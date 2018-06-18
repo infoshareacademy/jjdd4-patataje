@@ -1,4 +1,4 @@
-package com.infoshare;
+package com.hydrozagadka;
 
 public class Main {
 
