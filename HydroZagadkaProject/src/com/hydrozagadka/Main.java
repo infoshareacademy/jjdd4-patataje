@@ -12,7 +12,7 @@ public class Main {
             ld.load();
             ld.readExample();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Nie znaleziono pliku");
         } catch (IOException e) {
             e.printStackTrace();
         }
