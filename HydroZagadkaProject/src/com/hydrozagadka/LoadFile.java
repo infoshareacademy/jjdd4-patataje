@@ -9,8 +9,17 @@ import java.util.*;
 public class LoadFile {
     BufferedReader br;
     Map<Integer, WaterContainer> allContainers = new HashMap<>();
+    WaterContainer waterContainer;
 
-        //Metod loading all csv files into objects
+    public Map<Integer, WaterContainer> getAllContainers() {
+        return allContainers;
+    }
+
+    public WaterContainer getWaterContainer() {
+        return waterContainer;
+    }
+
+    //Metod loading all csv files into objects
     public void load() throws IOException {
         String loadedLine;
         WaterContainer wc = null;

@@ -7,7 +7,7 @@ public class WaterContainer {
    private  Integer id;
      private String containerName;
      private String stationName;
-     private String state;
+     private String province;
 
     public Integer getId() {
         return id;
@@ -33,12 +33,12 @@ public class WaterContainer {
         this.stationName = stationName;
     }
 
-    public String getState() {
-        return state;
+    public String getProvince() {
+        return province;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setProvince(String province) {
+        this.province = province;
     }
 
     public List<History> getHistory() {
