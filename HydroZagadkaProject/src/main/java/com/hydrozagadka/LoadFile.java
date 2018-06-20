@@ -8,6 +8,7 @@ import java.util.*;
 
 public class LoadFile {
     BufferedReader br;
+
     Map<Integer, WaterContainer> allContainers = new HashMap<>();
     WaterContainer waterContainer;
 
@@ -19,14 +20,16 @@ public class LoadFile {
         return waterContainer;
     }
 
-    //Metod loading all csv files into objects
-    public void load() throws IOException {
+
+        //Metod loading all csv files into objects
+    public  Map<Integer, WaterContainer> load() throws IOException {
+
         String loadedLine;
         WaterContainer wc = null;
         String[] splitedLine;
 
-        for (int i = 1; i <= 12; i++) {
-            br = new BufferedReader(new FileReader("/home/orzel/jjdd4-patataje/HydroZagadkaProject/codz_2016_"+i+".csv"));
+        for (int i = 12; i >= 1; i--) {
+            br = new BufferedReader(new FileReader("data/codz_2016_"+i+".csv"));
             //read lines
         while ((loadedLine = br.readLine()) != null) {
             //deleting "
@@ -49,23 +52,23 @@ public class LoadFile {
             if (flow == 99999.999) flow = 0.0;
             //if object doesn't exist in map
             if (!allContainers.containsKey(id)) {
-                wc = new WaterContainer(id, containerName, stationName, new ArrayList<>());
-                wc.history.add(new History(year, month, day, waterDeep, flow, temperature));
+                wc = new WaterContainer(id, containerName, stationName, new ArrayList<History>());
+                wc.getHistory().add(new History(year, month, day, waterDeep, flow, temperature));
                 //put id and object into map
                 allContainers.put(id, wc);
             } else {
-                allContainers.get(id).history.add(new History(year, month, day, waterDeep, flow, temperature));
+                allContainers.get(id).getHistory().add(new History(year, month, day, waterDeep, flow, temperature));
             }
         }
     }
+    return allContainers;
     }
-
     public void readExample() {
             WaterContainer wt = allContainers.get(149180020);
         System.out.println("------------------------------------------------------------------");
             System.out.println("| "+wt.getContainerName() + " |");
             System.out.println("--------------------------------------------------------------");
-            for (History hs : wt.history) {
+            for (History hs : wt.getHistory()) {
                 System.out.print("Date: "+hs.getYear()+"/" + hs.getMonth()+"/"+hs.getDay()+" \t| flow: "+hs.getFlow()+" \t| temperature:"+hs.getTemperature()+" \t| deep: "+hs.getWaterDeep()+"\n");
             }
             System.out.println();

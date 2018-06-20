@@ -8,6 +8,7 @@ public class WaterContainer {
      private String containerName;
      private String stationName;
      private String province;
+     private List<History> history;
 
     public Integer getId() {
         return id;
@@ -49,7 +50,6 @@ public class WaterContainer {
         this.history = history;
     }
 
-    List<History> history = new ArrayList<>();
 
     public WaterContainer(Integer id, String containerName, String stationName, List<History> history) {
     this.id=id;
