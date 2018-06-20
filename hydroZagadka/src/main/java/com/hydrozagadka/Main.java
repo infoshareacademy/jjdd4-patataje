@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 	// Tu piszemy kodzik Misiaczki
         try {
-            LoadFile ld = new LoadFile();
+            com.hydrozagadka.LoadFile ld = new com.hydrozagadka.LoadFile();
             ld.load();
             ld.readExample();
         } catch (FileNotFoundException e) {
