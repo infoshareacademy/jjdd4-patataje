@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.util.*;
 
 public class LoadFile {
-    BufferedReader br;
+  private  BufferedReader br;
 
-    Map<Integer, WaterContainer> allContainers = new HashMap<>();
-    WaterContainer waterContainer;
+  private  Map<Integer, WaterContainer> allContainers = new HashMap<>();
+  private  WaterContainer waterContainer;
 
     public Map<Integer, WaterContainer> getAllContainers() {
         return allContainers;
@@ -28,7 +28,7 @@ public class LoadFile {
         WaterContainer wc = null;
         String[] splitedLine;
 
-        for (int i = 12; i >= 1; i--) {
+        for (int i = 13; i >= 1; i--) {
             br = new BufferedReader(new FileReader("data/codz_2016_"+i+".csv"));
             //read lines
         while ((loadedLine = br.readLine()) != null) {
@@ -43,16 +43,18 @@ public class LoadFile {
             String containerName = splitedLine[1];
             String stationName = splitedLine[2];
             Integer year = Integer.parseInt(splitedLine[3]);
-            Integer month = Integer.parseInt(splitedLine[4]);
+            Integer month = Integer.parseInt(splitedLine[9]);
             Integer day = Integer.parseInt(splitedLine[5]);
             Double waterDeep = Double.parseDouble(splitedLine[6]);
             Double flow = Double.parseDouble(splitedLine[7]);
             Double temperature = Double.parseDouble(splitedLine[8]);
+            String province ="brak";
+            if(splitedLine.length==11) province=splitedLine[10];
             //change flow from none to 0;
             if (flow == 99999.999) flow = 0.0;
             //if object doesn't exist in map
             if (!allContainers.containsKey(id)) {
-                wc = new WaterContainer(id, containerName, stationName, new ArrayList<History>());
+                wc = new WaterContainer(id, containerName, stationName,province, new ArrayList<History>());
                 wc.getHistory().add(new History(year, month, day, waterDeep, flow, temperature));
                 //put id and object into map
                 allContainers.put(id, wc);
@@ -64,14 +66,10 @@ public class LoadFile {
     return allContainers;
     }
     public void readExample() {
-            WaterContainer wt = allContainers.get(149180020);
-        System.out.println("------------------------------------------------------------------");
-            System.out.println("| "+wt.getContainerName() + " |");
+        for (WaterContainer wt :allContainers.values()) {
+        //    System.out.println("------------------------------------------------------------------");
+            System.out.println("| "+wt.getContainerName() + " |"+wt.getProvince());
             System.out.println("--------------------------------------------------------------");
-            for (History hs : wt.getHistory()) {
-                System.out.print("Date: "+hs.getYear()+"/" + hs.getMonth()+"/"+hs.getDay()+" \t| flow: "+hs.getFlow()+" \t| temperature:"+hs.getTemperature()+" \t| deep: "+hs.getWaterDeep()+"\n");
-            }
-            System.out.println();
-
+        }
     }
 }
