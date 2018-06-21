@@ -74,6 +74,5 @@ public class LoadFile implements Loadable{
             System.out.print(hs.getYear()+"/"+hs.getMonth()+"/"+hs.getDay()+" |     "+hs.getWaterDeep()+"      |    "+hs.getFlow()+"    |   "+hs.getTemperature()+" |\n");
             System.out.println("------------------------------------------------");
         }
-
     }
 }

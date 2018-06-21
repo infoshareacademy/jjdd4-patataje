@@ -2,6 +2,10 @@ package com.hydrozagadka;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Main {
 
@@ -18,5 +22,10 @@ public class Main {
             e.printStackTrace();
         }
 
+    int a,b,d;
+        a=10;
+        b=10;
+        d=2013;
+        Date date = new GregorianCalendar(d, b-1, a).getTime();
     }
 }
