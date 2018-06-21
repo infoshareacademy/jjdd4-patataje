@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class LoadFile {
+public class LoadFile implements Loadable{
   private  BufferedReader br;
 
   private  Map<Integer, WaterContainer> allContainers = new HashMap<>();
@@ -34,13 +34,11 @@ public class LoadFile {
         while ((loadedLine = br.readLine()) != null) {
             //deleting "
             loadedLine = loadedLine.replaceAll("\"", "");
-            //deleting spaces
-            loadedLine = loadedLine.replaceAll(" ", "");
             //split data
             splitedLine = loadedLine.split(",");
             //creating local variables with splited data in String table
-            Integer id = Integer.parseInt(splitedLine[0]);
-            String containerName = splitedLine[1];
+            Integer id = Integer.parseInt(splitedLine[0].replaceAll(" ",""));
+            String containerName = splitedLine[1].toUpperCase();
             String stationName = splitedLine[2];
             Integer year = Integer.parseInt(splitedLine[3]);
             Integer month = Integer.parseInt(splitedLine[9]);
@@ -66,10 +64,16 @@ public class LoadFile {
     return allContainers;
     }
     public void readExample() {
-        for (WaterContainer wt :allContainers.values()) {
-        //    System.out.println("------------------------------------------------------------------");
-            System.out.println("| "+wt.getContainerName() + " |"+wt.getProvince());
-            System.out.println("--------------------------------------------------------------");
+        WaterContainer wt = allContainers.get(153220190);
+            System.out.println("====================================================================");
+            System.out.println("| "+wt.getContainerName() + " |     "+wt.getProvince()+"                |        "+wt.getStationName());
+            System.out.println("====================================================================\n");
+        System.out.println("| data      | stan wody | przeplyw | temperatura");
+        System.out.println("------------------------------------------------");
+        for (History hs: wt.getHistory()) {
+            System.out.print(hs.getYear()+"/"+hs.getMonth()+"/"+hs.getDay()+" |     "+hs.getWaterDeep()+"      |    "+hs.getFlow()+"    |   "+hs.getTemperature()+" |\n");
+            System.out.println("------------------------------------------------");
         }
+
     }
 }
