@@ -33,5 +33,18 @@ public class FilterFiles {
         return listOfMaxAndMinValues;
     }
 
+    public List<String> showWaterContainers(String value) {
 
+        System.out.println(value);
+        List<String> showContainers = new ArrayList<>();
+        for (WaterContainer wt : allFiles.values()) {
+            if (wt.getProvince().equals(value)) {
+                showContainers.add(wt.getContainerName());
+
+//                System.out.println(wt.getContainerName());
+            }
+        }
+        System.out.println(showContainers);
+        return showContainers;
+    }
 }
