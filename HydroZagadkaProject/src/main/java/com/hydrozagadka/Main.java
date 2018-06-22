@@ -10,6 +10,7 @@ public class Main {
         try {
             LoadFile ld = new LoadFile();
             FilterFiles filterFiles = new FilterFiles(ld.load());
+            ld.readExample();
             System.out.println(filterFiles.minValueOfHistoryFiles());
         } catch (FileNotFoundException e) {
             System.out.println("Nie znaleziono pliku");

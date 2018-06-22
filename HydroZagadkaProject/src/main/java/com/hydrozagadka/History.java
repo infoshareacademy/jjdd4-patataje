@@ -5,8 +5,9 @@ public class History {
     private Integer year;
     private Integer month;
     private Integer day;
-     private Double waterDeep;
+    private Double waterDeep;
     private Double flow;
+    private Double temperature;
 
     public Integer getYear() {
         return year;
@@ -56,7 +57,6 @@ public class History {
         this.temperature = temperature;
     }
 
-    private Double temperature;
 
     public History(Integer year, Integer month, Integer day, Double waterDeep, Double flow, Double temperature) {
         this.year = year;
@@ -67,5 +67,7 @@ public class History {
         this.temperature = temperature;
     }
 
-
+//    public ShowHistory() {
+//
+//    }
 }

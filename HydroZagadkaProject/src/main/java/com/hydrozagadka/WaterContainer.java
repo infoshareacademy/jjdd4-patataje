@@ -51,11 +51,12 @@ public class WaterContainer {
     }
 
 
-    public WaterContainer(Integer id, String containerName, String stationName, List<History> history) {
+    public WaterContainer(Integer id, String containerName, String stationName,String province, List<History> history) {
     this.id=id;
     this.containerName=containerName;
     this.stationName=stationName;
     this.history=history;
+    this.province=province;
 
     }
 }
