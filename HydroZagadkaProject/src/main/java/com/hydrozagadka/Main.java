@@ -11,7 +11,7 @@ public class Main {
             LoadFile ld = new LoadFile();
             FilterFiles filterFiles = new FilterFiles(ld.load());
             ld.readExample();
-            System.out.println(filterFiles.minValueOfHistoryFiles());
+            System.out.println(filterFiles.minAndMaxValueOfHistoryFiles(5));
         } catch (FileNotFoundException e) {
             System.out.println("Nie znaleziono pliku");
         } catch (IOException e) {

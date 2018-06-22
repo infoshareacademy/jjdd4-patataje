@@ -15,22 +15,18 @@ public class FilterFiles {
     }
 
 
-    public List<Double> minValueOfHistoryFiles() {
-        int id = 149180010;
-        Double min = Double.MAX_VALUE;
-        Double max = Double.MIN_VALUE;
-        List<Double> listOfMaxAndMinValues = new ArrayList<>();
-        for (History history : allFiles.get(id).getHistory()) {
-            if (min > history.getWaterDeep()) {
-                min = history.getWaterDeep();
-            }
-            if (max < history.getWaterDeep()){
-                max = history.getWaterDeep();
-            }
-        }
-        listOfMaxAndMinValues.add(max);
-        listOfMaxAndMinValues.add(min);
-        return listOfMaxAndMinValues;
+    public List<Double> minAndMaxValueOfHistoryFiles(int id) {
+        List<Double> result = new ArrayList<>();
+        List<History> historyList = allFiles.get(id).getHistory();
+        result.add(historyList.stream()
+                .mapToDouble(History::getWaterDeep)
+                .max().getAsDouble());
+
+        result.add(historyList.stream()
+                .mapToDouble(History::getWaterDeep)
+                .min().getAsDouble());
+
+        return result;
     }
 
 
