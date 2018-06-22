@@ -40,6 +40,7 @@ public class Province {
         System.out.println("15 = Wielkopolskie");
         province.put(16, " Zachodniopomorskie");
         System.out.println("16 = Zachodniopomorskie ");
+<<<<<<< Updated upstream
         {
             System.out.println("Wybierz województwo podając odpowiednią liczbę");
             Scanner scanner = new Scanner(System.in);
@@ -70,4 +71,26 @@ public class Province {
         }
     }
 
+=======
+
+
+        System.out.println("Wybierz województwo podając odpowiednią liczbę");
+        Scanner scanner = new Scanner(System.in);
+        int value = 0;
+        while (true) {
+            try {
+                value = scanner.nextInt();
+                if (value > 16 || value <= 0) {
+                    System.out.println("Podaj poprawny numer województwa");
+                } else {
+                    break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Podaj poprawny numer województwa");
+            }
+        }
+
+        System.out.println(province.get(value));
+    }
+>>>>>>> Stashed changes
 }
