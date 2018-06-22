@@ -64,7 +64,7 @@ public class LoadFile implements Loadable{
     return allContainers;
     }
     public void readExample() {
-        WaterContainer wt = allContainers.get(153220190);
+        WaterContainer wt = allContainers.get(150180060);
             System.out.println("====================================================================");
             System.out.println("| "+wt.getContainerName() + " |     "+wt.getProvince()+"                |        "+wt.getStationName());
             System.out.println("====================================================================\n");
