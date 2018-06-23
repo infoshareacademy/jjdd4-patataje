@@ -1,15 +1,17 @@
 package com.hydrozagadka;
 
 import java.io.IOException;
-import java.util.InputMismatchException;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.text.Collator;
+import java.util.*;
 
 public class Province {
+
+
+
+
+
     public static void main(String[] args) throws IOException {
-        LoadFile lf = new LoadFile();
-        FilterFiles filterFiles = new FilterFiles(lf.load());
+        FilterFiles filterFiles = new FilterFiles(new LoadFile().load());
         Map<Integer, String> province = new TreeMap<>();
         province.put(1,  "dolnośląskie");
         System.out.println("1 = Dolnośląskie");
@@ -48,21 +50,56 @@ public class Province {
 
         System.out.println("Wybierz województwo podając odpowiednią liczbę");
         Scanner scanner = new Scanner(System.in);
-        int value = 0;
-        while (true) {
+        String value = "";
+        int choice = -1;
+        while (choice!=0) {
             try {
-                value = scanner.nextInt();
-                if (value > 16 || value < 0) {
-                    System.out.println("Podaj poprawny numer województwa");
+                value = scanner.next();
+                 choice = Integer.parseInt(value);
+                if (choice > 16 || choice < 1) {
+                  if(choice!=0)  System.out.println("Podaj poprawny numer województwa");
                 } else {
+                    int choice2;
+                    //second choice watercontainer or point clearing screen
+                    for (int i = 0; i < 5; i++) {
+                        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n");
+                    }
+                    System.out.println("=======================================================");
+                    System.out.println("1: Wybierz zbiornik  | 2: Wybierz Stacje | 0: Wyjscie ");
+                    System.out.println("======================================================");
+                    choice2 = Integer.parseInt(scanner.next());
+                    if(choice2==1){
+                        List<WaterContainer> filteredByState= filterFiles.showWaterContainers(province.get(choice));
+                        filteredByState.sort(Comparator.comparing(WaterContainer::getContainerName));
+                        for (int i = 0; i < filteredByState.size(); i++) {
+                            System.out.println(filteredByState.get(i).getContainerName()+"\t  "+filteredByState.get(i).getId());
 
-                    break;
+                        }
+                        System.out.println("\n\n");
+                        System.out.println("=======================================================");
+                        System.out.println(" WPISZ ID ZBIORNIKA   |     0 WYJSCIE");
+                        System.out.println("========================================================");
+                        choice = scanner.nextInt();
+                        for (int i = 0; i < 5; i++) {
+                            System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n");
+                        }
+                        System.out.println("=======================================================");
+                        System.out.println(" 1. HISTORIA   |   2.HISTORYCZNE MIN MAX  |   0 WYJSCIE |");
+                        System.out.println("========================================================");
+                        filterFiles.showNewestData(choice);
+                        System.out.println();
+                        int choice3 = scanner.nextInt();
+                        if(choice3==1) filterFiles.readExample(choice);
+                    }
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Podaj poprawny numer województwa");
             }
+            catch (NumberFormatException e){
+                System.out.println("Podaj liczbe wojewodztwa!");
+            }
         }
-        System.out.println(province.get(value));
+
 
 //        filterFiles.showWaterContainers(province.get(value));
     }

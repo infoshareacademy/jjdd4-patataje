@@ -103,19 +103,4 @@ public class LoadFile implements Loadable {
         }
         return allContainers;
     }
-
-    public void readExample() {
-
-        WaterContainer wt = allContainers.get(153220190);
-        System.out.println("====================================================================");
-        System.out.println("| " + wt.getContainerName() + " |     " + wt.getProvince() + "                |        " + wt.getStationName());
-        System.out.println("====================================================================\n");
-        System.out.println("| data      | stan wody | przeplyw | temperatura");
-        System.out.println("------------------------------------------------");
-
-        wt.getHistory().stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate())).forEach(hs -> {
-            System.out.print(hs.getDate() + " |     " + hs.getWaterDeep() + "      |    " + hs.getFlow() + "    |   " + hs.getTemperature() + " |\n");
-            System.out.println("------------------------------------------------");
-        });
-    }
 }
