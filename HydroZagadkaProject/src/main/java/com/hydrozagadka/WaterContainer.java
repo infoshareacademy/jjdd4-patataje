@@ -59,4 +59,15 @@ public class WaterContainer {
     this.province=province;
 
     }
+
+    @Override
+    public String toString() {
+        return "WaterContainer{" +
+                "id=" + id +
+                ", containerName='" + containerName + '\'' +
+                ", stationName='" + stationName + '\'' +
+                ", province='" + province + '\'' +
+                ", history=" + history +
+                '}';
+    }
 }
