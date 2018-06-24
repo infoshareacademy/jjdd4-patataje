@@ -16,6 +16,7 @@ public class LoadFile implements Loadable {
     private BufferedReader br;
     private Map<Integer, WaterContainer> allContainers = new HashMap<>();
     private WaterContainer waterContainer;
+
     public Map<Integer, WaterContainer> getAllContainers() {
         return allContainers;
     }
@@ -48,6 +49,7 @@ public class LoadFile implements Loadable {
         }
         return new WaterContainer(id, containerName, stationName, province, new ArrayList<History>());
     }
+
     private History createHistory(String[] a) {
         Integer year = Integer.parseInt(a[3]);
         Integer month = Integer.parseInt(a[9]);
@@ -58,6 +60,7 @@ public class LoadFile implements Loadable {
         Double temperature = Double.parseDouble(a[8]);
         return new History(date, waterDeep, flow, temperature);
     }
+
     //Metod loading all csv files into objects
     public Map<Integer, WaterContainer> load() throws IOException {
         String loadedLine;

@@ -13,6 +13,7 @@ public class FilterFiles {
     public FilterFiles(Map<Integer, WaterContainer> allFiles) {
         this.allFiles = allFiles;
     }
+
     public List<Double> minValueOfHistoryFiles() {
         int id = 149180010;
         Double min = Double.MAX_VALUE;
@@ -56,6 +57,7 @@ public class FilterFiles {
         });
         return wt;
     }
+
     public void showNewestData(int id) {
         int lastIndexOfHistory = allFiles.get(id).getHistory().size() - 1;
         System.out.println("Nazwa kontenera | Nazwa Stacji | nazwa wojewodztwa | data      | stan wody | przeplyw | temperatura");
