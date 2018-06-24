@@ -32,15 +32,15 @@ public class FilterFiles {
     }
 
     public List<WaterContainer> getWaterContainers(String province) {
-
         System.out.println(province);
-        List<WaterContainer> showContainers = new ArrayList<>();
+        List<WaterContainer> getWaterContainer = new ArrayList<>();
         for (WaterContainer wt : allFiles.values()) {
+            System.out.println(wt.getProvince());
             if (wt.getProvince().equals(province)) {
-                showContainers.add(wt);
+                getWaterContainer.add(wt);
             }
         }
-        return showContainers;
+        return getWaterContainer;
     }
 
     public WaterContainer readExample(Integer id) {

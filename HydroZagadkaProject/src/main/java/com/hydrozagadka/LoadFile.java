@@ -80,7 +80,7 @@ public class LoadFile implements Loadable {
                     allContainers.put(wc.getId(), wc);
                 } else {
                     WaterContainer existingWc = allContainers.get(wc.getId());
-                    if (existingWc.getProvince().equals("brak") && !wc.getProvince().equals("brak")) {
+                    if (existingWc.getProvince().equals("N/A") && !wc.getProvince().equals("N/A")) {
                         existingWc.setProvince(wc.getProvince());
                     }
                 }
