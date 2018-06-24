@@ -5,15 +5,10 @@ import java.text.Collator;
 import java.util.*;
 
 public class Province {
-
-
-
-
-
     public static void main(String[] args) throws IOException {
         FilterFiles filterFiles = new FilterFiles(new LoadFile().load());
         Map<Integer, String> province = new TreeMap<>();
-        province.put(1,  "dolnośląskie");
+        province.put(1, "dolnośląskie");
         System.out.println("1 = Dolnośląskie");
         province.put(2, "kujawsko-pomorskie");
         System.out.println("2 = Kujawsko-pomorskie");
@@ -46,18 +41,16 @@ public class Province {
         province.put(16, "zachodniopomorskie");
         System.out.println("16 = Zachodniopomorskie ");
         System.out.println("Jeżeli chesz wyjśc z aplikacji wciśnij 0");
-
-
         System.out.println("Wybierz województwo podając odpowiednią liczbę");
         Scanner scanner = new Scanner(System.in);
         String value = "";
         int choice = -1;
-        while (choice!=0) {
+        while (choice != 0) {
             try {
                 value = scanner.next();
-                 choice = Integer.parseInt(value);
+                choice = Integer.parseInt(value);
                 if (choice > 16 || choice < 1) {
-                  if(choice!=0)  System.out.println("Podaj poprawny numer województwa");
+                    if (choice != 0) System.out.println("Podaj poprawny numer województwa");
                 } else {
                     int choice2;
                     //second choice watercontainer or point clearing screen
@@ -65,14 +58,14 @@ public class Province {
                         System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n");
                     }
                     System.out.println("=======================================================");
-                    System.out.println("1: Wybierz zbiornik  | 2: Wybierz Stacje | 0: Wyjscie ");
+                    System.out.println("1: Wybierz Stacje  | 2: Wybierz Zbiornik | 0: Wyjscie ");
                     System.out.println("======================================================");
                     choice2 = Integer.parseInt(scanner.next());
-                    if(choice2==1){
-                        List<WaterContainer> filteredByState= filterFiles.showWaterContainers(province.get(choice));
+                    if (choice2 == 1) {
+                        List<WaterContainer> filteredByState = filterFiles.getWaterContainers(province.get(choice));
                         filteredByState.sort(Comparator.comparing(WaterContainer::getContainerName));
                         for (int i = 0; i < filteredByState.size(); i++) {
-                            System.out.println(filteredByState.get(i).getContainerName()+"\t  "+filteredByState.get(i).getId());
+                            System.out.println(filteredByState.get(i).getContainerName() + "\t  " + filteredByState.get(i).getId());
 
                         }
                         System.out.println("\n\n");
@@ -89,19 +82,14 @@ public class Province {
                         filterFiles.showNewestData(choice);
                         System.out.println();
                         int choice3 = scanner.nextInt();
-                        if(choice3==1) filterFiles.readExample(choice);
+                        if (choice3 == 1) filterFiles.readExample(choice);
                     }
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Podaj poprawny numer województwa");
-            }
-            catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println("Podaj liczbe wojewodztwa!");
             }
         }
-
-
-//        filterFiles.showWaterContainers(province.get(value));
     }
-
 }

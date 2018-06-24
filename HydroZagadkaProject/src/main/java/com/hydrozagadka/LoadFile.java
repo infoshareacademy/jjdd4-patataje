@@ -14,10 +14,8 @@ import java.util.stream.Collectors;
 
 public class LoadFile implements Loadable {
     private BufferedReader br;
-
     private Map<Integer, WaterContainer> allContainers = new HashMap<>();
     private WaterContainer waterContainer;
-
     public Map<Integer, WaterContainer> getAllContainers() {
         return allContainers;
     }
@@ -35,7 +33,7 @@ public class LoadFile implements Loadable {
                 }
             }
         } catch (IOException ex) {
-
+            System.out.println("Nie znaleziono folderu!");
         }
         return fileNames;
     }
@@ -44,35 +42,26 @@ public class LoadFile implements Loadable {
         Integer id = Integer.parseInt(a[0].replaceAll(" ", ""));
         String containerName = a[1].toUpperCase();
         String stationName = a[2];
-        String province = "brak";
-
+        String province = "N/A";
         if (a.length == 11) {
             province = a[10];
         }
-
         return new WaterContainer(id, containerName, stationName, province, new ArrayList<History>());
     }
-
     private History createHistory(String[] a) {
         Integer year = Integer.parseInt(a[3]);
         Integer month = Integer.parseInt(a[9]);
         Integer day = Integer.parseInt(a[5]);
-
         LocalDate date = LocalDate.of(year, month, day);
-
         Double waterDeep = Double.parseDouble(a[6]);
         Double flow = Double.parseDouble(a[7]);
         Double temperature = Double.parseDouble(a[8]);
-
         return new History(date, waterDeep, flow, temperature);
     }
-
     //Metod loading all csv files into objects
     public Map<Integer, WaterContainer> load() throws IOException {
-
         String loadedLine;
         String[] splitedLine;
-
         List<String> files = getFilesList("data/");
 
         for (String file : files) {
@@ -84,10 +73,8 @@ public class LoadFile implements Loadable {
                 //split data
                 splitedLine = loadedLine.split(",");
                 //creating local variables with splited data in String table
-
                 WaterContainer wc = createWaterContainer(splitedLine);
                 History history = createHistory(splitedLine);
-
                 //if object doesn't exist in map
                 if (!allContainers.containsKey(wc.getId())) {
                     allContainers.put(wc.getId(), wc);

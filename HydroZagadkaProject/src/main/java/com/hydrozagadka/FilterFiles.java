@@ -13,8 +13,6 @@ public class FilterFiles {
     public FilterFiles(Map<Integer, WaterContainer> allFiles) {
         this.allFiles = allFiles;
     }
-
-
     public List<Double> minValueOfHistoryFiles() {
         int id = 149180010;
         Double min = Double.MAX_VALUE;
@@ -24,7 +22,7 @@ public class FilterFiles {
             if (min > history.getWaterDeep()) {
                 min = history.getWaterDeep();
             }
-            if (max < history.getWaterDeep()){
+            if (max < history.getWaterDeep()) {
                 max = history.getWaterDeep();
             }
         }
@@ -33,40 +31,36 @@ public class FilterFiles {
         return listOfMaxAndMinValues;
     }
 
-    public List<WaterContainer> showWaterContainers(String value) {
+    public List<WaterContainer> getWaterContainers(String province) {
 
-        System.out.println(value);
+        System.out.println(province);
         List<WaterContainer> showContainers = new ArrayList<>();
         for (WaterContainer wt : allFiles.values()) {
-            if (wt.getProvince().equals(value)) {
+            if (wt.getProvince().equals(province)) {
                 showContainers.add(wt);
-
-//                System.out.println(wt.getContainerName());
             }
         }
-//        System.out.println(showContainers);
         return showContainers;
     }
 
-    public void readExample(Integer id) {
+    public WaterContainer readExample(Integer id) {
         WaterContainer wt = allFiles.get(id);
         System.out.println("====================================================================");
         System.out.println("| " + wt.getContainerName() + " |     " + wt.getProvince() + "                |        " + wt.getStationName());
         System.out.println("====================================================================\n");
         System.out.println("| data      | stan wody | przeplyw | temperatura");
         System.out.println("------------------------------------------------");
-
         wt.getHistory().stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate())).forEach(hs -> {
             System.out.print(hs.getDate() + " |     " + hs.getWaterDeep() + "      |    " + hs.getFlow() + "    |   " + hs.getTemperature() + " |\n");
             System.out.println("------------------------------------------------");
         });
+        return wt;
     }
-
     public void showNewestData(int id) {
-        int lastIndexOfHistory = allFiles.get(id).getHistory().size();
+        int lastIndexOfHistory = allFiles.get(id).getHistory().size() - 1;
         System.out.println("Nazwa kontenera | Nazwa Stacji | nazwa wojewodztwa | data      | stan wody | przeplyw | temperatura");
-        System.out.print(allFiles.get(id).getContainerName()+" | "+allFiles.get(id).getStationName()+"     | "+allFiles.get(id).getProvince());
-        System.out.println("        |    "+allFiles.get(id).getHistory().get(lastIndexOfHistory).getDate()+" |   "+allFiles.get(id).getHistory().get(lastIndexOfHistory).getWaterDeep()+" | "+
-                        allFiles.get(id).getHistory().get(lastIndexOfHistory).getFlow()+"     | "+allFiles.get(id).getHistory().get(lastIndexOfHistory).getTemperature());
+        System.out.print(allFiles.get(id).getContainerName() + " | " + allFiles.get(id).getStationName() + "     | " + allFiles.get(id).getProvince());
+        System.out.println("        |    " + allFiles.get(id).getHistory().get(lastIndexOfHistory).getDate() + " |   " + allFiles.get(id).getHistory().get(lastIndexOfHistory).getWaterDeep() + " | " +
+                allFiles.get(id).getHistory().get(lastIndexOfHistory).getFlow() + "     | " + allFiles.get(id).getHistory().get(lastIndexOfHistory).getTemperature());
     }
 }
