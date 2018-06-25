@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
 
 public class LoadFile implements Loadable {
     private BufferedReader br;
-    private  Map<Integer, String> province = new TreeMap<>();
+    private Set<String> province = new LinkedHashSet<>();
+
     private List<String> getFilesList(String directory) {
         List<String> fileNames = new ArrayList<>();
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(directory))) {
@@ -56,7 +57,7 @@ public class LoadFile implements Loadable {
     public Map<Integer, WaterContainer> load() {
         String loadedLine;
         String[] splitedLine;
-        Integer i=1;
+
         Map<Integer, WaterContainer> allContainers = new HashMap<>();
         try {
             List<String> files = getFilesList("data/");
@@ -79,8 +80,7 @@ public class LoadFile implements Loadable {
                         WaterContainer existingWc = allContainers.get(wc.getId());
                         if (existingWc.getProvince().equals("N/A") && !wc.getProvince().equals("N/A")) {
                             existingWc.setProvince(wc.getProvince());
-                            province.put(i,wc.getProvince());
-                            i++;
+                            province.add(wc.getProvince());
                         }
                     }
                     allContainers.get(wc.getId()).getHistory().add(history);
@@ -89,10 +89,10 @@ public class LoadFile implements Loadable {
         } catch (Exception e) {
             System.out.println("Nie znaleziono pliku!");
         }
-        getProvince(province);
         return allContainers;
     }
-    private Map<Integer,String> getProvince(Map<Integer,String> province){
+
+    public Set<String> getProvince(){
         return province;
     }
 }

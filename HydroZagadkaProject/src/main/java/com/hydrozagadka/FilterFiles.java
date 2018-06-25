@@ -12,6 +12,7 @@ public class FilterFiles {
     private History historyFiles;
     private LoadFile loadFile;
     private Map<Integer, WaterContainer> allFiles;
+    private Map<Integer, WaterContainer> provinces;
 
     public FilterFiles(LoadFile loadFile) {
         this.loadFile = loadFile;
