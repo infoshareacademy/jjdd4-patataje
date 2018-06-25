@@ -1,5 +1,8 @@
 package com.hydrozagadka;
 
+import de.vandermeer.asciitable.AsciiTable;
+import de.vandermeer.asciithemes.a8.A8_Grids;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,8 +13,9 @@ public class FilterFiles {
     private LoadFile loadFile;
     private Map<Integer, WaterContainer> allFiles;
 
-    public FilterFiles(Map<Integer, WaterContainer> allFiles) {
-        this.allFiles = allFiles;
+    public FilterFiles(LoadFile loadFile) {
+        this.loadFile = loadFile;
+        this.allFiles = loadFile.load();
     }
 
     public List<Double> minValueOfHistoryFiles() {
@@ -45,15 +49,29 @@ public class FilterFiles {
 
     public WaterContainer readExample(Integer id) {
         WaterContainer wt = allFiles.get(id);
-        System.out.println("====================================================================");
-        System.out.println("| " + wt.getContainerName() + " |     " + wt.getProvince() + "                |        " + wt.getStationName());
-        System.out.println("====================================================================\n");
-        System.out.println("| data      | stan wody | przeplyw | temperatura");
-        System.out.println("------------------------------------------------");
+
+        AsciiTable table = new AsciiTable();
+        table.addRule();
+        table.addRow(null, wt.getContainerName(), wt.getProvince(), wt.getStationName());
+        table.addHeavyRule();
+        table.addRow("data", "stan wody", "przepływ", "temperatura");
+        table.addRule();
         wt.getHistory().stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate())).forEach(hs -> {
-            System.out.print(hs.getDate() + " |     " + hs.getWaterDeep() + "      |    " + hs.getFlow() + "    |   " + hs.getTemperature() + " |\n");
-            System.out.println("------------------------------------------------");
+            table.addRow(hs.getDate(), hs.getWaterDeep(), hs.getFlow(), hs.getTemperature());
+            table.addRule();
         });
+        table.getContext().setGrid(A8_Grids.lineDoubleBlocks());
+        System.out.println(table.render());
+//
+//        System.out.println("====================================================================");
+//        System.out.println("| " + wt.getContainerName() + "|     " + wt.getProvince() + "                |        " + wt.getStationName());
+//        System.out.println("====================================================================\n");
+//        System.out.println("| data      | stan wody | przeplyw | temperatura");
+//        System.out.println("------------------------------------------------");
+//        wt.getHistory().stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate())).forEach(hs -> {
+//            System.out.print(hs.getDate() + " |     " + hs.getWaterDeep() + "      |    " + hs.getFlow() + "    |   " + hs.getTemperature() + " |\n");
+//            System.out.println("------------------------------------------------");
+//        });
         return wt;
     }
 

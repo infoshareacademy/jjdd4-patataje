@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Province {
     public static void main(String[] args) throws IOException {
-        FilterFiles filterFiles = new FilterFiles(new LoadFile().load());
+        FilterFiles filterFiles = new FilterFiles(new LoadFile());
         Map<Integer, String> province = new TreeMap<>();
         province.put(1, "dolnośląskie");
         System.out.println("1 = Dolnośląskie");

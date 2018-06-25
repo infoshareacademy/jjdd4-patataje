@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Executable;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -62,34 +63,38 @@ public class LoadFile implements Loadable {
     }
 
     //Metod loading all csv files into objects
-    public Map<Integer, WaterContainer> load() throws IOException {
+    public Map<Integer, WaterContainer> load() {
         String loadedLine;
         String[] splitedLine;
-        List<String> files = getFilesList("data/");
+        try {
+            List<String> files = getFilesList("data/");
 
-        for (String file : files) {
-            br = new BufferedReader(new FileReader(file));
-            //read lines
-            while ((loadedLine = br.readLine()) != null) {
-                //deleting "
-                loadedLine = loadedLine.replaceAll("\"", "");
-                //split data
-                splitedLine = loadedLine.split(",");
-                //creating local variables with splited data in String table
-                WaterContainer wc = createWaterContainer(splitedLine);
-                History history = createHistory(splitedLine);
-                //if object doesn't exist in map
-                if (!allContainers.containsKey(wc.getId())) {
-                    allContainers.put(wc.getId(), wc);
-                } else {
-                    WaterContainer existingWc = allContainers.get(wc.getId());
-                    if (existingWc.getProvince().equals("N/A") && !wc.getProvince().equals("N/A")) {
-                        existingWc.setProvince(wc.getProvince());
+            for (String file : files) {
+                br = new BufferedReader(new FileReader(file));
+                //read lines
+                while ((loadedLine = br.readLine()) != null) {
+                    //deleting "
+                    loadedLine = loadedLine.replaceAll("\"", "");
+                    //split data
+                    splitedLine = loadedLine.split(",");
+                    //creating local variables with splited data in String table
+                    WaterContainer wc = createWaterContainer(splitedLine);
+                    History history = createHistory(splitedLine);
+                    //if object doesn't exist in map
+                    if (!allContainers.containsKey(wc.getId())) {
+                        allContainers.put(wc.getId(), wc);
+                    } else {
+                        WaterContainer existingWc = allContainers.get(wc.getId());
+                        if (existingWc.getProvince().equals("N/A") && !wc.getProvince().equals("N/A")) {
+                            existingWc.setProvince(wc.getProvince());
+                        }
                     }
-                }
 
-                allContainers.get(wc.getId()).getHistory().add(history);
+                    allContainers.get(wc.getId()).getHistory().add(history);
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Nie znaleziono pliku!");
         }
         return allContainers;
     }
