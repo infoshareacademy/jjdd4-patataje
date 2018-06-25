@@ -1,12 +1,14 @@
 package com.hydrozagadka;
 
+import com.sun.javafx.collections.MappingChange;
+
 import javax.sound.midi.Soundbank;
 import java.io.IOException;
 import java.text.Collator;
 import java.util.*;
 
 public class Province {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         FilterFiles filterFiles = new FilterFiles(new LoadFile());
         Map<Integer, String> province = new TreeMap<>();
         province.put(1, "dolnośląskie");
@@ -80,7 +82,7 @@ public class Province {
                         System.out.println("=======================================================");
                         System.out.println(" 1. HISTORIA   |   2.HISTORYCZNE MIN MAX  |   0 WYJSCIE |");
                         System.out.println("========================================================");
-                        filterFiles.showNewestData(choice);
+               //         filterFiles.showNewestData(choice);
                         System.out.println();
                         int choice3 = scanner.nextInt();
                         if (choice3 == 1) filterFiles.readExample(choice);
