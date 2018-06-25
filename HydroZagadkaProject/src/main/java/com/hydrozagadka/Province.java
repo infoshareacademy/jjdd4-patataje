@@ -1,5 +1,6 @@
 package com.hydrozagadka;
 
+import javax.sound.midi.Soundbank;
 import java.io.IOException;
 import java.text.Collator;
 import java.util.*;
@@ -89,6 +90,8 @@ public class Province {
                 System.out.println("Podaj poprawny numer województwa");
             } catch (NumberFormatException e) {
                 System.out.println("Podaj liczbe wojewodztwa!");
+            } catch (NullPointerException e){
+                System.out.println("Podales zle id!");
             }
         }
     }
