@@ -1,6 +1,5 @@
 package com.hydrozagadka;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WaterContainer {

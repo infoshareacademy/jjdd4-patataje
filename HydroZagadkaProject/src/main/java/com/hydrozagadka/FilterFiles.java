@@ -1,15 +1,9 @@
 package com.hydrozagadka;
 
-import de.vandermeer.asciitable.AsciiTable;
-import de.vandermeer.asciithemes.a8.A8_Grids;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class FilterFiles {
     private History historyFiles;
@@ -21,15 +15,15 @@ public class FilterFiles {
         this.allFiles = loadFile.load();
     }
 
-    public List<WaterContainer> getWaterContainers(String province){
-            List<WaterContainer> getWaterContainer = new ArrayList<>();
-            for (WaterContainer wt : allFiles.values()) {
-                if (wt.getProvince().equals(province)) {
-                    getWaterContainer.add(wt);
-                }
+    public List<WaterContainer> getWaterContainers(String province) {
+        List<WaterContainer> getWaterContainer = new ArrayList<>();
+        for (WaterContainer wt : allFiles.values()) {
+            if (wt.getProvince().equals(province)) {
+                getWaterContainer.add(wt);
             }
-            return getWaterContainer;
         }
+        return getWaterContainer;
+    }
 
     public List<Double> minAndMaxValueOfHistoryFiles(int id) {
         List<Double> result = new ArrayList<>();
@@ -72,6 +66,7 @@ public class FilterFiles {
     public WaterContainer getWaterContainerByID(Integer id) {
         return allFiles.get(id);
     }
+
     public List<Double> minAndMaxValueOfHistoryFiles(int id, LocalDate start, LocalDate end) {
         List<History> listOfWaterContainerHistory = allFiles.get(id).getHistory();
         List<Double> listOfResultValues = new ArrayList<>();
