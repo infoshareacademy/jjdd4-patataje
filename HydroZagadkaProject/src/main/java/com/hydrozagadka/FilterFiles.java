@@ -34,19 +34,18 @@ public class FilterFiles {
     }
 
 
-
     public List<WaterContainer> filterThroughContainer(String nameOfWaterContainer) {
-       List<WaterContainer> waterContainerList = new ArrayList<>();
+        List<WaterContainer> waterContainerList = new ArrayList<>();
 
         for (WaterContainer waterContainer : allFiles.values()) {
-            if (waterContainer.getContainerName().equals(nameOfWaterContainer)) {
+            if (waterContainer.getStationName().equals(nameOfWaterContainer)) {
                 waterContainerList.add(waterContainer);
             }
         }
         return waterContainerList;
     }
 
-    public List<WaterContainer> showWaterContainers(String value) {
+    public List<WaterContainer> showWaterContainersThroughProvince(String value) {
 
         List<WaterContainer> showContainers = new ArrayList<>();
 

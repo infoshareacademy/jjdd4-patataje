@@ -12,9 +12,11 @@ public class Main {
             LoadFile ld = new LoadFile();
             FilterFiles filterFiles = new FilterFiles(ld.load());
            // ld.readExample();
-            LocalDate localDate1 = LocalDate.of(2016,7,12);
-            LocalDate localDate2 = LocalDate.of(2016,7,17);
-            System.out.println(filterFiles.minAndMaxValueOfHistoryFiles(149180020, localDate1, localDate2));
+            LocalDate localDate1 = LocalDate.of(2016,7,22);
+            LocalDate localDate2 = LocalDate.of(2016,7,30);
+            System.out.println(filterFiles.minAndMaxValueOfHistoryFiles(149180300, localDate1, localDate2));
+       //     filterFiles.showWaterContainersThroughProvince("lubuskie").forEach(System.out::println);
+       //     filterFiles.filterThroughContainer("Odra (1)").forEach(System.out::println);
         } catch (FileNotFoundException e) {
             System.out.println("Nie znaleziono pliku");
         } catch (IOException e) {
