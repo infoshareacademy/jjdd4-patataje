@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LoadFile{
+public class CSVLoader{
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();
 

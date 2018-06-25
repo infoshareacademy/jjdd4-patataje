@@ -10,11 +10,11 @@ import java.util.Map;
 
 public class FilterFiles {
     private History historyFiles;
-    private LoadFile loadFile;
+    private CSVLoader loadFile;
     private Map<Integer, WaterContainer> allFiles;
     private Map<Integer, WaterContainer> provinces;
 
-    public FilterFiles(LoadFile loadFile) {
+    public FilterFiles(CSVLoader loadFile) {
         this.loadFile = loadFile;
         this.allFiles = loadFile.load();
     }
