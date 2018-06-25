@@ -15,17 +15,7 @@ import java.util.stream.Collectors;
 
 public class LoadFile implements Loadable {
     private BufferedReader br;
-    private Map<Integer, WaterContainer> allContainers = new HashMap<>();
-    private WaterContainer waterContainer;
-
-    public Map<Integer, WaterContainer> getAllContainers() {
-        return allContainers;
-    }
-
-    public WaterContainer getWaterContainer() {
-        return waterContainer;
-    }
-
+    private  Map<Integer, String> province = new TreeMap<>();
     private List<String> getFilesList(String directory) {
         List<String> fileNames = new ArrayList<>();
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(directory))) {
@@ -66,6 +56,8 @@ public class LoadFile implements Loadable {
     public Map<Integer, WaterContainer> load() {
         String loadedLine;
         String[] splitedLine;
+        Integer i=1;
+        Map<Integer, WaterContainer> allContainers = new HashMap<>();
         try {
             List<String> files = getFilesList("data/");
 
@@ -87,15 +79,20 @@ public class LoadFile implements Loadable {
                         WaterContainer existingWc = allContainers.get(wc.getId());
                         if (existingWc.getProvince().equals("N/A") && !wc.getProvince().equals("N/A")) {
                             existingWc.setProvince(wc.getProvince());
+                            province.put(i,wc.getProvince());
+                            i++;
                         }
                     }
-
                     allContainers.get(wc.getId()).getHistory().add(history);
                 }
             }
         } catch (Exception e) {
             System.out.println("Nie znaleziono pliku!");
         }
+        getProvince(province);
         return allContainers;
+    }
+    private Map<Integer,String> getProvince(Map<Integer,String> province){
+        return province;
     }
 }
