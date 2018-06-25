@@ -31,4 +31,14 @@ public class History {
     public Double getTemperature() {
         return temperature;
     }
+
+    @Override
+    public String toString() {
+        return "History{" +
+                "date=" + date +
+                ", waterDeep=" + waterDeep +
+                ", flow=" + flow +
+                ", temperature=" + temperature +
+                '}';
+    }
 }
