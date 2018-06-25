@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LoadFile implements Loadable {
+public class LoadFile{
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();
 
@@ -30,7 +30,6 @@ public class LoadFile implements Loadable {
         }
         return fileNames;
     }
-
     private WaterContainer createWaterContainer(String[] a) {
         Integer id = Integer.parseInt(a[0].replaceAll(" ", ""));
         String containerName = a[1].toUpperCase();
