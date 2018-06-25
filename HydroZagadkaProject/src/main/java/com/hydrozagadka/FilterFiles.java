@@ -36,7 +36,6 @@ public class FilterFiles {
         System.out.println(province);
         List<WaterContainer> getWaterContainer = new ArrayList<>();
         for (WaterContainer wt : allFiles.values()) {
-            System.out.println(wt.getProvince());
             if (wt.getProvince().equals(province)) {
                 getWaterContainer.add(wt);
             }
