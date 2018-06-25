@@ -5,15 +5,21 @@ import de.vandermeer.asciitable.AsciiTable;
 
 import javax.sound.midi.Soundbank;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.text.Collator;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Province {
     private static List<String> province;
-    private static AsciiTable at = new AsciiTable();
+   private static CSVLoader csvLoader = new CSVLoader();
+    private static FilterFiles filterFiles = new FilterFiles(csvLoader);
     public static void createMenu(){
+        AsciiTable at = new AsciiTable();
         System.out.println("\n\nAPLIKACJA SPRAWDZAJACA STAN WOD W POLSCE\n");
+        at.addRule();
+        at.addRow("MENU");
+        at.addRule();
         for (int i = 1; i < province.size(); i++) {
             at.addRow(i+": "+province.get(i-1));
             at.addRule();
@@ -23,63 +29,63 @@ public class Province {
         at.getContext().setWidth(50);
         System.out.println(at.render());
     }
-    public static void main(String[] args){
-        CSVLoader csvLoader = new CSVLoader();
-        FilterFiles filterFiles = new FilterFiles(csvLoader);
-         province = csvLoader.getProvince().stream().collect(Collectors.toList());
-        at.addRule();
-        at.addRow("MENU");
-        at.addRule();
-        createMenu();
-//        String value = "";
-//        int choice = -1;
-//        while (choice != 0) {
-//            try {
-//                value = scanner.next();
-//                choice = Integer.parseInt(value);
-//                if (choice > 16 || choice < 1) {
-//                    if (choice != 0) System.out.println("Podaj poprawny numer województwa");
-//                } else {
-//                    int choice2;
-//                    //second choice watercontainer or point clearing screen
-//                    for (int i = 0; i < 5; i++) {
-//                        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n");
-//                    }
-//                    System.out.println("=======================================================");
-//                    System.out.println("1: Wybierz Stacje  | 2: Wybierz Zbiornik | 0: Wyjscie ");
-//                    System.out.println("======================================================");
-//                    choice2 = Integer.parseInt(scanner.next());
-//                    if (choice2 == 1) {
-                  //      List<WaterContainer> filteredByState = filterFiles.getWaterContainers(province.get(choice));
-               //         filteredByState.sort(Comparator.comparing(WaterContainer::getContainerName));
-               //         for (int i = 0; i < filteredByState.size(); i++) {
-                //            System.out.println(filteredByState.get(i).getContainerName() + "\t  " + filteredByState.get(i).getId());
 
-                  //      }
-//                        System.out.println("\n\n");
-//                        System.out.println("=======================================================");
-//                        System.out.println(" WPISZ ID ZBIORNIKA   |     0 WYJSCIE");
-//                        System.out.println("========================================================");
-//                        choice = scanner.nextInt();
-//                        for (int i = 0; i < 5; i++) {
-//                            System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n");
-//                        }
-//                        System.out.println("=======================================================");
-//                        System.out.println(" 1. HISTORIA   |   2.HISTORYCZNE MIN MAX  |   0 WYJSCIE |");
-//                        System.out.println("========================================================");
-//               //         filterFiles.showNewestData(choice);
-//                        System.out.println();
-//                        int choice3 = scanner.nextInt();
-//                        if (choice3 == 1) filterFiles.readExample(choice);
-//                    }
-//                }
-//            } catch (InputMismatchException e) {
-//                System.out.println("Podaj poprawny numer województwa");
-//            } catch (NumberFormatException e) {
-//                System.out.println("Podaj liczbe wojewodztwa!");
-//            } catch (NullPointerException e){
-//                System.out.println("Podales zle id!");
-//            }
-//        }
+    public static void secondMenu(){
+        AsciiTable secmenu = new AsciiTable();
+        for (int i = 0; i < 5; i++) {
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        }
+        secmenu.addRule();
+        secmenu.addRow("1:Wyswietl Stacje","2:Wybierz Zbiornik","3:Cofnij","0:Wyjscie");
+        secmenu.addRule();
+        secmenu.getContext().setWidth(70);
+        System.out.println(secmenu.render());
+    }
+
+    public static void casemenu(Integer choice,Integer choice2){
+        AsciiTable ac = new AsciiTable();
+        switch (choice2){
+            case 1: {
+               List<WaterContainer> filteredByProvince = filterFiles.showWaterContainersThroughProvince(province.get(choice-1));
+               ac.addRule();
+               ac.addRow("ID","NAZWA STACJI","NAZWA ZBIORNIKA");
+               ac.addRule();
+                for (WaterContainer wt:filteredByProvince) {
+                    ac.addRow(wt.getId(),wt.getStationName(),wt.getContainerName());
+                    ac.addRule();
+                }
+                ac.addRule();
+                ac.addRow("Podaj ID","3:Cofnij","0:Wyjscie");
+                ac.addRule();
+                ac.getContext().setWidth(70);
+                System.out.println(ac.render());
+                break;
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        province = csvLoader.getProvince().stream().collect(Collectors.toList());
+        createMenu();
+        Integer choice = -1;
+        while(choice!=0) {
+
+                String keyboardChoice = scanner.next();
+                try {
+                    choice = Integer.parseInt(keyboardChoice);
+                }catch (NumberFormatException e){
+                    System.out.println("Podales niewlasciwy ciag znakow!");
+                }
+                if(choice<=16 && choice>=1){
+                    secondMenu();
+                    try{
+                        Integer choice2 = scanner.nextInt();
+                        casemenu(choice,choice2);
+
+                    }catch (Exception e){
+                        System.out.println("Podales niewlasciwy znak!");
+                    }
+                }
+        }
     }
 }
