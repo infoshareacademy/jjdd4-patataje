@@ -18,4 +18,4 @@ out/
 
 # OS X
 .DS_Store
-Main.java
+src/main/java/com/hydrozagadka/Main.java
