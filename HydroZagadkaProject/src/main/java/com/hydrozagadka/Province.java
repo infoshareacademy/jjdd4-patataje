@@ -1,6 +1,8 @@
 package com.hydrozagadka;
 
 
+import de.vandermeer.asciitable.AsciiTable;
+
 import javax.sound.midi.Soundbank;
 import java.io.IOException;
 import java.text.Collator;
@@ -9,18 +11,25 @@ import java.util.stream.Collectors;
 
 public class Province {
     private static List<String> province;
+    private static AsciiTable at = new AsciiTable();
     public static void createMenu(){
+        System.out.println("\n\nAPLIKACJA SPRAWDZAJACA STAN WOD W POLSCE\n");
         for (int i = 1; i < province.size(); i++) {
-            System.out.println(i+": "+province.get(i-1));
-
+            at.addRow(i+": "+province.get(i-1));
+            at.addRule();
         }
+        at.addRow("0: Wyjscie");
+        at.addRule();
+        at.getContext().setWidth(50);
+        System.out.println(at.render());
     }
-
     public static void main(String[] args){
         CSVLoader csvLoader = new CSVLoader();
         FilterFiles filterFiles = new FilterFiles(csvLoader);
          province = csvLoader.getProvince().stream().collect(Collectors.toList());
-
+        at.addRule();
+        at.addRow("MENU");
+        at.addRule();
         createMenu();
 //        String value = "";
 //        int choice = -1;
