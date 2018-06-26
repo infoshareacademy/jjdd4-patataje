@@ -6,6 +6,7 @@ import de.vandermeer.asciitable.AsciiTable;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLOutput;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -61,14 +62,18 @@ public class Province {
         at.addRule();
         at.getContext().setWidth(35);
         System.out.println(at.render());
-
-        int choice = Integer.valueOf(scanner.nextLine());
-
-        if (choice <= 16 && choice >= 1) {
-
-            secondMenu(province.get(choice - 1));
+        try {
+            int choice = Integer.valueOf(scanner.nextLine());
+            if (choice <= 16 && choice >= 1) {
+                secondMenu(province.get(choice - 1));
+            }else{
+                System.out.println("Podaj liczbe z zakresu w menu!");
+                createMenu();
+            }
+        }catch (NumberFormatException e){
+            System.out.println("Podaj poprawna wartosc!");
+            createMenu();
         }
-
     }
 
     public static void secondMenu(String province) {
@@ -132,14 +137,19 @@ public class Province {
         System.out.println(ccwID.render());
         String choice = scanner.nextLine();
         List<WaterContainer> containers = filterFiles.filterThroughContainer(choice);
-        for (WaterContainer wt : containers) {
+        for (int i = 0; i < containers.size(); i++) {
+            WaterContainer wt = containers.get(i);
             ccwID2.addRule();
             ccwID2.addRow(wt.getId(), wt.getProvince(), wt.getStationName(), wt.getContainerName());
-
+            if(i%11==10){
+                ccwID2.addRule();
+                ccwID2.getContext().setWidth(70);
+                System.out.println(ccwID2.render());
+                System.out.println("wyswietlic wiecej danych? t/n");
+                String loadMoreFiles = scanner.nextLine();
+                if(loadMoreFiles.equals("n")) break;
+            }
         }
-        ccwID2.addRule();
-        ccwID2.getContext().setWidth(70);
-        System.out.println(ccwID2.render());
 //        String choiceName = scanner.nextLine();
     }
 
