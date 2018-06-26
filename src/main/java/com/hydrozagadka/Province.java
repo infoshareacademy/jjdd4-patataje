@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -24,28 +23,24 @@ public class Province {
     private static DecimalFormat doubleFormat;
     private static DateTimeFormatter dateFormat;
 
-    private static void getProperties(){
+    private static void getProperties() {
         Properties prop = new Properties();
         InputStream input = null;
 
         try {
             input = new FileInputStream("data/config.properties");
-
-            // load a properties file
             prop.load(input);
-
-            // get the property value and print it out
-       doubleFormat=new DecimalFormat(prop.getProperty("doubleformat"));
-       dateFormat = DateTimeFormatter.ofPattern(prop.getProperty("dateformat"));
+            doubleFormat = new DecimalFormat(prop.getProperty("doubleformat"));
+            dateFormat = DateTimeFormatter.ofPattern(prop.getProperty("dateformat"));
 
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("Blad przy wczytywaniu pliku konfiguracyjnego");
         } finally {
             if (input != null) {
                 try {
                     input.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("Blad przy probie zamkniecia pliku konfiguracyjnego");
                 }
             }
         }
@@ -184,7 +179,7 @@ public class Province {
     public static void main(String[] args) {
         province = csvLoader.getProvince().stream().collect(Collectors.toList());
         getProperties();
-   //     createMenu();
+             createMenu();
 
         //print doubli z propertiesa przyklad
 //        double b= 12.123221;
