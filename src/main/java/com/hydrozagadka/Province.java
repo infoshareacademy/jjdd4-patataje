@@ -3,8 +3,15 @@ package com.hydrozagadka;
 
 import de.vandermeer.asciitable.AsciiTable;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -14,11 +21,38 @@ public class Province {
     private static FilterFiles filterFiles = new FilterFiles(csvLoader);
     private static Map<Integer, WaterContainer> allFiles;
     private static Scanner scanner = new Scanner(System.in);
+    private static DecimalFormat doubleFormat;
+    private static DateTimeFormatter dateFormat;
+
+    private static void getProperties(){
+        Properties prop = new Properties();
+        InputStream input = null;
+
+        try {
+            input = new FileInputStream("data/config.properties");
+
+            // load a properties file
+            prop.load(input);
+
+            // get the property value and print it out
+       doubleFormat=new DecimalFormat(prop.getProperty("doubleformat"));
+       dateFormat = DateTimeFormatter.ofPattern(prop.getProperty("dateformat"));
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
 
     public static void createMenu() {
-
-
         AsciiTable at = new AsciiTable();
         System.out.println("\n\nAPLIKACJA SPRAWDZAJACA STAN WOD W POLSCE\n");
         at.addRule();
@@ -149,7 +183,7 @@ public class Province {
 
     public static void main(String[] args) {
         province = csvLoader.getProvince().stream().collect(Collectors.toList());
-
+        getProperties();
         createMenu();
 
 
