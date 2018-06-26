@@ -3,14 +3,30 @@ package com.hydrozagadka;
 
 import de.vandermeer.asciitable.AsciiTable;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.Properties;
 
 public class Province {
     private static List<String> province;
     private static CSVLoader csvLoader = new CSVLoader();
     private static FilterFiles filterFiles = new FilterFiles(csvLoader);
+    private static DecimalFormat doubleShowFormat;
+    private static DateTimeFormatter dateFormat;
+
+    public static void setDoubleShowFormat(DecimalFormat doubleShowFormat) {
+        Province.doubleShowFormat = doubleShowFormat;
+    }
+
+    public static void setDateFormat(DateTimeFormatter dateFormat) {
+        Province.dateFormat = dateFormat;
+    }
 
     public static void createMenu() {
         AsciiTable at = new AsciiTable();
@@ -62,7 +78,33 @@ public class Province {
         }
     }
 
+    public static void getproperties(){
+        Properties prop = new Properties();
+        InputStream input = null;
+
+        try {
+            input = new FileInputStream("data/config.properties");
+            // load a properties file
+            prop.load(input);
+            setDoubleShowFormat(new DecimalFormat(prop.getProperty("doubleFormat")));
+            setDateFormat(DateTimeFormatter.ofPattern(prop.getProperty("dateFormat")));
+
+        } catch (IOException ex) {
+            System.out.println("Nie znaleziono pliku konfiguracyjnego!");
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    System.out.println("Nieudane zamkniecie pliku konfiguracyjnego");
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
+
+        getproperties();
         Scanner scanner = new Scanner(System.in);
         province = csvLoader.getProvince().stream().collect(Collectors.toList());
         createMenu();
@@ -80,6 +122,10 @@ public class Province {
                 try {
                     Integer choice2 = scanner.nextInt();
                     casemenu(choice, choice2);
+
+                        // to jest kod do wyswietlania doubli w formacie z propertiesow
+//                        String dx = doubleShowFormat.format(h.getTemperature());
+//                        double d = Double.valueOf(dx);
 
                 } catch (Exception e) {
                     System.out.println("Podales niewlasciwy znak!");
