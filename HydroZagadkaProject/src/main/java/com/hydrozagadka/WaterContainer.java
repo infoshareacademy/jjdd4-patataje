@@ -1,14 +1,13 @@
 package com.hydrozagadka;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WaterContainer {
-   private  Integer id;
-     private String containerName;
-     private String stationName;
-     private String province;
-     private List<History> history;
+    private Integer id;
+    private String containerName;
+    private String stationName;
+    private String province;
+    private List<History> history;
 
     public Integer getId() {
         return id;
@@ -51,12 +50,23 @@ public class WaterContainer {
     }
 
 
-    public WaterContainer(Integer id, String containerName, String stationName,String province, List<History> history) {
-    this.id=id;
-    this.containerName=containerName;
-    this.stationName=stationName;
-    this.history=history;
-    this.province=province;
+    public WaterContainer(Integer id, String containerName, String stationName, String province, List<History> history) {
+        this.id = id;
+        this.containerName = containerName;
+        this.stationName = stationName;
+        this.history = history;
+        this.province = province;
 
+    }
+
+    @Override
+    public String toString() {
+        return "WaterContainer{" +
+                "id=" + id +
+                ", containerName='" + containerName + '\'' +
+                ", stationName='" + stationName + '\'' +
+                ", province='" + province + '\'' +
+                ", history=" + history +
+                '}';
     }
 }
