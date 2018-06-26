@@ -13,8 +13,12 @@ public class Province {
     private static CSVLoader csvLoader = new CSVLoader();
     private static FilterFiles filterFiles = new FilterFiles(csvLoader);
     private static Map<Integer, WaterContainer> allFiles;
+    private static Scanner scanner = new Scanner(System.in);
+
 
     public static void createMenu() {
+
+
         AsciiTable at = new AsciiTable();
         System.out.println("\n\nAPLIKACJA SPRAWDZAJACA STAN WOD W POLSCE\n");
         at.addRule();
@@ -26,51 +30,88 @@ public class Province {
         }
         at.addRow("0: Wyjscie");
         at.addRule();
-        at.getContext().setWidth(50);
+        at.getContext().setWidth(35);
         System.out.println(at.render());
+
+        int choice = Integer.valueOf(scanner.nextLine());
+
+        if (choice <= 16 && choice >= 1) {
+
+            secondMenu(province.get(choice - 1));
+        }
+
     }
 
-    public static void secondMenu() {
+    public static void secondMenu(String province) {
         AsciiTable secmenu = new AsciiTable();
-        for (int i = 0; i < 5; i++) {
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        }
+//       TU ENTER
         secmenu.addRule();
         secmenu.addRow("1:Wyswietl Stacje", "2:Wybierz Zbiornik", "3:Cofnij", "0:Wyjscie");
         secmenu.addRule();
         secmenu.getContext().setWidth(70);
         System.out.println(secmenu.render());
+        int choice = Integer.valueOf(scanner.nextLine());
+        switch (choice) {
+            case 1: {
+                casemenu(province);
+                break;
+            }
+            case 2: {
+                chooseContainerWithName();
+            }
+        }
+
 
     }
 
-    public static void casemenu(Integer choice, Integer choice2) {
+    public static void casemenu(String province) {
         AsciiTable ac = new AsciiTable();
-        switch (choice2) {
-            case 1: {
-                List<WaterContainer> filteredByProvince = filterFiles.showWaterContainersThroughProvince(province.get(choice - 1));
-                ac.addRule();
-                ac.addRow("ID", "NAZWA STACJI", "NAZWA ZBIORNIKA");
-                ac.addRule();
-                for (WaterContainer wt : filteredByProvince) {
-                    ac.addRow(wt.getId(), wt.getStationName(), wt.getContainerName());
-                    ac.addRule();
-                }
-                ac.addRule();
-                ac.addRow("Podaj ID", "3:Cofnij", "0:Wyjscie");
-                ac.addRule();
-                ac.getContext().setWidth(70);
-                System.out.println(ac.render());
-                break;
-            }
-            case 2:{
-                System.out.println("wybrales zbiornik");
-                break;
-            }
-            case 3: {
-                createMenu();
-                break;
-            }
+        List<WaterContainer> filteredByProvince = filterFiles.showWaterContainersThroughProvince(province);
+        ac.addRule();
+        ac.addRow("ID", "NAZWA STACJI", "NAZWA ZBIORNIKA");
+        ac.addRule();
+        for (WaterContainer wt : filteredByProvince) {
+            ac.addRow(wt.getId(), wt.getStationName(), wt.getContainerName());
+            ac.addRule();
         }
+
+        ac.getContext().setWidth(70);
+        System.out.println(ac.render());
+        getIDMenu();
+    }
+
+    public static void getIDMenu() {
+        AsciiTable getIDM = new AsciiTable();
+        getIDM.addRule();
+        getIDM.addRow("Podaj ID ", "3:Cofnij", "0:Wyjscie");
+        getIDM.addRule();
+        getIDM.getContext().setWidth(70);
+        System.out.println(getIDM.render());
+
+//        Integer choiceID = Integer.parseInt(scanner.nextLine());
+
+    }
+
+
+    public static void chooseContainerWithName() {
+        AsciiTable ccwID = new AsciiTable();
+        AsciiTable ccwID2 = new AsciiTable();
+        ccwID.addRule();
+        ccwID.addRow("Podaj nazwe zbiornika", "3:Cofnij", "0:Wyjscie");
+        ccwID.addRule();
+        ccwID.getContext().setWidth(70);
+        System.out.println(ccwID.render());
+        String choice = scanner.nextLine();
+        List<WaterContainer> containers = filterFiles.filterThroughContainer(choice);
+        for (WaterContainer wt : containers) {
+            ccwID2.addRule();
+            ccwID2.addRow(wt.getId(), wt.getProvince(), wt.getStationName(), wt.getContainerName());
+
+        }
+        ccwID2.addRule();
+        ccwID2.getContext().setWidth(70);
+        System.out.println(ccwID2.render());
+//        String choiceName = scanner.nextLine();
     }
 
     public static void showNewestData(int id) {
@@ -90,49 +131,29 @@ public class Province {
 
     public static void showHistoricData(int id) {
         WaterContainer wt = allFiles.get(id);
-
         AsciiTable sHd = new AsciiTable();
         sHd.addRule();
         sHd.addRow("STACJA: ", wt.getContainerName(), wt.getProvince(), wt.getStationName());
-
         sHd.addRule();
         sHd.addRow("DATA", "STAN WODY", "PRZEPŁYW", "TEMPERATURA");
         sHd.addRule();
-        wt.getHistory().stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate())).forEach(hs -> {
-            sHd.addRow(hs.getDate(), hs.getWaterDeep(), hs.getFlow(), hs.getTemperature());
-            sHd.addRule();
-        });
+        wt.getHistory().stream()
+                .sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()))
+                .forEach(hs -> {
+                    sHd.addRow(hs.getDate(), hs.getWaterDeep(), hs.getFlow(), hs.getTemperature());
+                    sHd.addRule();
+                });
         System.out.println(sHd.render());
+
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         province = csvLoader.getProvince().stream().collect(Collectors.toList());
-        Integer choice2 = -1;
+
         createMenu();
-        Integer choice = -1;
 
-        while (choice != 0) {
 
-            String keyboardChoice = scanner.next();
-            try {
-                choice = Integer.parseInt(keyboardChoice);
-            } catch (NumberFormatException e) {
-                System.out.println("Podales niewlasciwy ciag znakow!");
-            }
-            if (choice <= 16 && choice >= 1) {
-                secondMenu();
-                try {
-                    choice2 = scanner.nextInt();
-                    casemenu(choice, choice2);
-
-                } catch (Exception e) {
-                    System.out.println("Podales niewlasciwy znak!");
-                }
-            }
-            if (choice2 ==1 ){
-
-            }
-        }
     }
+
+
 }
