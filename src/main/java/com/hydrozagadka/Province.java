@@ -184,9 +184,18 @@ public class Province {
     public static void main(String[] args) {
         province = csvLoader.getProvince().stream().collect(Collectors.toList());
         getProperties();
-        createMenu();
+   //     createMenu();
 
+        //print doubli z propertiesa przyklad
+//        double b= 12.123221;
+//        String a = doubleFormat.format(b);
+//        b= Double.parseDouble(a);
+//        System.out.println(b);
 
+        //print LocalDate z propertiesa
+//    LocalDate ld = LocalDate.now();
+//    String a = ld.format(dateFormat);
+//        System.out.println(a);
     }
 
 
