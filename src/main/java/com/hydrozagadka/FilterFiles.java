@@ -44,7 +44,7 @@ public class FilterFiles {
         List<WaterContainer> waterContainerList = new ArrayList<>();
 
         for (WaterContainer waterContainer : allFiles.values()) {
-            if (waterContainer.getStationName().equals(nameOfWaterContainer)) {
+            if (waterContainer.getStationName().contains(nameOfWaterContainer)) {
                 waterContainerList.add(waterContainer);
             }
         }
