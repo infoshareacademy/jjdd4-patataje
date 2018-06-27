@@ -246,8 +246,13 @@ public class Province {
                 History hs = ciapek.get(i);
                 String waterDeepS = doubleFormat.format(hs.getWaterDeep());
                 Double waterDeep = Double.parseDouble(waterDeepS);
+                String flowS = doubleFormat.format(hs.getFlow());
+                Double flow = Double.parseDouble(flowS);
+                String temperatureS = doubleFormat.format(hs.getTemperature());
+                Double temperature = Double.parseDouble(temperatureS);
                 String formatedDate = hs.getDate().format(dateFormat);
-                sHd.addRow(formatedDate, waterDeep, hs.getFlow(), hs.getTemperature());
+
+                sHd.addRow(formatedDate, waterDeep, flow, temperature);
                 sHd.addRule();
 
             }
