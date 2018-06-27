@@ -211,19 +211,25 @@ public class Province {
                 filterFiles.getWaterContainerByID(id).getHistory().size()-1;
 
         //jakiś przypał z datą, pokazuje ostatni dzień lipca.
-
         AsciiTable sNd = new AsciiTable();
         sNd.addRule();
         sNd.addRow("WOJEWÓDZTWO", "NAZWA RZEKI", "NAZWA STACJI", "DATA", "STAN WODY [cm]", "PRZEPŁYW [m3/s]", "TEMPERATURA [℃]");
         sNd.addRule();
+        String waterDeeps = doubleFormat.format(filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getWaterDeep());
+        double waterDeep = Double.parseDouble(waterDeeps);
+        String flowS = doubleFormat.format(filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getFlow());
+        double flow = Double.parseDouble(flowS);
+        String temperatureS = doubleFormat.format(filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getTemperature());
+        double temperature = Double.parseDouble(temperatureS);
+        String date = filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getDate().format(dateFormat);
         sNd.addRow(
                 filterFiles.getWaterContainerByID(id).getProvince(),
                 filterFiles.getWaterContainerByID(id).getStationName(),
                 filterFiles.getWaterContainerByID(id).getContainerName(),
-                filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getDate(),
-                filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getWaterDeep(),
-                filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getFlow(),
-                filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getTemperature());
+                date,
+                waterDeep,
+                flow,
+                temperature);
         sNd.addRule();
         sNd.addRow(null, null, null, "Czy chcesz zobaczyć wszystkie historyczne dane?", null, " Wybierz: t(Tak)/n(Nie)", "w:Wyjście");
         sNd.addRule();
@@ -259,7 +265,15 @@ public class Province {
                     break;
                 }
                 History hs = ciapek.get(i);
-                sHd.addRow(hs.getDate(), hs.getWaterDeep(), hs.getFlow(), hs.getTemperature());
+                String date = hs.getDate().format(dateFormat);
+                String waterDeepS = doubleFormat.format(hs.getWaterDeep());
+                String flowS = doubleFormat.format(hs.getFlow());
+                String temperatureS = doubleFormat.format(hs.getTemperature());
+                double waterDeep = Double.parseDouble(waterDeepS);
+                double flow = Double.parseDouble(flowS);
+                double temperature = Double.parseDouble(temperatureS);
+
+                sHd.addRow(date, waterDeep,flow, temperature);
                 sHd.addRule();
 
             }
