@@ -89,10 +89,9 @@ public class Province {
             Thread.sleep(800);
             createMenu();
         }
-
     }
 
-    public static void secondMenu(String province) {
+    public static void secondMenu(String province){
         AsciiTable secmenu = new AsciiTable();
 //Runtime.getRuntime().exec("cls");
         secmenu.addRule();
@@ -108,7 +107,7 @@ public class Province {
                     break;
                 }
                 case 2: {
-                    chooseContainerWithName();
+                    chooseContainerWithName(province);
                     break;
                 }
                 case 3: {
@@ -135,7 +134,7 @@ public class Province {
         AsciiTable ac = new AsciiTable();
         List<WaterContainer> filteredByProvince = filterFiles.showWaterContainersThroughProvince(province);
         ac.addRule();
-        ac.addRow("ID", "NAZWA STACJI", "NAZWA ZBIORNIKA");
+        ac.addRow("ID", "NAZWA STACJI", "NAZWA RZEKI");
         ac.addRule();
         for (WaterContainer wt : filteredByProvince) {
             ac.addRow(wt.getId(), wt.getStationName(), wt.getContainerName());
@@ -150,7 +149,7 @@ public class Province {
     public static void getIDMenu(String province) {
         AsciiTable getIDM = new AsciiTable();
         getIDM.addRule();
-        getIDM.addRow("Podaj ID ", "3:Cofnij", "0:Wyjscie");
+        getIDM.addRow("Podaj ID rzeki ", "3:Cofnij", "0:Wyjście");
         getIDM.addRule();
         getIDM.getContext().setWidth(70);
         System.out.println(getIDM.render());
@@ -168,13 +167,14 @@ public class Province {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
-    public static void chooseContainerWithName() {
+    public static void chooseContainerWithName(String province) {
         AsciiTable ccwID = new AsciiTable();
         AsciiTable ccwID2 = new AsciiTable();
         ccwID.addRule();
-        ccwID.addRow("Podaj nazwe zbiornika", "3:Cofnij", "0:Wyjscie");
+        ccwID.addRow("Podaj nazwę rzeki", "3:Cofnij", "0:Wyjście");
         ccwID.addRule();
         ccwID.getContext().setWidth(70);
         System.out.println(ccwID.render());
@@ -188,7 +188,8 @@ public class Province {
         ccwID2.addRule();
         ccwID2.getContext().setWidth(70);
         System.out.println(ccwID2.render());
-//        String choiceName = scanner.nextLine();
+        getIDMenu(province);
+
     }
 
     public static void showNewestData(int id) {
@@ -212,12 +213,6 @@ public class Province {
         sNd.addRule();
         sNd.addRow(null, null, null, null, "Czy chcesz zobaczyć wszystkie historyczne dane?", null, " Wybierz: T(Tak)/N(Nie)");
         sNd.addRule();
-        sNd.addRow(allFiles.get(id).getContainerName(),
-                allFiles.get(id).getStationName(), allFiles.get(id).getProvince(),
-                allFiles.get(id).getHistory().get(lastIndexOfHistory).getDate(),
-                allFiles.get(id).getHistory().get(lastIndexOfHistory).getWaterDeep(),
-                allFiles.get(id).getHistory().get(lastIndexOfHistory).getFlow(),
-                allFiles.get(id).getHistory().get(lastIndexOfHistory).getTemperature());
         System.out.println(sNd.render());
 
         String yOrN = scanner.nextLine();
@@ -232,20 +227,34 @@ public class Province {
     }
 
     public static void showHistoricData(int id) {
-        WaterContainer wt = allFiles.get(id);
+        WaterContainer wt = filterFiles.getWaterContainerByID(id);
         AsciiTable sHd = new AsciiTable();
         sHd.addRule();
-        sHd.addRow("STACJA: ", wt.getContainerName(), wt.getProvince(), wt.getStationName());
+        sHd.addRow(null, "WOJEWÓDZTWO: " + wt.getProvince(), "RZEKA: " + wt.getStationName(), "STACJA: " + wt.getContainerName());
         sHd.addRule();
-        sHd.addRow("DATA", "STAN WODY", "PRZEPŁYW", "TEMPERATURA");
+        sHd.addRow("DATA", "STAN WODY [cm]", "PRZEPŁYW [m3/s]", "TEMPERATURA [℃]");
         sHd.addRule();
-        wt.getHistory().stream()
-                .sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()))
-                .forEach(hs -> {
-                    sHd.addRow(hs.getDate(), hs.getWaterDeep(), hs.getFlow(), hs.getTemperature());
-                    sHd.addRule();
-                });
-        System.out.println(sHd.render());
+
+        List<History> ciapek = wt.getHistory().stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate())).collect(Collectors.toList());
+        for (int i = 0; i < ciapek.size(); ) {
+            for (int j = 0; j < 10; j++, i++) {
+                if (i > ciapek.size() - 1) {
+                    break;
+                }
+                History hs = ciapek.get(i);
+                sHd.addRow(hs.getDate(), hs.getWaterDeep(), hs.getFlow(), hs.getTemperature());
+                sHd.addRule();
+
+            }
+            System.out.println(sHd.render());
+            if (i >= ciapek.size()) {
+                break;
+            }
+            if (!pytanko()) {
+                break;
+            }
+        }
+
 
     }
 
@@ -265,15 +274,14 @@ public class Province {
 
     public static void main(String[] args) {
         province = csvLoader.getProvince().stream().collect(Collectors.toList());
-
         try {
             createMenu();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
+        } catch (InterruptedException e) {
+            System.out.println("Za długo czekałeś, oj oj...");
+        }
 
     }
 
-
 }
+
