@@ -1,91 +1,77 @@
 package com.hydrozagadka;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class FilterFiles {
+
+    private Map<Integer, WaterContainer> waterContainerMap;
     private History historyFiles;
     private CSVLoader loadFile;
-    private Map<Integer, WaterContainer> allFiles;
+
 
     public FilterFiles(CSVLoader loadFile) {
         this.loadFile = loadFile;
-        this.allFiles = loadFile.loadCSV();
+        this.waterContainerMap = loadFile.loadCSV();
     }
 
-    public List<WaterContainer> getWaterContainers(String province) {
-        List<WaterContainer> getWaterContainer = new ArrayList<>();
-        for (WaterContainer wt : allFiles.values()) {
-            if (wt.getProvince().equals(province)) {
-                getWaterContainer.add(wt);
-            }
-        }
-        return getWaterContainer;
-    }
 
-    public List<Double> minAndMaxValueOfHistoryFiles(int id) {
-        List<Double> result = new ArrayList<>();
-        List<History> historyList = allFiles.get(id).getHistory();
-        result.add(historyList.stream()
-                .mapToDouble(History::getWaterDeep)
-                .max().getAsDouble());
+    public List<History> minAndMaxValueOfHistoryFiles(int id) {
+        List<History> result = new ArrayList<>();
+        List<History> historyList = waterContainerMap.get(id).getHistory();
+        historyList.stream()
+                .max(Comparator.comparingDouble(History::getWaterDeep))
+                .ifPresent(result::add);
 
-        result.add(historyList.stream()
-                .mapToDouble(History::getWaterDeep)
-                .min().getAsDouble());
+        historyList.stream()
+                .min(Comparator.comparingDouble(History::getWaterDeep))
+                .ifPresent(result::add);
 
         return result;
     }
 
 
-    public List<WaterContainer> filterThroughContainer(String nameOfWaterContainer) {
-        List<WaterContainer> waterContainerList = new ArrayList<>();
+    public List<WaterContainer> filterThroughContainer(String nameOfWaterContainer, String province) {
 
-        for (WaterContainer waterContainer : allFiles.values()) {
-            if (waterContainer.getStationName().contains(nameOfWaterContainer)) {
-                waterContainerList.add(waterContainer);
-            }
-        }
-        return waterContainerList;
+        return waterContainerMap.values().stream()
+                .filter(value -> value.getStationName().contains(nameOfWaterContainer))
+                .filter(value -> value.getProvince().equals(province))
+                .collect(Collectors.toList());
+
+
     }
 
     public List<WaterContainer> showWaterContainersThroughProvince(String value) {
 
-        List<WaterContainer> showContainers = new ArrayList<>();
-
-        for (WaterContainer wt : allFiles.values()) {
-            if (wt.getProvince().equals(value)) {
-                showContainers.add(wt);
-            }
-        }
-        return showContainers;
+        return waterContainerMap.values().stream()
+                .filter(elem -> elem.getProvince().equals(value))
+                .collect(Collectors.toList());
     }
 
-    public WaterContainer getWaterContainerByID(Integer id) {
-        return allFiles.get(id);
-    }
+    public List<History> minAndMaxValueOfHistoryFiles(int id, LocalDate start, LocalDate end) {
+        List<History> listOfResultValues = new ArrayList<>();
+        List<History> listOfWaterContainerHistory = waterContainerMap.get(id).getHistory();
 
-    public List<Double> minAndMaxValueOfHistoryFiles(int id, LocalDate start, LocalDate end) {
-        List<History> listOfWaterContainerHistory = allFiles.get(id).getHistory();
-        List<Double> listOfResultValues = new ArrayList<>();
+        listOfWaterContainerHistory.stream()
+                .filter(x -> x.getDate().plusDays(1).isAfter(start))
+                .filter(x -> x.getDate().minusDays(1).isBefore(end))
+                .max(Comparator.comparingDouble(History::getWaterDeep))
+                .ifPresent(listOfResultValues::add);
 
 
-        listOfResultValues.add(listOfWaterContainerHistory.stream()
-                .filter(x -> x.getDate().isAfter(start))
-                .filter(x -> x.getDate().isBefore(end))
-                .mapToDouble(History::getWaterDeep)
-                .max().getAsDouble());
-
-        listOfResultValues.add(listOfWaterContainerHistory.stream()
-                .filter(x -> x.getDate().isAfter(start))
-                .filter(x -> x.getDate().isBefore(end))
-                .mapToDouble(History::getWaterDeep)
-                .min().getAsDouble());
+        listOfWaterContainerHistory.stream()
+                .filter(x -> x.getDate().plusDays(1).isAfter(start))
+                .filter(x -> x.getDate().minusDays(1).isBefore(end))
+                .min(Comparator.comparingDouble(History::getWaterDeep))
+                .ifPresent(listOfResultValues::add);
 
 
         return listOfResultValues;
-
     }
+
+    public WaterContainer getWaterContainerByID(Integer id) {
+        return waterContainerMap.get(id);
+    }
+
 }
