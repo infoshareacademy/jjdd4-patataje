@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.sql.SQLOutput;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -47,55 +48,87 @@ public class Province {
         }
     }
 
+    public static void closeApp() {
 
-    public static void createMenu() {
+        System.out.println("Aplikacja została zamknięta.");
+        System.exit(0);
+    }
+
+    public static void createMenu() throws InterruptedException {
+
+
         AsciiTable at = new AsciiTable();
-        System.out.println("\n\nAPLIKACJA SPRAWDZAJACA STAN WOD W POLSCE\n");
+        System.out.println("\n\nAPLIKACJA WYŚWIETLAJĄCA STAN WÓD DLA POLSKICH RZEK\n");
         at.addRule();
-        at.addRow("MENU");
+        at.addRow("Aby wyświetlić najświeższe dostępne dane");
+        at.addRule();
+        at.addRow("Wybierz województwo:");
         at.addRule();
         for (int i = 1; i < province.size(); i++) {
             at.addRow(i + ": " + province.get(i - 1));
             at.addRule();
         }
-        at.addRow("0: Wyjscie");
+        at.addRow("0: Wyjście");
         at.addRule();
         at.getContext().setWidth(35);
         System.out.println(at.render());
         try {
+
             int choice = Integer.valueOf(scanner.nextLine());
+
             if (choice <= 16 && choice >= 1) {
+
                 secondMenu(province.get(choice - 1));
-            }else{
-                System.out.println("Podaj liczbe z zakresu w menu!");
+            } else {
+                System.out.println("Podaj poprawną liczbę województwa.");
+                Thread.sleep(800);
                 createMenu();
             }
-        }catch (NumberFormatException e){
-            System.out.println("Podaj poprawna wartosc!");
+        } catch (Exception e) {
+            System.out.println("wybrales litere gnomie, sprobuj jeszcze raz");
+            Thread.sleep(800);
             createMenu();
         }
+
     }
 
     public static void secondMenu(String province) {
         AsciiTable secmenu = new AsciiTable();
-//       TU ENTER
+//Runtime.getRuntime().exec("cls");
         secmenu.addRule();
-        secmenu.addRow("1:Wyswietl Stacje", "2:Wybierz Zbiornik", "3:Cofnij", "0:Wyjscie");
+        secmenu.addRow("1:Wyświetl Stacje", "2:Wybierz Rzekę", "3:Cofnij", "0:Wyjście");
         secmenu.addRule();
         secmenu.getContext().setWidth(70);
         System.out.println(secmenu.render());
-        int choice = Integer.valueOf(scanner.nextLine());
-        switch (choice) {
-            case 1: {
-                casemenu(province);
-                break;
+        try {
+            int choice = Integer.valueOf(scanner.nextLine());
+            switch (choice) {
+                case 1: {
+                    casemenu(province);
+                    break;
+                }
+                case 2: {
+                    chooseContainerWithName();
+                    break;
+                }
+                case 3: {
+                    createMenu();
+                    break;
+                }
+                case 0: {
+                    closeApp();
+                    break;
+                }
+                default: {
+                    System.out.println("Wybrałeś złą odpowiedź, spróbuj jeszcze raz.");
+                    secondMenu(province);
+                }
             }
-            case 2: {
-                chooseContainerWithName();
-            }
+
+        } catch (Exception e) {
+            System.out.println("To nie cyferki, spróbuj jeszcze raz.!");
+            secondMenu(province);
         }
-
-
     }
 
     public static void casemenu(String province) {
@@ -111,21 +144,31 @@ public class Province {
 
         ac.getContext().setWidth(70);
         System.out.println(ac.render());
-        getIDMenu();
+        getIDMenu(province);
     }
 
-    public static void getIDMenu() {
+    public static void getIDMenu(String province) {
         AsciiTable getIDM = new AsciiTable();
         getIDM.addRule();
         getIDM.addRow("Podaj ID ", "3:Cofnij", "0:Wyjscie");
         getIDM.addRule();
         getIDM.getContext().setWidth(70);
         System.out.println(getIDM.render());
-
-//        Integer choiceID = Integer.parseInt(scanner.nextLine());
-
+        try {
+            int choiceID = Integer.valueOf(scanner.nextLine());
+            if (filterFiles.getWaterContainerByID(choiceID) != null) {
+                showNewestData(choiceID);
+            }
+            if (choiceID == 3) {
+                secondMenu(province);
+            }
+            if (choiceID == 0) {
+                closeApp();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
 
     public static void chooseContainerWithName() {
         AsciiTable ccwID = new AsciiTable();
@@ -137,27 +180,37 @@ public class Province {
         System.out.println(ccwID.render());
         String choice = scanner.nextLine();
         List<WaterContainer> containers = filterFiles.filterThroughContainer(choice);
-        for (int i = 0; i < containers.size(); i++) {
-            WaterContainer wt = containers.get(i);
+        for (WaterContainer wt : containers) {
             ccwID2.addRule();
             ccwID2.addRow(wt.getId(), wt.getProvince(), wt.getStationName(), wt.getContainerName());
-            if(i%11==10){
-                ccwID2.addRule();
-                ccwID2.getContext().setWidth(70);
-                System.out.println(ccwID2.render());
-                System.out.println("wyswietlic wiecej danych? t/n");
-                String loadMoreFiles = scanner.nextLine();
-                if(loadMoreFiles.equals("n")) break;
-            }
+
         }
+        ccwID2.addRule();
+        ccwID2.getContext().setWidth(70);
+        System.out.println(ccwID2.render());
 //        String choiceName = scanner.nextLine();
     }
 
     public static void showNewestData(int id) {
-        int lastIndexOfHistory = allFiles.get(id).getHistory().size() - 1;
+        int lastIndexOfHistory =
+                filterFiles.getWaterContainerByID(id).getHistory().size() - 1;
+
+        //jakiś przypał z datą, pokazuje ostatni dzień lipca.
+
         AsciiTable sNd = new AsciiTable();
         sNd.addRule();
-        sNd.addRow("NAZWA ZBIORNIKA", "NAZWA STACJI", "WOJEWÓDZTWO", "DATA", "STAN WODY", "PRZEPŁYW", "TEMPERATURA");
+        sNd.addRow("WOJEWÓDZTWO", "NAZWA RZEKI", "NAZWA STACJI", "DATA", "STAN WODY [cm]", "PRZEPŁYW [m3/s]", "TEMPERATURA [℃]");
+        sNd.addRule();
+        sNd.addRow(
+                filterFiles.getWaterContainerByID(id).getProvince(),
+                filterFiles.getWaterContainerByID(id).getStationName(),
+                filterFiles.getWaterContainerByID(id).getContainerName(),
+                filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getDate(),
+                filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getWaterDeep(),
+                filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getFlow(),
+                filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getTemperature());
+        sNd.addRule();
+        sNd.addRow(null, null, null, null, "Czy chcesz zobaczyć wszystkie historyczne dane?", null, " Wybierz: T(Tak)/N(Nie)");
         sNd.addRule();
         sNd.addRow(allFiles.get(id).getContainerName(),
                 allFiles.get(id).getStationName(), allFiles.get(id).getProvince(),
@@ -166,6 +219,16 @@ public class Province {
                 allFiles.get(id).getHistory().get(lastIndexOfHistory).getFlow(),
                 allFiles.get(id).getHistory().get(lastIndexOfHistory).getTemperature());
         System.out.println(sNd.render());
+
+        String yOrN = scanner.nextLine();
+        if (yOrN.equals("T")) {
+            showHistoricData(id);
+        } else if (yOrN.equals("N")) {
+            System.out.println("Program został zamknięty.");
+            System.exit(0);
+        } else {
+            System.out.println("Wybrałeś zły znak. Spróbuj jeszcze raz.");
+        }
     }
 
     public static void showHistoricData(int id) {
@@ -186,21 +249,30 @@ public class Province {
 
     }
 
+    public static boolean pytanko() {
+        System.out.println("Czy chcesz więcej danych T/N");
+        String more = scanner.nextLine();
+
+        if (more.equals("N")) {
+            System.out.println("Aplikacja się zamknęła,");
+            return false;
+        } else if (more.equals("T")) {
+            return true;
+        } else {
+            return pytanko();
+        }
+    }
+
     public static void main(String[] args) {
         province = csvLoader.getProvince().stream().collect(Collectors.toList());
-        getProperties();
-             createMenu();
 
-        //print doubli z propertiesa przyklad
-//        double b= 12.123221;
-//        String a = doubleFormat.format(b);
-//        b= Double.parseDouble(a);
-//        System.out.println(b);
+        try {
+            createMenu();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        //print LocalDate z propertiesa
-//    LocalDate ld = LocalDate.now();
-//    String a = ld.format(dateFormat);
-//        System.out.println(a);
+
     }
 
 
