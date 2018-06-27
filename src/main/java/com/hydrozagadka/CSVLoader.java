@@ -13,7 +13,7 @@ import java.util.*;
 public class CSVLoader{
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();
-
+    private Map<Integer, WaterContainer> allContainers = new HashMap<>();
     private List<String> getFilesList(String directory) {
         List<String> fileNames = new ArrayList<>();
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(directory))) {
@@ -50,42 +50,48 @@ public class CSVLoader{
     }
 
     //Metod loading all csv files into objects
-    public Map<Integer, WaterContainer> load() {
+    public Map<Integer, WaterContainer> loadCSV() {
         String loadedLine;
         String[] splitedLine;
-
-        Map<Integer, WaterContainer> allContainers = new HashMap<>();
         try {
             List<String> files = getFilesList("data/");
-
             for (String file : files) {
                 br = new BufferedReader(new FileReader(file));
                 //read lines
                 while ((loadedLine = br.readLine()) != null) {
-                    //deleting "
-                    loadedLine = loadedLine.replaceAll("\"", "");
-                    //split data
-                    splitedLine = loadedLine.split(",");
+                    splitedLine = splitString(loadedLine);
                     //creating local variables with splited data in String table
                     WaterContainer wc = createWaterContainer(splitedLine);
                     History history = createHistory(splitedLine);
                     //if object doesn't exist in map
-                    if (!allContainers.containsKey(wc.getId())) {
-                        allContainers.put(wc.getId(), wc);
-                    } else {
-                        WaterContainer existingWc = allContainers.get(wc.getId());
-                        if (existingWc.getProvince().equals("N/A") && !wc.getProvince().equals("N/A")) {
-                            existingWc.setProvince(wc.getProvince());
-                            province.add(wc.getProvince());
-                        }
-                    }
-                    allContainers.get(wc.getId()).getHistory().add(history);
+                    checkingExistingContainers(wc, history);
                 }
             }
         } catch (Exception e) {
             System.out.println("Nie znaleziono pliku!");
         }
         return allContainers;
+    }
+
+    private String[] splitString(String loadedLine) {
+        String[] splitedLine;//deleting "
+        loadedLine = loadedLine.replaceAll("\"", "");
+        //split data
+        splitedLine = loadedLine.split(",");
+        return splitedLine;
+    }
+
+    private void checkingExistingContainers(WaterContainer wc, History history) {
+        if (!allContainers.containsKey(wc.getId())) {
+            allContainers.put(wc.getId(), wc);
+        } else {
+            WaterContainer existingWc = allContainers.get(wc.getId());
+            if (existingWc.getProvince().equals("N/A") && !wc.getProvince().equals("N/A")) {
+                existingWc.setProvince(wc.getProvince());
+                province.add(wc.getProvince());
+            }
+        }
+        allContainers.get(wc.getId()).getHistory().add(history);
     }
 
     public Set<String> getProvince(){

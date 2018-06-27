@@ -12,7 +12,7 @@ public class FilterFiles {
 
     public FilterFiles(CSVLoader loadFile) {
         this.loadFile = loadFile;
-        this.allFiles = loadFile.load();
+        this.allFiles = loadFile.loadCSV();
     }
 
     public List<WaterContainer> getWaterContainers(String province) {
