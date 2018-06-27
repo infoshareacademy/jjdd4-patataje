@@ -26,8 +26,8 @@ public class Province {
     private static Scanner scanner = new Scanner(System.in);
     private static DecimalFormat doubleFormat;
     private static DateTimeFormatter dateFormat;
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static String ANSI_COLOR =null;
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static String ANSI_COLOR =null;
 
 
     private static void getProperties() {
