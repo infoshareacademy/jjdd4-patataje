@@ -26,6 +26,9 @@ public class Province {
     private static Scanner scanner = new Scanner(System.in);
     private static DecimalFormat doubleFormat;
     private static DateTimeFormatter dateFormat;
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static String ANSI_COLOR =null;
+
 
     private static void getProperties() {
         Properties prop = new Properties();
@@ -36,6 +39,7 @@ public class Province {
             prop.load(input);
             doubleFormat = new DecimalFormat(prop.getProperty("doubleformat"));
             dateFormat = DateTimeFormatter.ofPattern(prop.getProperty("dateformat"));
+            ANSI_COLOR = prop.getProperty("stringcolor");
 
         } catch (IOException ex) {
             System.out.println("Blad przy wczytywaniu pliku konfiguracyjnego");
@@ -60,7 +64,7 @@ public class Province {
 
 
         AsciiTable at = new AsciiTable();
-        System.out.println("\n\nAPLIKACJA WYŚWIETLAJĄCA STAN WÓD DLA POLSKICH RZEK\n");
+        System.out.println(ANSI_COLOR+"\n\nAPLIKACJA WYŚWIETLAJĄCA STAN WÓD DLA POLSKICH RZEK\n");
         at.addRule();
         at.addRow("Aby wyświetlić najświeższe dostępne dane");
         at.addRule();
@@ -287,7 +291,6 @@ public class Province {
         province = csvLoader.getProvince().stream().collect(Collectors.toList());
         try {
             createMenu();
-
         } catch (InterruptedException e) {
             System.out.println("Za długo czekałeś, oj oj...");
         }
