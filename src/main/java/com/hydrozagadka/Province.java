@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLOutput;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.io.IOException;
 import java.util.List;
@@ -242,7 +244,10 @@ public class Province {
                     break;
                 }
                 History hs = ciapek.get(i);
-                sHd.addRow(hs.getDate(), hs.getWaterDeep(), hs.getFlow(), hs.getTemperature());
+                String waterDeepS = doubleFormat.format(hs.getWaterDeep());
+                Double waterDeep = Double.parseDouble(waterDeepS);
+                String formatedDate = hs.getDate().format(dateFormat);
+                sHd.addRow(formatedDate, waterDeep, hs.getFlow(), hs.getTemperature());
                 sHd.addRule();
 
             }
@@ -273,6 +278,7 @@ public class Province {
     }
 
     public static void main(String[] args) {
+        getProperties();
         province = csvLoader.getProvince().stream().collect(Collectors.toList());
         try {
             createMenu();
