@@ -6,12 +6,9 @@ import de.vandermeer.asciitable.AsciiTable;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLOutput;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -64,18 +61,18 @@ public class Province {
         System.out.println(ANSI_COLOR + "\n\nAPLIKACJA WYŚWIETLAJĄCA STAN WÓD DLA POLSKICH RZEK\n");
         System.out.println("Aby wyświetlić najświeższe dostępne dane:");
         try {
-        at.addRule();
-        at.addRow(null,null, null, "Wybierz województwo:");
-        at.addRule();
-        for (int i = 0, j=1; i < province.size()-4; i+=4,j+=4) {
-            at.addRow(j + ": " + province.get(i), (j + 1) + ": " + province.get(i+1),
-                    (j + 2) + ": " + province.get(i + 2), (j + 3) + ": " + province.get(i + 3));
             at.addRule();
-        }
-        at.addRow(null,null, null, "0: Wyjście");
-        at.addRule();
-        at.getContext().setWidth(170);
-        System.out.println(at.render());
+            at.addRow(null, null, null, "Wybierz województwo:");
+            at.addRule();
+            for (int i = 0, j = 1; i < province.size() - 4; i += 4, j += 4) {
+                at.addRow(j + ": " + province.get(i), (j + 1) + ": " + province.get(i + 1),
+                        (j + 2) + ": " + province.get(i + 2), (j + 3) + ": " + province.get(i + 3));
+                at.addRule();
+            }
+            at.addRow(null, null, null, "0: Wyjście");
+            at.addRule();
+            at.getContext().setWidth(170);
+            System.out.println(at.render());
             int choice = Integer.valueOf(scanner.nextLine());
 
             if (choice <= 16 && choice >= 1) {
@@ -93,7 +90,7 @@ public class Province {
             System.out.println("Naciśnij Enter aby przejść dalej");
             scanner.nextLine();
             createMenu();
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Blad podczas wczytywania danych program zostanie zamkniety");
             closeApp();
         }
@@ -200,7 +197,7 @@ public class Province {
             ccwID2.getContext().setWidth(70);
             System.out.println(ccwID2.render());
             getIDMenu(province);
-        } catch (ArithmeticException e ) {
+        } catch (ArithmeticException e) {
             System.out.println("Nie znaleziono zbiornika");
             chooseContainerWithName(province);
         }
@@ -208,7 +205,7 @@ public class Province {
 
     public static void showNewestData(int id) {
         int lastIndexOfHistory =
-                filterFiles.getWaterContainerByID(id).getHistory().size()-1;
+                filterFiles.getWaterContainerByID(id).getHistory().size() - 1;
 
         //jakiś przypał z datą, pokazuje ostatni dzień lipca.
         AsciiTable sNd = new AsciiTable();
@@ -231,18 +228,21 @@ public class Province {
                 flow,
                 temperature);
         sNd.addRule();
-        sNd.addRow(null, null, null, "Czy chcesz zobaczyć wszystkie historyczne dane?", null, " Wybierz: t(Tak)/n(Nie)", "w:Wyjście");
+        sNd.addRow(null, null, null, "Jeśli chcesz przejrzeć wszystkie historyczne dane ", null, " wybierz: 1", "c : cofnij");
+        sNd.addRule();
+        sNd.addRow(null, null, null, "Jeśli chcesz wyświetlić minimalne i maksymalne wartości dla podanej stacji ", null, " wybierz: 2", "w : wyjście");
         sNd.addRule();
         sNd.getContext().setWidth(150);
         System.out.println(sNd.render());
         String yOrN = scanner.nextLine();
-        if (yOrN.equals("t")) {
+        if (yOrN.equals("1")) {
             showHistoricData(id);
+        } else if (yOrN.equals("2")) {
+            minMaxSelectMenu(id);
         } else if (yOrN.equals("w")) {
             closeApp();
-        } else if (yOrN.equals("n")) {
-            System.out.println("Program został zamknięty.");
-            System.exit(0);
+        } else if (yOrN.equals("c")) {
+            getIDMenu(String.valueOf(province));
         } else {
             System.out.println("Wybrałeś zły znak. Spróbuj jeszcze raz.");
             showNewestData(id);
@@ -258,13 +258,13 @@ public class Province {
         sHd.addRow("DATA", "STAN WODY [cm]", "PRZEPŁYW [m3/s]", "TEMPERATURA [℃]");
         sHd.addRule();
 
-        List<History> ciapek = wt.getHistory().stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate())).collect(Collectors.toList());
-        for (int i = 0; i < ciapek.size(); ) {
+        List<History> historyList = wt.getHistory().stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate())).collect(Collectors.toList());
+        for (int i = 0; i < historyList.size(); ) {
             for (int j = 0; j < 10; j++, i++) {
-                if (i > ciapek.size() - 1) {
+                if (i > historyList.size() - 1) {
                     break;
                 }
-                History hs = ciapek.get(i);
+                History hs = historyList.get(i);
                 String date = hs.getDate().format(dateFormat);
                 String waterDeepS = doubleFormat.format(hs.getWaterDeep());
                 String flowS = doubleFormat.format(hs.getFlow());
@@ -273,12 +273,12 @@ public class Province {
                 double flow = Double.parseDouble(flowS);
                 double temperature = Double.parseDouble(temperatureS);
 
-                sHd.addRow(date, waterDeep,flow, temperature);
+                sHd.addRow(date, waterDeep, flow, temperature);
                 sHd.addRule();
 
             }
             System.out.println(sHd.render());
-            if (i >= ciapek.size()) {
+            if (i >= historyList.size()) {
                 break;
             }
             if (!moreDataQ()) {
@@ -301,6 +301,43 @@ public class Province {
         } else {
             return moreDataQ();
         }
+    }
+
+    public static void minMaxSelectMenu(int id) {
+        AsciiTable sHd = new AsciiTable();
+// TU CHYBA COS NIE TAK:
+        LocalDate start = null;
+        LocalDate end = null;
+
+        sHd.addRule();
+        sHd.addRow("Wyświetl dane minimalne i maksymalne dla całego dostępnego zakresu", "Wybierz: 1");
+        sHd.addRule();
+        sHd.addRow("Wyświetl dane minimalne i maksymalne dla wybranego przez siebie okresu", "Wybierz: 2");
+        sHd.addRule();
+        sHd.addRow("3: cofnij", "0: wyjdź");
+        sHd.addRule();
+        System.out.println(sHd.render());
+        String choice4 = scanner.nextLine();
+        if (choice4.equals("1")) {
+            showMinMax(id);
+        } else if (choice4.equals("2")) {
+            showMinMaxforDatas(id, start, end);
+        } else if (choice4.equals("3")) {
+            showNewestData(id);
+        } else if (choice4.equals("0")) {
+            closeApp();
+        } else {
+            System.out.println("Wybrałeś zły znak. Spróbuj jeszcze raz.");
+            minMaxSelectMenu(id);
+        }
+    }
+
+    public static void showMinMax(int id) {
+        filterFiles.minAndMaxValueOfHistoryFiles(id);
+    }
+
+    public static void showMinMaxforDatas(int id, LocalDate start, LocalDate end) {
+        filterFiles.minAndMaxValueOfHistoryFiles(id, start, end);
     }
 
     public static void main(String[] args) {
