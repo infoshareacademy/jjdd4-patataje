@@ -48,8 +48,6 @@ public class CSVLoader{
         Double temperature = Double.parseDouble(a[8]);
         return new History(date, waterDeep, flow, temperature);
     }
-
-    //Metod loading all csv files into objects
     public Map<Integer, WaterContainer> loadCSV() {
         String loadedLine;
         String[] splitedLine;
@@ -57,13 +55,10 @@ public class CSVLoader{
             List<String> files = getFilesList("data/");
             for (String file : files) {
                 br = new BufferedReader(new FileReader(file));
-                //read lines
                 while ((loadedLine = br.readLine()) != null) {
                     splitedLine = splitString(loadedLine);
-                    //creating local variables with splited data in String table
                     WaterContainer wc = createWaterContainer(splitedLine);
                     History history = createHistory(splitedLine);
-                    //if object doesn't exist in map
                     checkingExistingContainers(wc, history);
                 }
             }
