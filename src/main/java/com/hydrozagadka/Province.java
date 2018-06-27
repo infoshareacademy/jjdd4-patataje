@@ -2,6 +2,7 @@ package com.hydrozagadka;
 
 
 import de.vandermeer.asciitable.AsciiTable;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,8 +26,7 @@ public class Province {
     private static Scanner scanner = new Scanner(System.in);
     private static DecimalFormat doubleFormat;
     private static DateTimeFormatter dateFormat;
-    private static final String ANSI_RESET = "\u001B[0m";
-    private static String ANSI_COLOR =null;
+    private static String ANSI_COLOR = null;
 
     private static void getProperties() {
         Properties prop = new Properties();
@@ -37,7 +37,7 @@ public class Province {
             prop.load(input);
             doubleFormat = new DecimalFormat(prop.getProperty("doubleformat"));
             dateFormat = DateTimeFormatter.ofPattern(prop.getProperty("dateformat"));
-            ANSI_COLOR = prop.getProperty("green");
+            ANSI_COLOR = prop.getProperty("red");
 
         } catch (IOException ex) {
             System.out.println("Blad przy wczytywaniu pliku konfiguracyjnego");
@@ -60,26 +60,25 @@ public class Province {
 
     public static void createMenu() {
 
-
         AsciiTable at = new AsciiTable();
-        System.out.println(ANSI_COLOR+"\n\nAPLIKACJA WYŚWIETLAJĄCA STAN WÓD DLA POLSKICH RZEK\n");
+        System.out.println(ANSI_COLOR + "\n\nAPLIKACJA WYŚWIETLAJĄCA STAN WÓD DLA POLSKICH RZEK\n");
         System.out.println("Aby wyświetlić najświeższe dostępne dane:");
         at.addRule();
-        at.addRow("Wybierz województwo:");
+        at.addRow(null,null, null, "Wybierz województwo:");
         at.addRule();
-        for (int i = 1; i < province.size(); i++) {
-            at.addRow(i + ": " + province.get(i - 1));
+        for (int i = 0, j=1; i < province.size()-5; i+=3,j+=4) {
+            at.addRow(j + ": " + province.get(i), (j + 1) + ": " + province.get(i+1),
+                    (j + 2) + ": " + province.get(i + 2), (j + 3) + ": " + province.get(i + 3));
             at.addRule();
         }
-        at.addRow("0: Wyjście");
+        at.addRow(null,null, null, "0: Wyjście");
         at.addRule();
-        at.getContext().setWidth(35);
+        at.getContext().setWidth(170);
         System.out.println(at.render());
         try {
             int choice = Integer.valueOf(scanner.nextLine());
 
             if (choice <= 16 && choice >= 1) {
-
                 selectionMenu(province.get(choice - 1));
             } else if (choice == 0) {
                 closeApp();
@@ -196,7 +195,7 @@ public class Province {
             ccwID2.getContext().setWidth(70);
             System.out.println(ccwID2.render());
             getIDMenu(province);
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             System.out.println("Nie znaleziono zbiornika");
             chooseContainerWithName(province);
         }
@@ -221,14 +220,14 @@ public class Province {
                 filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getFlow(),
                 filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getTemperature());
         sNd.addRule();
-        sNd.addRow(null, null, null, "Czy chcesz zobaczyć wszystkie historyczne dane?", null, " Wybierz: T(Tak)/N(Nie)","W:Wyjście");
+        sNd.addRow(null, null, null, "Czy chcesz zobaczyć wszystkie historyczne dane?", null, " Wybierz: T(Tak)/N(Nie)", "W:Wyjście");
         sNd.addRule();
         System.out.println(sNd.render());
 
         String yOrN = scanner.nextLine();
         if (yOrN.equals("T")) {
             showHistoricData(id);
-        }else if (yOrN.equals("W")){
+        } else if (yOrN.equals("W")) {
             closeApp();
         } else if (yOrN.equals("N")) {
             System.out.println("Program został zamknięty.");
