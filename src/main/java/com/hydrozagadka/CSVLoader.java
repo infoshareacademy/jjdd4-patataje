@@ -14,6 +14,7 @@ public class CSVLoader{
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();
     private Map<Integer, WaterContainer> allContainers = new HashMap<>();
+
     private List<String> getFilesList(String directory) {
         List<String> fileNames = new ArrayList<>();
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(directory))) {
@@ -27,6 +28,7 @@ public class CSVLoader{
         }
         return fileNames;
     }
+
     private WaterContainer createWaterContainer(String[] a) {
         Integer id = Integer.parseInt(a[0].replaceAll(" ", ""));
         String containerName = a[1].toUpperCase();
@@ -48,6 +50,7 @@ public class CSVLoader{
         Double temperature = Double.parseDouble(a[8]);
         return new History(date, waterDeep, flow, temperature);
     }
+
     public Map<Integer, WaterContainer> loadCSV() {
         String loadedLine;
         String[] splitedLine;
