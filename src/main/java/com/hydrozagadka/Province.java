@@ -39,7 +39,7 @@ public class Province {
             prop.load(input);
             doubleFormat = new DecimalFormat(prop.getProperty("doubleformat"));
             dateFormat = DateTimeFormatter.ofPattern(prop.getProperty("dateformat"));
-            ANSI_COLOR = prop.getProperty("stringcolor");
+            ANSI_COLOR = prop.getProperty("green");
 
         } catch (IOException ex) {
             System.out.println("Blad przy wczytywaniu pliku konfiguracyjnego");
