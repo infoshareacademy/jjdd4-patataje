@@ -191,8 +191,6 @@ public class Province {
             ccwID.getContext().setWidth(70);
             System.out.println(ccwID.render());
             String choice = scanner.nextLine();
-            if(Integer.parseInt(choice)==3) selectionMenu(province);
-            if(Integer.parseInt(choice)==0) closeApp();
             List<WaterContainer> containers = filterFiles.filterThroughContainer(choice, province);
             for (WaterContainer wt : containers) {
                 ccwID2.addRule();
@@ -202,7 +200,7 @@ public class Province {
             ccwID2.getContext().setWidth(70);
             System.out.println(ccwID2.render());
             getIDMenu(province);
-        } catch (ArithmeticException e) {
+        } catch (ArithmeticException e ) {
             System.out.println("Nie znaleziono zbiornika");
             chooseContainerWithName(province);
         }
