@@ -326,16 +326,16 @@ public class Province {
 
     public static void minMaxSelectMenu(int id) {
         AsciiTable sHd = new AsciiTable();
-// TU CHYBA COS NIE TAK:
+// TU CHYBA  NIE TAK:
         LocalDate start = null;
         LocalDate end = null;
 
         sHd.addRule();
-        sHd.addRow(null, null, "Wyświetl dane minimalne i maksymalne dla całego dostępnego zakresu", "Wybierz: 1");
+        sHd.addRow( "Wyświetl dane minimalne i maksymalne dla całego dostępnego zakresu", "Wybierz: 1");
         sHd.addRule();
-        sHd.addRow(null, null, "Wyświetl dane minimalne i maksymalne dla wybranego przez siebie okresu", "Wybierz: 2");
+        sHd.addRow( "Wyświetl dane minimalne i maksymalne dla wybranego przez siebie okresu", "Wybierz: 2");
         sHd.addRule();
-        sHd.addRow(null, "3: cofnij", null, "0: wyjdź");
+        sHd.addRow( "3: cofnij",  "0: wyjdź");
         sHd.addRule();
         System.out.println(sHd.render());
         int choice4 = Integer.valueOf(scanner.nextLine());
