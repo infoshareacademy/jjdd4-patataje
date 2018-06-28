@@ -340,7 +340,7 @@ public class Province {
         if (choice4 == 1) {
             showMinMax(id);
         } else if (choice4 == 2) {
-       try {
+      // try {
            //   sHd.addRule();
 
            // sHd.addRow("Podaj datę początkową");
@@ -351,7 +351,7 @@ public class Province {
            //   sHd.render();
 
            showMinMaxforDatas(id, start, end);
-       } catch ()
+       //}
         } else if (choice4 == 3) {
             showNewestData(id);
         } else if (choice4 == 0) {
