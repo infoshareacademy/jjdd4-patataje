@@ -142,13 +142,22 @@ public class Province {
         ac.addRule();
         ac.addRow("ID", "NAZWA STACJI", "NAZWA RZEKI");
         ac.addRule();
+        int i =1;
         for (WaterContainer wt : filteredByProvince) {
             ac.addRow(wt.getId(), wt.getStationName(), wt.getContainerName());
             ac.addRule();
+            if(i%10==0) {
+                ac.addRow(null,null,"Wyswietlic wiecej rekordow? n-koniec");
+                ac.addRule();
+                ac.getContext().setWidth(70);
+                System.out.println(ac.render());
+                          String choice = scanner.nextLine();
+                               if(choice.equals("n")) getIDMenu(province);
+            }
+            i++;
         }
 
-        ac.getContext().setWidth(70);
-        System.out.println(ac.render());
+
         getIDMenu(province);
     }
 
