@@ -375,7 +375,8 @@ public class Province {
     public static void showMinMaxforDatas(int id, String start, String end) {
         LocalDate startDate = LocalDate.parse(start);
         LocalDate endDate = LocalDate.parse(end);
-        filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).forEach(System.out::println);
+        filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).forEach(history -> System.out.println(history.getDate()));
+        filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).forEach(history -> System.out.println(history.getWaterDeep()));
 
     }
 
