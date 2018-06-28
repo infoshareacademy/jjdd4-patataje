@@ -147,28 +147,27 @@ public class Province {
         List<WaterContainer> filteredByProvince = filterFiles.showWaterContainersThroughProvince(province);
         ac.addRule();
         ac.addRow("ID", "NAZWA RZEKI", "NAZWA STACJI").setTextAlignment(TextAlignment.CENTER);
-        ;
+
         ac.addRule();
+        int i =1;
         for (WaterContainer wt : filteredByProvince) {
-        for (int i = 0; i < filteredByProvince.size(); ) {
-            for (int j = 0; j < 10; j++, i++) {
-                wt = filteredByProvince.get(i);
 
-                   ac.addRow(wt.getId(), wt.getStationName(), wt.getContainerName());
-                   ac.addRule();
-                }
-            System.out.println(ac.render());
-                if (i >= filteredByProvince.size()) {
-                    break;
-                }
-                if (!moreDataQ()) {
-                  break;}
-
-
-//            ac.getContext().setWidth(70);
+            ac.addRow(wt.getId(), wt.getStationName(), wt.getContainerName());
+            ac.addRule();
+            if(i%10==0) {
+                ac.addRow(null,null,"Wyswietlic wiecej rekordow? n-koniec");
+                ac.addRule();
+                ac.getContext().setWidth(70);
+                System.out.println(ac.render());
+                          String choice = scanner.nextLine();
+                               if(choice.equals("n")) getIDMenu(province);
             }
-            getIDMenu(province);
+            i++;
         }
+
+
+        getIDMenu(province);
+
     }
 
     public static void getIDMenu(String province) {
@@ -243,8 +242,11 @@ public class Province {
     }
 
     public static void showNewestData(int id) {
+       List<History> sorted =  sortHistory(filterFiles.getWaterContainerByID(id));
         int lastIndexOfHistory =
-                filterFiles.getWaterContainerByID(id).getHistory().size() - 1;
+
+                sorted.size()-1;
+
         //jakiś przypał z datą, pokazuje ostatni dzień lipca.
         AsciiTable sNd = new AsciiTable();
         sNd.addRule();
@@ -305,7 +307,7 @@ public class Province {
         sHd.addRow("DATA", "STAN WODY [cm]", "PRZEPŁYW [m3/s]", "TEMPERATURA [℃]");
         sHd.addRule();
 
-        List<History> historyList = wt.getHistory().stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate())).collect(Collectors.toList());
+        List<History> historyList = sortHistory(wt);
         for (int i = 0; i < historyList.size(); ) {
             for (int j = 0; j < 10; j++, i++) {
                 if (i > historyList.size() - 1) {
@@ -334,6 +336,10 @@ public class Province {
         }
 
 
+    }
+
+    private static List<History> sortHistory(WaterContainer wt) {
+        return wt.getHistory().stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate())).collect(Collectors.toList());
     }
 
     public static boolean moreDataQ() {
