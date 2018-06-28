@@ -1,19 +1,16 @@
 package com.hydrozagadka;
 
 
+import com.hydrozagadka.exceptions.IdLengthException;
 import de.vandermeer.asciitable.AsciiTable;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLOutput;
 import java.text.DecimalFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.io.IOException;
 import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -22,7 +19,6 @@ public class Province {
     private static List<String> province;
     private static CSVLoader csvLoader = new CSVLoader();
     private static FilterFiles filterFiles = new FilterFiles(csvLoader);
-    private static Map<Integer, WaterContainer> allFiles;
     private static Scanner scanner = new Scanner(System.in);
     private static DecimalFormat doubleFormat;
     private static DateTimeFormatter dateFormat;
@@ -89,7 +85,7 @@ public class Province {
                 createMenu();
             }
         } catch (NumberFormatException e) {
-            System.out.println("Wpisałeś złą nazwę rzeki");
+            System.out.println("To nie cyferki, spróbuj jeszcze raz.!");
             System.out.println("Naciśnij Enter aby przejść dalej");
             scanner.nextLine();
             createMenu();
@@ -133,7 +129,7 @@ public class Province {
             }
 
         } catch (NumberFormatException e) {
-            System.out.println("To nie cyferki, spróbuj jeszcze raz.!");
+            System.out.println("Wpisałeś złą nazwę rzeki");
             selectionMenu(province);
         }
     }
@@ -163,6 +159,7 @@ public class Province {
         System.out.println(getIDM.render());
         try {
             int choiceID = Integer.valueOf(scanner.nextLine());
+            if(filterFiles.getWaterContainerByID(choiceID)==null) throw new IdLengthException();
             if (filterFiles.getWaterContainerByID(choiceID) != null) {
                 showNewestData(choiceID);
             }
@@ -177,8 +174,10 @@ public class Province {
             System.out.println("Nacisnij enter aby kontynuowac");
             scanner.nextLine();
             getIDMenu(province);
-        }
-
+        }catch (IdLengthException e) {
+        System.out.println("Podałeś nieprawidłowe ID");
+        closeApp();
+    }
     }
 
     public static void chooseContainerWithName(String province) {
@@ -186,7 +185,7 @@ public class Province {
         AsciiTable ccwID2 = new AsciiTable();
         try {
             ccwID.addRule();
-            ccwID.addRow("Podaj nazwę rzeki", "3:Cofnij", "0:Wyjście");
+            ccwID.addRow("Podaj nazwę rzeki", "3:Cofnij", "0:Wyjście","Enter:wyświetl wszystkie");
             ccwID.addRule();
             ccwID.getContext().setWidth(70);
             System.out.println(ccwID.render());
@@ -209,7 +208,6 @@ public class Province {
     public static void showNewestData(int id) {
         int lastIndexOfHistory =
                 filterFiles.getWaterContainerByID(id).getHistory().size()-1;
-
         //jakiś przypał z datą, pokazuje ostatni dzień lipca.
         AsciiTable sNd = new AsciiTable();
         sNd.addRule();
@@ -306,7 +304,8 @@ public class Province {
     public static void main(String[] args) {
         getProperties();
         province = csvLoader.getProvince().stream().collect(Collectors.toList());
-
+        Locale defaultLocale = new Locale("en", "US");
+        Locale.setDefault(defaultLocale);
         createMenu();
     }
 
