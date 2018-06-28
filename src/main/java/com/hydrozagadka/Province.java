@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
@@ -54,27 +53,32 @@ public class Province {
     public static void closeApp() {
 
         System.out.println("Aplikacja została zamknięta.");
+        byeScreen();
         System.exit(0);
+
     }
 
     public static void createMenu() {
 
         AsciiTable at = new AsciiTable();
         System.out.println(ANSI_COLOR + "\n\nAPLIKACJA WYŚWIETLAJĄCA STAN WÓD DLA POLSKICH RZEK\n");
+        welcomeScreen();
         System.out.println("Aby wyświetlić najświeższe dostępne dane:");
         try {
-        at.addRule();
-        at.addRow(null,null, null, "Wybierz województwo:").setTextAlignment(TextAlignment.CENTER);;
-        at.addRule();
-        for (int i = 0, j=1; i < province.size()-4; i+=4,j+=4) {
-            at.addRow(j + ": " + province.get(i), (j + 1) + ": " + province.get(i+1),
-                    (j + 2) + ": " + province.get(i + 2), (j + 3) + ": " + province.get(i + 3));
             at.addRule();
-        }
-        at.addRow(null,null, null, "0: Wyjście").setTextAlignment(TextAlignment.RIGHT);;
-        at.addRule();
-        at.getContext().setWidth(170);
-        System.out.println(at.render());
+            at.addRow(null, null, null, "Wybierz województwo:").setTextAlignment(TextAlignment.CENTER);
+            ;
+            at.addRule();
+            for (int i = 0, j = 1; i < province.size() - 4; i += 4, j += 4) {
+                at.addRow(j + ": " + province.get(i), (j + 1) + ": " + province.get(i + 1),
+                        (j + 2) + ": " + province.get(i + 2), (j + 3) + ": " + province.get(i + 3));
+                at.addRule();
+            }
+            at.addRow(null, null, null, "0: Wyjście").setTextAlignment(TextAlignment.RIGHT);
+            ;
+            at.addRule();
+            at.getContext().setWidth(100);
+            System.out.println(at.render());
             int choice = Integer.valueOf(scanner.nextLine());
 
             if (choice <= 16 && choice >= 1) {
@@ -92,7 +96,7 @@ public class Province {
             System.out.println("Naciśnij Enter aby przejść dalej");
             scanner.nextLine();
             createMenu();
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Blad podczas wczytywania danych program zostanie zamkniety");
             closeApp();
         }
@@ -102,7 +106,8 @@ public class Province {
         AsciiTable secmenu = new AsciiTable();
 //Runtime.getRuntime().exec("cls");
         secmenu.addRule();
-        secmenu.addRow("1:Wyświetl Stacje", "2:Wybierz Rzekę", "3:Cofnij", "0:Wyjście").setTextAlignment(TextAlignment.CENTER);;
+        secmenu.addRow("1:Wyświetl Stacje", "2:Wybierz Rzekę", "3:Cofnij", "0:Wyjście").setTextAlignment(TextAlignment.CENTER);
+        ;
         secmenu.addRule();
         secmenu.getContext().setWidth(70);
         System.out.println(secmenu.render());
@@ -132,7 +137,7 @@ public class Province {
             }
 
         } catch (NumberFormatException e) {
-            System.out.println("Wpisałeś złą nazwę rzeki");
+            System.out.println("Podaj liczbe!");
             selectionMenu(province);
         }
     }
@@ -141,28 +146,43 @@ public class Province {
         AsciiTable ac = new AsciiTable();
         List<WaterContainer> filteredByProvince = filterFiles.showWaterContainersThroughProvince(province);
         ac.addRule();
-        ac.addRow("ID", "NAZWA STACJI", "NAZWA RZEKI").setTextAlignment(TextAlignment.CENTER);;
+        ac.addRow("ID", "NAZWA RZEKI", "NAZWA STACJI").setTextAlignment(TextAlignment.CENTER);
+        ;
         ac.addRule();
         for (WaterContainer wt : filteredByProvince) {
-            ac.addRow(wt.getId(), wt.getStationName(), wt.getContainerName());
-            ac.addRule();
-        }
+        for (int i = 0; i < filteredByProvince.size(); ) {
+            for (int j = 0; j < 10; j++, i++) {
+                wt = filteredByProvince.get(i);
 
-        ac.getContext().setWidth(70);
-        System.out.println(ac.render());
-        getIDMenu(province);
+                   ac.addRow(wt.getId(), wt.getStationName(), wt.getContainerName());
+                   ac.addRule();
+                }
+            System.out.println(ac.render());
+                if (i >= filteredByProvince.size()) {
+                    break;
+                }
+                if (!moreDataQ()) {
+                  break;}
+
+
+//            ac.getContext().setWidth(70);
+            }
+            getIDMenu(province);
+        }
     }
 
     public static void getIDMenu(String province) {
         AsciiTable getIDM = new AsciiTable();
         getIDM.addRule();
-        getIDM.addRow("Podaj ID rzeki ", "3:Cofnij", "0:Wyjście").setTextAlignment(TextAlignment.CENTER);;
+        getIDM.addRow("Podaj ID rzeki ", "3:Cofnij", "0:Wyjście").setTextAlignment(TextAlignment.CENTER);
+        ;
         getIDM.addRule();
         getIDM.getContext().setWidth(70);
         System.out.println(getIDM.render());
         try {
             int choiceID = Integer.valueOf(scanner.nextLine());
-            if(filterFiles.getWaterContainerByID(choiceID)==null) throw new IdLengthException();
+            if (filterFiles.getWaterContainerByID(choiceID) == null && choiceID != 3 && choiceID != 0)
+                throw new IdLengthException();
             if (filterFiles.getWaterContainerByID(choiceID) != null) {
                 showNewestData(choiceID);
             }
@@ -177,10 +197,12 @@ public class Province {
             System.out.println("Nacisnij enter aby kontynuowac");
             scanner.nextLine();
             getIDMenu(province);
-        }catch (IdLengthException e) {
-        System.out.println("Podałeś nieprawidłowe ID");
-        closeApp();
-    }
+        } catch (IdLengthException e) {
+            System.out.println("Podałeś nieprawidłowe ID");
+            System.out.println("Nacisnij enter aby kontynuowac");
+            scanner.nextLine();
+            getIDMenu(province);
+        }
     }
 
     public static void chooseContainerWithName(String province) {
@@ -188,7 +210,8 @@ public class Province {
         AsciiTable ccwID2 = new AsciiTable();
         try {
             ccwID.addRule();
-            ccwID.addRow("Podaj nazwę rzeki", "3:Cofnij", "0:Wyjście","Enter:wyświetl wszystkie").setTextAlignment(TextAlignment.CENTER);;
+            ccwID.addRow("Podaj nazwę rzeki", "3:Cofnij", "0:Wyjście", "Enter:wyświetl wszystkie").setTextAlignment(TextAlignment.CENTER);
+            ;
             ccwID.addRule();
             ccwID.getContext().setWidth(70);
             System.out.println(ccwID.render());
@@ -213,7 +236,7 @@ public class Province {
             ccwID2.getContext().setWidth(70);
             System.out.println(ccwID2.render());
             getIDMenu(province);
-        } catch (ArithmeticException e ) {
+        } catch (ArithmeticException e) {
             System.out.println("Nie znaleziono zbiornika");
             chooseContainerWithName(province);
         }
@@ -221,7 +244,7 @@ public class Province {
 
     public static void showNewestData(int id) {
         int lastIndexOfHistory =
-                filterFiles.getWaterContainerByID(id).getHistory().size()-1;
+                filterFiles.getWaterContainerByID(id).getHistory().size() - 1;
         //jakiś przypał z datą, pokazuje ostatni dzień lipca.
         AsciiTable sNd = new AsciiTable();
         sNd.addRule();
@@ -244,9 +267,11 @@ public class Province {
                 temperature);
         sNd.addRule();
         sNd.addRule();
-        sNd.addRow(null, null, null, "Jeśli chcesz przejrzeć wszystkie historyczne dane ", null, " wybierz: 1", "3 : cofnij").setTextAlignment(TextAlignment.CENTER);;
+        sNd.addRow(null, null, null, "Jeśli chcesz przejrzeć wszystkie historyczne dane ", null, " wybierz: 1", "3 : cofnij").setTextAlignment(TextAlignment.CENTER);
+        ;
         sNd.addRule();
-        sNd.addRow(null, null, null, "Jeśli chcesz wyświetlić minimalne i maksymalne wartości dla podanej stacji ", null, " wybierz: 2", "0 : wyjście").setTextAlignment(TextAlignment.CENTER);;
+        sNd.addRow(null, null, null, "Jeśli chcesz wyświetlić minimalne i maksymalne wartości dla podanej stacji ", null, " wybierz: 2", "0 : wyjście").setTextAlignment(TextAlignment.CENTER);
+        ;
         sNd.addRule();
         sNd.getContext().setWidth(150);
         System.out.println(sNd.render());
@@ -332,11 +357,14 @@ public class Province {
         LocalDate end = null;
 
         sHd.addRule();
-        sHd.addRow( "Wyświetl dane minimalne i maksymalne dla całego dostępnego zakresu", "Wybierz: 1").setTextAlignment(TextAlignment.CENTER);;
+        sHd.addRow("Wyświetl dane minimalne i maksymalne dla całego dostępnego zakresu", "Wybierz: 1").setTextAlignment(TextAlignment.CENTER);
+        ;
         sHd.addRule();
-        sHd.addRow( "Wyświetl dane minimalne i maksymalne dla wybranego przez siebie okresu", "Wybierz: 2").setTextAlignment(TextAlignment.CENTER);;
+        sHd.addRow("Wyświetl dane minimalne i maksymalne dla wybranego przez siebie okresu", "Wybierz: 2").setTextAlignment(TextAlignment.CENTER);
+        ;
         sHd.addRule();
-        sHd.addRow( "3: cofnij",  "0: wyjdź").setTextAlignment(TextAlignment.RIGHT);;
+        sHd.addRow("3: cofnij", "0: wyjdź").setTextAlignment(TextAlignment.RIGHT);
+        ;
         sHd.addRule();
         System.out.println(sHd.render());
         int choice4 = Integer.valueOf(scanner.nextLine());
@@ -358,9 +386,10 @@ public class Province {
     public static void showMinMax(int id) {
         AsciiTable sHd = new AsciiTable();
         sHd.addRule();
-        sHd.addRow("Maksimum", "Minimum");
-        sHd.addRule();
-        sHd.addRow(filterFiles.minAndMaxValueOfHistoryFiles(id));
+
+        sHd.addRow(filterFiles.minAndMaxValueOfHistoryFiles(id).get(0).getDate() + " " + filterFiles.minAndMaxValueOfHistoryFiles(id).get(0).getWaterDeep(),
+                filterFiles.minAndMaxValueOfHistoryFiles(id).get(1).getDate() + " " + filterFiles.minAndMaxValueOfHistoryFiles(id).get(1).getWaterDeep());
+
         sHd.addRule();
         System.out.println(sHd.render());
     }
@@ -383,5 +412,34 @@ public class Province {
         createMenu();
     }
 
+    public static void welcomeScreen() {
+        System.out.println("\n" +
+                "\n" +
+                "    o   o                                Witaj\n" +
+                "                  /^^^^^7             W Aplikacji\n" +
+                "    '  '     ,oO))))))))Oo,         Wykonanej przez\n" +
+                "           ,'))))))))))))))), /{     PATATAJE team\n" +
+                "      '  ,'o  ))))))))))))))))={   \n" +
+                "         >    ))))))))))))))))={  Miłego korzystania!\n" +
+                "         `,   ))))))\\ \\)))))))={    \n" +
+                "           ',))))))))\\/)))))' \\{         ⓒJPPL\n" +
+                "             '*O))))))))O*'\n");
+        System.out.println("");
+    }
 
+    public static void byeScreen() {
+        System.out.println("\n" +
+                "                 ,__\n" +
+                "                   |  `'.\n" +
+                "__           |`-._/_.:---`-.._\n" +
+                "\\='.       _/..--'`__         `'-._\n" +
+                " \\- '-.--\"`      ===        /   o  `',      Szkoda,\n" +
+                "  )= (                 .--_ |       _.'     że nas\n" +
+                " /_=.'-._             {=_-_ |   .--`-.    opuszczasz.\n" +
+                "/_.'    `\\`'-._        '-=   \\    _.'    \n" +
+                "    jgs  )  _.-'`'-..       _..-'`         żegnaj!\n" +
+                "        /_.'        `/\";';`|\n" +
+                "                     \\` .'/\n" +
+                "                      '--'\n");
+    }
 }
