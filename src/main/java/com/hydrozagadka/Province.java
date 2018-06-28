@@ -131,7 +131,7 @@ public class Province {
             }
 
         } catch (NumberFormatException e) {
-            System.out.println("Wpisałeś złą nazwę rzeki");
+            System.out.println("Podaj liczbe!");
             selectionMenu(province);
         }
     }
@@ -161,7 +161,7 @@ public class Province {
         System.out.println(getIDM.render());
         try {
             int choiceID = Integer.valueOf(scanner.nextLine());
-            if(filterFiles.getWaterContainerByID(choiceID)==null) throw new IdLengthException();
+            if(filterFiles.getWaterContainerByID(choiceID)==null && choiceID!=3 && choiceID!=0) throw new IdLengthException();
             if (filterFiles.getWaterContainerByID(choiceID) != null) {
                 showNewestData(choiceID);
             }
@@ -178,7 +178,9 @@ public class Province {
             getIDMenu(province);
         }catch (IdLengthException e) {
         System.out.println("Podałeś nieprawidłowe ID");
-        closeApp();
+            System.out.println("Nacisnij enter aby kontynuowac");
+            scanner.nextLine();
+        getIDMenu(province);
     }
     }
 
@@ -357,7 +359,8 @@ public class Province {
     public static void showMinMax(int id) {
         AsciiTable sHd = new AsciiTable();
         sHd.addRule();
-        sHd.addRow(filterFiles.minAndMaxValueOfHistoryFiles(id));
+        sHd.addRow(filterFiles.minAndMaxValueOfHistoryFiles(id).get(0).getDate()+" "+filterFiles.minAndMaxValueOfHistoryFiles(id).get(0).getWaterDeep(),
+                filterFiles.minAndMaxValueOfHistoryFiles(id).get(1).getDate()+" "+filterFiles.minAndMaxValueOfHistoryFiles(id).get(1).getWaterDeep());
         sHd.addRule();
         System.out.println(sHd.render());
     }
