@@ -339,7 +339,7 @@ public class Province {
         sHd.addRule();
         System.out.println(sHd.render());
         int choice4 = Integer.valueOf(scanner.nextLine());
-        if (choice4 == 1) {1
+        if (choice4 == 1) {
             showMinMax(id);
         } else if (choice4 == 2) {
 
