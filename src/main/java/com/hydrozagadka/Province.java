@@ -3,6 +3,7 @@ package com.hydrozagadka;
 
 import com.hydrozagadka.exceptions.IdLengthException;
 import de.vandermeer.asciitable.AsciiTable;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -63,14 +64,14 @@ public class Province {
         System.out.println("Aby wyświetlić najświeższe dostępne dane:");
         try {
         at.addRule();
-        at.addRow(null,null, null, "Wybierz województwo:");
+        at.addRow(null,null, null, "Wybierz województwo:").setTextAlignment(TextAlignment.CENTER);;
         at.addRule();
         for (int i = 0, j=1; i < province.size()-4; i+=4,j+=4) {
             at.addRow(j + ": " + province.get(i), (j + 1) + ": " + province.get(i+1),
                     (j + 2) + ": " + province.get(i + 2), (j + 3) + ": " + province.get(i + 3));
             at.addRule();
         }
-        at.addRow(null,null, null, "0: Wyjście");
+        at.addRow(null,null, null, "0: Wyjście").setTextAlignment(TextAlignment.RIGHT);;
         at.addRule();
         at.getContext().setWidth(170);
         System.out.println(at.render());
@@ -101,7 +102,7 @@ public class Province {
         AsciiTable secmenu = new AsciiTable();
 //Runtime.getRuntime().exec("cls");
         secmenu.addRule();
-        secmenu.addRow("1:Wyświetl Stacje", "2:Wybierz Rzekę", "3:Cofnij", "0:Wyjście");
+        secmenu.addRow("1:Wyświetl Stacje", "2:Wybierz Rzekę", "3:Cofnij", "0:Wyjście").setTextAlignment(TextAlignment.CENTER);;
         secmenu.addRule();
         secmenu.getContext().setWidth(70);
         System.out.println(secmenu.render());
@@ -140,7 +141,7 @@ public class Province {
         AsciiTable ac = new AsciiTable();
         List<WaterContainer> filteredByProvince = filterFiles.showWaterContainersThroughProvince(province);
         ac.addRule();
-        ac.addRow("ID", "NAZWA STACJI", "NAZWA RZEKI");
+        ac.addRow("ID", "NAZWA STACJI", "NAZWA RZEKI").setTextAlignment(TextAlignment.CENTER);;
         ac.addRule();
         for (WaterContainer wt : filteredByProvince) {
             ac.addRow(wt.getId(), wt.getStationName(), wt.getContainerName());
@@ -155,7 +156,7 @@ public class Province {
     public static void getIDMenu(String province) {
         AsciiTable getIDM = new AsciiTable();
         getIDM.addRule();
-        getIDM.addRow("Podaj ID rzeki ", "3:Cofnij", "0:Wyjście");
+        getIDM.addRow("Podaj ID rzeki ", "3:Cofnij", "0:Wyjście").setTextAlignment(TextAlignment.CENTER);;
         getIDM.addRule();
         getIDM.getContext().setWidth(70);
         System.out.println(getIDM.render());
@@ -187,7 +188,7 @@ public class Province {
         AsciiTable ccwID2 = new AsciiTable();
         try {
             ccwID.addRule();
-            ccwID.addRow("Podaj nazwę rzeki", "3:Cofnij", "0:Wyjście","Enter:wyświetl wszystkie");
+            ccwID.addRow("Podaj nazwę rzeki", "3:Cofnij", "0:Wyjście","Enter:wyświetl wszystkie").setTextAlignment(TextAlignment.CENTER);;
             ccwID.addRule();
             ccwID.getContext().setWidth(70);
             System.out.println(ccwID.render());
@@ -243,9 +244,9 @@ public class Province {
                 temperature);
         sNd.addRule();
         sNd.addRule();
-        sNd.addRow(null, null, null, "Jeśli chcesz przejrzeć wszystkie historyczne dane ", null, " wybierz: 1", "3 : cofnij");
+        sNd.addRow(null, null, null, "Jeśli chcesz przejrzeć wszystkie historyczne dane ", null, " wybierz: 1", "3 : cofnij").setTextAlignment(TextAlignment.CENTER);;
         sNd.addRule();
-        sNd.addRow(null, null, null, "Jeśli chcesz wyświetlić minimalne i maksymalne wartości dla podanej stacji ", null, " wybierz: 2", "0 : wyjście");
+        sNd.addRow(null, null, null, "Jeśli chcesz wyświetlić minimalne i maksymalne wartości dla podanej stacji ", null, " wybierz: 2", "0 : wyjście").setTextAlignment(TextAlignment.CENTER);;
         sNd.addRule();
         sNd.getContext().setWidth(150);
         System.out.println(sNd.render());
@@ -331,11 +332,11 @@ public class Province {
         LocalDate end = null;
 
         sHd.addRule();
-        sHd.addRow( "Wyświetl dane minimalne i maksymalne dla całego dostępnego zakresu", "Wybierz: 1");
+        sHd.addRow( "Wyświetl dane minimalne i maksymalne dla całego dostępnego zakresu", "Wybierz: 1").setTextAlignment(TextAlignment.CENTER);;
         sHd.addRule();
-        sHd.addRow( "Wyświetl dane minimalne i maksymalne dla wybranego przez siebie okresu", "Wybierz: 2");
+        sHd.addRow( "Wyświetl dane minimalne i maksymalne dla wybranego przez siebie okresu", "Wybierz: 2").setTextAlignment(TextAlignment.CENTER);;
         sHd.addRule();
-        sHd.addRow( "3: cofnij",  "0: wyjdź");
+        sHd.addRow( "3: cofnij",  "0: wyjdź").setTextAlignment(TextAlignment.RIGHT);;
         sHd.addRule();
         System.out.println(sHd.render());
         int choice4 = Integer.valueOf(scanner.nextLine());
@@ -356,6 +357,8 @@ public class Province {
 
     public static void showMinMax(int id) {
         AsciiTable sHd = new AsciiTable();
+        sHd.addRule();
+        sHd.addRow("Maksimum", "Minimum");
         sHd.addRule();
         sHd.addRow(filterFiles.minAndMaxValueOfHistoryFiles(id));
         sHd.addRule();
