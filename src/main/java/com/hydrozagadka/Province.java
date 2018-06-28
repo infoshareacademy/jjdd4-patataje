@@ -376,9 +376,11 @@ public class Province {
            //   sHd.addRule();
 
            // sHd.addRow("Podaj datę początkową");
+            System.out.println("Podaj datę początkową z 2016 roku (yyyy-mm-dd)");
            String start = scanner.nextLine();
            //   sHd.addRule();
            //     sHd.addRow("Podaj datę końcową");
+            System.out.println("Podaj datę końcową z 2016 roku (yyyy-mm-dd)");
            String end = scanner.nextLine();
            //   sHd.render();
 
@@ -409,11 +411,14 @@ public class Province {
     }
 
     public static void showMinMaxforDatas(int id, String start, String end) {
+        AsciiTable sMM = new AsciiTable();
+        sMM.addRule();
         LocalDate startDate = LocalDate.parse(start);
         LocalDate endDate = LocalDate.parse(end);
-        filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).forEach(history -> System.out.println(history.getDate()));
-        filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).forEach(history -> System.out.println(history.getWaterDeep()));
-
+        filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).forEach(history -> sMM.addRow((history.getDate())));
+         filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).forEach(history -> sMM.addRow(history.getWaterDeep()));
+        sMM.addRule();
+        System.out.println(sMM.render());
     }
 
     public static void main(String[] args) {
