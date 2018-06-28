@@ -9,10 +9,7 @@ import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Province {
@@ -188,10 +185,21 @@ public class Province {
             ccwID.getContext().setWidth(70);
             System.out.println(ccwID.render());
             String choice = scanner.nextLine();
-            List<WaterContainer> containers = filterFiles.filterThroughContainer(choice, province);
-            for (WaterContainer wt : containers) {
-                ccwID2.addRule();
-                ccwID2.addRow(wt.getId(), wt.getProvince(), wt.getStationName(), wt.getContainerName());
+
+            if (!(choice.equals("3")) && !(choice.equals("0"))) {
+
+
+                List<WaterContainer> containers = filterFiles.filterThroughContainer(choice, province);
+                for (WaterContainer wt : containers) {
+                    ccwID2.addRule();
+                    ccwID2.addRow(wt.getId(), wt.getProvince(), wt.getStationName(), wt.getContainerName());
+                }
+            }
+
+            if (choice.equals("3")) {
+                selectionMenu(province);
+            } else if (choice.equals("0")) {
+                closeApp();
             }
             ccwID2.addRule();
             ccwID2.getContext().setWidth(70);
@@ -228,24 +236,31 @@ public class Province {
                 flow,
                 temperature);
         sNd.addRule();
-        sNd.addRow(null, null, null, "Jeśli chcesz przejrzeć wszystkie historyczne dane ", null, " wybierz: 1", "c : cofnij");
         sNd.addRule();
-        sNd.addRow(null, null, null, "Jeśli chcesz wyświetlić minimalne i maksymalne wartości dla podanej stacji ", null, " wybierz: 2", "w : wyjście");
+        sNd.addRow(null, null, null, "Jeśli chcesz przejrzeć wszystkie historyczne dane ", null, " wybierz: 1", "3 : cofnij");
+        sNd.addRule();
+        sNd.addRow(null, null, null, "Jeśli chcesz wyświetlić minimalne i maksymalne wartości dla podanej stacji ", null, " wybierz: 2", "0 : wyjście");
         sNd.addRule();
         sNd.getContext().setWidth(150);
         System.out.println(sNd.render());
-        String yOrN = scanner.nextLine();
-        if (yOrN.equals("1")) {
-            showHistoricData(id);
-        } else if (yOrN.equals("2")) {
-            minMaxSelectMenu(id);
-        } else if (yOrN.equals("w")) {
-            closeApp();
-        } else if (yOrN.equals("c")) {
-            getIDMenu(String.valueOf(province));
-        } else {
-            System.out.println("Wybrałeś zły znak. Spróbuj jeszcze raz.");
-            showNewestData(id);
+
+        int choiceID = Integer.valueOf(scanner.nextLine());
+        switch (choiceID) {
+            case 1: {
+                showHistoricData(id);
+            }
+            case 2: {
+                minMaxSelectMenu(id);
+            }
+            case 3: {
+                getIDMenu(String.valueOf(province));
+            }
+            case 0: {
+                closeApp();
+            }
+            default:
+                System.out.println("Wybrałeś zły znak. Spróbuj jeszcze raz.");
+                showNewestData(id);
         }
     }
 
@@ -294,7 +309,7 @@ public class Province {
         String more = scanner.nextLine();
 
         if (more.equals("n")) {
-            System.out.println("Aplikacja się zamknęła,");
+            closeApp();
             return false;
         } else if (more.equals("t")) {
             return true;
@@ -310,21 +325,22 @@ public class Province {
         LocalDate end = null;
 
         sHd.addRule();
-        sHd.addRow("Wyświetl dane minimalne i maksymalne dla całego dostępnego zakresu", "Wybierz: 1");
+        sHd.addRow(null, null, "Wyświetl dane minimalne i maksymalne dla całego dostępnego zakresu", "Wybierz: 1");
         sHd.addRule();
-        sHd.addRow("Wyświetl dane minimalne i maksymalne dla wybranego przez siebie okresu", "Wybierz: 2");
+        sHd.addRow(null, null, "Wyświetl dane minimalne i maksymalne dla wybranego przez siebie okresu", "Wybierz: 2");
         sHd.addRule();
-        sHd.addRow("3: cofnij", "0: wyjdź");
+        sHd.addRow(null, "3: cofnij", null, "0: wyjdź");
         sHd.addRule();
         System.out.println(sHd.render());
-        String choice4 = scanner.nextLine();
-        if (choice4.equals("1")) {
+        int choice4 = Integer.valueOf(scanner.nextLine());
+        if (choice4 == 1) {1
             showMinMax(id);
-        } else if (choice4.equals("2")) {
+        } else if (choice4 == 2) {
+
             showMinMaxforDatas(id, start, end);
-        } else if (choice4.equals("3")) {
+        } else if (choice4 == 3) {
             showNewestData(id);
-        } else if (choice4.equals("0")) {
+        } else if (choice4 == 0) {
             closeApp();
         } else {
             System.out.println("Wybrałeś zły znak. Spróbuj jeszcze raz.");
@@ -333,14 +349,25 @@ public class Province {
     }
 
     public static void showMinMax(int id) {
-        filterFiles.minAndMaxValueOfHistoryFiles(id);
+        AsciiTable sHd = new AsciiTable();
+        sHd.addRule();
+        sHd.addRow(filterFiles.minAndMaxValueOfHistoryFiles(id));
+        sHd.addRule();
+        System.out.println(sHd.render());
     }
 
     public static void showMinMaxforDatas(int id, LocalDate start, LocalDate end) {
         filterFiles.minAndMaxValueOfHistoryFiles(id, start, end);
+        String startDate = scanner.nextLine();
+        String endDate = scanner.nextLine();
+        start = LocalDate.parse(startDate);
+        end = LocalDate.parse(endDate);
+
     }
 
     public static void main(String[] args) {
+        Locale defaultLocale = new Locale("en", "US");
+        Locale.setDefault(defaultLocale);
         getProperties();
         province = csvLoader.getProvince().stream().collect(Collectors.toList());
 
