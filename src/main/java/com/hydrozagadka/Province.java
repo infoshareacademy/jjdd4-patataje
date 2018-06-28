@@ -359,26 +359,31 @@ public class Province {
     public static void minMaxSelectMenu(int id) {
         AsciiTable sHd = new AsciiTable();
 // TU CHYBA  NIE TAK:
-        LocalDate start = null;
-        LocalDate end = null;
+        sHd.addRule();
 
+        sHd.addRow( "Wyświetl dane minimalne i maksymalne dla całego dostępnego zakresu", "Wybierz: 1").setTextAlignment(TextAlignment.CENTER);
         sHd.addRule();
-        sHd.addRow("Wyświetl dane minimalne i maksymalne dla całego dostępnego zakresu", "Wybierz: 1").setTextAlignment(TextAlignment.CENTER);
-        ;
+        sHd.addRow( "Wyświetl dane minimalne i maksymalne dla wybranego przez siebie okresu", "Wybierz: 2").setTextAlignment(TextAlignment.CENTER);
         sHd.addRule();
-        sHd.addRow("Wyświetl dane minimalne i maksymalne dla wybranego przez siebie okresu", "Wybierz: 2").setTextAlignment(TextAlignment.CENTER);
-        ;
-        sHd.addRule();
-        sHd.addRow("3: cofnij", "0: wyjdź").setTextAlignment(TextAlignment.RIGHT);
-        ;
+        sHd.addRow( "3: cofnij",  "0: wyjdź").setTextAlignment(TextAlignment.RIGHT);
         sHd.addRule();
         System.out.println(sHd.render());
         int choice4 = Integer.valueOf(scanner.nextLine());
         if (choice4 == 1) {
             showMinMax(id);
         } else if (choice4 == 2) {
+      // try {
+           //   sHd.addRule();
 
-            showMinMaxforDatas(id, start, end);
+           // sHd.addRow("Podaj datę początkową");
+           String start = scanner.nextLine();
+           //   sHd.addRule();
+           //     sHd.addRow("Podaj datę końcową");
+           String end = scanner.nextLine();
+           //   sHd.render();
+
+           showMinMaxforDatas(id, start, end);
+       //}
         } else if (choice4 == 3) {
             showNewestData(id);
         } else if (choice4 == 0) {
@@ -392,20 +397,21 @@ public class Province {
     public static void showMinMax(int id) {
         AsciiTable sHd = new AsciiTable();
         sHd.addRule();
-
-        sHd.addRow(filterFiles.minAndMaxValueOfHistoryFiles(id).get(0).getDate() + " " + filterFiles.minAndMaxValueOfHistoryFiles(id).get(0).getWaterDeep(),
-                filterFiles.minAndMaxValueOfHistoryFiles(id).get(1).getDate() + " " + filterFiles.minAndMaxValueOfHistoryFiles(id).get(1).getWaterDeep());
+        sHd.addRow(null, "MAKSIMUM",null, "MINIMUM").setTextAlignment(TextAlignment.CENTER);
+        sHd.addRule();
+        sHd.addRow("Data", "Poziom wody [cm]","Data", "Poziom wody [cm]");
+        sHd.addRule();
+        sHd.addRow(filterFiles.minAndMaxValueOfHistoryFiles(id).get(0).getDate(), filterFiles.minAndMaxValueOfHistoryFiles(id).get(0).getWaterDeep(),
+                filterFiles.minAndMaxValueOfHistoryFiles(id).get(1).getDate() , filterFiles.minAndMaxValueOfHistoryFiles(id).get(1).getWaterDeep());
 
         sHd.addRule();
         System.out.println(sHd.render());
     }
 
-    public static void showMinMaxforDatas(int id, LocalDate start, LocalDate end) {
-        filterFiles.minAndMaxValueOfHistoryFiles(id, start, end);
-        String startDate = scanner.nextLine();
-        String endDate = scanner.nextLine();
-        start = LocalDate.parse(startDate);
-        end = LocalDate.parse(endDate);
+    public static void showMinMaxforDatas(int id, String start, String end) {
+        LocalDate startDate = LocalDate.parse(start);
+        LocalDate endDate = LocalDate.parse(end);
+        filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).forEach(System.out::println);
 
     }
 
