@@ -221,8 +221,9 @@ public class Province {
     }
 
     public static void showNewestData(int id) {
+       List<History> sorted =  sortHistory(filterFiles.getWaterContainerByID(id));
         int lastIndexOfHistory =
-                filterFiles.getWaterContainerByID(id).getHistory().size()-1;
+                sorted.size()-1;
         //jakiś przypał z datą, pokazuje ostatni dzień lipca.
         AsciiTable sNd = new AsciiTable();
         sNd.addRule();
@@ -281,7 +282,7 @@ public class Province {
         sHd.addRow("DATA", "STAN WODY [cm]", "PRZEPŁYW [m3/s]", "TEMPERATURA [℃]");
         sHd.addRule();
 
-        List<History> historyList = wt.getHistory().stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate())).collect(Collectors.toList());
+        List<History> historyList = sortHistory(wt);
         for (int i = 0; i < historyList.size(); ) {
             for (int j = 0; j < 10; j++, i++) {
                 if (i > historyList.size() - 1) {
@@ -310,6 +311,10 @@ public class Province {
         }
 
 
+    }
+
+    private static List<History> sortHistory(WaterContainer wt) {
+        return wt.getHistory().stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate())).collect(Collectors.toList());
     }
 
     public static boolean moreDataQ() {
