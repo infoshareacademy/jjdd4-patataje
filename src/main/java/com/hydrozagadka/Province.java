@@ -373,9 +373,11 @@ public class Province {
     public static void showMinMax(int id) {
         AsciiTable sHd = new AsciiTable();
         sHd.addRule();
-        sHd.addRow(filterFiles.minAndMaxValueOfHistoryFiles(id).get(0).getDate()+" "+filterFiles.minAndMaxValueOfHistoryFiles(id).get(0).getWaterDeep(),
-                filterFiles.minAndMaxValueOfHistoryFiles(id).get(1).getDate()+" "+filterFiles.minAndMaxValueOfHistoryFiles(id).get(1).getWaterDeep());
-        sHd.addRule();
+        filterFiles.minAndMaxValueOfHistoryFiles(id)
+                .forEach(history -> {
+                    sHd.addRow(history.getDate(),history.getWaterDeep());
+                    sHd.addRule();
+        });
         System.out.println(sHd.render());
     }
 
