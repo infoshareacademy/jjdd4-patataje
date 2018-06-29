@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
@@ -54,6 +53,7 @@ public class Province {
     public static void closeApp() {
 
         System.out.println("Aplikacja została zamknięta.");
+        byeScreen();
         System.exit(0);
     }
 
@@ -61,20 +61,23 @@ public class Province {
 
         AsciiTable at = new AsciiTable();
         System.out.println(ANSI_COLOR + "\n\nAPLIKACJA WYŚWIETLAJĄCA STAN WÓD DLA POLSKICH RZEK\n");
+        welcomeScreen();
         System.out.println("Aby wyświetlić najświeższe dostępne dane:");
         try {
-        at.addRule();
-        at.addRow(null,null, null, "Wybierz województwo:").setTextAlignment(TextAlignment.CENTER);;
-        at.addRule();
-        for (int i = 0, j=1; i < province.size()-4; i+=4,j+=4) {
-            at.addRow(j + ": " + province.get(i), (j + 1) + ": " + province.get(i+1),
-                    (j + 2) + ": " + province.get(i + 2), (j + 3) + ": " + province.get(i + 3));
             at.addRule();
-        }
-        at.addRow(null,null, null, "0: Wyjście").setTextAlignment(TextAlignment.RIGHT);;
-        at.addRule();
-        at.getContext().setWidth(170);
-        System.out.println(at.render());
+            at.addRow(null, null, null, "Wybierz województwo:").setTextAlignment(TextAlignment.CENTER);
+            ;
+            at.addRule();
+            for (int i = 0, j = 1; i < province.size() - 4; i += 4, j += 4) {
+                at.addRow(j + ": " + province.get(i), (j + 1) + ": " + province.get(i + 1),
+                        (j + 2) + ": " + province.get(i + 2), (j + 3) + ": " + province.get(i + 3));
+                at.addRule();
+            }
+            at.addRow(null, null, null, "0: Wyjście").setTextAlignment(TextAlignment.RIGHT);
+            ;
+            at.addRule();
+            at.getContext().setWidth(100);
+            System.out.println(at.render());
             int choice = Integer.valueOf(scanner.nextLine());
 
             if (choice <= 16 && choice >= 1) {
@@ -141,7 +144,8 @@ public class Province {
         AsciiTable ac = new AsciiTable();
         List<WaterContainer> filteredByProvince = filterFiles.showWaterContainersThroughProvince(province);
         ac.addRule();
-        ac.addRow("ID", "NAZWA STACJI", "NAZWA RZEKI").setTextAlignment(TextAlignment.CENTER);;
+        ac.addRow("ID", "NAZWA RZEKI", "NAZWA STACJI").setTextAlignment(TextAlignment.CENTER);
+
         ac.addRule();
         int i =1;
         for (WaterContainer wt : filteredByProvince) {
@@ -165,13 +169,15 @@ public class Province {
     public static void getIDMenu(String province) {
         AsciiTable getIDM = new AsciiTable();
         getIDM.addRule();
-        getIDM.addRow("Podaj ID rzeki ", "3:Cofnij", "0:Wyjście").setTextAlignment(TextAlignment.CENTER);;
+        getIDM.addRow("Podaj ID rzeki ", "3:Cofnij", "0:Wyjście").setTextAlignment(TextAlignment.CENTER);
+        ;
         getIDM.addRule();
         getIDM.getContext().setWidth(70);
         System.out.println(getIDM.render());
         try {
             int choiceID = Integer.valueOf(scanner.nextLine());
-            if(filterFiles.getWaterContainerByID(choiceID)==null && choiceID!=3 && choiceID!=0) throw new IdLengthException();
+            if (filterFiles.getWaterContainerByID(choiceID) == null && choiceID != 3 && choiceID != 0)
+                throw new IdLengthException();
             if (filterFiles.getWaterContainerByID(choiceID) != null) {
                 showNewestData(choiceID);
             }
@@ -186,12 +192,12 @@ public class Province {
             System.out.println("Nacisnij enter aby kontynuowac");
             scanner.nextLine();
             getIDMenu(province);
-        }catch (IdLengthException e) {
-        System.out.println("Podałeś nieprawidłowe ID");
+        } catch (IdLengthException e) {
+            System.out.println("Podałeś nieprawidłowe ID");
             System.out.println("Nacisnij enter aby kontynuowac");
             scanner.nextLine();
-        getIDMenu(province);
-    }
+            getIDMenu(province);
+        }
     }
 
     public static void chooseContainerWithName(String province) {
@@ -199,7 +205,8 @@ public class Province {
         AsciiTable ccwID2 = new AsciiTable();
         try {
             ccwID.addRule();
-            ccwID.addRow("Podaj nazwę rzeki", "3:Cofnij", "0:Wyjście","Enter:wyświetl wszystkie").setTextAlignment(TextAlignment.CENTER);;
+            ccwID.addRow("Podaj nazwę rzeki", "3:Cofnij", "0:Wyjście", "Enter:wyświetl wszystkie").setTextAlignment(TextAlignment.CENTER);
+            ;
             ccwID.addRule();
             ccwID.getContext().setWidth(70);
             System.out.println(ccwID.render());
@@ -256,9 +263,11 @@ public class Province {
                 temperature);
         sNd.addRule();
         sNd.addRule();
-        sNd.addRow(null, null, null, "Jeśli chcesz przejrzeć wszystkie historyczne dane ", null, " wybierz: 1", "3 : cofnij").setTextAlignment(TextAlignment.CENTER);;
+        sNd.addRow(null, null, null, "Jeśli chcesz przejrzeć wszystkie historyczne dane ", null, " wybierz: 1", "3 : cofnij").setTextAlignment(TextAlignment.CENTER);
+        ;
         sNd.addRule();
-        sNd.addRow(null, null, null, "Jeśli chcesz wyświetlić minimalne i maksymalne wartości dla podanej stacji ", null, " wybierz: 2", "0 : wyjście").setTextAlignment(TextAlignment.CENTER);;
+        sNd.addRow(null, null, null, "Jeśli chcesz wyświetlić minimalne i maksymalne wartości dla podanej stacji ", null, " wybierz: 2", "0 : wyjście").setTextAlignment(TextAlignment.CENTER);
+        ;
         sNd.addRule();
         sNd.getContext().setWidth(150);
         System.out.println(sNd.render());
@@ -360,9 +369,11 @@ public class Province {
            //   sHd.addRule();
 
            // sHd.addRow("Podaj datę początkową");
+            System.out.println("Podaj datę początkową z 2016 roku (yyyy-mm-dd)");
            String start = scanner.nextLine();
            //   sHd.addRule();
            //     sHd.addRow("Podaj datę końcową");
+            System.out.println("Podaj datę końcową z 2016 roku (yyyy-mm-dd)");
            String end = scanner.nextLine();
            //   sHd.render();
 
@@ -381,9 +392,13 @@ public class Province {
     public static void showMinMax(int id) {
         AsciiTable sHd = new AsciiTable();
         sHd.addRule();
-        sHd.addRow("Maksimum", "Minimum");
+        sHd.addRow(null, "MAKSIMUM",null, "MINIMUM").setTextAlignment(TextAlignment.CENTER);
         sHd.addRule();
-        sHd.addRow(filterFiles.minAndMaxValueOfHistoryFiles(id));
+        sHd.addRow("Data", "Poziom wody [cm]","Data", "Poziom wody [cm]");
+        sHd.addRule();
+        sHd.addRow(filterFiles.minAndMaxValueOfHistoryFiles(id).get(0).getDate(), filterFiles.minAndMaxValueOfHistoryFiles(id).get(0).getWaterDeep(),
+                filterFiles.minAndMaxValueOfHistoryFiles(id).get(1).getDate() , filterFiles.minAndMaxValueOfHistoryFiles(id).get(1).getWaterDeep());
+
         sHd.addRule();
         filterFiles.minAndMaxValueOfHistoryFiles(id)
                 .forEach(history -> {
@@ -394,6 +409,8 @@ public class Province {
     }
 
     public static void showMinMaxforDatas(int id, String start, String end) {
+        AsciiTable sMM = new AsciiTable();
+        sMM.addRule();
         LocalDate startDate = LocalDate.parse(start);
         LocalDate endDate = LocalDate.parse(end);
         filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).forEach(history -> System.out.println(history.getDate()));
@@ -410,5 +427,34 @@ public class Province {
         createMenu();
     }
 
+    public static void welcomeScreen() {
+        System.out.println("\n" +
+                "\n" +
+                "    o   o                                Witaj\n" +
+                "                  /^^^^^7             W Aplikacji\n" +
+                "    '  '     ,oO))))))))Oo,         Wykonanej przez\n" +
+                "           ,'))))))))))))))), /{     PATATAJE team\n" +
+                "      '  ,'o  ))))))))))))))))={   \n" +
+                "         >    ))))))))))))))))={  Miłego korzystania!\n" +
+                "         `,   ))))))\\ \\)))))))={    \n" +
+                "           ',))))))))\\/)))))' \\{         ⓒJPPL\n" +
+                "             '*O))))))))O*'\n");
+        System.out.println("");
+    }
 
+    public static void byeScreen() {
+        System.out.println("\n" +
+                "                 ,__\n" +
+                "                   |  `'.\n" +
+                "__           |`-._/_.:---`-.._\n" +
+                "\\='.       _/..--'`__         `'-._\n" +
+                " \\- '-.--\"`      ===        /   o  `',      Szkoda,\n" +
+                "  )= (                 .--_ |       _.'     że nas\n" +
+                " /_=.'-._             {=_-_ |   .--`-.    opuszczasz.\n" +
+                "/_.'    `\\`'-._        '-=   \\    _.'    \n" +
+                "    jgs  )  _.-'`'-..       _..-'`         żegnaj!\n" +
+                "        /_.'        `/\";';`|\n" +
+                "                     \\` .'/\n" +
+                "                      '--'\n");
+    }
 }
