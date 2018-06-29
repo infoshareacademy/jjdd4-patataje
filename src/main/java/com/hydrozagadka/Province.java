@@ -5,12 +5,14 @@ import com.hydrozagadka.exceptions.IdLengthException;
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
+import javax.sound.midi.Soundbank;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
@@ -95,7 +97,7 @@ public class Province {
             System.out.println("Naciśnij Enter aby przejść dalej");
             scanner.nextLine();
             createMenu();
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Blad podczas wczytywania danych program zostanie zamkniety");
             closeApp();
         }
@@ -105,7 +107,8 @@ public class Province {
         AsciiTable secmenu = new AsciiTable();
 //Runtime.getRuntime().exec("cls");
         secmenu.addRule();
-        secmenu.addRow("1:Wyświetl Stacje", "2:Wybierz Rzekę", "3:Cofnij", "0:Wyjście").setTextAlignment(TextAlignment.CENTER);;
+        secmenu.addRow("1:Wyświetl Stacje", "2:Wybierz Rzekę", "3:Cofnij", "0:Wyjście").setTextAlignment(TextAlignment.CENTER);
+        ;
         secmenu.addRule();
         secmenu.getContext().setWidth(70);
         System.out.println(secmenu.render());
@@ -147,17 +150,17 @@ public class Province {
         ac.addRow("ID", "NAZWA RZEKI", "NAZWA STACJI").setTextAlignment(TextAlignment.CENTER);
 
         ac.addRule();
-        int i =1;
+        int i = 1;
         for (WaterContainer wt : filteredByProvince) {
             ac.addRow(wt.getId(), wt.getStationName(), wt.getContainerName());
             ac.addRule();
-            if(i%10==0) {
-                ac.addRow(null,null,"Wyswietlic wiecej rekordow? n-koniec");
+            if (i % 10 == 0) {
+                ac.addRow(null, null, "Wyswietlic wiecej rekordow? n-koniec");
                 ac.addRule();
                 ac.getContext().setWidth(70);
                 System.out.println(ac.render());
-                          String choice = scanner.nextLine();
-                               if(choice.equals("n")) getIDMenu(province);
+                String choice = scanner.nextLine();
+                if (choice.equals("n")) getIDMenu(province);
             }
             i++;
         }
@@ -231,16 +234,16 @@ public class Province {
             ccwID2.getContext().setWidth(70);
             System.out.println(ccwID2.render());
             getIDMenu(province);
-        } catch (ArithmeticException e ) {
+        } catch (ArithmeticException e) {
             System.out.println("Nie znaleziono zbiornika");
             chooseContainerWithName(province);
         }
     }
 
     public static void showNewestData(int id) {
-       List<History> sorted =  sortHistory(filterFiles.getWaterContainerByID(id));
+        List<History> sorted = sortHistory(filterFiles.getWaterContainerByID(id));
         int lastIndexOfHistory =
-                sorted.size()-1;
+                sorted.size() - 1;
         //jakiś przypał z datą, pokazuje ostatni dzień lipca.
         AsciiTable sNd = new AsciiTable();
         sNd.addRule();
@@ -333,7 +336,9 @@ public class Province {
     }
 
     private static List<History> sortHistory(WaterContainer wt) {
-        return wt.getHistory().stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate())).collect(Collectors.toList());
+        return wt.getHistory().stream()
+                .sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()))
+                .collect(Collectors.toList());
     }
 
     public static boolean moreDataQ() {
@@ -354,31 +359,26 @@ public class Province {
         AsciiTable sHd = new AsciiTable();
 // TU CHYBA  NIE TAK:
         sHd.addRule();
-        sHd.addRow( "Wyświetl dane minimalne i maksymalne dla całego dostępnego zakresu", "Wybierz: 1").setTextAlignment(TextAlignment.CENTER);
+        sHd.addRow("Wyświetl dane minimalne i maksymalne dla całego dostępnego zakresu", "Wybierz: 1").setTextAlignment(TextAlignment.CENTER);
         sHd.addRule();
-        sHd.addRow( "Wyświetl dane minimalne i maksymalne dla wybranego przez siebie okresu", "Wybierz: 2").setTextAlignment(TextAlignment.CENTER);
+        sHd.addRow("Wyświetl dane minimalne i maksymalne dla wybranego przez siebie okresu", "Wybierz: 2").setTextAlignment(TextAlignment.CENTER);
         sHd.addRule();
-        sHd.addRow( "3: cofnij",  "0: wyjdź").setTextAlignment(TextAlignment.RIGHT);
+        sHd.addRow("3: cofnij", "0: wyjdź").setTextAlignment(TextAlignment.RIGHT);
         sHd.addRule();
         System.out.println(sHd.render());
         int choice4 = Integer.valueOf(scanner.nextLine());
         if (choice4 == 1) {
             showMinMax(id);
         } else if (choice4 == 2) {
-      // try {
-           //   sHd.addRule();
 
-           // sHd.addRow("Podaj datę początkową");
             System.out.println("Podaj datę początkową z 2016 roku (yyyy-mm-dd)");
-           String start = scanner.nextLine();
-           //   sHd.addRule();
-           //     sHd.addRow("Podaj datę końcową");
-            System.out.println("Podaj datę końcową z 2016 roku (yyyy-mm-dd)");
-           String end = scanner.nextLine();
-           //   sHd.render();
+            String start = scanner.nextLine();
 
-           showMinMaxforDatas(id, start, end);
-       //}
+            System.out.println("Podaj datę końcową z 2016 roku (yyyy-mm-dd)");
+            String end = scanner.nextLine();
+
+
+            showMinMaxforDatas(id, start, end);
         } else if (choice4 == 3) {
             showNewestData(id);
         } else if (choice4 == 0) {
@@ -392,25 +392,38 @@ public class Province {
     public static void showMinMax(int id) {
         AsciiTable sHd = new AsciiTable();
         sHd.addRule();
-        sHd.addRow(null, "MAKSIMUM",null, "MINIMUM").setTextAlignment(TextAlignment.CENTER);
+        sHd.addRow(null, "MAKSIMUM", null, "MINIMUM").setTextAlignment(TextAlignment.CENTER);
         sHd.addRule();
-        sHd.addRow("Data", "Poziom wody [cm]","Data", "Poziom wody [cm]");
+        sHd.addRow("Data", "Poziom wody [cm]", "Data", "Poziom wody [cm]");
         sHd.addRule();
         filterFiles.minAndMaxValueOfHistoryFiles(id)
                 .forEach(history -> {
-                    sHd.addRow(null,null,history.getDate(),history.getWaterDeep());
+                    sHd.addRow(null, null, history.getDate(), history.getWaterDeep());
                     sHd.addRule();
-        });
+                });
         System.out.println(sHd.render());
     }
 
     public static void showMinMaxforDatas(int id, String start, String end) {
         AsciiTable sMM = new AsciiTable();
         sMM.addRule();
-        LocalDate startDate = LocalDate.parse(start);
-        LocalDate endDate = LocalDate.parse(end);
-        filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).forEach(history -> System.out.println(history.getDate() + " " + history.getWaterDeep()));
+        try {
+            LocalDate startDate = LocalDate.parse(start);
+            LocalDate endDate = LocalDate.parse(end);
+            sMM.addRow("Wartość Maksymalna", filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).get(0).getDate() + " " + filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).get(0).getWaterDeep());
+            sMM.addRule();
+            sMM.addRow("Wartość Minimalna", filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).get(1).getDate() + " " + filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).get(1).getWaterDeep());
+            sMM.addRule();
+            System.out.println(sMM.render());
 
+        }catch (DateTimeParseException e){
+            System.out.println("Podałeś nieprawidłową datę ");
+            System.out.println("Nacisnij enter aby kontynuowac");
+            scanner.nextLine();
+            minMaxSelectMenu(id);
+        }
+
+        closeApp();
     }
 
     public static void main(String[] args) {
