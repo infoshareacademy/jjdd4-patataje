@@ -5,7 +5,6 @@ import com.hydrozagadka.exceptions.IdLengthException;
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
-import javax.sound.midi.Soundbank;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -244,7 +243,7 @@ public class Province {
         List<History> sorted = sortHistory(filterFiles.getWaterContainerByID(id));
         int lastIndexOfHistory =
                 sorted.size() - 1;
-        //jakiś przypał z datą, pokazuje ostatni dzień lipca.
+
         AsciiTable sNd = new AsciiTable();
         sNd.addRule();
         sNd.addRow("WOJEWÓDZTWO", "NAZWA RZEKI", "NAZWA STACJI", "DATA", "STAN WODY [cm]", "PRZEPŁYW [m3/s]", "TEMPERATURA [℃]");
@@ -416,7 +415,7 @@ public class Province {
             sMM.addRule();
             System.out.println(sMM.render());
 
-        }catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             System.out.println("Podałeś nieprawidłową datę ");
             System.out.println("Nacisnij enter aby kontynuowac");
             scanner.nextLine();
