@@ -396,13 +396,9 @@ public class Province {
         sHd.addRule();
         sHd.addRow("Data", "Poziom wody [cm]","Data", "Poziom wody [cm]");
         sHd.addRule();
-        sHd.addRow(filterFiles.minAndMaxValueOfHistoryFiles(id).get(0).getDate(), filterFiles.minAndMaxValueOfHistoryFiles(id).get(0).getWaterDeep(),
-                filterFiles.minAndMaxValueOfHistoryFiles(id).get(1).getDate() , filterFiles.minAndMaxValueOfHistoryFiles(id).get(1).getWaterDeep());
-
-        sHd.addRule();
         filterFiles.minAndMaxValueOfHistoryFiles(id)
                 .forEach(history -> {
-                    sHd.addRow(history.getDate(),history.getWaterDeep());
+                    sHd.addRow(null,null,history.getDate(),history.getWaterDeep());
                     sHd.addRule();
         });
         System.out.println(sHd.render());
@@ -413,8 +409,7 @@ public class Province {
         sMM.addRule();
         LocalDate startDate = LocalDate.parse(start);
         LocalDate endDate = LocalDate.parse(end);
-        filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).forEach(history -> System.out.println(history.getDate()));
-        filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).forEach(history -> System.out.println(history.getWaterDeep()));
+        filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).forEach(history -> System.out.println(history.getDate() + " " + history.getWaterDeep()));
 
     }
 
