@@ -1,5 +1,7 @@
 package com.hydrozagadka;
 
+import com.hydrozagadka.exceptions.DataLengthException;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,10 +12,11 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.*;
 
-public class CSVLoader{
+public class CSVLoader {
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();
     private Map<Integer, WaterContainer> allContainers = new HashMap<>();
+
     private List<String> getFilesList(String directory) {
         List<String> fileNames = new ArrayList<>();
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(directory))) {
@@ -27,6 +30,7 @@ public class CSVLoader{
         }
         return fileNames;
     }
+
     private WaterContainer createWaterContainer(String[] a) {
         Integer id = Integer.parseInt(a[0].replaceAll(" ", ""));
         String containerName = a[1].toUpperCase();
@@ -39,15 +43,22 @@ public class CSVLoader{
     }
 
     private History createHistory(String[] a) {
-        Integer year = Integer.parseInt(a[3]);
-        Integer month = Integer.parseInt(a[9]);
-        Integer day = Integer.parseInt(a[5]);
-        LocalDate date = LocalDate.of(year, month, day);
-        Double waterDeep = Double.parseDouble(a[6]);
-        Double flow = Double.parseDouble(a[7]);
-        Double temperature = Double.parseDouble(a[8]);
-        return new History(date, waterDeep, flow, temperature);
+        try {
+            Integer year = Integer.parseInt(a[3]);
+            Integer month = Integer.parseInt(a[9]);
+            Integer day = Integer.parseInt(a[5]);
+            LocalDate date = LocalDate.of(year, month, day);
+            Double waterDeep = Double.parseDouble(a[6]);
+            Double flow = Double.parseDouble(a[7]);
+            Double temperature = Double.parseDouble(a[8]);
+            return new History(date, waterDeep, flow, temperature);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            System.out.println("Błąd podczas konwertowania rekordu na liczbę!");
+            System.exit(0);
+        }
+        return null;
     }
+
     public Map<Integer, WaterContainer> loadCSV() {
         String loadedLine;
         String[] splitedLine;
@@ -62,7 +73,7 @@ public class CSVLoader{
                     checkingExistingContainers(wc, history);
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("Nie znaleziono pliku!");
         }
         return allContainers;
@@ -73,6 +84,7 @@ public class CSVLoader{
         loadedLine = loadedLine.replaceAll("\"", "");
         //split data
         splitedLine = loadedLine.split(",");
+        if (splitedLine.length < 10) throw new DataLengthException("Plik ma nieodpowiednią liczbę rekordów!");
         return splitedLine;
     }
 
@@ -89,7 +101,7 @@ public class CSVLoader{
         allContainers.get(wc.getId()).getHistory().add(history);
     }
 
-    public Set<String> getProvince(){
+    public Set<String> getProvince() {
         return province;
     }
 }
