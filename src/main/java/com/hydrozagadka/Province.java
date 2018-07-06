@@ -291,7 +291,7 @@ public class Province {
         sHd.addRule();
 
         List<History> historyList = sortHistory(wt);
-        for (int i = 0; i < historyList.size(); ) {
+        for (int i = 1; i < historyList.size(); ) {
             for (int j = 0; j < 10; j++, i++) {
                 if (i > historyList.size() - 1) {
                     break;
