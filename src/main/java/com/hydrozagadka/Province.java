@@ -231,7 +231,7 @@ public class Province {
     private static void showNewestData(int id) {
         List<History> sorted = sortHistory(filterFiles.getWaterContainerByID(id));
         int lastIndexOfHistory =
-                sorted.size() - 1;
+                sorted.size()-214;
 
         AsciiTable sNd = new AsciiTable();
         sNd.addRule();
