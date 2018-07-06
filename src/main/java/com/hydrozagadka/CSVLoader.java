@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.*;
 
-public class CSVLoader {
+class CSVLoader {
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();
     private Map<Integer, WaterContainer> allContainers = new HashMap<>();
@@ -59,7 +59,7 @@ public class CSVLoader {
         return null;
     }
 
-    public Map<Integer, WaterContainer> loadCSV() {
+    Map<Integer, WaterContainer> loadCSV() {
         String loadedLine;
         String[] splitedLine;
         try {
@@ -101,7 +101,7 @@ public class CSVLoader {
         allContainers.get(wc.getId()).getHistory().add(history);
     }
 
-    public Set<String> getProvince() {
+    Set<String> getProvince() {
         return province;
     }
 }

@@ -327,13 +327,14 @@ public class Province {
         System.out.println("Czy chcesz więcej danych t/n");
         String more = scanner.nextLine();
 
-        if (more.equals("n")) {
-            closeApp();
-            return false;
-        } else if (more.equals("t")) {
-            return true;
-        } else {
-            return moreDataQ();
+        switch (more) {
+            case "n":
+                closeApp();
+                return false;
+            case "t":
+                return true;
+            default:
+                return moreDataQ();
         }
     }
 

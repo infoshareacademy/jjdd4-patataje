@@ -4,20 +4,20 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class FilterFiles {
+class FilterFiles {
 
     private Map<Integer, WaterContainer> waterContainerMap;
     private History historyFiles;
     private CSVLoader loadFile;
 
 
-    public FilterFiles(CSVLoader loadFile) {
+    FilterFiles(CSVLoader loadFile) {
         this.loadFile = loadFile;
         this.waterContainerMap = loadFile.loadCSV();
     }
 
 
-    public List<History> minAndMaxValueOfHistoryFiles(int id) {
+    List<History> minAndMaxValueOfHistoryFiles(int id) {
         List<History> result = new ArrayList<>();
         List<History> historyList = waterContainerMap.get(id).getHistory();
         historyList.stream()
@@ -32,7 +32,7 @@ public class FilterFiles {
     }
 
 
-    public List<WaterContainer> filterThroughContainer(String nameOfWaterContainer, String province) {
+    List<WaterContainer> filterThroughContainer(String nameOfWaterContainer, String province) {
 
         return waterContainerMap.values().stream()
                 .filter(value -> value.getStationName().contains(nameOfWaterContainer))
@@ -42,14 +42,14 @@ public class FilterFiles {
 
     }
 
-    public List<WaterContainer> showWaterContainersThroughProvince(String value) {
+    List<WaterContainer> showWaterContainersThroughProvince(String value) {
 
         return waterContainerMap.values().stream()
                 .filter(elem -> elem.getProvince().equals(value))
                 .collect(Collectors.toList());
     }
 
-    public List<History> minAndMaxValueOfHistoryFiles(int id, LocalDate start, LocalDate end) {
+    List<History> minAndMaxValueOfHistoryFiles(int id, LocalDate start, LocalDate end) {
         List<History> listOfResultValues = new ArrayList<>();
         List<History> listOfWaterContainerHistory = waterContainerMap.get(id).getHistory();
 
@@ -70,7 +70,7 @@ public class FilterFiles {
         return listOfResultValues;
     }
 
-    public WaterContainer getWaterContainerByID(Integer id) {
+    WaterContainer getWaterContainerByID(Integer id) {
         return waterContainerMap.get(id);
     }
 
