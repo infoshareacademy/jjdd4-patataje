@@ -7,17 +7,16 @@ import java.util.stream.Collectors;
 class FilterFiles {
 
     private Map<Integer, WaterContainer> waterContainerMap;
-    private History historyFiles;
     private CSVLoader loadFile;
 
 
-    FilterFiles(CSVLoader loadFile) {
+    public FilterFiles(CSVLoader loadFile) {
         this.loadFile = loadFile;
         this.waterContainerMap = loadFile.loadCSV();
     }
 
 
-    List<History> minAndMaxValueOfHistoryFiles(int id) {
+    public List<History> minAndMaxValueOfHistoryFiles(int id) {
         List<History> result = new ArrayList<>();
         List<History> historyList = waterContainerMap.get(id).getHistory();
         historyList.stream()
@@ -32,7 +31,7 @@ class FilterFiles {
     }
 
 
-    List<WaterContainer> filterThroughContainer(String nameOfWaterContainer, String province) {
+    public List<WaterContainer> filterThroughContainer(String nameOfWaterContainer, String province) {
 
         return waterContainerMap.values().stream()
                 .filter(value -> value.getStationName().contains(nameOfWaterContainer))
@@ -42,14 +41,14 @@ class FilterFiles {
 
     }
 
-    List<WaterContainer> showWaterContainersThroughProvince(String value) {
+    public List<WaterContainer> showWaterContainersThroughProvince(String value) {
 
         return waterContainerMap.values().stream()
                 .filter(elem -> elem.getProvince().equals(value))
                 .collect(Collectors.toList());
     }
 
-    List<History> minAndMaxValueOfHistoryFiles(int id, LocalDate start, LocalDate end) {
+    public List<History> minAndMaxValueOfHistoryFiles(int id, LocalDate start, LocalDate end) {
         List<History> listOfResultValues = new ArrayList<>();
         List<History> listOfWaterContainerHistory = waterContainerMap.get(id).getHistory();
 
@@ -70,8 +69,7 @@ class FilterFiles {
         return listOfResultValues;
     }
 
-    WaterContainer getWaterContainerByID(Integer id) {
+    public WaterContainer getWaterContainerByID(Integer id) {
         return waterContainerMap.get(id);
     }
-
 }
