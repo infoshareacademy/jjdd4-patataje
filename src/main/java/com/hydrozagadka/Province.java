@@ -230,20 +230,14 @@ public class Province {
 
     private static void showNewestData(int id) {
         List<History> sorted = sortHistory(filterFiles.getWaterContainerByID(id));
-        int lastIndexOfHistory =
-                sorted.size()-214;
-
         AsciiTable sNd = new AsciiTable();
         sNd.addRule();
         sNd.addRow("WOJEWÓDZTWO", "NAZWA RZEKI", "NAZWA STACJI", "DATA", "STAN WODY [cm]", "PRZEPŁYW [m3/s]", "TEMPERATURA [℃]");
         sNd.addRule();
-        String waterDeeps = doubleFormat.format(filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getWaterDeep());
-        double waterDeep = Double.parseDouble(waterDeeps);
-        String flowS = doubleFormat.format(filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getFlow());
-        double flow = Double.parseDouble(flowS);
-        String temperatureS = doubleFormat.format(filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getTemperature());
-        double temperature = Double.parseDouble(temperatureS);
-        String date = filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getDate().format(dateFormat);
+        double waterDeep = Double.parseDouble(doubleFormat.format(sorted.get(0).getWaterDeep()));
+        double flow = Double.parseDouble(doubleFormat.format(sorted.get(0).getFlow()));
+        double temperature = Double.parseDouble(doubleFormat.format(sorted.get(0).getTemperature()));
+        String date = sorted.get(0).getDate().format(dateFormat);
         sNd.addRow(
                 filterFiles.getWaterContainerByID(id).getProvince(),
                 filterFiles.getWaterContainerByID(id).getStationName(),
