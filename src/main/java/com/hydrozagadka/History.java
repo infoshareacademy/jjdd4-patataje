@@ -9,26 +9,36 @@ public class History {
     private Double flow;
     private Double temperature;
 
-    public History(LocalDate date, Double waterDeep, Double flow, Double temperature) {
+    History(LocalDate date, Double waterDeep, Double flow, Double temperature) {
         this.date = date;
         this.waterDeep = waterDeep;
         this.flow = flow;
         this.temperature = temperature;
     }
 
-    public LocalDate getDate() {
+    LocalDate getDate() {
         return date;
     }
 
-    public Double getWaterDeep() {
+    Double getWaterDeep() {
         return waterDeep;
     }
 
-    public Double getFlow() {
+    Double getFlow() {
         return flow;
     }
 
-    public Double getTemperature() {
+    Double getTemperature() {
         return temperature;
+    }
+
+    @Override
+    public String toString() {
+        return "History{" +
+                "date=" + date +
+                ", waterDeep=" + waterDeep +
+                ", flow=" + flow +
+                ", temperature=" + temperature +
+                '}';
     }
 }
