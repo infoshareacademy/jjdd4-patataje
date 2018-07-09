@@ -16,7 +16,7 @@ class FilterFiles {
     }
 
 
-    public List<History> minAndMaxValueOfHistoryFiles(int id) {
+    public List<History> minAndMaxValueOfHistoryWaterDeeps(int id) {
         List<History> result = new ArrayList<>();
         List<History> historyList = waterContainerMap.get(id).getHistory();
         historyList.stream()
@@ -48,7 +48,7 @@ class FilterFiles {
                 .collect(Collectors.toList());
     }
 
-    public List<History> minAndMaxValueOfHistoryFiles(int id, LocalDate start, LocalDate end) {
+    public List<History> minAndMaxValueOfHistoryWaterDeeps(int id, LocalDate start, LocalDate end) {
         List<History> listOfResultValues = new ArrayList<>();
         List<History> listOfWaterContainerHistory = waterContainerMap.get(id).getHistory();
 
