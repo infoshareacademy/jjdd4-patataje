@@ -4,7 +4,6 @@ package com.hydrozagadka;
 import com.hydrozagadka.exceptions.IdLengthException;
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,35 +38,35 @@ public class Province {
             ANSI_COLOR = prop.getProperty("cyan");
 
         } catch (IOException ex) {
-            System.out.println("Blad przy wczytywaniu pliku konfiguracyjnego");
+            System.out.println("Błąd przy wczytywaniu pliku konfiguracyjnego");
         } finally {
             if (input != null) {
                 try {
                     input.close();
                 } catch (IOException e) {
-                    System.out.println("Blad przy probie zamkniecia pliku konfiguracyjnego");
+                    System.out.println("Błąd przy próbie zamknięcia pliku konfiguracyjnego");
                 }
             }
         }
     }
 
-    public static void closeApp() {
+    private static void closeApp() {
 
         System.out.println("Aplikacja została zamknięta.");
         byeScreen();
         System.exit(0);
     }
 
-    public static void createMenu() {
+    private static void createMenu() {
 
         AsciiTable at = new AsciiTable();
         System.out.println(ANSI_COLOR + "\n\nAPLIKACJA WYŚWIETLAJĄCA STAN WÓD DLA POLSKICH RZEK\n");
         welcomeScreen();
+
         System.out.println("Aby wyświetlić najświeższe dostępne dane:");
         try {
             at.addRule();
             at.addRow(null, null, null, "Wybierz województwo:").setTextAlignment(TextAlignment.CENTER);
-            ;
             at.addRule();
             for (int i = 0, j = 1; i < province.size() - 4; i += 4, j += 4) {
                 at.addRow(j + ": " + province.get(i), (j + 1) + ": " + province.get(i + 1),
@@ -75,7 +74,6 @@ public class Province {
                 at.addRule();
             }
             at.addRow(null, null, null, "0: Wyjście").setTextAlignment(TextAlignment.RIGHT);
-            ;
             at.addRule();
             at.getContext().setWidth(100);
             System.out.println(at.render());
@@ -102,12 +100,10 @@ public class Province {
         }
     }
 
-    public static void selectionMenu(String province) {
+    private static void selectionMenu(String province) {
         AsciiTable secmenu = new AsciiTable();
-//Runtime.getRuntime().exec("cls");
         secmenu.addRule();
         secmenu.addRow("1:Wyświetl Stacje", "2:Wybierz Rzekę", "3:Cofnij", "0:Wyjście").setTextAlignment(TextAlignment.CENTER);
-        ;
         secmenu.addRule();
         secmenu.getContext().setWidth(70);
         System.out.println(secmenu.render());
@@ -142,12 +138,11 @@ public class Province {
         }
     }
 
-    public static void showStationsforProvinces(String province) {
+    private static void showStationsforProvinces(String province) {
         AsciiTable ac = new AsciiTable();
         List<WaterContainer> filteredByProvince = filterFiles.showWaterContainersThroughProvince(province);
         ac.addRule();
         ac.addRow("ID", "NAZWA RZEKI", "NAZWA STACJI").setTextAlignment(TextAlignment.CENTER);
-
         ac.addRule();
         int i = 1;
         for (WaterContainer wt : filteredByProvince) {
@@ -163,16 +158,13 @@ public class Province {
             }
             i++;
         }
-
-
         getIDMenu(province);
     }
 
-    public static void getIDMenu(String province) {
+    private static void getIDMenu(String province) {
         AsciiTable getIDM = new AsciiTable();
         getIDM.addRule();
         getIDM.addRow("Podaj ID rzeki ", "3:Cofnij", "0:Wyjście").setTextAlignment(TextAlignment.CENTER);
-        ;
         getIDM.addRule();
         getIDM.getContext().setWidth(70);
         System.out.println(getIDM.render());
@@ -202,21 +194,18 @@ public class Province {
         }
     }
 
-    public static void chooseContainerWithName(String province) {
+    private static void chooseContainerWithName(String province) {
         AsciiTable ccwID = new AsciiTable();
         AsciiTable ccwID2 = new AsciiTable();
         try {
             ccwID.addRule();
             ccwID.addRow("Podaj nazwę rzeki", "3:Cofnij", "0:Wyjście", "Enter:wyświetl wszystkie").setTextAlignment(TextAlignment.CENTER);
-            ;
             ccwID.addRule();
             ccwID.getContext().setWidth(70);
             System.out.println(ccwID.render());
             String choice = scanner.nextLine();
 
             if (!(choice.equals("3")) && !(choice.equals("0"))) {
-
-
                 List<WaterContainer> containers = filterFiles.filterThroughContainer(choice, province);
                 for (WaterContainer wt : containers) {
                     ccwID2.addRule();
@@ -239,22 +228,17 @@ public class Province {
         }
     }
 
-    public static void showNewestData(int id) {
+    private static void showNewestData(int id) {
         List<History> sorted = sortHistory(filterFiles.getWaterContainerByID(id));
-        int lastIndexOfHistory =
-                sorted.size() - 1;
-
+        legend();
         AsciiTable sNd = new AsciiTable();
         sNd.addRule();
         sNd.addRow("WOJEWÓDZTWO", "NAZWA RZEKI", "NAZWA STACJI", "DATA", "STAN WODY [cm]", "PRZEPŁYW [m3/s]", "TEMPERATURA [℃]");
         sNd.addRule();
-        String waterDeeps = doubleFormat.format(filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getWaterDeep());
-        double waterDeep = Double.parseDouble(waterDeeps);
-        String flowS = doubleFormat.format(filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getFlow());
-        double flow = Double.parseDouble(flowS);
-        String temperatureS = doubleFormat.format(filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getTemperature());
-        double temperature = Double.parseDouble(temperatureS);
-        String date = filterFiles.getWaterContainerByID(id).getHistory().get(lastIndexOfHistory).getDate().format(dateFormat);
+        double waterDeep = Double.parseDouble(doubleFormat.format(sorted.get(0).getWaterDeep()));
+        double flow = Double.parseDouble(doubleFormat.format(sorted.get(0).getFlow()));
+        double temperature = Double.parseDouble(doubleFormat.format(sorted.get(0).getTemperature()));
+        String date = sorted.get(0).getDate().format(dateFormat);
         sNd.addRow(
                 filterFiles.getWaterContainerByID(id).getProvince(),
                 filterFiles.getWaterContainerByID(id).getStationName(),
@@ -266,10 +250,8 @@ public class Province {
         sNd.addRule();
         sNd.addRule();
         sNd.addRow(null, null, null, "Jeśli chcesz przejrzeć wszystkie historyczne dane ", null, " wybierz: 1", "3 : cofnij").setTextAlignment(TextAlignment.CENTER);
-        ;
         sNd.addRule();
         sNd.addRow(null, null, null, "Jeśli chcesz wyświetlić minimalne i maksymalne wartości dla podanej stacji ", null, " wybierz: 2", "0 : wyjście").setTextAlignment(TextAlignment.CENTER);
-        ;
         sNd.addRule();
         sNd.getContext().setWidth(150);
         System.out.println(sNd.render());
@@ -294,9 +276,10 @@ public class Province {
         }
     }
 
-    public static void showHistoricData(int id) {
+    private static void showHistoricData(int id) {
         WaterContainer wt = filterFiles.getWaterContainerByID(id);
         AsciiTable sHd = new AsciiTable();
+        legend();
         sHd.addRule();
         sHd.addRow(null, "WOJEWÓDZTWO: " + wt.getProvince(), "RZEKA: " + wt.getStationName(), "STACJA: " + wt.getContainerName());
         sHd.addRule();
@@ -304,7 +287,7 @@ public class Province {
         sHd.addRule();
 
         List<History> historyList = sortHistory(wt);
-        for (int i = 0; i < historyList.size(); ) {
+        for (int i = 1; i < historyList.size(); ) {
             for (int j = 0; j < 10; j++, i++) {
                 if (i > historyList.size() - 1) {
                     break;
@@ -317,10 +300,8 @@ public class Province {
                 double waterDeep = Double.parseDouble(waterDeepS);
                 double flow = Double.parseDouble(flowS);
                 double temperature = Double.parseDouble(temperatureS);
-
                 sHd.addRow(date, waterDeep, flow, temperature);
                 sHd.addRule();
-
             }
             System.out.println(sHd.render());
             if (i >= historyList.size()) {
@@ -330,8 +311,6 @@ public class Province {
                 break;
             }
         }
-
-
     }
 
     private static List<History> sortHistory(WaterContainer wt) {
@@ -340,23 +319,23 @@ public class Province {
                 .collect(Collectors.toList());
     }
 
-    public static boolean moreDataQ() {
+    private static boolean moreDataQ() {
         System.out.println("Czy chcesz więcej danych t/n");
         String more = scanner.nextLine();
 
-        if (more.equals("n")) {
-            closeApp();
-            return false;
-        } else if (more.equals("t")) {
-            return true;
-        } else {
-            return moreDataQ();
+        switch (more) {
+            case "n":
+                closeApp();
+                return false;
+            case "t":
+                return true;
+            default:
+                return moreDataQ();
         }
     }
 
-    public static void minMaxSelectMenu(int id) {
+    private static void minMaxSelectMenu(int id) {
         AsciiTable sHd = new AsciiTable();
-// TU CHYBA  NIE TAK:
         sHd.addRule();
         sHd.addRow("Wyświetl dane minimalne i maksymalne dla całego dostępnego zakresu", "Wybierz: 1").setTextAlignment(TextAlignment.CENTER);
         sHd.addRule();
@@ -388,14 +367,14 @@ public class Province {
         }
     }
 
-    public static void showMinMax(int id) {
+    private static void showMinMax(int id) {
         AsciiTable sHd = new AsciiTable();
         sHd.addRule();
         sHd.addRow(null, "MAKSIMUM", null, "MINIMUM").setTextAlignment(TextAlignment.CENTER);
         sHd.addRule();
         sHd.addRow("Data", "Poziom wody [cm]", "Data", "Poziom wody [cm]");
         sHd.addRule();
-        filterFiles.minAndMaxValueOfHistoryFiles(id)
+        filterFiles.minAndMaxValueOfHistoryWaterDeeps(id)
                 .forEach(history -> {
                     sHd.addRow(null, null, history.getDate(), history.getWaterDeep());
                     sHd.addRule();
@@ -403,15 +382,15 @@ public class Province {
         System.out.println(sHd.render());
     }
 
-    public static void showMinMaxforDatas(int id, String start, String end) {
+    private static void showMinMaxforDatas(int id, String start, String end) {
         AsciiTable sMM = new AsciiTable();
         sMM.addRule();
         try {
             LocalDate startDate = LocalDate.parse(start);
             LocalDate endDate = LocalDate.parse(end);
-            sMM.addRow("Wartość Maksymalna", filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).get(0).getDate() + " " + filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).get(0).getWaterDeep());
+            sMM.addRow("Wartość Maksymalna", filterFiles.minAndMaxValueOfHistoryWaterDeeps(id, startDate, endDate).get(0).getDate() + " " + filterFiles.minAndMaxValueOfHistoryWaterDeeps(id, startDate, endDate).get(0).getWaterDeep());
             sMM.addRule();
-            sMM.addRow("Wartość Minimalna", filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).get(1).getDate() + " " + filterFiles.minAndMaxValueOfHistoryFiles(id, startDate, endDate).get(1).getWaterDeep());
+            sMM.addRow("Wartość Minimalna", filterFiles.minAndMaxValueOfHistoryWaterDeeps(id, startDate, endDate).get(1).getDate() + " " + filterFiles.minAndMaxValueOfHistoryWaterDeeps(id, startDate, endDate).get(1).getWaterDeep());
             sMM.addRule();
             System.out.println(sMM.render());
 
@@ -434,7 +413,23 @@ public class Province {
         createMenu();
     }
 
-    public static void welcomeScreen() {
+    private static void legend() {
+        AsciiTable leg = new AsciiTable();
+        leg.addRule();
+            leg.addRow("LEGENDA").setTextAlignment(TextAlignment.CENTER);
+        leg.addRule();
+        leg.addRow("Stan wody 9999 lub 0.0 oznacza brak danych w bazie.");
+        leg.addRule();
+        leg.addRow("Przepływ 99999.999 lub 0.0 oznacza, że przepływ w tym dniu nie był opracowywany.");
+        leg.addRule();
+        leg.addRow("Temperatura 99.9 lub 0.0 oznacza brak danych w bazie, która może wynikać np. z braku pomiarów temperatury na stacji.");
+        leg.addRule();
+        leg.getContext().setWidth(40);
+        System.out.println(leg.render());
+        System.out.println("");
+    }
+
+    private static void welcomeScreen() {
         System.out.println("\n" +
                 "\n" +
                 "    o   o                                Witaj\n" +
@@ -449,7 +444,7 @@ public class Province {
         System.out.println("");
     }
 
-    public static void byeScreen() {
+    private static void byeScreen() {
         System.out.println("\n" +
                 "                 ,__\n" +
                 "                   |  `'.\n" +
