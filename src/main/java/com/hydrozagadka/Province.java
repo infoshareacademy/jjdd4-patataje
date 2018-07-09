@@ -4,7 +4,6 @@ package com.hydrozagadka;
 import com.hydrozagadka.exceptions.IdLengthException;
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,13 +38,13 @@ public class Province {
             ANSI_COLOR = prop.getProperty("cyan");
 
         } catch (IOException ex) {
-            System.out.println("Blad przy wczytywaniu pliku konfiguracyjnego");
+            System.out.println("Błąd przy wczytywaniu pliku konfiguracyjnego");
         } finally {
             if (input != null) {
                 try {
                     input.close();
                 } catch (IOException e) {
-                    System.out.println("Blad przy probie zamkniecia pliku konfiguracyjnego");
+                    System.out.println("Błąd przy próbie zamknięcia pliku konfiguracyjnego");
                 }
             }
         }
@@ -63,6 +62,7 @@ public class Province {
         AsciiTable at = new AsciiTable();
         System.out.println(ANSI_COLOR + "\n\nAPLIKACJA WYŚWIETLAJĄCA STAN WÓD DLA POLSKICH RZEK\n");
         welcomeScreen();
+
         System.out.println("Aby wyświetlić najświeższe dostępne dane:");
         try {
             at.addRule();
@@ -230,6 +230,7 @@ public class Province {
 
     private static void showNewestData(int id) {
         List<History> sorted = sortHistory(filterFiles.getWaterContainerByID(id));
+        legend();
         AsciiTable sNd = new AsciiTable();
         sNd.addRule();
         sNd.addRow("WOJEWÓDZTWO", "NAZWA RZEKI", "NAZWA STACJI", "DATA", "STAN WODY [cm]", "PRZEPŁYW [m3/s]", "TEMPERATURA [℃]");
@@ -278,6 +279,7 @@ public class Province {
     private static void showHistoricData(int id) {
         WaterContainer wt = filterFiles.getWaterContainerByID(id);
         AsciiTable sHd = new AsciiTable();
+        legend();
         sHd.addRule();
         sHd.addRow(null, "WOJEWÓDZTWO: " + wt.getProvince(), "RZEKA: " + wt.getStationName(), "STACJA: " + wt.getContainerName());
         sHd.addRule();
@@ -409,6 +411,22 @@ public class Province {
         province = csvLoader.getProvince().stream().collect(Collectors.toList());
 
         createMenu();
+    }
+
+    private static void legend() {
+        AsciiTable leg = new AsciiTable();
+        leg.addRule();
+            leg.addRow("LEGENDA").setTextAlignment(TextAlignment.CENTER);
+        leg.addRule();
+        leg.addRow("Stan wody 9999 lub 0.0 oznacza brak danych w bazie.");
+        leg.addRule();
+        leg.addRow("Przepływ 99999.999 lub 0.0 oznacza, że przepływ w tym dniu nie był opracowywany.");
+        leg.addRule();
+        leg.addRow("Temperatura 99.9 lub 0.0 oznacza brak danych w bazie, która może wynikać np. z braku pomiarów temperatury na stacji.");
+        leg.addRule();
+        leg.getContext().setWidth(40);
+        System.out.println(leg.render());
+        System.out.println("");
     }
 
     private static void welcomeScreen() {
