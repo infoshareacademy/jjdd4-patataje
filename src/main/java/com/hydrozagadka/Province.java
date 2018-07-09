@@ -28,26 +28,18 @@ public class Province {
 
     private static void getProperties() {
         Properties prop = new Properties();
-        InputStream input = null;
 
         try {
-            input = new FileInputStream("data/config.properties");
+            InputStream  input = new FileInputStream("data/config.properties");
             prop.load(input);
             doubleFormat = new DecimalFormat(prop.getProperty("doubleformat"));
             dateFormat = DateTimeFormatter.ofPattern(prop.getProperty("dateformat"));
-            ANSI_COLOR = prop.getProperty("cyan");
-
+            ANSI_COLOR = prop.getProperty("purple");
+            input.close();
         } catch (IOException ex) {
             System.out.println("Błąd przy wczytywaniu pliku konfiguracyjnego");
-        } finally {
-            if (input != null) {
-                try {
-                    input.close();
-                } catch (IOException e) {
-                    System.out.println("Błąd przy próbie zamknięcia pliku konfiguracyjnego");
-                }
-            }
         }
+
     }
 
     private static void closeApp() {
