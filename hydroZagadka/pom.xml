@@ -5,17 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>patataje</groupId>
-    <artifactId>hydroZagadka-app</artifactId>
+    <artifactId>hydroZagadka</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>hydroZagadka-app</name>
+    <name>hydroZagadka</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
-	<modules>
-		<module>hydroZagadka</module>
-		<module>hydroZagadkaweb</module>
-	</modules>
+	<parent>
+    <groupId>patataje</groupId>
+    <artifactId>hydroZagadka-app</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</parent>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
