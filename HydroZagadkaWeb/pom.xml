@@ -21,6 +21,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.28</version>
+        </dependency>
+        <dependency>
             <groupId>patataje</groupId>
             <artifactId>HydroZagadkaApp</artifactId>
             <version>1.0-SNAPSHOT</version>
