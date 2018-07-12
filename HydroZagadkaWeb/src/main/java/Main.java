@@ -1,26 +1,28 @@
-package com.hydrozagadka.servlets.Beans;
-
-import javax.enterprise.context.ApplicationScoped;
 import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+public class Main {
+    public static void main(String[] args) {
+        String zipPath = "/home/orzel/Downloads/codz_2016_01.zip";
+        String directPath = "/home/orzel/Downloads";
+        unzip(zipPath,directPath);
+    }
+    public static void unzip(String zipPath, String directPath){
 
-@ApplicationScoped
-public class UnzipDaoBean implements UnzipDao {
-
-    @Override
-    public void unzip(InputStream fis, String destinationDirPath) {
-        File dir = new File(destinationDirPath);
+        File dir = new File(directPath);
         // create output directory if it doesn't exist
         if(!dir.exists()) dir.mkdirs();
+        FileInputStream fis;
         //buffer for read and write data to file
         byte[] buffer = new byte[1024];
         try {
+            fis = new FileInputStream(zipPath);
             ZipInputStream zis = new ZipInputStream(fis);
             ZipEntry ze = zis.getNextEntry();
             while(ze != null){
                 String fileName = ze.getName();
-                File newFile = new File(destinationDirPath + File.separator + fileName);
+                File newFile = new File(directPath + File.separator + fileName);
+                System.out.println("Unzipping to "+newFile.getAbsolutePath());
                 //create directories for sub directories in zip
                 new File(newFile.getParent()).mkdirs();
                 FileOutputStream fos = new FileOutputStream(newFile);
@@ -40,8 +42,5 @@ public class UnzipDaoBean implements UnzipDao {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 }
-
