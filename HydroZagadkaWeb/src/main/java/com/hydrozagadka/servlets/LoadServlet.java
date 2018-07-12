@@ -10,7 +10,8 @@ import java.io.PrintWriter;
 
 @WebServlet("/loadservlet")
 public class LoadServlet extends HttpServlet {
-    private final String DestinationDirpath = "";
+    private final String DestinationDirpath = "/home/pawelorlikowski/jjdd4-patataje/HydroZagadkaApp/data/data";
+    private final String d= "/home/pawelorlikowski/Downloads";
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             String s = request.getParameter("file");
             PrintWriter pr=response.getWriter();
