@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-class FilterFiles {
+public class FilterFiles {
 
     private Map<Integer, WaterContainer> waterContainerMap;
     private CSVLoader loadFile;
