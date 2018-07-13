@@ -22,20 +22,19 @@ import java.nio.file.Paths;
 public class LoadServlet extends HttpServlet {
     @Inject
     private UnzipDao unzipDao;
-    String directPath = "/home/orzel/Downloads";
+    String directPath = "/home/pawelorlikowski/jjdd4-patataje/HydroZagadkaApp/data";
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file");
         PrintWriter pr = response.getWriter();
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-        if(!fileName.contains(".zip")){
-            pr.println("rzal mi ciebie");
+        if (!fileName.contains(".zip")) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pr.close();
             return;
         }
         InputStream is = filePart.getInputStream();
-        unzipDao.unzip(is,directPath);
-
+        unzipDao.unzip(is, directPath);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
