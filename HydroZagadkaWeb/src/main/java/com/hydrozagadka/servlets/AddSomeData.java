@@ -16,10 +16,11 @@ public class AddSomeData extends HttpServlet {
     private CSVLoader csvLoader = new CSVLoader();
     private FilterFiles filterFiles = new FilterFiles(csvLoader);
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer containerId = Integer.parseInt(request.getParameter("containerId"));
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        Integer containerId = Integer.parseInt(req.getParameter("containerId"));
 
         filterFiles.getWaterContainerByID(containerId);
-
     }
 }
