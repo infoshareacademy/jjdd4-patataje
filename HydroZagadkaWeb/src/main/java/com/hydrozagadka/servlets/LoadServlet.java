@@ -1,7 +1,6 @@
 package com.hydrozagadka.servlets;
 
 import com.hydrozagadka.servlets.Beans.UnzipDao;
-import net.lingala.zip4j.core.ZipFile;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
