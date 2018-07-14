@@ -101,7 +101,7 @@ public class CSVLoader {
         allContainers.get(wc.getId()).getHistory().add(history);
     }
 
-    Set<String> getProvince() {
+  public Set<String> getProvince() {
         return province;
     }
 }

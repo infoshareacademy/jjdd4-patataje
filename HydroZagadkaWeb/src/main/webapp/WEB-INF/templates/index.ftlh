@@ -6,44 +6,46 @@
     <meta charset="utf-8">
     <meta lang="pl">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js" defer></script>
-    <script src=https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.js defer></script>
-    <link rel="stylesheet" href="../../css/firstForm.css">
-    <script src="../../js/firstForm.js"></script>
+    <style>
+        .watercontainer ,.station ,.province{
+            width: 20%;
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
-<form action="/addSomeData" method="post" class="form-inline">
+<form action="/addSomeData" method="get" class="form-inline">
+
 <div class="form-group">
-    <select id="province" class="selectpicker" data-live-search="true" title="Województwo">
-        <option value="0">Hot Dog, Fries and a Soda</option>
-        <option value="1">Burger, Shake and a Smile</option>
-        <option value="2">Sugar, Spice and all things nice</option>
-        <option value="3">Baby Back Ribs</option>
-        <option value="4">A really really long option made to illustrate an issue with the live search in an inline form</option>
+    <select class="province" id="province" name="state" title="Województwo" onchange="this.form.submit()">
+            <#list provinces as item>
+              <option value=${item}>${item}</option>
+            </#list>
     </select>
-</div>
-<div class="form-group">
-    <select id="watercontainer" class="selectpicker" data-live-search="true" title="Zbiornik">
-        <option value="0">Hot Dog, Fries and a Soda</option>
-        <option value="1">Burger, Shake and a Smile</option>
-        <option value="2">Sugar, Spice and all things nice</option>
-        <option value="3">Baby Back Ribs</option>
-        <option value="4">A really really long option made to illustrate an issue with the live search in an inline form</option>
+    </form>
+<form action="/aaaa" method="get" class="form-inline">
+    <select class="watercontainer" id="watercontainer" title="Zbiornik" onchange="this.form.submit">
+
     </select>
-</div>
-<div class="form-group" id="station" style="display: none">
-    <select class="selectpicker" data-live-search="true" title="Stacja" >
-        <option>Hot Dog, Fries and a Soda</option>
-        <option>Burger, Shake and a Smile</option>
-        <option>Sugar, Spice and all things nice</option>
-        <option>Baby Back Ribs</option>
-        <option>A really really long option made to illustrate an issue with the live search in an inline form</option>
+    </form>
+
+    <form action="/bbbb" method="get" class="form-inline">
+    <select class="station" id="station" title="Stacja" onchange="this.form.submit">
+
     </select>
-</div>
-<button type="submit" id="wyslij">Wyslij</button>
 </form>
+</div>
+<script>
+    $(document).ready(function() {
+        $('.province').select2();
+        $('.watercontainer').select2();
+        $('.station').select2();
+    });
+</script>
 </body>
 </html>

@@ -1,16 +1,15 @@
 $(document).ready(function() {
-    $("#province").change(function(){
-        if($(this).val() >= "0")
-        {
-            $(this).submit();
-            $("#watercontainer").change(function(){
-                if($(this).val() >= "0")
-                {
-                    $( "#watercontainer" ).submit();
-                  $("#station").fadeIn(1000);
-                }
-            });
-        }
-    });
+    $('.selectpicker').select2();
+    // $("#province").change(function(){
+    //     if($(this).val() >= "0")
+    //     {
+    //         $("#watercontainer").change(function(){
+    //             if($(this).val() >= "0")
+    //             {
+    //               $("#station").fadeIn(1000);
+    //             }
+    //         });
+    //     }
+    // });
 
 });
