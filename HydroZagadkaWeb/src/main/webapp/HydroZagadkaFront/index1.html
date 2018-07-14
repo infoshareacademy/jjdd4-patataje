@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Main Page of HydroZagadka</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+          rel="stylesheet" type="text/css">
+    <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+<!-- Navigation -->
+<a class="menu-toggle rounded" href="#">
+    <i class="fa fa-bars"></i>
+</a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+            <a class="js-scroll-trigger" href="#page-top">Main Page</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="#about">O Aplikacji</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="#check">Znajdź zbiornik</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="#log">Logowanie</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="#contact">Kontakt</a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Header -->
+<header class="masthead d-flex">
+    <div class="container text-center my-auto">
+        <h1 class="mb-1">HydroZagadka</h1>
+        <h3 class="mb-5">
+            <em>Aplikacja sprawdzająca stan wód w Polsce</em>
+        </h3>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#check">Sprawdź!</a>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">O aplikacji</a>
+    </div>
+    <div class="overlay"></div>
+</header>
+
+<!-- o aplikacji -->
+<section class="content-section bg-light" id="about">
+    <div class="container text-center my-auto">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <h2>Projekt aplikacji został zrealizowany podczas </h2>
+                <h2>Aplikacjia pozwala na sprawdzenie stanu wód.. blablablablabla</h2>
+                <p class="lead mb-5">tutaj jakiś opis, coś tam co gdzie robi blablabla</p>
+                <a class="btn btn-dark btn-xl js-scroll-trigger" href="#check">Sprawdź zbiornik</a>
+            </div>
+        </div>
+    </div>
+    <div class="overlay"></div>
+</section>
+
+
+<!-- Sprawdź zbiornik -->
+<section class="content-section bg-light" id="check">
+    <div class="container text-center my-auto">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <form action="/loadservlet" method="post" enctype="multipart/form-data" multiple>
+                    <input type="file" name="file">Load file
+                    <button type="submit">Wyslij</button>
+                </form>
+                <h2>Tutaj będzie formularz itp itd...</h2>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="overlay"></div>
+</section>
+
+<!-- Logowanie -->
+<section class="masthead d-flex" id="log">
+    <div class="container text-center my-auto">
+        <h1 class="mb-1">Logowanie wkrótce</h1>
+        <h3 class="mb-5">
+            <em>musisz jeszcze poczekać</em>
+        </h3>
+            </div>
+    <div class="overlay"></div>
+</section>
+
+
+<!-- Contact -->
+<section class="content-section bg-primary text-white text-center" id="contact">
+    <div class="container">
+        <div class="content-section-heading">
+            <h3 class="text-secondary mb-0">Aplikację</h3>
+            <h2 class="mb-5">Stworzyli</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+            <span class="service-icon rounded-circle mx-auto mb-3">
+              <i class="icon-emotsmile"></i>
+            </span>
+                <h4>
+                    <strong>Pafeł</strong>
+                </h4>
+                <p class="text-faded mb-0">Looks great on any screen size!</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+            <span class="service-icon rounded-circle mx-auto mb-3">
+              <i class="icon-ghost"></i>
+            </span>
+                <h4>
+                    <strong>Jóleg</strong>
+                </h4>
+                <p class="text-faded mb-0">Freshly redesigned for Bootstrap 4.</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+            <span class="service-icon rounded-circle mx-auto mb-3">
+              <i class="icon-magic-wand"></i>
+            </span>
+                <h4>
+                    <strong>Lócjan</strong>
+                </h4>
+                <p class="text-faded mb-0">Millions of users
+                    <i class="fa fa-heart"></i>
+                    Start Bootstrap!</p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+            <span class="service-icon rounded-circle mx-auto mb-3">
+              <i class="icon-energy"></i>
+            </span>
+                <h4>
+                    <strong>Pałlina</strong>
+                </h4>
+                <p class="text-faded mb-0">I mustache you a question...</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="footer text-center">
+    <div class="container">
+        <ul class="list-inline mb-5">
+            <li class="list-inline-item">
+                <a class="social-link rounded-circle text-white"
+                   href="https://github.com/infoshareacademy/jjdd4-patataje">
+                    <i class="icon-social-github"></i>
+                </a>
+            </li>
+        </ul>
+        <p class="text-muted small mb-0">Copyright &copy; Patataje 2018</p>
+    </div>
+</footer>
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+</a>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="js/stylish-portfolio.min.js"></script>
+
+</body>
+
+</html>
