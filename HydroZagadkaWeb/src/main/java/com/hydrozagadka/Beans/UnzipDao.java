@@ -1,4 +1,4 @@
-package com.hydrozagadka.servlets.Beans;
+package com.hydrozagadka.Beans;
 
 import javax.ejb.Local;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package com.hydrozagadka.servlets.Beans;
+package com.hydrozagadka.Beans;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.io.*;

@@ -1,6 +1,7 @@
 package com.hydrozagadka.servlets;
 
-import com.hydrozagadka.servlets.Beans.UnzipDao;
+import com.hydrozagadka.Beans.UnzipDao;
+import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -20,6 +21,8 @@ import java.nio.file.Paths;
 public class LoadServlet extends HttpServlet {
     @Inject
     private UnzipDao unzipDao;
+    @Inject
+    FreeMarkerConfig freeMarkerConfig;
     String directPath = "/home/pawelorlikowski/jjdd4-patataje/HydroZagadkaApp/data";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
