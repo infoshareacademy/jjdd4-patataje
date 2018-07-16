@@ -9,7 +9,7 @@ public class FilterFiles {
     private Map<Integer, WaterContainer> waterContainerMap;
 
     public FilterFiles(CSVLoader loadFile) {
-        this.waterContainerMap = loadFile.loadCSV();
+        this.waterContainerMap = loadFile.getAllContainers();
     }
 
 

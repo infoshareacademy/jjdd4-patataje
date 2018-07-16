@@ -13,11 +13,19 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class CSVLoader {
-    public static final String DIRECT_PATH = "/home/pawelorlikowski/jjdd4-patataje/HydroZagadkaApp/data";
+    public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
 
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();
     private Map<Integer, WaterContainer> allContainers = new HashMap<>();
+
+    public Map<Integer, WaterContainer> getAllContainers() {
+        return allContainers;
+    }
+
+    public CSVLoader() {
+        loadCSV();
+    }
 
     private List<String> getFilesList() {
         List<String> fileNames = new ArrayList<>();

@@ -1,15 +1,11 @@
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js" defer></script>
-    <style>
-        .watercontainer,.province,.station {
-            width: 100%;
-        }
-    </style>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Users List</title>
+    <link type="text/css" href="/css/firstForm.css"/>
+</head>
+<body>
+<h2>AAAAAAAAAAAA</h2>
 <form action="/addSomeData" method="get" class="form-inline">
 
     <div class="form-group">
@@ -35,12 +31,8 @@
 </div>
 <script>
     $(document).ready(function() {
-        // $('.province').onchange(function () {
-        //  $('.watercontainer').css("display","inline")
-        // });
         $('.province').select2();
-        $('.watercontainer').select2();
-        $('.station').select2();
     });
 </script>
-
+</body>
+</html>

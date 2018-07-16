@@ -9,7 +9,7 @@
     <meta name="author" content="JPPL">
 
     <title>HydroZagadka</title>
-    <link rel="icon" href="FrontStyles/img/Drop.png">
+    <link rel="icon" href="/FrontStyles/img/Drop.png">
 
 
     <!-- Bootstrap Core CSS -->
@@ -17,6 +17,8 @@
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- Custom CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-stylish-portfolio/3.3.7/css/stylish-portfolio.css"
+          rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css"
           rel="stylesheet">
 
     <!-- Custom Fonts -->
@@ -30,6 +32,7 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.js"></script>
     <![endif]-->
 
 </head>

@@ -49,7 +49,7 @@ public class WelcomeServlet extends HttpServlet {
         PrintWriter pr = response.getWriter();
         Map<String, Object> model = new HashMap<>();
         model.put("provinces", load.getProvince());
-        Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
+        Template template = freeMarkerConfig.getTemplate("firstMenu.ftlh", getServletContext());
         try {
             template.process(model, pr);
         } catch (TemplateException e) {
