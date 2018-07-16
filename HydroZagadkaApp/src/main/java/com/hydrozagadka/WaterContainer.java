@@ -17,7 +17,7 @@ public class WaterContainer {
         this.id = id;
     }
 
-    String getContainerName() {
+    public String getContainerName() {
         return containerName;
     }
 
@@ -25,7 +25,7 @@ public class WaterContainer {
         this.containerName = containerName;
     }
 
-    String getStationName() {
+    public String getStationName() {
         return stationName;
     }
 
@@ -33,7 +33,7 @@ public class WaterContainer {
         this.stationName = stationName;
     }
 
-    String getProvince() {
+    public String getProvince() {
         return province;
     }
 
@@ -41,7 +41,7 @@ public class WaterContainer {
         this.province = province;
     }
 
-    List<History> getHistory() {
+    public List<History> getHistory() {
         return history;
     }
 

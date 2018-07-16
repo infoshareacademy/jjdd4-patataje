@@ -29,13 +29,15 @@
     </select>
     </form>
 <form action="/aaaa" method="get" class="form-inline">
-    <select class="watercontainer" id="watercontainer" title="Zbiornik" onchange="this.form.submit">
-
+    <select class="watercontainer" id="watercontainer" title="Zbiornik" >
+   <#list watercontainer as item>
+       <option value=${item}>${item}</option>
+   </#list>
     </select>
     </form>
 
     <form action="/bbbb" method="get" class="form-inline">
-    <select class="station" id="station" title="Stacja" onchange="this.form.submit">
+    <select class="station" id="station" title="Stacja" >
 
     </select>
 </form>
