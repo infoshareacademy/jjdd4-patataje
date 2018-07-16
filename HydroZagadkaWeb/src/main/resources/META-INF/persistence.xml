@@ -5,7 +5,7 @@
   http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd" version="2.2">
 
     <persistence-unit name="demoPU" transaction-type="JTA">
-        <jta-data-source>java:ds/demods</jta-data-source>
+        <jta-data-source>java:ds/hydroZagadka</jta-data-source>
 
         <properties>
             <!-- Hibernate settings -->
