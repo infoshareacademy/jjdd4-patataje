@@ -11,9 +11,8 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js" defer></script>
     <style>
-        .watercontainer {
-            width: 20%;
-            display: none;
+        .watercontainer,.province,.station {
+            width: 100%;
         }
     </style>
 </head>
