@@ -11,7 +11,7 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js" defer></script>
     <style>
-        .watercontainer ,.station ,.province{
+        .watercontainer {
             width: 20%;
             display: none;
         }
@@ -42,6 +42,9 @@
 </div>
 <script>
     $(document).ready(function() {
+        // $('.province').onchange(function () {
+        //  $('.watercontainer').css("display","inline")
+        // });
         $('.province').select2();
         $('.watercontainer').select2();
         $('.station').select2();

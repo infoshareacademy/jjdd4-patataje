@@ -7,11 +7,8 @@ import java.util.stream.Collectors;
 public class FilterFiles {
 
     private Map<Integer, WaterContainer> waterContainerMap;
-    private CSVLoader loadFile;
-
 
     public FilterFiles(CSVLoader loadFile) {
-        this.loadFile = loadFile;
         this.waterContainerMap = loadFile.loadCSV();
     }
 

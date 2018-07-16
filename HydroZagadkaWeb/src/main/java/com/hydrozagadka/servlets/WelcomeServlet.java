@@ -24,22 +24,34 @@ import java.util.stream.Collectors;
 
 @WebServlet("/")
 public class WelcomeServlet extends HttpServlet {
+
     @Inject
     FreeMarkerConfig freeMarkerConfig;
+
     @Inject
     ProvinceBean provinceBean;
-    CSVLoader load = new CSVLoader();
-    FilterFiles ff = new FilterFiles(load);
+
+    private CSVLoader load;
+    private FilterFiles ff;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+         load = new CSVLoader();
+         ff = new FilterFiles(load);
+    }
+
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter pr = response.getWriter();
-        Map<String,Object> model = new HashMap<>();
-        model.put("provinces",provinceBean.getProvince());
-        Template template = freeMarkerConfig.getTemplate("index.ftlh",getServletContext());
+        Map<String, Object> model = new HashMap<>();
+        model.put("provinces", load.getProvince());
+        Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
         try {
-            template.process(model,pr);
+            template.process(model, pr);
         } catch (TemplateException e) {
             e.printStackTrace();
         }

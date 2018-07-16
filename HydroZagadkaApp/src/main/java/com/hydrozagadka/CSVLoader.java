@@ -13,13 +13,16 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class CSVLoader {
+    public static final String DIRECT_PATH = "/home/pawelorlikowski/jjdd4-patataje/HydroZagadkaApp/data";
+
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();
     private Map<Integer, WaterContainer> allContainers = new HashMap<>();
 
-    private List<String> getFilesList(String directory) {
+    private List<String> getFilesList() {
         List<String> fileNames = new ArrayList<>();
-        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(directory))) {
+        try  {
+            DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(DIRECT_PATH));
             for (Path path : directoryStream) {
                 if (path.toString().contains("codz_")) {
                     fileNames.add(path.toString());
@@ -59,11 +62,11 @@ public class CSVLoader {
         return null;
     }
 
-    Map<Integer, WaterContainer> loadCSV() {
+     Map<Integer, WaterContainer> loadCSV() {
         String loadedLine;
         String[] splitedLine;
         try {
-            List<String> files = getFilesList("data/");
+            List<String> files = getFilesList();
             for (String file : files) {
                 br = new BufferedReader(new FileReader(file));
                 while ((loadedLine = br.readLine()) != null) {
