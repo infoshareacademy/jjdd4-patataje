@@ -1,17 +1,46 @@
-<form action="/addSomeData" method="post" class="form-inline">
-    <input type="checkbox" name="province">
-    <input type="checkbox" name="waterContainer">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js" defer></script>
+    <style>
+        .watercontainer,.province,.station {
+            width: 100%;
+        }
+    </style>
+<form action="/addSomeData" method="get" class="form-inline">
+
     <div class="form-group">
-        <label class="col-md-1 control-label" for="lunch">Lunch:</label>
-    </div>
-    <div class="form-group">
-        <select id="lunch" class="selectpicker" data-live-search="true" title="Please select a lunch ...">
-            <option>Hot Dog, Fries and a Soda</option>
-            <option>Burger, Shake and a Smile</option>
-            <option>Sugar, Spice and all things nice</option>
-            <option>Baby Back Ribs</option>
-            <option>A really really long option made to illustrate an issue with the live search in an inline form</option>
+        <select class="province" id="province" name="state" title="Województwo" onchange="this.form.submit()">
+            <#list provinces as item>
+                <option value=${item}>${item}</option>
+            </#list>
         </select>
-    </div>
-    <button type="submit">Wyslij</button>
 </form>
+<form action="/aaaa" method="get" class="form-inline">
+    <select class="watercontainer" id="watercontainer" title="Zbiornik" >
+   <#list watercontainer as item>
+       <option value=${item}>${item}</option>
+   </#list>
+    </select>
+</form>
+
+<form action="/bbbb" method="get" class="form-inline">
+    <select class="station" id="station" title="Stacja" >
+
+    </select>
+</form>
+</div>
+<script>
+    $(document).ready(function() {
+        // $('.province').onchange(function () {
+        //  $('.watercontainer').css("display","inline")
+        // });
+        $('.province').select2();
+        $('.watercontainer').select2();
+        $('.station').select2();
+    });
+</script>
+
