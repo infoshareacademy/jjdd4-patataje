@@ -1,14 +1,16 @@
 package com.hydrozagadka.Beans;
 
-import javax.enterprise.context.ApplicationScoped;
-import java.io.*;
+import javax.enterprise.context.RequestScoped;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-@ApplicationScoped
-public class UnzipDaoBean implements UnzipDao {
+@RequestScoped
+public class UnzipBean {
 
-    @Override
     public void unzip(InputStream fis, String destinationDirPath) {
         File dir = new File(destinationDirPath);
         if (!dir.exists()) dir.mkdirs();

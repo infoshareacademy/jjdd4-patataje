@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>AAAAAAAAAAAA</h2>
-<form action="/addSomeData" method="get" class="form-inline">
+<form action="/filter" method="get" class="form-inline">
 
     <div class="form-group">
         <select class="province" id="province" name="state" title="Województwo" onchange="this.form.submit()">

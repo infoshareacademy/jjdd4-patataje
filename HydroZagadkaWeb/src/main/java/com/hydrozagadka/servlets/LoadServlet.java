@@ -1,6 +1,6 @@
 package com.hydrozagadka.servlets;
 
-import com.hydrozagadka.Beans.UnzipDao;
+import com.hydrozagadka.Beans.UnzipBean;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 
 import javax.inject.Inject;
@@ -20,25 +20,27 @@ import java.nio.file.Paths;
 @MultipartConfig
 public class LoadServlet extends HttpServlet {
     @Inject
-    private UnzipDao unzipDao;
+    private UnzipBean unzipBean;
     @Inject
     FreeMarkerConfig freeMarkerConfig;
+
     public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Part filePart = request.getPart("file");
-        PrintWriter pr = response.getWriter();
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Part filePart = req.getPart("file");
+        PrintWriter pr = resp.getWriter();
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         if (!fileName.contains(".zip")) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pr.close();
             return;
         }
         InputStream is = filePart.getInputStream();
-        unzipDao.unzip(is, DIRECT_PATH);
+        unzipBean.unzip(is, DIRECT_PATH);
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     }
 }

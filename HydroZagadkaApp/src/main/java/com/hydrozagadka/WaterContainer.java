@@ -1,72 +1,80 @@
 package com.hydrozagadka;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "WATER_CONTAINERS")
 public class WaterContainer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
+    @Column(name = "containerName")
     private String containerName;
+    @Column
     private String stationName;
+    @Column
     private String province;
+    @Column
+    @OneToMany(mappedBy = "waterContainers", fetch = FetchType.EAGER)
     private List<History> history;
 
-    Integer getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public WaterContainer setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getContainerName() {
         return containerName;
     }
 
-    public void setContainerName(String containerName) {
+    public WaterContainer setContainerName(String containerName) {
         this.containerName = containerName;
+        return this;
     }
 
     public String getStationName() {
         return stationName;
     }
 
-    public void setStationName(String stationName) {
+    public WaterContainer setStationName(String stationName) {
         this.stationName = stationName;
+        return this;
     }
 
     public String getProvince() {
         return province;
     }
 
-    void setProvince(String province) {
+    public WaterContainer setProvince(String province) {
         this.province = province;
+        return this;
     }
 
     public List<History> getHistory() {
         return history;
     }
 
-    public void setHistory(List<History> history) {
+    public WaterContainer setHistory(List<History> history) {
         this.history = history;
-    }
-
-
-    WaterContainer(Integer id, String containerName, String stationName, String province, List<History> history) {
-        this.id = id;
-        this.containerName = containerName;
-        this.stationName = stationName;
-        this.history = history;
-        this.province = province;
-
+        return this;
     }
 
     @Override
     public String toString() {
-        return "WaterContainer{" +
-                "id=" + id +
-                ", containerName='" + containerName + '\'' +
-                ", stationName='" + stationName + '\'' +
-                ", province='" + province + '\'' +
-                ", history=" + history +
-                '}';
+        final StringBuffer sb = new StringBuffer("WaterContainer{");
+        sb.append("id=").append(id);
+        sb.append(", containerName='").append(containerName).append('\'');
+        sb.append(", stationName='").append(stationName).append('\'');
+        sb.append(", province='").append(province).append('\'');
+        sb.append(", history=").append(history);
+        sb.append('}');
+        return sb.toString();
     }
 }
