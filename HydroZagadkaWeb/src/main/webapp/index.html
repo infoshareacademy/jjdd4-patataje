@@ -23,31 +23,7 @@
     </div>
 </form>
 <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function () {
-        $("#province").change(function () {
-           if($("#province").val()==-1){
-               return;
-           }
-            $.ajax({
-                    url:'watercontainer',
-                    data:{name:$("#province").val()},
-                    type:'get',
-                    cache:false,
-                    success:function(response){
-                       var options = JSON.parse(response);
-                            for (var i = 0; i < options.length; i++) {
-                            $('#watercontainer').append('<option value='+options[i].id+'>'+options[i].name+'</option>');
-                            }
-                            $('#watercontainerlist').fadeIn(1000);
-                    },
-                    error:function(){
-                        alert('error');
-                    }
-                }
-            );
-        });
-    });
+<script src="js/formcreator.js">
 </script>
 </body>
 </html>
