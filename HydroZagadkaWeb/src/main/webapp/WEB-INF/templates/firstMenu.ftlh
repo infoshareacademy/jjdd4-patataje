@@ -16,10 +16,10 @@
         </select>
 </form>
 <form action="/aaaa" method="get" class="form-inline">
-    <select class="watercontainer" id="watercontainer" title="Zbiornik" >
-   <#list watercontainer as item>
-       <option value=${item}>${item}</option>
-   </#list>
+    <#--<select class="watercontainer" id="watercontainer" title="Zbiornik" >-->
+   <#--<#list watercontainer as item>-->
+       <#--<option value=${item}>${item}</option>-->
+   <#--</#list>-->
     </select>
 </form>
 
