@@ -7,6 +7,8 @@ import java.time.LocalDate;
 @Table(name = "HISTORIES")
 public class History {
 
+    @Column(name = "id")
+    private Long id;
     @Column(name = "dates")
     private LocalDate date;
     @Column(name = "water_deeps")
@@ -24,6 +26,14 @@ public class History {
         this.waterDeep = waterDeep;
         this.flow = flow;
         this.temperature = temperature;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDate getDate() {
@@ -69,7 +79,8 @@ public class History {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("History{");
-        sb.append("date=").append(date);
+        sb.append("id=").append(id);
+        sb.append(", date=").append(date);
         sb.append(", waterDeep=").append(waterDeep);
         sb.append(", flow=").append(flow);
         sb.append(", temperature=").append(temperature);
