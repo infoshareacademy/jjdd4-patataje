@@ -13,13 +13,13 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class CSVLoader {
-    public static final String DIRECT_PATH = "/home/juliuszklos/Development/HydroZagadka/jjdd4-patataje/HydroZagadkaApp/data";
+    private static final String DIRECT_PATH = "/home/juliuszklos/Development/HydroZagadka/jjdd4-patataje/HydroZagadkaApp/data";
 
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();
-    private Map<Integer, WaterContainer> allContainers = new HashMap<>();
+    private Map<Long, WaterContainer> allContainers = new HashMap<>();
 
-    public Map<Integer, WaterContainer> getAllContainers() {
+    public Map<Long, WaterContainer> getAllContainers() {
         return allContainers;
     }
 
@@ -29,7 +29,7 @@ public class CSVLoader {
 
     private List<String> getFilesList() {
         List<String> fileNames = new ArrayList<>();
-        try  {
+        try {
             DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(DIRECT_PATH));
             for (Path path : directoryStream) {
                 if (path.toString().contains("codz_")) {
@@ -43,14 +43,14 @@ public class CSVLoader {
     }
 
     private WaterContainer createWaterContainer(String[] a) {
-        Integer id = Integer.parseInt(a[0].replaceAll(" ", ""));
+        Long id = Long.parseLong(a[0].replaceAll(" ", ""));
         String containerName = a[1].toUpperCase();
         String stationName = a[2];
         String province = "N/A";
         if (a.length == 11) {
             province = a[10];
         }
-        return new WaterContainer(id, containerName, stationName, province, new ArrayList<History>());
+        return new WaterContainer(id, containerName, stationName, province, new ArrayList<>());
     }
 
     private History createHistory(String[] a) {
@@ -70,7 +70,7 @@ public class CSVLoader {
         return null;
     }
 
-     Map<Integer, WaterContainer> loadCSV() {
+    private Map<Long, WaterContainer> loadCSV() {
         String loadedLine;
         String[] splitedLine;
         try {
@@ -112,7 +112,7 @@ public class CSVLoader {
         allContainers.get(wc.getId()).getHistory().add(history);
     }
 
-  public Set<String> getProvince() {
+    public Set<String> getProvince() {
         return province;
     }
 }
