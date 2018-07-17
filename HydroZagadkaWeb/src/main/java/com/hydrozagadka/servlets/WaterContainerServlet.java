@@ -21,10 +21,10 @@ public class WaterContainerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String action = req.getParameter("action");
-        if ()
-        if () {
-            findAllWaterContainers(req, resp);
-        }
+//        if ()
+//        if () {
+//            findAllWaterContainers(req, resp);
+//        }
     }
 
     private void findAllWaterContainers(HttpServletRequest req, HttpServletResponse resp) throws IOException {
