@@ -36,6 +36,12 @@
             <version>8.0</version>
             <scope>provided</scope>
         </dependency>
+        <!--slf4j-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.25</version>
+        </dependency>
         <!--Hibernate-->
         <dependency>
             <groupId>org.hibernate</groupId>

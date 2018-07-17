@@ -6,6 +6,8 @@ import com.hydrozagadka.FilterFiles;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -24,7 +26,7 @@ import java.util.stream.Collectors;
 
 @WebServlet("/")
 public class WelcomeServlet extends HttpServlet {
-
+    private Logger LOG = LoggerFactory.getLogger(WelcomeServlet.class);
     @Inject
     FreeMarkerConfig freeMarkerConfig;
 
@@ -38,6 +40,7 @@ public class WelcomeServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
          load = new CSVLoader();
+        LOG.info("Load CSVFile: {}");
          ff = new FilterFiles(load);
     }
 

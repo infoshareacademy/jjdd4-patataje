@@ -2,6 +2,8 @@ package com.hydrozagadka.servlets;
 
 import com.hydrozagadka.Beans.UnzipDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -19,6 +21,8 @@ import java.nio.file.Paths;
 @WebServlet("/loadservlet")
 @MultipartConfig
 public class LoadServlet extends HttpServlet {
+    private Logger LOG = LoggerFactory.getLogger(LoadServlet.class);
+
     @Inject
     private UnzipDao unzipDao;
     @Inject
