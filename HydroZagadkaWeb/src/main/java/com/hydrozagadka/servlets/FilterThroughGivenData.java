@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@WebServlet("/addSomeData")
-public class AddSomeData extends HttpServlet {
+@WebServlet("/filter")
+public class FilterThroughGivenData extends HttpServlet {
 
     private CSVLoader csvLoader = new CSVLoader();
     private FilterFiles filterFiles = new FilterFiles(csvLoader);
