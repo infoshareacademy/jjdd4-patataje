@@ -4,9 +4,10 @@
 
 <head>
 
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Project of Web Application which shows water levels for lakes and rivers in Poland.">
+    <meta name="description"
+          content="Project of Web Application which shows water levels for lakes and rivers in Poland.">
     <meta name="author" content="JPPL">
 
     <title>HydroZagadka</title>
@@ -42,7 +43,7 @@
             <em>Aplikacja sprawdzająca stan wód w Polsce</em>
         </h3>
         <a class="btn btn-primary btn-xl js-scroll-trigger" href="#upload">Wyślij dane!</a>
-        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#check">Sprawdź!</a>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#check">Sprawdź zbiornik!</a>
         <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">O aplikacji!</a>
     </div>
     <div class="overlay"></div>
@@ -70,7 +71,7 @@
             <div class="col-lg-10 mx-auto">
 
                 <h3>Wybierz zbiornik dla którego chcesz zobaczyć dane:</h3>
-                chooseCon
+
 
             </div>
         </div>
@@ -98,15 +99,12 @@
 <!-- o aplikacji -->
 <#include "mainPartsOfPage/aboutApp.ftlh">
 
-
 <!-- Kontakt -->
-<#include "mainPartsOfPage/aboutUs.ftlh">
-
+<#include "mainPartsOfPage/aboutAuthors.ftlh">
 
 <!-- Footer -->
 
 <#include "mainPartsOfPage/footer.ftlh">
-
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">

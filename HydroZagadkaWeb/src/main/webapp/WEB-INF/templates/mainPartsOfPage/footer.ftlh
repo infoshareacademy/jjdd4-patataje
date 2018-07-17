@@ -8,6 +8,6 @@
                 </a>
             </li>
         </ul>
-        <p class="text-muted small mb-0">Copyright &copy; Patataje 2018</p>
+        <p class="text-muted small mb-0">Copyright &copy; Patataje ${.now?string.yyyy}</p>
     </div>
 </footer>

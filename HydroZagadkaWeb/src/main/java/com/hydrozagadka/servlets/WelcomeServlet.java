@@ -34,7 +34,7 @@ public class WelcomeServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
 
         Map<String, Object> model = new HashMap<>();

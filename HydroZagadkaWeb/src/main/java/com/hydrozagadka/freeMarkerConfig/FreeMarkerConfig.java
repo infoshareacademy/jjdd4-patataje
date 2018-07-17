@@ -24,4 +24,6 @@ public class FreeMarkerConfig {
 
         return configuration.getTemplate(templateName);
     }
+
+
 }
