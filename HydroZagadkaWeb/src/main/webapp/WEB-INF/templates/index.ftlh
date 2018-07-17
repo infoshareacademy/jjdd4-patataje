@@ -51,47 +51,13 @@
 
 
 <!-- upload plików -->
-<section class="content-section bg-light" id="upload">
-    <div class="container text-center my-auto">
-        <div class="row">
-            <div class="col-lg-10 mx-auto">
-                <h2> Aby zobaczyć wykresy wyślij plik zip:</h2>
-
-
-            </div>
-        </div>
-    </div>
-    <div class="overlay"></div>
-</section>
+<#include "changingParts/uploadFiles.ftlh">
 
 <!-- Sprawdź zbiornik -->
-<section class="content-section bg-light" id="check">
-    <div class="container text-center my-auto">
-        <div class="row">
-            <div class="col-lg-10 mx-auto">
+<#include "changingParts/checkContainer.ftlh">
 
-                <h3>Wybierz zbiornik dla którego chcesz zobaczyć dane:</h3>
-
-
-            </div>
-        </div>
-    </div>
-    <div class="overlay"></div>
-</section>
-
-<!-- wyświetlanie danych -->
-<section class="content-section bg-light" id="show">
-    <div class="container text-center my-auto">
-        <div class="row">
-            <div class="col-lg-10 mx-auto">
-                <h2> tu się pojawią wykresy</h2>
-
-
-            </div>
-        </div>
-    </div>
-    <div class="overlay"></div>
-</section>
+<!-- wyświetlanie danych - wykresy -->
+<#include "changingParts/charts.ftlh">
 
 <!-- Logowanie -->
 <#include "mainPartsOfPage/logUser.ftlh">
