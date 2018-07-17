@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Users List</title>
+    <link type="text/css" href="/css/firstForm.css"/>
+</head>
+<body>
+
+<form id="form" class="form-inline">
+
+    <div class="form-group">
+        <select class="province" id="province" name="state" title="Województwo">
+
+            <option value="-1">[Wybor]</option>
+            <option value="pomorskie">pomorskie</option>
+            <option value="lubuskie">lubuskie</option>
+            <option value="lubelskie">lubelskie</option>
+        </select>
+    </div>
+    <div id="watercontainerlist" style="display: none">
+        <select class="watercontainer" id="watercontainer" name="watercontainer" title="Zbiornik">
+        </select>
+    </div>
+</form>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $("#province").change(function () {
+           if($("#province").val()==-1){
+               return;
+           }
+            $.ajax({
+                    url:'watercontainer',
+                    data:{name:$("#province").val()},
+                    type:'get',
+                    cache:false,
+                    success:function(response){
+                       var options = JSON.parse(response);
+                            for (var i = 0; i < options.length; i++) {
+                            $('#watercontainer').append('<option value='+options[i].id+'>'+options[i].name+'</option>');
+                            }
+                            $('#watercontainerlist').fadeIn(1000);
+                    },
+                    error:function(){
+                        alert('error');
+                    }
+                }
+            );
+        });
+    });
+</script>
+</body>
+</html>
