@@ -10,12 +10,11 @@ import java.util.zip.ZipInputStream;
 
 @RequestScoped
 public class UnzipBean {
-
     public void unzip(InputStream fis, String destinationDirPath) {
         File dir = new File(destinationDirPath);
         if (!dir.exists()) dir.mkdirs();
         byte[] buffer = new byte[1024];
-        try (ZipInputStream zis = new ZipInputStream(fis);){
+        try (ZipInputStream zis = new ZipInputStream(fis);) {
             ZipEntry ze = zis.getNextEntry();
             while (ze != null) {
                 String fileName = ze.getName();

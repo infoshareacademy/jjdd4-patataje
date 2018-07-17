@@ -9,7 +9,7 @@ public class History {
 
     @Column(name = "dates")
     private LocalDate date;
-    @Column(name = "waterdeeps")
+    @Column(name = "water_deeps")
     private Double waterDeep;
     @Column(name = "flows")
     private Double flow;
@@ -19,49 +19,51 @@ public class History {
     @JoinColumn(name = "container_id")
     private WaterContainer waterContainers;
 
+    public History(LocalDate date, Double waterDeep, Double flow, Double temperature) {
+        this.date = date;
+        this.waterDeep = waterDeep;
+        this.flow = flow;
+        this.temperature = temperature;
+    }
+
     public LocalDate getDate() {
         return date;
     }
 
-    public History setDate(LocalDate date) {
+    public void setDate(LocalDate date) {
         this.date = date;
-        return this;
     }
 
     public Double getWaterDeep() {
         return waterDeep;
     }
 
-    public History setWaterDeep(Double waterDeep) {
+    public void setWaterDeep(Double waterDeep) {
         this.waterDeep = waterDeep;
-        return this;
     }
 
     public Double getFlow() {
         return flow;
     }
 
-    public History setFlow(Double flow) {
+    public void setFlow(Double flow) {
         this.flow = flow;
-        return this;
     }
 
     public Double getTemperature() {
         return temperature;
     }
 
-    public History setTemperature(Double temperature) {
+    public void setTemperature(Double temperature) {
         this.temperature = temperature;
-        return this;
     }
 
     public WaterContainer getWaterContainers() {
         return waterContainers;
     }
 
-    public History setWaterContainers(WaterContainer waterContainers) {
+    public void setWaterContainers(WaterContainer waterContainers) {
         this.waterContainers = waterContainers;
-        return this;
     }
 
     @Override

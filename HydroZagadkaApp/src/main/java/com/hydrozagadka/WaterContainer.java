@@ -10,60 +10,62 @@ public class WaterContainer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
-    @Column(name = "containerName")
+    private Long id;
+    @Column(name = "container_name")
     private String containerName;
-    @Column
+    @Column(name = "station_name")
     private String stationName;
-    @Column
+    @Column(name = "province_name")
     private String province;
-    @Column
     @OneToMany(mappedBy = "waterContainers", fetch = FetchType.EAGER)
     private List<History> history;
 
-    public Integer getId() {
+    public WaterContainer(Long id, String containerName, String stationName, String province, List<History> history) {
+        this.id = id;
+        this.containerName = containerName;
+        this.stationName = stationName;
+        this.province = province;
+        this.history = history;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public WaterContainer setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
-        return this;
     }
 
     public String getContainerName() {
         return containerName;
     }
 
-    public WaterContainer setContainerName(String containerName) {
+    public void setContainerName(String containerName) {
         this.containerName = containerName;
-        return this;
     }
 
     public String getStationName() {
         return stationName;
     }
 
-    public WaterContainer setStationName(String stationName) {
+    public void setStationName(String stationName) {
         this.stationName = stationName;
-        return this;
     }
 
     public String getProvince() {
         return province;
     }
 
-    public WaterContainer setProvince(String province) {
+    public void setProvince(String province) {
         this.province = province;
-        return this;
     }
 
     public List<History> getHistory() {
         return history;
     }
 
-    public WaterContainer setHistory(List<History> history) {
+    public void setHistory(List<History> history) {
         this.history = history;
-        return this;
     }
 
     @Override
