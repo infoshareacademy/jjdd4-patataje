@@ -38,8 +38,10 @@ public class LoadServlet extends HttpServlet {
             pr.close();
             return;
         }
+
         InputStream is = filePart.getInputStream();
         unzipDao.unzip(is, DIRECT_PATH);
+        LOG.info("Unzip File: {}");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
