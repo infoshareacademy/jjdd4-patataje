@@ -22,11 +22,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.LogManager;
 import java.util.stream.Collectors;
 
 @WebServlet("/")
 public class WelcomeServlet extends HttpServlet {
-    private Logger LOG = LoggerFactory.getLogger(WelcomeServlet.class);
+    private static Logger logger = LoggerFactory.getLogger(WelcomeServlet.class);
     @Inject
     FreeMarkerConfig freeMarkerConfig;
 
@@ -40,7 +41,7 @@ public class WelcomeServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
          load = new CSVLoader();
-        LOG.info("Load CSVFile: {}");
+        logger.info("Load CSVFile: {}");
          ff = new FilterFiles(load);
     }
 

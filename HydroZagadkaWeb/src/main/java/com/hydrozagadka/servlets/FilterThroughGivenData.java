@@ -9,6 +9,7 @@ import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,8 +25,7 @@ import java.util.stream.Collectors;
 
 @WebServlet("/filter")
 public class FilterThroughGivenData extends HttpServlet {
-    private Logger LOG = LoggerFactory.getLogger(FilterThroughGivenData.class);
-
+    private static Logger logger = LoggerFactory.getLogger(FilterThroughGivenData.class);
     private CSVLoader csvLoader = new CSVLoader();
     private FilterFiles filterFiles = new FilterFiles(csvLoader);
     @Inject

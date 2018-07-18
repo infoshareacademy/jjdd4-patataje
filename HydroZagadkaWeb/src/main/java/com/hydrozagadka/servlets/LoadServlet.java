@@ -21,7 +21,7 @@ import java.nio.file.Paths;
 @WebServlet("/loadservlet")
 @MultipartConfig
 public class LoadServlet extends HttpServlet {
-    private Logger LOG = LoggerFactory.getLogger(LoadServlet.class);
+    private static Logger logger = LoggerFactory.getLogger(LoadServlet.class);
 
     @Inject
     private UnzipDao unzipDao;
@@ -41,7 +41,7 @@ public class LoadServlet extends HttpServlet {
 
         InputStream is = filePart.getInputStream();
         unzipDao.unzip(is, DIRECT_PATH);
-        LOG.info("Unzip File: {}");
+        logger.info("Unzip File: {}");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
