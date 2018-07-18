@@ -7,6 +7,8 @@ import java.time.LocalDate;
 @Table(name = "HISTORIES")
 public class History {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "dates")
@@ -20,6 +22,9 @@ public class History {
     @ManyToOne
     @JoinColumn(name = "container_id")
     private WaterContainer waterContainers;
+
+    public History() {
+    }
 
     public History(LocalDate date, Double waterDeep, Double flow, Double temperature) {
         this.date = date;

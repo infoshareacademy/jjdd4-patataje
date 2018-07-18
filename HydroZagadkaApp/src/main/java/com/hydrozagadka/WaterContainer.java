@@ -20,6 +20,9 @@ public class WaterContainer {
     @OneToMany(mappedBy = "waterContainers", fetch = FetchType.EAGER)
     private List<History> history;
 
+    public WaterContainer() {
+    }
+
     public WaterContainer(Long id, String containerName, String stationName, String province, List<History> history) {
         this.id = id;
         this.containerName = containerName;
