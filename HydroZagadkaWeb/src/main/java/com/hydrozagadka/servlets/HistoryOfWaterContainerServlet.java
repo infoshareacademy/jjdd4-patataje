@@ -46,7 +46,7 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         String historyJsonAsString = objectMapper.writeValueAsString(historyOfWaterContainer);
         model.put("history", historyJsonAsString);
-        Template template = freeMarkerConfig.getTemplate("chart", getServletContext());
+        Template template = freeMarkerConfig.getTemplate("changingParts/charts.ftlh", getServletContext());
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
