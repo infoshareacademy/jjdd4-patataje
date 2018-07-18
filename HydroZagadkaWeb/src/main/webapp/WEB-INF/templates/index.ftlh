@@ -21,10 +21,9 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
           rel="stylesheet" type="text/css">
     <link href="../../HydroZagadkaFront/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
     <link href="../../HydroZagadkaFront/css/stylish-portfolio.min.css" rel="stylesheet">
-
 </head>
 
 <body id="page-top">
@@ -84,13 +83,13 @@
 <!-- Bootstrap core JavaScript -->
 <script src="../../HydroZagadkaFront/vendor/jquery/jquery.min.js"></script>
 <script src="../../HydroZagadkaFront/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- Plugin JavaScript -->
 <script src="../../HydroZagadkaFront/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for this template -->
 <script src="../../HydroZagadkaFront/js/stylish-portfolio.min.js"></script>
-
+<script src="../../js/formcreator.js"></script>
 </body>
 
 </html>

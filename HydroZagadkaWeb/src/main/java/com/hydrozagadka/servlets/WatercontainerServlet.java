@@ -40,7 +40,7 @@ public class WatercontainerServlet extends HttpServlet {
         String province = request.getParameter("name");
         PrintWriter pr = response.getWriter();
         List<WaterContainerView> result = mapper.mapToWaterContainerView(filterFiles.showWaterContainersThroughProvince(province));
-        String a =objectMapper.writeValueAsString(result);
+        String a = objectMapper.writeValueAsString(result);
         pr.println(a);
         pr.close();
     }
