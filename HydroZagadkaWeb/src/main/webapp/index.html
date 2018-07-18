@@ -1,33 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://java.sun.com/jsf/html">
 <head>
     <title>Users List</title>
     <link type="text/css" href="/css/firstForm.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+    <style>
+        .selector {
+            width: 200px;
+        }
+    </style>
 </head>
 <body>
 
-<form id="form" class="form-inline">
+<form class="form-inline">
 
-    <div class="form-group">
-        <select class="province" id="province" name="state" title="Województwo">
-
-            <option value="-1">[Wybor]</option>
-            <option value="pomorskie">pomorskie</option>
-            <option value="lubuskie">lubuskie</option>
-            <option value="lubelskie">lubelskie</option>
-        </select>
-    </div>
+    <select class="selector" id="province" name="state" title="Województwo">
+        <option value="-1">[Wybor]</option>
+        <option value="pomorskie">pomorskie</option>
+        <option value="lubuskie">lubuskie</option>
+        <option value="lubelskie">lubelskie</option>
+    </select>
     <div id="watercontainerlist" style="display: none">
-        <select class="watercontainer" id="watercontainer" name="watercontainer" title="Zbiornik">
-        </select>
-    </div>
-    <div id="stationlist" style="display: none">
-        <select class="station" id="station" name="station" title="Stacja">
+        <select class="selector" id="watercontainer" name="watercontainer" title="Zbiornik">
         </select>
     </div>
 </form>
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-<script src="js/formcreator.js">
-</script>
+<div id="stationlist" style="display: none">
+    <form class="form-inline" method="get" action="/history">
+    <select class="selector" id="station" name="station" title="Stacja">
+    </select>
+        <button type="submit">Sprawdź</button>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="js/formcreator.js"></script>
 </body>
 </html>

@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    $('#province').select2();
+    $('#watercontainer').select2();
+    $('#station').select2();
     $("#province").change(function () {
         if($("#province").val()==-1){
             return;
@@ -41,7 +44,7 @@ $(document).ready(function () {
                     $('#station').find('option').remove();
                     var options = JSON.parse(response);
                     for (var i = 0; i < options.length; i++) {
-                        $('#station').append('<option value='+options[i].name+'>'+options[i].name+'</option>');
+                        $('#station').append('<option value='+options[i].id+'>'+options[i].name+'</option>');
                     }
                     $('#stationlist').fadeIn(1000);
 
@@ -51,5 +54,5 @@ $(document).ready(function () {
                 }
             }
         );
-    });
+    })
 });
