@@ -1,8 +1,10 @@
 package com.hydrozagadka.servlets;
 
 import com.hydrozagadka.Beans.UnzipBean;
+import com.hydrozagadka.Beans.UnzipDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -20,11 +22,11 @@ import java.nio.file.Paths;
 @MultipartConfig
 public class LoadServlet extends HttpServlet {
     @Inject
-    private UnzipBean unzipBean;
+    private UnzipDao unzipDao;
     @Inject
     FreeMarkerConfig freeMarkerConfig;
 
-    public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
+    public static final String DIRECT_PATH = "D:/Develop/Hydrozagadka/jjdd4-patataje/HydroZagadkaApp/data";
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Part filePart = req.getPart("file");
@@ -36,7 +38,7 @@ public class LoadServlet extends HttpServlet {
             return;
         }
         InputStream is = filePart.getInputStream();
-        unzipBean.unzip(is, DIRECT_PATH);
+        unzipDao.unzip(is, DIRECT_PATH);
     }
 
     @Override

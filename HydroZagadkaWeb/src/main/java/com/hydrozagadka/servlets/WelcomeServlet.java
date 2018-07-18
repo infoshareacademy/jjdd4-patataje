@@ -1,34 +1,37 @@
 package com.hydrozagadka.servlets;
 
-import com.hydrozagadka.CSVLoader;
-import com.hydrozagadka.WaterContainer;
-import com.hydrozagadka.dao.HistoryDao;
-import com.hydrozagadka.dao.WaterContainerDao;
+import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = "/welcome")
+@WebServlet
 public class WelcomeServlet extends HttpServlet {
-
     @Inject
-    private WaterContainerDao waterContainerDao;
-    @Inject
-    private HistoryDao historyDao;
+    FreeMarkerConfig freeMarkerConfig;
 
-    @Override
-    public void init() throws ServletException {
-        CSVLoader csvLoader = new CSVLoader();
-        Map<Long, WaterContainer> waterContainerMap = csvLoader.getAllContainers();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
 
-        waterContainerMap.values().stream()
-                .forEach(waterContainer -> waterContainerDao.save(waterContainer));
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
 
-        waterContainerMap.values().stream()
-                .forEach(waterContainer -> waterContainer.getHistory().stream()
-                        .forEach(history -> historyDao.save(history)));
+        Map<String, Object> model = new HashMap<>();
+
+        try {
+            template.process(model, response.getWriter());
+        } catch (TemplateException e) {
+            e.printStackTrace();
+        }
     }
 }
