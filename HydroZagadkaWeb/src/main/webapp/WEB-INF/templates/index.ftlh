@@ -60,6 +60,7 @@
 <#include "changingParts/charts.ftlh">
 
 <!-- Logowanie -->
+
 <#include "mainPartsOfPage/logUser.ftlh">
 
 <!-- o aplikacji -->
