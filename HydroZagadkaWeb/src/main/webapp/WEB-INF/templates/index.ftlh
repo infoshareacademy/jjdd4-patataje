@@ -59,6 +59,9 @@
 <!-- wyświetlanie danych - wykresy -->
 <#include "changingParts/charts.ftlh">
 
+<!-- wyświetlanie danych - mapa -->
+<#include "changingParts/maps.ftlh">
+
 <!-- Logowanie -->
 
 <#include "mainPartsOfPage/logUser.ftlh">

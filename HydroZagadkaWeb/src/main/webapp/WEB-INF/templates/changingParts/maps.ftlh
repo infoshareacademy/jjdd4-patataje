@@ -1,9 +1,10 @@
-<section class="content-section bg-light" id="charts">
+<section class="content-section bg-light" id="maps">
     <div class="container text-center my-auto">
         <div class="row">
             <div class="col-lg-10 mx-auto">
-                <h2>  wykresy</h2>
-<#include "charts/chart.html">
+                <h2> Mapa Polski:</h2>
+
+<#include "maps/map.html">
 
             </div>
         </div>
