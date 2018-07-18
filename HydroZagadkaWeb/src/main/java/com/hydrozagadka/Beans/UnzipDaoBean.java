@@ -1,11 +1,12 @@
 package com.hydrozagadka.Beans;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-@ApplicationScoped
+@RequestScoped
 public class UnzipDaoBean implements UnzipDao {
 
     @Override
