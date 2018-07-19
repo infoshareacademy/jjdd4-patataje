@@ -37,7 +37,7 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json");
 
         Integer idWaterContainer = Integer.parseInt(request.getParameter("station"));
         Map<String, Object> model = new HashMap<>();
@@ -49,15 +49,16 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         String historyJsonAsString = objectMapper.writeValueAsString(historyOfWaterContainer);
         PrintWriter pw = response.getWriter();
+
+        //model.put("json", historyJsonAsString);
         pw.println(historyJsonAsString);
-        Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
-        try {
-            template.process(model,pw);
-        } catch (TemplateException e) {
-            e.printStackTrace();
-        }
-        pw.close();
-//        response.sendRedirect("/welcome");
+//        Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
+//        try {
+//            template.process(model,pw);
+//        } catch (TemplateException e) {
+//            e.printStackTrace();
+//        }
+//        pw.close();
 //        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.ftlh");
 //        requestDispatcher.forward(request,response);
 

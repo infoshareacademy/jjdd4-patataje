@@ -70,22 +70,12 @@
                 <h2>  wykresy</h2>
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                 <script type="text/javascript">
+
+
+
                     google.charts.load('current', {'packages':['corechart']});
                     google.charts.setOnLoadCallback(drawChart);
                     function drawChart() {
-
-                        // $.ajax({
-                        //             url:'history',
-                        //
-                        //             type:'get',
-                        //             success:function(response){
-                        //                 var options = JSON.parse(response);
-                        //             },
-                        //             error:function(){
-                        //                 alert('error');
-                        //             }
-                        //         }
-                        // );
 
 
                         var data = google.visualization.arrayToDataTable([
