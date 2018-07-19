@@ -23,10 +23,11 @@ public class LoadServlet extends HttpServlet {
     private UnzipDao unzipDao;
     @Inject
     FreeMarkerConfig freeMarkerConfig;
-    public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
+    public static final String DIRECT_PATH = "/home/paulinaprzekop/jjdd4-patataje/HydroZagadkaApp/data";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Part filePart = request.getPart("file");
+
+        response.setContentType("text/html;charset=UTF-8");Part filePart = request.getPart("file");
         PrintWriter pr = response.getWriter();
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         if (!fileName.contains(".zip")) {
@@ -39,6 +40,6 @@ public class LoadServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
     }
 }

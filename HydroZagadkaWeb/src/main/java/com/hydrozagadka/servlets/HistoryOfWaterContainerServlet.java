@@ -13,6 +13,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,20 +37,29 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+
         Integer idWaterContainer = Integer.parseInt(request.getParameter("station"));
         Map<String, Object> model = new HashMap<>();
         List<History> historyOfWaterContainer = filterFiles
                 .getWaterContainerByID(idWaterContainer)
                 .getHistory();
         ObjectMapper objectMapper = new ObjectMapper();
-        // objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         String historyJsonAsString = objectMapper.writeValueAsString(historyOfWaterContainer);
-        model.put("history", historyJsonAsString);
-        Template template = freeMarkerConfig.getTemplate("changingParts/charts.ftlh", getServletContext());
+        PrintWriter pw = response.getWriter();
+        pw.println(historyJsonAsString);
+        Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
         try {
-            template.process(model, response.getWriter());
+            template.process(model,pw);
         } catch (TemplateException e) {
+            e.printStackTrace();
         }
+        pw.close();
+//        response.sendRedirect("/welcome");
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.ftlh");
+//        requestDispatcher.forward(request,response);
+
     }
 }
