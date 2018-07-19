@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class FilterFiles {
 
-    private Map<Integer, WaterContainer> waterContainerMap;
+    private Map<Long, WaterContainer> waterContainerMap;
 
     public FilterFiles(CSVLoader loadFile) {
         this.waterContainerMap = loadFile.getAllContainers();

@@ -1,19 +1,41 @@
 package com.hydrozagadka;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "WATER_CONTAINERS")
 public class WaterContainer {
-    private Integer id;
+
+    @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "container_name")
     private String containerName;
+    @Column(name = "station_name")
     private String stationName;
+    @Column(name = "province_name")
     private String province;
+    @OneToMany(mappedBy = "waterContainers", fetch = FetchType.EAGER)
     private List<History> history;
 
-    public Integer getId() {
+    public WaterContainer() {
+    }
+
+    public WaterContainer(Long id, String containerName, String stationName, String province, List<History> history) {
+        this.id = id;
+        this.containerName = containerName;
+        this.stationName = stationName;
+        this.province = province;
+        this.history = history;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -37,7 +59,7 @@ public class WaterContainer {
         return province;
     }
 
-    void setProvince(String province) {
+    public void setProvince(String province) {
         this.province = province;
     }
 
@@ -49,24 +71,15 @@ public class WaterContainer {
         this.history = history;
     }
 
-
-    WaterContainer(Integer id, String containerName, String stationName, String province, List<History> history) {
-        this.id = id;
-        this.containerName = containerName;
-        this.stationName = stationName;
-        this.history = history;
-        this.province = province;
-
-    }
-
     @Override
     public String toString() {
-        return "WaterContainer{" +
-                "id=" + id +
-                ", containerName='" + containerName + '\'' +
-                ", stationName='" + stationName + '\'' +
-                ", province='" + province + '\'' +
-                ", history=" + history +
-                '}';
+        final StringBuffer sb = new StringBuffer("WaterContainer{");
+        sb.append("id=").append(id);
+        sb.append(", containerName='").append(containerName).append('\'');
+        sb.append(", stationName='").append(stationName).append('\'');
+        sb.append(", province='").append(province).append('\'');
+        sb.append(", history=").append(history);
+        sb.append('}');
+        return sb.toString();
     }
 }

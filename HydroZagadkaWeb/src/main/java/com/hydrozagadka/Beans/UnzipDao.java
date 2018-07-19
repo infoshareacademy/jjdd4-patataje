@@ -1,7 +1,6 @@
 package com.hydrozagadka.Beans;
 
 import javax.ejb.Local;
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 @Local
