@@ -27,7 +27,8 @@ public class LoadServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        response.setContentType("text/html;charset=UTF-8");Part filePart = request.getPart("file");
+        response.setContentType("text/html;charset=UTF-8");
+        Part filePart = request.getPart("file");
         PrintWriter pr = response.getWriter();
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         if (!fileName.contains(".zip")) {
