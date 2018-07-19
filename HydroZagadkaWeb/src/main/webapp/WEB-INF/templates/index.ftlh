@@ -73,31 +73,8 @@
 
 
 
-                    google.charts.load('current', {'packages':['corechart']});
-                    google.charts.setOnLoadCallback(drawChart);
-                    function drawChart() {
-
-
-                        var data = google.visualization.arrayToDataTable([
-                            ['Data', 'Poziom wody [cm]', 'Przepływ [m/s]', 'Temperatura [&ordm; C]'],
-                            ['2004',  10,      4, 12],
-                            ['2005',  11,      4.60, 13],
-                            ['2006',  6,       1.120, 15],
-                            ['2007',  10,      5.40, 17]
-                        ]);
-
-                        var options = {
-                            title: 'Pjęęękny wykres:',
-                            curveType: 'function',
-                            legend: { position: 'bottom' }
-                        };
-
-                        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-                        chart.draw(data, options);
-                    }
                 </script>
-                <div id="curve_chart" style="width: 900px; height: 500px"></div>
+                <div id="curve_chart" style="width: 900px; height: 500px;display: none;"></div>
             </div>
         </div>
     </div>

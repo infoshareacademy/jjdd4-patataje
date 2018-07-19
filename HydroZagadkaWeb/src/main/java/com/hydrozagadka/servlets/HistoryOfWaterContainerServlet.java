@@ -42,7 +42,8 @@ private HistoryDao historyDao;
         response.setContentType("application/json");
 
         Long idWaterContainer = Long.parseLong(request.getParameter("station"));
-        List<History> historyOfWaterContainer = filterFiles.getWaterContainerByID(idWaterContainer).getHistory();
+//        List<History> historyOfWaterContainer = filterFiles.getWaterContainerByID(idWaterContainer).getHistory();
+        List<History> historyOfWaterContainer = historyDao.getHistoryFormWaterContainer(idWaterContainer);
         ObjectMapper objectMapper = new ObjectMapper();
       //   objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
