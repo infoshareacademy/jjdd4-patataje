@@ -56,7 +56,7 @@
 <#include "changingParts/checkContainer.ftlh">
 
 <!-- wyświetlanie danych - wykresy -->
-<#include "changingParts/charts.ftlh">
+<#include "changingParts/maps.ftlh">
 
 
 
