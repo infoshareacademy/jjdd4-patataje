@@ -23,6 +23,9 @@ public class History {
     @JoinColumn(name = "container_id")
     private WaterContainer waterContainers;
 
+    @Transient
+    private Long containerId;
+
     public History() {
     }
 
@@ -31,6 +34,14 @@ public class History {
         this.waterDeep = waterDeep;
         this.flow = flow;
         this.temperature = temperature;
+    }
+
+    public Long getContainerId() {
+        return containerId;
+    }
+
+    public void setContainerId(Long containerId) {
+        this.containerId = containerId;
     }
 
     public Long getId() {

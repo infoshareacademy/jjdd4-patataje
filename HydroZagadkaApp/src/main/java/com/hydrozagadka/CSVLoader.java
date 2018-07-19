@@ -18,6 +18,7 @@ public class CSVLoader {
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();
     private Map<Long, WaterContainer> allContainers = new HashMap<>();
+
     public Map<Long, WaterContainer> getAllContainers() {
         return allContainers;
     }
@@ -52,7 +53,7 @@ public class CSVLoader {
         return new WaterContainer(id, containerName, stationName, province, new ArrayList<>());
     }
 
-    private History createHistory(String[] a) {
+    private History createHistory(WaterContainer wc, String[] a) {
         try {
             Integer year = Integer.parseInt(a[3]);
             Integer month = Integer.parseInt(a[9]);
@@ -61,7 +62,10 @@ public class CSVLoader {
             Double waterDeep = Double.parseDouble(a[6]);
             Double flow = Double.parseDouble(a[7]);
             Double temperature = Double.parseDouble(a[8]);
-            return new History(date, waterDeep, flow, temperature);
+
+            History history = new History(date, waterDeep, flow, temperature);
+            history.setContainerId(wc.getId());
+            return history;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             System.out.println("Błąd podczas konwertowania rekordu na liczbę!");
             System.exit(0);
@@ -79,7 +83,7 @@ public class CSVLoader {
                 while ((loadedLine = br.readLine()) != null) {
                     splitedLine = splitString(loadedLine);
                     WaterContainer wc = createWaterContainer(splitedLine);
-                    History history = createHistory(splitedLine);
+                    History history = createHistory(wc, splitedLine);
                     checkingExistingContainers(wc, history);
                 }
             }
