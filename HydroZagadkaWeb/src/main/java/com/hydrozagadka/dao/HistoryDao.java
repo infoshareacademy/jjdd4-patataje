@@ -39,4 +39,9 @@ public class HistoryDao {
 
         return query.getResultList();
     }
+    public List<History> getHistoryFormWaterContainer(Long id){
+        Query query = entityManager.createQuery("SELECT h FROM History h join h.WaterContainer wt WHERE wt.id=:Id");
+        query.setParameter("Id",id);
+        return query.getResultList();
+    }
 }

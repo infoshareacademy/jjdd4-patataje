@@ -30,7 +30,7 @@ $(document).ready(function () {
 
 
     $("#watercontainer").change(function () {
-        if($("#province").val()==-1 || $("#watercontainer").val()==""){
+        if($("#province").val()==-1 || $("#watercontainer").val()==-1){
             return;
         }
         $.ajax({
@@ -42,6 +42,7 @@ $(document).ready(function () {
                 cache:false,
                 success:function(response){
                     $('#station').find('option').remove();
+                    $('#station').append('<option value="-1">[Wybierz]</option>');
                     var options = JSON.parse(response);
                     for (var i = 0; i < options.length; i++) {
                         $('#station').append('<option value='+options[i].id+'>'+options[i].name+'</option>');

@@ -161,7 +161,7 @@ public class Province {
         getIDM.getContext().setWidth(70);
         System.out.println(getIDM.render());
         try {
-            int choiceID = Integer.valueOf(scanner.nextLine());
+            Long choiceID = Long.valueOf(scanner.nextLine());
             if (filterFiles.getWaterContainerByID(choiceID) == null && choiceID != 3 && choiceID != 0)
                 throw new IdLengthException();
             if (filterFiles.getWaterContainerByID(choiceID) != null) {
@@ -220,7 +220,7 @@ public class Province {
         }
     }
 
-    private static void showNewestData(int id) {
+    private static void showNewestData(Long id) {
         List<History> sorted = sortHistory(filterFiles.getWaterContainerByID(id));
         legend();
         AsciiTable sNd = new AsciiTable();
@@ -268,7 +268,7 @@ public class Province {
         }
     }
 
-    private static void showHistoricData(int id) {
+    private static void showHistoricData(Long id) {
         WaterContainer wt = filterFiles.getWaterContainerByID(id);
         AsciiTable sHd = new AsciiTable();
         legend();
@@ -326,7 +326,7 @@ public class Province {
         }
     }
 
-    private static void minMaxSelectMenu(int id) {
+    private static void minMaxSelectMenu(Long id) {
         AsciiTable sHd = new AsciiTable();
         sHd.addRule();
         sHd.addRow("Wyświetl dane minimalne i maksymalne dla całego dostępnego zakresu", "Wybierz: 1").setTextAlignment(TextAlignment.CENTER);
@@ -359,7 +359,7 @@ public class Province {
         }
     }
 
-    private static void showMinMax(int id) {
+    private static void showMinMax(Long id) {
         AsciiTable sHd = new AsciiTable();
         sHd.addRule();
         sHd.addRow("Wartość Maksymalna", filterFiles.minAndMaxValueOfHistoryWaterDeeps(id).get(0).getDate() + " " + filterFiles.minAndMaxValueOfHistoryWaterDeeps(id).get(0).getWaterDeep());
@@ -374,7 +374,7 @@ public class Province {
         System.out.println(sHd.render());
     }
 
-    private static void showMinMaxforDatas(int id, String start, String end) {
+    private static void showMinMaxforDatas(Long id, String start, String end) {
         AsciiTable sMM = new AsciiTable();
         sMM.addRule();
         try {

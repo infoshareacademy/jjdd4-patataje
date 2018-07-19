@@ -79,7 +79,7 @@
 
 
                         var data = google.visualization.arrayToDataTable([
-                            ['Data', 'Poziom wody', 'Przepływ', 'Temperatura'],
+                            ['Data', 'Poziom wody [cm]', 'Przepływ [m/s]', 'Temperatura [&ordm; C]'],
                             ['2004',  10,      4, 12],
                             ['2005',  11,      4.60, 13],
                             ['2006',  6,       1.120, 15],

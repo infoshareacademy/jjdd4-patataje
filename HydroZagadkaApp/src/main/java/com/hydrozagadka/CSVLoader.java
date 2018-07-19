@@ -29,7 +29,7 @@ public class CSVLoader {
 
     private List<String> getFilesList() {
         List<String> fileNames = new ArrayList<>();
-        try  {
+        try {
             DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(DIRECT_PATH));
             for (Path path : directoryStream) {
                 if (path.toString().contains("codz_")) {
@@ -61,9 +61,14 @@ public class CSVLoader {
             LocalDate date = LocalDate.of(year, month, day);
             Double waterDeep = Double.parseDouble(a[6]);
             Double flow = Double.parseDouble(a[7]);
+            if (flow == 99999.999) {
+                flow = 0.0;
+            }
             Double temperature = Double.parseDouble(a[8]);
-
-            History history = new History(date, waterDeep, flow, temperature);
+            if (temperature == 99.9){
+                temperature=0.0;
+            }
+                History history = new History(date, waterDeep, flow, temperature);
             history.setContainerId(wc.getId());
             return history;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
@@ -115,7 +120,7 @@ public class CSVLoader {
         allContainers.get(wc.getId()).getHistory().add(history);
     }
 
-  public Set<String> getProvince() {
+    public Set<String> getProvince() {
         return province;
     }
 }
