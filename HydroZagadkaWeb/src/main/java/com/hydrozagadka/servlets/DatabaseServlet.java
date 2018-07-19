@@ -12,12 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = "/database")
+@Transactional
 public class DatabaseServlet extends HttpServlet {
 
     @Inject
@@ -54,9 +56,9 @@ public class DatabaseServlet extends HttpServlet {
 
 
     private void findAll(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        final List<History> result = historyDao.findAll();
+        final List<WaterContainer> result = waterContainerDao.findAll();
         PrintWriter printWriter = resp.getWriter();
         result.stream()
-                .forEach(history -> printWriter.write(history.toString() + "\n"));
+                .forEach(waterContainer -> printWriter.write(waterContainer.toString() + "\n"));
     }
 }

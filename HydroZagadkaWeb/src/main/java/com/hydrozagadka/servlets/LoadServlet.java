@@ -22,16 +22,15 @@ public class LoadServlet extends HttpServlet {
     @Inject
     private UnzipDao unzipDao;
     @Inject
-    private FreeMarkerConfig freeMarkerConfig;
+    FreeMarkerConfig freeMarkerConfig;
+    public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
 
-    public static final String DIRECT_PATH = "D:/Develop/Hydrozagadka/jjdd4-patataje/HydroZagadkaApp/data";
-
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Part filePart = req.getPart("file");
-        PrintWriter pr = resp.getWriter();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Part filePart = request.getPart("file");
+        PrintWriter pr = response.getWriter();
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         if (!fileName.contains(".zip")) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pr.close();
             return;
         }
@@ -39,8 +38,7 @@ public class LoadServlet extends HttpServlet {
         unzipDao.unzip(is, DIRECT_PATH);
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
     }
 }

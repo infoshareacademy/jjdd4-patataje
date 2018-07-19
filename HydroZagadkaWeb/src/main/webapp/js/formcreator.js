@@ -55,4 +55,25 @@ $(document).ready(function () {
             }
         );
     })
+
+    $('.history-form').on('submit', function () {
+        var historyId = $('#station').val()
+
+        $.ajax({
+                url:'/history?station=' + historyId,
+                crossDomain: true,
+                type:'get',
+                success:function(response){
+                    console.log(response)
+                    console.log(response[0])
+                },
+                error:function(err){
+                    console.log(err)
+                    alert('error');
+                }
+            }
+        )
+
+        return false
+    });
 });
