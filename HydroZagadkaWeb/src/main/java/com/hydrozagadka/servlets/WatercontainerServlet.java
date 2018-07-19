@@ -23,9 +23,9 @@ import java.util.List;
 public class WatercontainerServlet extends HttpServlet {
 
     @Inject
-    WaterContainerAndStationMapper mapper;
-    CSVLoader csvLoader = new CSVLoader();
-    FilterFiles filterFiles = new FilterFiles(csvLoader);
+    private WaterContainerAndStationMapper mapper;
+    private CSVLoader csvLoader = new CSVLoader();
+    private FilterFiles filterFiles = new FilterFiles(csvLoader);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

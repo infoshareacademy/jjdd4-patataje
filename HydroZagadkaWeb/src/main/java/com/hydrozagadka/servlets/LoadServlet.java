@@ -1,10 +1,8 @@
 package com.hydrozagadka.servlets;
 
-import com.hydrozagadka.Beans.UnzipBean;
 import com.hydrozagadka.Beans.UnzipDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -24,7 +22,7 @@ public class LoadServlet extends HttpServlet {
     @Inject
     private UnzipDao unzipDao;
     @Inject
-    FreeMarkerConfig freeMarkerConfig;
+    private FreeMarkerConfig freeMarkerConfig;
 
     public static final String DIRECT_PATH = "D:/Develop/Hydrozagadka/jjdd4-patataje/HydroZagadkaApp/data";
 

@@ -26,10 +26,11 @@ import java.util.Map;
 
 @WebServlet("/history")
 public class HistoryOfWaterContainerServlet extends HttpServlet {
-    CSVLoader csvLoader = new CSVLoader();
-    FilterFiles filterFiles = new FilterFiles(csvLoader);
+
+    private CSVLoader csvLoader = new CSVLoader();
+    private FilterFiles filterFiles = new FilterFiles(csvLoader);
     @Inject
-    FreeMarkerConfig freeMarkerConfig;
+    private FreeMarkerConfig freeMarkerConfig;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

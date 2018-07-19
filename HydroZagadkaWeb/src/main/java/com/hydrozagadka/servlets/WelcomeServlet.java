@@ -14,10 +14,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet
+@WebServlet(urlPatterns = "/welcome")
 public class WelcomeServlet extends HttpServlet {
     @Inject
-    FreeMarkerConfig freeMarkerConfig;
+    private FreeMarkerConfig freeMarkerConfig;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
