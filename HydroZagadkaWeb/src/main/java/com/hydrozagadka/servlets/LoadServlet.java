@@ -36,6 +36,7 @@ public class LoadServlet extends HttpServlet {
         if (!fileName.contains(".zip")) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pr.close();
+            logger.error("No zip file found");
             return;
         }
 

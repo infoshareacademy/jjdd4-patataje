@@ -42,7 +42,7 @@ public class WelcomeServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
          load = new CSVLoader();
-        logger.info("Load CSVFile: {}");
+        logger.info("Load CSVFile");
          ff = new FilterFiles(load);
     }
 
@@ -60,7 +60,7 @@ public class WelcomeServlet extends HttpServlet {
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
-            e.printStackTrace();
+            logger.error("Template dosen't exist");
         }
     }
 }

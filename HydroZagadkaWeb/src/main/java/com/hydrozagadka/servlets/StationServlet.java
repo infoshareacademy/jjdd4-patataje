@@ -9,6 +9,8 @@ import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.FilterFiles;
 import com.hydrozagadka.Model.StationView;
 import com.hydrozagadka.Model.WaterContainerView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -22,7 +24,7 @@ import java.util.List;
 
 @WebServlet("/station")
 public class StationServlet extends HttpServlet {
-
+    private static Logger logger = LoggerFactory.getLogger(LoadServlet.class);
     @Inject
     WaterContainerAndStationMapper mapper;
     CSVLoader csvLoader = new CSVLoader();
@@ -41,6 +43,7 @@ public class StationServlet extends HttpServlet {
         List<StationView> result = mapper.mapToStationView(filterFiles.filterThroughContainer(watercontainer,province));
         String a =objectMapper.writeValueAsString(result);
         pr.println(a);
+        logger.info("Files filtred throught containers");
         pr.close();
     }
 }

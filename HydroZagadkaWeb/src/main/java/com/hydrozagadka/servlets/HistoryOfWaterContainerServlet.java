@@ -50,6 +50,7 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
+
         }
     }
 }

@@ -8,6 +8,8 @@ import com.hydrozagadka.Beans.WaterContainerAndStationMapper;
 import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.FilterFiles;
 import com.hydrozagadka.Model.WaterContainerView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -21,7 +23,7 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/watercontainer")
 public class WatercontainerServlet extends HttpServlet {
-
+    private static Logger logger = LoggerFactory.getLogger(LoadServlet.class);
     @Inject
     WaterContainerAndStationMapper mapper;
     CSVLoader csvLoader = new CSVLoader();
@@ -42,6 +44,7 @@ public class WatercontainerServlet extends HttpServlet {
         List<WaterContainerView> result = mapper.mapToWaterContainerView(filterFiles.showWaterContainersThroughProvince(province));
         String a = objectMapper.writeValueAsString(result);
         pr.println(a);
+        logger.info("Water containers filtred throught provinces");
         pr.close();
     }
 }
