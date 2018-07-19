@@ -9,7 +9,7 @@ public class WaterContainer {
     private String province;
     private List<History> history;
 
-    Integer getId() {
+    public Integer getId() {
         return id;
     }
 

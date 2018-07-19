@@ -25,11 +25,12 @@ import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.stream.Collectors;
 
-@WebServlet("/")
+@WebServlet("/welcome")
 public class WelcomeServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(WelcomeServlet.class);
     @Inject
     FreeMarkerConfig freeMarkerConfig;
+
 
     @Inject
     ProvinceBean provinceBean;
@@ -46,19 +47,20 @@ public class WelcomeServlet extends HttpServlet {
     }
 
 
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter pr = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+        Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
+
         Map<String, Object> model = new HashMap<>();
-        model.put("provinces", load.getProvince());
-        Template template = freeMarkerConfig.getTemplate("firstMenu.ftlh", getServletContext());
+
         try {
-            template.process(model, pr);
+            template.process(model, response.getWriter());
         } catch (TemplateException e) {
             e.printStackTrace();
         }
-        pr.close();
     }
 }
