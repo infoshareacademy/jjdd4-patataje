@@ -41,7 +41,7 @@
             </div>
             <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
             <span class="service-icon rounded-circle mx-auto mb-3">
-              <img class ="avatar" src='../../HydroZagadkaFront/img/meduza.jpg'>
+              <img class ="avatar" src='../../HydroZagadkaFront/img/murena.png'>
             </span>
                 <h4>
                     <strong>Lócjan</strong>
