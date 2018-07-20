@@ -19,8 +19,8 @@ public class CheckingIntervals extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LocalDate start = LocalDate.of(2016, 05, 04);
-        LocalDate end = LocalDate.of(2016, 06, 04);
+        LocalDate start = LocalDate.of(2016, 01, 04);
+        LocalDate end = LocalDate.of(2016, 12, 04);
 
         resp.getWriter().println(historyDao.findWaterdeepBetweenTwoDates(start, end, 153190100L));
     }
