@@ -13,13 +13,13 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class CSVLoader {
-    public static final String DIRECT_PATH = "/home/paulinaprzekop/PROJEKT/jjdd4-patataje/HydroZagadkaApp/data";
+    private static final String DIRECT_PATH = "/home/paulinaprzekop/PROJEKT/jjdd4-patataje/HydroZagadkaApp/data";
 
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();
-    private Map<Integer, WaterContainer> allContainers = new HashMap<>();
+    private Map<Long, WaterContainer> allContainers = new HashMap<>();
 
-    public Map<Integer, WaterContainer> getAllContainers() {
+    public Map<Long, WaterContainer> getAllContainers() {
         return allContainers;
     }
 
@@ -29,7 +29,7 @@ public class CSVLoader {
 
     private List<String> getFilesList() {
         List<String> fileNames = new ArrayList<>();
-        try  {
+        try {
             DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(DIRECT_PATH));
             for (Path path : directoryStream) {
                 if (path.toString().contains("codz_")) {
@@ -43,7 +43,7 @@ public class CSVLoader {
     }
 
     private WaterContainer createWaterContainer(String[] a) {
-        Integer id = Integer.parseInt(a[0].replaceAll(" ", ""));
+        Long id = Long.parseLong(a[0].replaceAll(" ", ""));
         String containerName = a[1].toUpperCase();
         String stationName = a[2];
         String province = "N/A";
@@ -53,7 +53,7 @@ public class CSVLoader {
         return new WaterContainer(id, containerName, stationName, province, new ArrayList<History>());
     }
 
-    private History createHistory(String[] a) {
+    private History createHistory(WaterContainer wc, String[] a) {
         try {
             Integer year = Integer.parseInt(a[3]);
             Integer month = Integer.parseInt(a[9]);
@@ -61,8 +61,16 @@ public class CSVLoader {
             LocalDate date = LocalDate.of(year, month, day);
             Double waterDeep = Double.parseDouble(a[6]);
             Double flow = Double.parseDouble(a[7]);
+            if (flow == 99999.999) {
+                flow = 0.0;
+            }
             Double temperature = Double.parseDouble(a[8]);
-            return new History(date, waterDeep, flow, temperature);
+            if (temperature == 99.9){
+                temperature=0.0;
+            }
+                History history = new History(date, waterDeep, flow, temperature);
+            history.setContainerId(wc.getId());
+            return history;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             System.out.println("Błąd podczas konwertowania rekordu na liczbę!");
             System.exit(0);
@@ -70,7 +78,7 @@ public class CSVLoader {
         return null;
     }
 
-     Map<Integer, WaterContainer> loadCSV() {
+    private Map<Long, WaterContainer> loadCSV() {
         String loadedLine;
         String[] splitedLine;
         try {
@@ -80,7 +88,7 @@ public class CSVLoader {
                 while ((loadedLine = br.readLine()) != null) {
                     splitedLine = splitString(loadedLine);
                     WaterContainer wc = createWaterContainer(splitedLine);
-                    History history = createHistory(splitedLine);
+                    History history = createHistory(wc, splitedLine);
                     checkingExistingContainers(wc, history);
                 }
             }
@@ -112,7 +120,7 @@ public class CSVLoader {
         allContainers.get(wc.getId()).getHistory().add(history);
     }
 
-  public Set<String> getProvince() {
+    public Set<String> getProvince() {
         return province;
     }
 }

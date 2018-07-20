@@ -8,7 +8,6 @@ import com.hydrozagadka.Beans.WaterContainerAndStationMapper;
 import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.FilterFiles;
 import com.hydrozagadka.Model.StationView;
-import com.hydrozagadka.Model.WaterContainerView;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -24,9 +23,10 @@ import java.util.List;
 public class StationServlet extends HttpServlet {
 
     @Inject
-    WaterContainerAndStationMapper mapper;
-    CSVLoader csvLoader = new CSVLoader();
-    FilterFiles filterFiles = new FilterFiles(csvLoader);
+    private WaterContainerAndStationMapper mapper;
+    private CSVLoader csvLoader = new CSVLoader();
+    private FilterFiles filterFiles = new FilterFiles(csvLoader);
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

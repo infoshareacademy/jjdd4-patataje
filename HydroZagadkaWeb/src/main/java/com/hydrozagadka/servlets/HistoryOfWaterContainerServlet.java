@@ -8,6 +8,7 @@ import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.FilterFiles;
 import com.hydrozagadka.History;
 import com.hydrozagadka.Model.WaterContainerView;
+import com.hydrozagadka.dao.HistoryDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -27,10 +28,11 @@ import java.util.Map;
 
 @WebServlet("/history")
 public class HistoryOfWaterContainerServlet extends HttpServlet {
-    CSVLoader csvLoader = new CSVLoader();
-    FilterFiles filterFiles = new FilterFiles(csvLoader);
-    @Inject
-    FreeMarkerConfig freeMarkerConfig;
+
+    private CSVLoader csvLoader = new CSVLoader();
+    private FilterFiles filterFiles = new FilterFiles(csvLoader);
+@Inject
+private HistoryDao historyDao;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -39,28 +41,17 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
 
-        Integer idWaterContainer = Integer.parseInt(request.getParameter("station"));
-        Map<String, Object> model = new HashMap<>();
-        List<History> historyOfWaterContainer = filterFiles
-                .getWaterContainerByID(idWaterContainer)
-                .getHistory();
+        Long idWaterContainer = Long.parseLong(request.getParameter("station"));
+//        List<History> historyOfWaterContainer = filterFiles.getWaterContainerByID(idWaterContainer).getHistory();
+        List<History> historyOfWaterContainer = historyDao.getHistoryFormWaterContainer(idWaterContainer);
         ObjectMapper objectMapper = new ObjectMapper();
-         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+      //   objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         String historyJsonAsString = objectMapper.writeValueAsString(historyOfWaterContainer);
         PrintWriter pw = response.getWriter();
 
-        //model.put("json", historyJsonAsString);
         pw.println(historyJsonAsString);
-//        Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
-//        try {
-//            template.process(model,pw);
-//        } catch (TemplateException e) {
-//            e.printStackTrace();
-//        }
-//        pw.close();
-//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.ftlh");
-//        requestDispatcher.forward(request,response);
+
 
     }
 }

@@ -13,6 +13,7 @@ $(document).ready(function () {
                 cache:false,
                 success:function(response){
                     $('#watercontainer').find('option').remove();
+                    $('#watercontainer').append('<option value="-1">[Wybierz]</option>');
                     var options = JSON.parse(response);
                     for (var i = 0; i < options.length; i++) {
                         $('#watercontainer').append('<option value='+options[i].name+'>'+options[i].name+'</option>');
@@ -30,7 +31,7 @@ $(document).ready(function () {
 
 
     $("#watercontainer").change(function () {
-        if($("#province").val()==-1 || $("#watercontainer").val()==""){
+        if($("#province").val()==-1 || $("#watercontainer").val()==-1){
             return;
         }
         $.ajax({
@@ -42,6 +43,7 @@ $(document).ready(function () {
                 cache:false,
                 success:function(response){
                     $('#station').find('option').remove();
+                    $('#station').append('<option value="-1">[Wybierz]</option>');
                     var options = JSON.parse(response);
                     for (var i = 0; i < options.length; i++) {
                         $('#station').append('<option value='+options[i].id+'>'+options[i].name+'</option>');
@@ -65,15 +67,49 @@ $(document).ready(function () {
                 type:'get',
                 success:function(response){
                     console.log(response)
-                    console.log(response[0])
-                },
+                    var history = response;
+
+                    google.charts.load('current', {'packages':['corechart']});
+                    google.charts.setOnLoadCallback(drawChart);
+                    function drawChart() {
+
+                        var data=[];
+                        var Header= ['Dzień', 'Poziom wody [cm]', 'Przepływ [m/s]','Temperatura [ C]'];
+                        data.push(Header);
+                        for (var i = 0; i < history.length; i++) {
+                            var temp=[];
+                            temp.push(i);
+                            temp.push(history[i][0]);
+                            temp.push(history[i][1]);
+                            temp.push(history[i][2]);
+                            data.push(temp);
+                        }
+                        var chartdata = new google.visualization.arrayToDataTable(data);
+
+                        $('#curve_chart').fadeIn(2000);
+
+                        var options = {
+                            title: 'Pjęęękny wykres:',
+                            curveType: 'function',
+                            legend: { position: 'bottom' }
+                        };
+
+                        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+                        chart.draw(chartdata, options);
+                    }
+
+
+
+
+                    },
                 error:function(err){
                     console.log(err)
                     alert('error');
                 }
             }
         )
-
         return false
+
     });
 });
