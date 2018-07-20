@@ -5,10 +5,16 @@
         border: none;
         border-radius: 4px;
         background-color: #f1f1f1;
-    }
-    .selector,.form-inline,.formclass{
+            }
+    .selector,.form-inline {
         margin-left: auto;
         margin-right: auto;
+
+    }
+
+    form{
+        width: 300px;
+        margin: 0 auto;
     }
 
 </style>
@@ -43,11 +49,11 @@
     </div>
     </div>
 </form>
-<div class="formclass" id="stationlist" style="display: none;">
+<div class="formclass" id="stationlist" style="display: none; margin-left: 50px;">
     <form class="history-form form-inline">
-   Stacja pomiarowa: <select class="selector" id="station" name="station" title="Stacja" style="width: 200px;">
+        <div style="text-align: center">Stacja pomiarowa:</div> <select class="selector" id="station" name="station" title="Stacja" style="width: 200px;margin-left: 40px">
     </select>
-        <button type="submit">Sprawdź</button>
+        <input type="submit" value="Sprawdź" style="margin-left: 60px">
     </form>
 </div>
 </div>

@@ -51,7 +51,7 @@
 
                         var options = {
                             mapType: 'styledMap',
-                            zoomLevel: 5,
+                            zoomLevel: 6,
                             showTooltip: true,
                             showInfoWindow: true,
                             useMapTypeControl: true,
