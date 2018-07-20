@@ -1,6 +1,7 @@
 package com.hydrozagadka;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class History {
 
@@ -8,6 +9,7 @@ public class History {
     private Double waterDeep;
     private Double flow;
     private Double temperature;
+
 
     History(LocalDate date, Double waterDeep, Double flow, Double temperature) {
         this.date = date;
@@ -40,5 +42,22 @@ public class History {
                 ", flow=" + flow +
                 ", temperature=" + temperature +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        History history = (History) o;
+        return Objects.equals(date, history.date) &&
+                Objects.equals(waterDeep, history.waterDeep) &&
+                Objects.equals(flow, history.flow) &&
+                Objects.equals(temperature, history.temperature);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(date, waterDeep, flow, temperature);
     }
 }

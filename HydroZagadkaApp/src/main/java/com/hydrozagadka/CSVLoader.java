@@ -13,7 +13,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.logging.Level;
 
 public class CSVLoader {
     private static Logger logger = LoggerFactory.getLogger(CSVLoader.class);

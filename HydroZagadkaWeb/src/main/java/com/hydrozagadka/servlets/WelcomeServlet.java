@@ -25,7 +25,6 @@ public class WelcomeServlet extends HttpServlet {
     @Inject
     FreeMarkerConfig freeMarkerConfig;
 
-
     @Inject
     ProvinceBean provinceBean;
 
@@ -55,5 +54,9 @@ public class WelcomeServlet extends HttpServlet {
         } catch (TemplateException e) {
             logger.warn("Template dosen't exist");
         }
+    }
+
+    public CSVLoader getLoad() {
+        return load;
     }
 }
