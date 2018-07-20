@@ -27,7 +27,8 @@ public class LoadServlet extends HttpServlet {
     private UnzipDao unzipDao;
     @Inject
     FreeMarkerConfig freeMarkerConfig;
-    public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
+    public static final String DIRECT_PATH = "/home/orzel/jjdd4-pat" +
+            "ataje/HydroZagadkaApp/data";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file");
@@ -36,7 +37,7 @@ public class LoadServlet extends HttpServlet {
         if (!fileName.contains(".zip")) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pr.close();
-            logger.error("No zip file found");
+            logger.warn("No zip file found");
             return;
         }
 

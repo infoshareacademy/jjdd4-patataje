@@ -1,6 +1,8 @@
 package com.hydrozagadka;
 
 import com.hydrozagadka.exceptions.DataLengthException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,8 +13,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.logging.Level;
 
 public class CSVLoader {
+    private static Logger logger = LoggerFactory.getLogger(CSVLoader.class);
+
     public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
 
     private BufferedReader br;
@@ -26,7 +31,6 @@ public class CSVLoader {
     public CSVLoader() {
         loadCSV();
     }
-
     private List<String> getFilesList() {
         List<String> fileNames = new ArrayList<>();
         try  {
@@ -38,6 +42,7 @@ public class CSVLoader {
             }
         } catch (IOException ex) {
             System.out.println("Nie znaleziono folderu!");
+            logger.warn("Nie znaleziono folderu");
         }
         return fileNames;
     }
@@ -66,6 +71,7 @@ public class CSVLoader {
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             System.out.println("Błąd podczas konwertowania rekordu na liczbę!");
             System.exit(0);
+            logger.warn("Błąd konwertowania rekordu na liczbę");
         }
         return null;
     }
@@ -86,6 +92,7 @@ public class CSVLoader {
             }
         } catch (IOException e) {
             System.out.println("Nie znaleziono pliku!");
+            logger.warn("Nie znaleziono pliku");
         }
         return allContainers;
     }
@@ -96,7 +103,9 @@ public class CSVLoader {
         //split data
         splitedLine = loadedLine.split(",");
         if (splitedLine.length < 10) throw new DataLengthException("Plik ma nieodpowiednią liczbę rekordów!");
+        logger.warn("Nieprawidłwa liczba rekordów");
         return splitedLine;
+
     }
 
     private void checkingExistingContainers(WaterContainer wc, History history) {

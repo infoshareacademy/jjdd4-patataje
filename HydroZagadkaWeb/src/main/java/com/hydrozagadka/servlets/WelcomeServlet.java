@@ -9,7 +9,6 @@ import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,13 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.logging.LogManager;
-import java.util.stream.Collectors;
 
 @WebServlet("/welcome")
 public class WelcomeServlet extends HttpServlet {
@@ -41,11 +35,10 @@ public class WelcomeServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-         load = new CSVLoader();
+        load = new CSVLoader();
         logger.info("Load CSVFile");
-         ff = new FilterFiles(load);
+        ff = new FilterFiles(load);
     }
-
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -60,7 +53,7 @@ public class WelcomeServlet extends HttpServlet {
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
-            logger.error("Template dosen't exist");
+            logger.warn("Template dosen't exist");
         }
     }
 }
