@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class CSVLoader {
-    private static final String DIRECT_PATH = "/home/pawelorlikowski/jjdd4-patataje/HydroZagadkaApp/data";
+    private static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
 
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();
@@ -29,7 +29,7 @@ public class CSVLoader {
 
     private List<String> getFilesList() {
         List<String> fileNames = new ArrayList<>();
-        try {
+        try  {
             DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(DIRECT_PATH));
             for (Path path : directoryStream) {
                 if (path.toString().contains("codz_")) {
@@ -120,7 +120,7 @@ public class CSVLoader {
         allContainers.get(wc.getId()).getHistory().add(history);
     }
 
-    public Set<String> getProvince() {
+  public Set<String> getProvince() {
         return province;
     }
 }
