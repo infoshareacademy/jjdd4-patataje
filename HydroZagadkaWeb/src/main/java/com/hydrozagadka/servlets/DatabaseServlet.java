@@ -46,17 +46,10 @@ public class DatabaseServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        if (action.equals("action")) {
-            findAll(req, resp);
-        }
     }
 
 
     private void findAll(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        final List<History> result = historyDao.findAll();
-        PrintWriter printWriter = resp.getWriter();
-        result.stream()
-                .forEach(history -> printWriter.write(history.toString() + "\n"));
+
     }
 }

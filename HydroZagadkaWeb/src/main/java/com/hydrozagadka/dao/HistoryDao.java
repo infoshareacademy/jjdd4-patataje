@@ -1,12 +1,16 @@
 package com.hydrozagadka.dao;
 
 import com.hydrozagadka.History;
+import com.hydrozagadka.Model.ChartHistory;
+import com.hydrozagadka.WaterContainer;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Stateless
 public class HistoryDao {
@@ -39,9 +43,16 @@ public class HistoryDao {
 
         return query.getResultList();
     }
-    public List<History> getHistoryFormWaterContainer(Long id){
-        Query query = entityManager.createNativeQuery( "select water_deeps ,flows,temperatures from HISTORIES where container_id=:Id order by dates asc");
-        query.setParameter("Id",id);
-        return query.getResultList();
+
+    public List<ChartHistory> getHistoryByWaterContainer(Long id) {
+        Query q = entityManager.createQuery(
+                "SELECT h FROM History h WHERE h.waterContainers.id = :id");
+        q.setParameter("id", id);
+        return ((List<History>) q.getResultList()).stream()
+                .map(history -> new ChartHistory(
+                        history.getWaterDeep(),
+                        history.getFlow(),
+                        history.getTemperature()))
+                .collect(toList());
     }
 }
