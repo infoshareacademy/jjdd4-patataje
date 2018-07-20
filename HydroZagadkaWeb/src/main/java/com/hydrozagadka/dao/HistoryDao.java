@@ -1,6 +1,7 @@
 package com.hydrozagadka.dao;
 
 import com.hydrozagadka.History;
+import com.hydrozagadka.Model.MinAndMaxValues;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -8,6 +9,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.time.LocalDate;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Stateless
 public class HistoryDao {
@@ -35,17 +38,14 @@ public class HistoryDao {
         return entityManager.find(History.class, id);
     }
 
-    public List<History> findAll() {
-        final Query query = entityManager.createQuery("SELECT h FROM History h");
-
-        return query.getResultList();
-    }
-
-    public List<History> findWaterdeepBetweenTwoDates(LocalDate startDate, LocalDate endDate, Long id) {
-        final Query query = entityManager.createQuery("SELECT max(History.waterDeep), min(History.waterDeep) from History where History.waterContainers.id = :id and History.date > :startDate and History.date < :endDate");
+    public MinAndMaxValues findWaterdeepBetweenTwoDates(LocalDate startDate, LocalDate endDate, Long id) {
+        final Query query = entityManager.createQuery("SELECT max(h.waterDeep), min(h.waterDeep) from History h where h.waterContainers.id = :id and h.date > :startDate and h.date < :endDate");
         query.setParameter("startDate", startDate);
         query.setParameter("endDate", endDate);
         query.setParameter("id", id);
-        return query.getResultList();
+
+        List<Object[]> result = query.getResultList();
+        Object[] o = result.get(0);
+        return new MinAndMaxValues((Double) o[0], (Double) o[1]);
     }
 }

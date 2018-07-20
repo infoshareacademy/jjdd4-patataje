@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -43,22 +44,5 @@ public class DatabaseServlet extends HttpServlet {
                             history.setWaterContainers(wc);
                             historyDao.save(history);
                         }));
-
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        if (action.equals("action")) {
-            findAll(req, resp);
-        }
-    }
-
-
-    private void findAll(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        final List<WaterContainer> result = waterContainerDao.findAll();
-        PrintWriter printWriter = resp.getWriter();
-        result.stream()
-                .forEach(waterContainer -> printWriter.write(waterContainer.toString() + "\n"));
     }
 }
