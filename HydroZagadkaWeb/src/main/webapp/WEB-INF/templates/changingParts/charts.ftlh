@@ -2,10 +2,8 @@
     <div class="container text-center my-auto">
         <div class="row">
             <div class="col-lg-10 mx-auto">
-                <h2>  wykresy</h2>
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                 <script type="text/javascript">
-
 
 
                 </script>

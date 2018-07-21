@@ -58,10 +58,17 @@ $(document).ready(function () {
     })
 
     $('.history-form').on('submit', function () {
-        var historyId = $('#station').val()
+        var historyId = $('#station').val();
+
+            var startdate = $('#startdate').val();
+            var enddate = $('#enddate').val();
 
         $.ajax({
                 url:'/history?station=' + historyId,
+                data:{
+                  startDate:startdate,
+                  endDate:enddate
+                },
                 crossDomain: true,
                 type:'get',
                 success:function(response){
@@ -89,7 +96,7 @@ $(document).ready(function () {
                         $('#curve_chart').fadeIn(2000);
 
                         var options = {
-                            title: 'Pjęęękny wykres:',
+                            title: 'Wykres temperatury, przepływu oraz stanu wody dla wybranej stacji pomiarowej: ',
                             curveType: 'function',
                             legend: { position: 'bottom' }
                         };
@@ -98,10 +105,6 @@ $(document).ready(function () {
 
                         chart.draw(chartdata, options);
                     }
-
-
-
-
                     },
                 error:function(err){
                     console.log(err)
@@ -110,6 +113,8 @@ $(document).ready(function () {
             }
         )
         return false
-
+    });
+    $('#checkdate').click(function() {
+        $("#dates").toggle(this.checked);
     });
 });

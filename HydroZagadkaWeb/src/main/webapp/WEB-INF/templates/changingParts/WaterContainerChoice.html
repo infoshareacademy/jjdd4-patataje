@@ -1,72 +1,54 @@
-<style>
-    .watercontainerform{
-        width: 100%;
-        border: none;
-        border-radius: 4px;
-        background-color: #f1f1f1;
-            }
-
-    .formclass{
-        width: 100%;
-        padding: 16px 20px;
-        border: none;
-        border-radius: 4px;
-        background-color: #f1f1f1;
-
-    }
-
-    /*.selector{*/
-        /*width: 200px;*/
-        /*display: inline-block;*/
-    /*}*/
-    .watercontainerform{
-        width: 500px;
-        height: 300px;
-    }
-    /*form{*/
-        /*width: 300px;*/
-    /*}*/
-
-</style>
-
-<div>
-    <link type="text/css" href="../../../HydroZagadkaFront/css/watercontainerformstyle.css">
+<br>
 <form>
-    <div id="provincelist">
-   Województwo:  <select class="selector" id="province" name="state" title="Województwo" style="width: 200px;">
-        <option value="-1">[Wybor]</option>
-        <option value="pomorskie">pomorskie</option>
-        <option value="lubuskie">lubuskie</option>
-        <option value="lubelskie">lubelskie</option>
-        <option value="podkarpackie">podkarpackie</option>
-        <option value="warmińsko-mazurskie">warmińsko-mazurskie</option>
-        <option value="zachodniopomorskie">zachodniopomorskie</option>
-        <option value="podlaskie">podlaskie</option>
-        <option value="opolskie">opolskie</option>
-        <option value="śląskie">śląskie</option>
-        <option value="mazowieckie">mazowieckie</option>
-        <option value="podlaskie">podlaskie</option>
-        <option value="dolnośląskie">dolnośląskie</option>
-        <option value="wielkopolskie">wielkopolskie</option>
-        <option value="świętokrzyskie">świętokrzyskie</option>
-        <option value="małopolskie">małopolskie</option>
-        <option value="łódzkie">łódzkie</option>
+    <div class="form-group" id="provincelist">
 
-    </select>
-    <div  id="watercontainerlist" style="display: none;">
-      Zbionik:  <select class="selector" id="watercontainer" name="watercontainer" title="Zbiornik" style="width: 200px;">
+        <label for="province">Województwo:</label><br>
+
+        <select class="form-control col-sm-5" id="province" name="state" title="Województwo">
+            <option selected>[Wybierz]</option>
+            <option value="pomorskie">pomorskie</option>
+            <option value="lubuskie">lubuskie</option>
+            <option value="lubelskie">lubelskie</option>
+            <option value="podkarpackie">podkarpackie</option>
+            <option value="warmińsko-mazurskie">warmińsko-mazurskie</option>
+            <option value="zachodniopomorskie">zachodniopomorskie</option>
+            <option value="podlaskie">podlaskie</option>
+            <option value="opolskie">opolskie</option>
+            <option value="śląskie">śląskie</option>
+            <option value="mazowieckie">mazowieckie</option>
+            <option value="podlaskie">podlaskie</option>
+            <option value="dolnośląskie">dolnośląskie</option>
+            <option value="wielkopolskie">wielkopolskie</option>
+            <option value="świętokrzyskie">świętokrzyskie</option>
+            <option value="małopolskie">małopolskie</option>
+            <option value="łódzkie">łódzkie</option>
         </select>
-    </div>
+
+        <div class="form-group" id="watercontainerlist">
+            <br>
+            <label for="watercontainer">Zbionik:</label><br>
+            <select class="form-control col-sm-5" id="watercontainer" name="watercontainer" title="Zbiornik">
+            </select></div>
     </div>
 </form>
 
-
-<div id="stationlist" style="display: none;">
+<div>
     <form class="history-form">
-        <div>Stacja pomiarowa:</div> <select class="selector" id="station" name="station" title="Stacja">
-    </select>
-        <input type="submit" value="Sprawdź">
+        <div class="form-group" id="stationlist">
+            <label for="station">Stacja pomiarowa:</label><br>
+            <select class="form-control col-sm-5" id="station" name="station" title="Stacja">
+            </select><br>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="checkdate">
+                <label class="form-check-label" for="checkdate">Sprawdź dla wybranego przedziału dat</label>
+            </div>
+            <div id="dates" style="display: none">
+                <input type="date" id="startdate">
+                <input type="date" id="enddate">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Sprawdź</button>
+        </div>
     </form>
-</div>
-</div>
 
+</div>
