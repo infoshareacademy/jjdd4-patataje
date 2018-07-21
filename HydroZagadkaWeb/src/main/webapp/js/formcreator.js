@@ -34,6 +34,7 @@ $(document).ready(function () {
         if($("#province").val()==-1 || $("#watercontainer").val()==-1){
             return;
         }
+        $('.invalid-feedback').css("display","none");
         $.ajax({
                 url:'station',
                 data:{
@@ -59,7 +60,6 @@ $(document).ready(function () {
 
     $('.history-form').on('submit', function () {
         var historyId = $('#station').val();
-
             var startdate = $('#startdate').val();
             var enddate = $('#enddate').val();
 
@@ -77,7 +77,6 @@ $(document).ready(function () {
                       $("#curve_chart").html("<h1>Nie znaleziono wyników</h1>").fadeIn(2000);
                     }else {
                         var history = response;
-
                         google.charts.load('current', {'packages': ['corechart']});
                         google.charts.setOnLoadCallback(drawChart);
 
