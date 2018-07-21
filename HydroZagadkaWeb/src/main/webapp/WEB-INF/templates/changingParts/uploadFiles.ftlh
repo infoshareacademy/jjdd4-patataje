@@ -1,10 +1,10 @@
 <section class="content-section bg-light" id="upload">
     <div class="container text-center my-auto">
         <div class="row">
-            <div class="col-lg-10 mx-auto">
+            <div class="col-lg-10 mx-auto" id="uploadfile">
                 <h2> Aby zobaczyć wykresy wyślij plik zip:</h2>
 <br>
-                <form class="formclass" method="post" action="/loadservlet" enctype="multipart/form-data"><div>
+                <form class="formclass" method="post" id="loadfile" action="/loadservlet" enctype="multipart/form-data"><div>
                     <input type="file" name="file" accept=".zip" ="btn btn-primary"></div>
                     <br>
                     <br><div>

@@ -36,6 +36,7 @@ public class LoadServlet extends HttpServlet {
         }
         InputStream is = filePart.getInputStream();
         unzipDao.unzip(is, DIRECT_PATH);
+        response.sendRedirect("/welcome");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

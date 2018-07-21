@@ -115,6 +115,7 @@ $(document).ready(function () {
         )
         return false
     });
+
     $('#checkdate').click(function() {
         $("#dates").toggle(this.checked);
     });
