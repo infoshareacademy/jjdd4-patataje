@@ -23,7 +23,7 @@ public class LoadServlet extends HttpServlet {
     private UnzipDao unzipDao;
     @Inject
     FreeMarkerConfig freeMarkerConfig;
-    public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
+    public static final String DIRECT_PATH = "C:/Users/Paulucha/Desktop/programowanie/PROJECTS/HydroZagadka3/jjdd4-patataje/HydroZagadkaApp/data/";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file");

@@ -98,7 +98,7 @@ $(document).ready(function () {
                             $('#curve_chart').fadeIn(2000);
 
                             var options = {
-                                title: 'Pjęęękny wykres:',
+                                title: 'Wykres zmian temperatury, przepływu oraz stanu wody dla wybranej stacji:',
                                 curveType: 'function',
                                 legend: {position: 'bottom'}
                             };
