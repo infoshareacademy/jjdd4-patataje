@@ -3,6 +3,7 @@ package com.hydrozagadka;
 import javax.persistence.*;
 import java.util.List;
 
+
 @Entity
 @Table(name = "WATER_CONTAINERS")
 public class WaterContainer {

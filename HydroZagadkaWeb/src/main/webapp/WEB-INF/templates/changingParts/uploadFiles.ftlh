@@ -1,15 +1,4 @@
-<style>
-    .formclass{
-        width: 100%;
-        padding: 16px 20px;
-        border: none;
-        border-radius: 4px;
-        background-color: #f1f1f1;
 
-    }
-
-
-</style>
 <section class="content-section bg-light" id="upload">
     <div class="container text-center my-auto">
         <div class="row">
