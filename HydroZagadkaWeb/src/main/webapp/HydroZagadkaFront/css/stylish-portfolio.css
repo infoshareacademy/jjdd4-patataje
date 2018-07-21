@@ -329,6 +329,7 @@ a:hover, a:focus, a:active {
   background-color: #1D809F !important;
   border-color: #1D809F !important;
   color: #fff !important;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
