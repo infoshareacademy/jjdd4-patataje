@@ -1,7 +1,7 @@
 <section class="content-section bg-light" id="maps">
     <div class="container text-center my-auto">
         <div class="row">
-            <div class="col-lg-10 mx-auto">
+            <div class="col-lg-10 mx-auto" id="mapa" style="display:none;">
                 <h2> Mapa Polski:</h2>
 
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

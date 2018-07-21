@@ -86,7 +86,7 @@ $(document).ready(function () {
 
             var options = {
                 mapType: 'styledMap',
-                zoomLevel: 6,
+                zoomLevel: 12,
                 showTooltip: true,
                 showInfoWindow: true,
                 useMapTypeControl: true,
@@ -118,8 +118,8 @@ $(document).ready(function () {
             };
 
             var map = new google.visualization.Map(document.getElementById('map_div'));
-
             map.draw(data, options);
+            $('#mapa').fadeIn(2000);
         }
     })
 
