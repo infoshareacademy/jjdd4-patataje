@@ -35,6 +35,7 @@ private StatisticsDao statisticsDao;
 
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         response.setContentType("application/json");
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");

@@ -78,7 +78,7 @@ $(document).ready(function () {
 
             var options = {
                 mapType: 'styledMap',
-                zoomLevel: 4,
+                zoomLevel: 9,
                 showTooltip: true,
                 showInfoWindow: true,
                 useMapTypeControl: true,
