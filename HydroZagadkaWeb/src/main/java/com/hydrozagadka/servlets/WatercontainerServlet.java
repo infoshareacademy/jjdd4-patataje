@@ -8,6 +8,7 @@ import com.hydrozagadka.Beans.WaterContainerAndStationMapper;
 import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.FilterFiles;
 import com.hydrozagadka.Model.WaterContainerView;
+import com.hydrozagadka.dao.WaterContainerDao;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -24,8 +25,9 @@ public class WatercontainerServlet extends HttpServlet {
 
     @Inject
     private WaterContainerAndStationMapper mapper;
-    private CSVLoader csvLoader = new CSVLoader();
-    private FilterFiles filterFiles = new FilterFiles(csvLoader);
+    @Inject
+    private WaterContainerDao waterContainerDao;
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -39,7 +41,7 @@ public class WatercontainerServlet extends HttpServlet {
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         String province = request.getParameter("name");
         PrintWriter pr = response.getWriter();
-        List<WaterContainerView> result = mapper.mapToWaterContainerView(filterFiles.showWaterContainersThroughProvince(province));
+        List<WaterContainerView> result = mapper.mapToWaterContainerView(waterContainerDao.getWaterContainerByProvince(province));
         String a = objectMapper.writeValueAsString(result);
         pr.println(a);
         pr.close();

@@ -41,6 +41,13 @@ public class HistoryDao {
         return entityManager.find(History.class, id);
     }
 
+    public List<History> findByDate(LocalDate date, Long id){
+        Query q = entityManager.createQuery("select h from History h where date=:date and h.waterContainers.id=:id");
+        q.setParameter("date",date);
+        q.setParameter("id",id);
+        return q.getResultList();
+    }
+
     public MinAndMaxValues findWaterdeepBetweenTwoDates(LocalDate startDate, LocalDate endDate, Long id) {
         final Query query = entityManager.createQuery("SELECT max(h.waterDeep), min(h.waterDeep) from History h where h.waterContainers.id = :id and h.date > :startDate and h.date < :endDate");
         query.setParameter("startDate", startDate);
