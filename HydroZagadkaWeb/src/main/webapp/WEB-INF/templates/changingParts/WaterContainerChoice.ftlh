@@ -43,7 +43,7 @@
 </form>
 
 <div>
-    <form class="history-form">
+    <form class="history-form" name="subform">
         <div class="form-group" id="stationlist">
             <label for="station">Stacja pomiarowa:</label><br>
             <select class="form-control col-sm-5 is-invalid" id="station" name="station" title="Stacja" required>
@@ -60,7 +60,8 @@
                 <input type="date" id="enddate">
             </div>
             <br>
-            <button type="submit" class="btn btn-primary">Sprawdź</button>
+            <a class="btn btn-primary btn-xl js-scroll-trigger" id="movetocharts" href="#charts" style="display: none">Sprawdź</a>
+            <button type="submit" class="btn btn-primary" onclick="getElementById('movetocharts').click()">Sprawdź</button>
         </div>
     </form>
 
