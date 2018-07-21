@@ -35,7 +35,8 @@
             <label for="watercontainer">Zbionik:</label><br>
 
             <select class="form-control col-sm-5 is-invalid" id="watercontainer" name="watercontainer" title="Zbiornik" required>
-               </select> <div class="invalid-feedback">
+                <option value="-1">[Wybierz]</option>
+            </select> <div class="invalid-feedback">
             Proszę wybrać zbiornik.
         </div></div>
     </div>
@@ -46,6 +47,7 @@
         <div class="form-group" id="stationlist">
             <label for="station">Stacja pomiarowa:</label><br>
             <select class="form-control col-sm-5 is-invalid" id="station" name="station" title="Stacja" required>
+                <option value="-1">[Wybierz]</option>
             </select><div class="invalid-feedback">
             Proszę wybrać stację.
         </div><br>

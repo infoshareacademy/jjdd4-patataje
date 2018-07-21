@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.Model.ChartHistory;
 import com.hydrozagadka.dao.HistoryDao;
+import com.hydrozagadka.dao.StatisticsDao;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/history")
@@ -26,11 +28,12 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
     private LocalDate enddate = LocalDate.now();
 @Inject
 private HistoryDao historyDao;
+@Inject
+private StatisticsDao statisticsDao;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         String startDate = request.getParameter("startDate");
@@ -38,11 +41,16 @@ private HistoryDao historyDao;
         if(isCorrectDate(startDate,endDate)){
              startdate = LocalDate.parse(startDate);
              enddate = LocalDate.parse(endDate);
+             if(!isStartDateErlier(startdate,enddate)){
+                 startdate = LocalDate.of(1954,01,01);
+                 enddate = LocalDate.now();
+             }
         }
         Long idWaterContainer = Long.parseLong(request.getParameter("station"));
-        List<ChartHistory> historyOfWaterContainer = historyDao.getHistoryByWaterContainer(idWaterContainer);
+        statisticsDao.update(idWaterContainer);
+        List<ChartHistory> historyOfWaterContainer = historyDao.getHistoryByWaterContainer(idWaterContainer,startdate,enddate);
         ObjectMapper objectMapper = new ObjectMapper();
-      //   objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        //   objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         String historyJsonAsString = objectMapper.writeValueAsString(historyOfWaterContainer);
         PrintWriter pw = response.getWriter();
@@ -58,4 +66,12 @@ private HistoryDao historyDao;
         }
         return true;
     }
+
+    private boolean isStartDateErlier(LocalDate startdate,LocalDate enddate){
+        if(startdate.isAfter(enddate)){
+            return false;
+        }
+        return true;
+    }
+
 }

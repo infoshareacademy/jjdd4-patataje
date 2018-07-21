@@ -5,6 +5,7 @@ import com.hydrozagadka.Model.ChartHistory;
 import com.hydrozagadka.WaterContainer;
 import com.hydrozagadka.Model.MinAndMaxValues;
 
+import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -51,10 +52,12 @@ public class HistoryDao {
         return new MinAndMaxValues((Double) o[0], (Double) o[1]);
     }
 
-    public List<ChartHistory> getHistoryByWaterContainer(Long id) {
+    public List<ChartHistory> getHistoryByWaterContainer(Long id, LocalDate startDate, LocalDate endDate) {
         Query q = entityManager.createQuery(
-                "SELECT h FROM History h WHERE h.waterContainers.id = :id");
+                "SELECT h FROM History h WHERE h.waterContainers.id = :id AND h.date BETWEEN :startDate AND :endDate");
         q.setParameter("id", id);
+        q.setParameter("startDate",startDate);
+        q.setParameter("endDate",endDate);
         return ((List<History>) q.getResultList()).stream()
                 .map(history -> new ChartHistory(
                         history.getWaterDeep(),

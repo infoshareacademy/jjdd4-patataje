@@ -2,8 +2,10 @@ package com.hydrozagadka.servlets;
 
 import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.History;
+import com.hydrozagadka.Model.Statistics;
 import com.hydrozagadka.WaterContainer;
 import com.hydrozagadka.dao.HistoryDao;
+import com.hydrozagadka.dao.StatisticsDao;
 import com.hydrozagadka.dao.WaterContainerDao;
 
 import javax.inject.Inject;
@@ -25,14 +27,18 @@ public class DatabaseServlet extends HttpServlet {
     private WaterContainerDao waterContainerDao;
     @Inject
     private HistoryDao historyDao;
-
+    @Inject
+    private StatisticsDao statisticsDao;
     @Override
     public void init() throws ServletException {
         CSVLoader csvLoader = new CSVLoader();
         Map<Long,WaterContainer> waterContainerMap = csvLoader.getAllContainers();
 
         waterContainerMap.values().stream()
-                .forEach(waterContainer -> waterContainerDao.save(waterContainer));
+                .forEach(waterContainer -> {
+                    waterContainerDao.save(waterContainer);
+                    statisticsDao.save(new Statistics(0L,waterContainer));
+                });
 
         waterContainerMap.values().stream()
                 .forEach(waterContainer -> waterContainer.getHistory().stream()

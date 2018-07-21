@@ -1,6 +1,7 @@
 package com.hydrozagadka.servlets;
 
 import com.hydrozagadka.dao.HistoryDao;
+import com.hydrozagadka.dao.StatisticsDao;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -14,11 +15,13 @@ import java.io.IOException;
 public class testservlet extends HttpServlet {
     @Inject
     HistoryDao historyDao;
+    @Inject
+    StatisticsDao statisticsDao;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        statisticsDao.update(153190100L);
     }
 }
