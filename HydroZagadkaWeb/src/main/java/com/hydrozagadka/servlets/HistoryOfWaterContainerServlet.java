@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.Model.ChartHistory;
 import com.hydrozagadka.dao.HistoryDao;
+import com.hydrozagadka.dao.StatisticsDao;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -27,11 +28,12 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
     private LocalDate enddate = LocalDate.now();
 @Inject
 private HistoryDao historyDao;
+@Inject
+private StatisticsDao statisticsDao;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         String startDate = request.getParameter("startDate");
@@ -45,6 +47,7 @@ private HistoryDao historyDao;
              }
         }
         Long idWaterContainer = Long.parseLong(request.getParameter("station"));
+        statisticsDao.update(idWaterContainer);
         List<ChartHistory> historyOfWaterContainer = historyDao.getHistoryByWaterContainer(idWaterContainer,startdate,enddate);
         ObjectMapper objectMapper = new ObjectMapper();
         //   objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
