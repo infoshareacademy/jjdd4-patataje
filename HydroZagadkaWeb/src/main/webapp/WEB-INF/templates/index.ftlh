@@ -55,32 +55,15 @@
 <!-- Sprawdź zbiornik -->
 <#include "changingParts/checkContainer.ftlh">
 
+
+
 <!-- wyświetlanie danych - wykresy -->
+
 <#include "changingParts/charts.ftlh">
 
 
-
 <!-- wyświetlanie danych - mapa -->
-
-
-<section class="content-section bg-light" id="charts">
-    <div class="container text-center my-auto">
-        <div class="row">
-            <div class="col-lg-10 mx-auto">
-                <h2>  wykresy</h2>
-                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-                <script type="text/javascript">
-
-
-
-                </script>
-                <div id="curve_chart" style="width: 900px; height: 500px;display: none;"></div>
-            </div>
-        </div>
-    </div>
-    <div class="overlay"></div>
-</section>
-
+<#include "changingParts/maps.ftlh">
 
 <!-- Logowanie -->
 
