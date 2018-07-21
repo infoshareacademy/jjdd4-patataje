@@ -1,10 +1,14 @@
+<style>
+
+
+</style>
 <br>
 <form>
     <div class="form-group" id="provincelist">
 
         <label for="province">Województwo:</label><br>
 
-        <select class="form-control col-sm-5" id="province" name="state" title="Województwo">
+        <select class="form-control col-sm-5" id="province" name="state" title="Województwo" required>
             <option selected>[Wybierz]</option>
             <option value="pomorskie">pomorskie</option>
             <option value="lubuskie">lubuskie</option>
@@ -24,11 +28,16 @@
             <option value="łódzkie">łódzkie</option>
         </select>
 
-        <div class="form-group" id="watercontainerlist">
+
+
+        <div class="form-group" id="watercontainerlist" >
             <br>
             <label for="watercontainer">Zbionik:</label><br>
-            <select class="form-control col-sm-5" id="watercontainer" name="watercontainer" title="Zbiornik">
-            </select></div>
+
+            <select class="form-control col-sm-5 is-invalid" id="watercontainer" name="watercontainer" title="Zbiornik" required>
+               </select> <div class="invalid-feedback">
+            Proszę wybrać zbiornik.
+        </div></div>
     </div>
 </form>
 
@@ -36,8 +45,10 @@
     <form class="history-form">
         <div class="form-group" id="stationlist">
             <label for="station">Stacja pomiarowa:</label><br>
-            <select class="form-control col-sm-5" id="station" name="station" title="Stacja">
-            </select><br>
+            <select class="form-control col-sm-5 is-invalid" id="station" name="station" title="Stacja" required>
+            </select><div class="invalid-feedback">
+            Proszę wybrać stację.
+        </div><br>
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="checkdate">
                 <label class="form-check-label" for="checkdate">Sprawdź dla wybranego przedziału dat</label>

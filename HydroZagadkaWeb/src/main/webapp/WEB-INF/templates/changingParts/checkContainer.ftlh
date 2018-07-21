@@ -4,7 +4,7 @@
             <div class="col-lg-10 mx-auto">
 
                 <h3>Wybierz zbiornik dla którego chcesz zobaczyć dane:</h3>
-                <#include "WaterContainerChoice.html">
+                <#include "WaterContainerChoice.ftlh">
 
             </div>
         </div>
