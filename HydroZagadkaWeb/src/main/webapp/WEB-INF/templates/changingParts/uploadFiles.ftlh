@@ -4,7 +4,7 @@
             <div class="col-lg-10 mx-auto">
                 <h2> Aby zobaczyć wykresy wyślij plik zip:</h2>
 <br>
-                <form class="formclass" method="post" action="/loadservlet"><div>
+                <form class="formclass" method="post" action="/loadservlet" enctype="multipart/form-data"><div>
                     <input type="file" name="file" accept=".zip" ="btn btn-primary"></div>
                     <br>
                     <br><div>
