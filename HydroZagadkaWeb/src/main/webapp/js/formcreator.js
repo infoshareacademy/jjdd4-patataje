@@ -43,7 +43,6 @@ $(document).ready(function () {
                 cache:false,
                 success:function(response){
                     $('#station').find('option').remove();
-                    $('#station').append('<option value="-1">[Wybierz]</option>');
                     var options = JSON.parse(response);
                     for (var i = 0; i < options.length; i++) {
                         $('#station').append('<option value='+options[i].id+'>'+options[i].name+'</option>');
@@ -74,16 +73,17 @@ $(document).ready(function () {
                     function drawChart() {
 
                         var data=[];
-                        var Header= ['Dzień', 'Poziom wody [cm]', 'Przepływ [m/s]','Temperatura [ C]'];
+                        var Header= ['Dzień', 'Przepływ [m/s]', 'Temperatura [ C]','Poziom wody [cm]'];
                         data.push(Header);
                         for (var i = 0; i < history.length; i++) {
                             var temp=[];
                             temp.push(i);
-                            temp.push(history[i][0]);
-                            temp.push(history[i][1]);
-                            temp.push(history[i][2]);
+                            temp.push(history[i].flow);
+                            temp.push(history[i].temperature);
+                            temp.push(history[i].waterDeep);
                             data.push(temp);
                         }
+                        console.log(data)
                         var chartdata = new google.visualization.arrayToDataTable(data);
 
                         $('#curve_chart').fadeIn(2000);

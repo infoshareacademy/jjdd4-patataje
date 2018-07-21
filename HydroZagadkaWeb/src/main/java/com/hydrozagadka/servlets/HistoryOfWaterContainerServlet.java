@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.FilterFiles;
 import com.hydrozagadka.History;
+import com.hydrozagadka.Model.ChartHistory;
 import com.hydrozagadka.Model.WaterContainerView;
 import com.hydrozagadka.dao.HistoryDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
@@ -30,7 +31,6 @@ import java.util.Map;
 public class HistoryOfWaterContainerServlet extends HttpServlet {
 
     private CSVLoader csvLoader = new CSVLoader();
-    private FilterFiles filterFiles = new FilterFiles(csvLoader);
 @Inject
 private HistoryDao historyDao;
 
@@ -42,8 +42,7 @@ private HistoryDao historyDao;
         response.setContentType("application/json");
 
         Long idWaterContainer = Long.parseLong(request.getParameter("station"));
-//        List<History> historyOfWaterContainer = filterFiles.getWaterContainerByID(idWaterContainer).getHistory();
-        List<History> historyOfWaterContainer = historyDao.getHistoryFormWaterContainer(idWaterContainer);
+        List<ChartHistory> historyOfWaterContainer = historyDao.getHistoryByWaterContainer(idWaterContainer);
         ObjectMapper objectMapper = new ObjectMapper();
       //   objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
