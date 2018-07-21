@@ -73,41 +73,43 @@ $(document).ready(function () {
                 type:'get',
                 success:function(response){
                     console.log(response)
-                    var history = response;
+                    if(response.length ==0){
+                      $("#curve_chart").html("<h1>Nie znaleziono wyników</h1>").fadeIn(2000);
+                    }else {
+                        var history = response;
 
-                    google.charts.load('current', {'packages':['corechart']});
-                    google.charts.setOnLoadCallback(drawChart);
-                    function drawChart() {
+                        google.charts.load('current', {'packages': ['corechart']});
+                        google.charts.setOnLoadCallback(drawChart);
 
-                        var data=[];
-                        var Header= ['Dzień', 'Przepływ [m/s]', 'Temperatura [ C]','Poziom wody [cm]'];
-                        data.push(Header);
-                        for (var i = 0; i < history.length; i++) {
-                            var temp=[];
-                            temp.push(i);
-                            temp.push(history[i].flow);
-                            temp.push(history[i].temperature);
-                            temp.push(history[i].waterDeep);
-                            data.push(temp);
+                        function drawChart() {
+
+                            var data = [];
+                            var Header = ['Dzień', 'Przepływ [m/s]', 'Temperatura [ C]', 'Poziom wody [cm]'];
+                            data.push(Header);
+                            for (var i = 0; i < history.length; i++) {
+                                var temp = [];
+                                temp.push(i);
+                                temp.push(history[i].flow);
+                                temp.push(history[i].temperature);
+                                temp.push(history[i].waterDeep);
+                                data.push(temp);
+                            }
+                            var chartdata = new google.visualization.arrayToDataTable(data);
+
+                            $('#curve_chart').fadeIn(2000);
+
+                            var options = {
+                                title: 'Pjęęękny wykres:',
+                                curveType: 'function',
+                                legend: {position: 'bottom'}
+                            };
+                            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+                            chart.draw(chartdata, options);
                         }
-                        console.log(data)
-                        var chartdata = new google.visualization.arrayToDataTable(data);
-
-                        $('#curve_chart').fadeIn(2000);
-
-                        var options = {
-                            title: 'Pjęęękny wykres:',
-                            curveType: 'function',
-                            legend: { position: 'bottom' }
-                        };
-
-                        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-                        chart.draw(chartdata, options);
                     }
                     },
                 error:function(err){
-                    console.log(err)
                     alert('error');
                 }
             }
