@@ -73,20 +73,12 @@ $(document).ready(function () {
             data.addColumn('string', 'Location');
             data.addRows([
                 ['rzeka '+rzeka, rzeka]
-                // ['rzeka Skotawa', 'Skotawa'],
-                // ['rzeka Łupawa', 'Łupawa'],
-                // ['rzeka Piaśnica Dolna', 'Piaśnica Dolna'],
-                // ['rzeka Bolszewka', 'Bolszewka'],
-                // ['rzeka Reda', 'Reda'],
-                // ['Martwa Wisła', 'Martwa Wisła'],
-                // ['rzeka Słupia', 'Słupia'],
-                // ['rzeka Motława', 'Motława'],
-                // ['rzeka Radunia', 'Radunia']
+
             ]);
 
             var options = {
                 mapType: 'styledMap',
-                zoomLevel: 12,
+                zoomLevel: 4,
                 showTooltip: true,
                 showInfoWindow: true,
                 useMapTypeControl: true,
