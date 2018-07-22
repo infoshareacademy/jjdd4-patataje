@@ -17,15 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/history")
 public class HistoryOfWaterContainerServlet extends HttpServlet {
 
-    private CSVLoader csvLoader = new CSVLoader();
-    private LocalDate startdate = LocalDate.of(1954, 01, 01);
-    private LocalDate enddate = LocalDate.now();
+    private LocalDate startDate = LocalDate.of(1954, 01, 01);
+    private LocalDate endDate = LocalDate.now();
     @Inject
     private HistoryDao historyDao;
     @Inject
@@ -40,17 +38,17 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
         if (isCorrectDate(startDate, endDate)) {
-            startdate = LocalDate.parse(startDate);
-            enddate = LocalDate.parse(endDate);
-            if (!isStartDateErlier(startdate, enddate)) {
-                startdate = LocalDate.of(1954, 01, 01);
-                enddate = LocalDate.now();
+            this.startDate = LocalDate.parse(startDate);
+            this.endDate = LocalDate.parse(endDate);
+            if (!isStartDateErlier(this.startDate, this.endDate)) {
+                this.startDate = LocalDate.of(1954, 01, 01);
+                this.endDate = LocalDate.now();
             }
         }
         Long idWaterContainer = Long.parseLong(request.getParameter("station"));
         statisticsDao.update(idWaterContainer);
 
-        List<ChartHistory> historyOfWaterContainer = historyDao.getHistoryByWaterContainer(idWaterContainer, startdate, enddate);
+        List<ChartHistory> historyOfWaterContainer = historyDao.getHistoryByWaterContainerWithDates(idWaterContainer, this.startDate, this.endDate);
         ObjectMapper objectMapper = new ObjectMapper();
         //   objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
@@ -71,8 +69,8 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
         return true;
     }
 
-    private boolean isStartDateErlier(LocalDate startdate, LocalDate enddate) {
-        if (startdate.isAfter(enddate)) {
+    private boolean isStartDateErlier(LocalDate startDate, LocalDate endDate) {
+        if (startDate.isAfter(endDate)) {
             return false;
         }
         return true;

@@ -1,7 +1,6 @@
 package com.hydrozagadka.servlets;
 
 import com.hydrozagadka.CSVLoader;
-import com.hydrozagadka.History;
 import com.hydrozagadka.Model.Statistics;
 import com.hydrozagadka.WaterContainer;
 import com.hydrozagadka.dao.HistoryDao;
@@ -15,9 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = "/database")
@@ -54,10 +50,5 @@ public class DatabaseServlet extends HttpServlet {
                             }
                         }));
         resp.sendRedirect("/welcome");
-    }
-
-
-    private void findAll(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
     }
 }

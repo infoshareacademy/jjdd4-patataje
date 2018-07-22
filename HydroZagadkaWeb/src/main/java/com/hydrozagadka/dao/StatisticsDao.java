@@ -1,6 +1,5 @@
 package com.hydrozagadka.dao;
 
-import com.hydrozagadka.History;
 import com.hydrozagadka.Model.Statistics;
 
 import javax.ejb.Stateless;
@@ -12,7 +11,7 @@ import java.util.List;
 @Stateless
 public class StatisticsDao {
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     public void save(Statistics statistics){
         entityManager.persist(statistics);
