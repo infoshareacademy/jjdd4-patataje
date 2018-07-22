@@ -23,13 +23,6 @@ public class WaterContainerDao {
         return entityManager.merge(waterContainer);
     }
 
-    public void delete(Long id) {
-        final WaterContainer waterContainer = entityManager.find(WaterContainer.class, id);
-        if (waterContainer != null) {
-            entityManager.remove(waterContainer);
-        }
-    }
-
     public List<WaterContainer> getWaterContainerByProvince(String province){
         Query q = entityManager.createQuery("select w from WaterContainer w where w.province like :province");
         q.setParameter("province",province);
@@ -48,9 +41,4 @@ public class WaterContainerDao {
         return entityManager.find(WaterContainer.class, id);
     }
 
-    public List<WaterContainer> findAll() {
-        final Query query = entityManager.createQuery("SELECT w FROM WaterContainer w");
-
-        return query.getResultList();
-    }
 }

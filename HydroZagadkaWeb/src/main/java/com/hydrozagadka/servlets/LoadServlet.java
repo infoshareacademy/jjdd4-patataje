@@ -26,14 +26,9 @@ import java.util.Map;
 @WebServlet("/loadservlet")
 @MultipartConfig
 public class LoadServlet extends HttpServlet {
-    @Inject
-    private WaterContainerDao waterContainerDao;
-    @Inject
-    private HistoryDao historyDao;
+
     @Inject
     private UnzipDao unzipDao;
-    @Inject
-    private StatisticsDao statisticsDao;
     private Map<Long, WaterContainer> waterContainerMap;
     public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
 

@@ -27,9 +27,10 @@ public class StationView {
 
     @Override
     public String toString() {
-        return "StationView{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        final StringBuffer sb = new StringBuffer("StationView{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

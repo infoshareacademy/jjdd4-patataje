@@ -1,6 +1,7 @@
 package com.hydrozagadka.Model;
 
 public class WaterContainerView {
+
     private Long id;
     private String name;
 

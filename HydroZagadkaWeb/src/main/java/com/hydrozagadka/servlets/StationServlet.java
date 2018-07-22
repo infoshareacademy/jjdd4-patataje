@@ -27,8 +27,6 @@ public class StationServlet extends HttpServlet {
     private WaterContainerAndStationMapper mapper;
     @Inject
     private WaterContainerDao waterContainerDao;
-    private CSVLoader csvLoader = new CSVLoader();
-    private FilterFiles filterFiles = new FilterFiles(csvLoader);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

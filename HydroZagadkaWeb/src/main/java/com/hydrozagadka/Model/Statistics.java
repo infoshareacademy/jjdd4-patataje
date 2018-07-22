@@ -14,7 +14,6 @@ public class Statistics {
     @OneToOne
     @JoinColumn(name="container_id",unique = true)
     private WaterContainer waterContainer;
-
     @Column(name = "views")
     private Long views;
 
