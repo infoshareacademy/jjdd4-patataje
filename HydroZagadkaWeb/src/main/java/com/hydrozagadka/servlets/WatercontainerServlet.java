@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.hydrozagadka.Beans.WaterContainerAndStationMapper;
-import com.hydrozagadka.CSVLoader;
-import com.hydrozagadka.FilterFiles;
+import com.hydrozagadka.mappers.WaterContainerAndStationMapper;
 import com.hydrozagadka.Model.WaterContainerView;
 import com.hydrozagadka.dao.WaterContainerDao;
 
@@ -42,9 +40,8 @@ public class WatercontainerServlet extends HttpServlet {
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         String province = request.getParameter("name");
         PrintWriter pr = response.getWriter();
-        List<WaterContainerView> result = mapper.mapToWaterContainerView(waterContainerDao.getWaterContainerByProvince(province));
-        String a = objectMapper.writeValueAsString(result);
-        pr.println(a);
+        String result = mapper.mapToWaterContainerView(waterContainerDao.getWaterContainerByProvince(province));
+        pr.println(result);
         pr.close();
     }
 }

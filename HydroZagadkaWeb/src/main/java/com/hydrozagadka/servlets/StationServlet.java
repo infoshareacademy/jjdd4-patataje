@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.hydrozagadka.Beans.WaterContainerAndStationMapper;
+import com.hydrozagadka.mappers.WaterContainerAndStationMapper;
 import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.FilterFiles;
 import com.hydrozagadka.Model.StationView;
@@ -42,9 +42,8 @@ public class StationServlet extends HttpServlet {
         String watercontainer = request.getParameter("watercontainer");
         response.setContentType("application/json; charset=utf-8");
         PrintWriter pr = response.getWriter();
-        List<StationView> result = mapper.mapToStationView(waterContainerDao.getWaterContainerByProvinceAndwaterContainer(province,watercontainer));
-        String a =objectMapper.writeValueAsString(result);
-        pr.println(a);
+        String result = mapper.mapToStationView(waterContainerDao.getWaterContainerByProvinceAndwaterContainer(province,watercontainer));
+        pr.println(result);
         pr.close();
     }
 }
