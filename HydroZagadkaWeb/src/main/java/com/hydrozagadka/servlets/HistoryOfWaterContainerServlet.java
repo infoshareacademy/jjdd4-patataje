@@ -50,7 +50,6 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
 
         List<ChartHistory> historyOfWaterContainer = historyDao.getHistoryByWaterContainerWithDates(idWaterContainer, this.startDate, this.endDate);
         ObjectMapper objectMapper = new ObjectMapper();
-        //   objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         String historyJsonAsString = objectMapper.writeValueAsString(historyOfWaterContainer);
         response.setContentType("application/json; charset=utf-8");
