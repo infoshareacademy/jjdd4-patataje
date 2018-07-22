@@ -37,9 +37,9 @@ public class StationServlet extends HttpServlet {
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         String province = request.getParameter("name");
-        String watercontainer = request.getParameter("watercontainer");
+        String waterContainer = request.getParameter("watercontainer");
         PrintWriter pr = response.getWriter();
-        List<StationView> result = mapper.mapToStationView(waterContainerDao.getWaterContainerByProvinceAndwaterContainer(province,watercontainer));
+        List<StationView> result = mapper.mapToStationView(waterContainerDao.getWaterContainerByProvinceAndwaterContainer(province,waterContainer));
         String a =objectMapper.writeValueAsString(result);
         pr.println(a);
         pr.close();

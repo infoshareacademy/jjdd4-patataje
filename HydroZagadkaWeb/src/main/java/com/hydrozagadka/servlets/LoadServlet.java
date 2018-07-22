@@ -2,12 +2,7 @@ package com.hydrozagadka.servlets;
 
 import com.hydrozagadka.Beans.UnzipDao;
 import com.hydrozagadka.CSVLoader;
-import com.hydrozagadka.Model.Statistics;
 import com.hydrozagadka.WaterContainer;
-import com.hydrozagadka.dao.HistoryDao;
-import com.hydrozagadka.dao.StatisticsDao;
-import com.hydrozagadka.dao.WaterContainerDao;
-import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -29,6 +24,7 @@ public class LoadServlet extends HttpServlet {
 
     @Inject
     private UnzipDao unzipDao;
+
     private Map<Long, WaterContainer> waterContainerMap;
     public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
 
