@@ -35,7 +35,7 @@ public class WatercontainerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
         ObjectMapper objectMapper = new ObjectMapper();
         response.setContentType("application/json; charset=utf-8");
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);

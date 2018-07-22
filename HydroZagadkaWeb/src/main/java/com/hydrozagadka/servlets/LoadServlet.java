@@ -21,7 +21,6 @@ import java.util.Map;
 @WebServlet("/loadservlet")
 @MultipartConfig
 public class LoadServlet extends HttpServlet {
-
     @Inject
     private UnzipDao unzipDao;
 
@@ -47,5 +46,4 @@ public class LoadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
     }
-
 }

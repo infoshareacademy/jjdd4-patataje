@@ -3,7 +3,7 @@ package com.hydrozagadka.servlets;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hydrozagadka.CSVLoader;
+
 import com.hydrozagadka.Model.ChartHistory;
 import com.hydrozagadka.dao.HistoryDao;
 import com.hydrozagadka.dao.StatisticsDao;
@@ -35,6 +35,7 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
         if (isCorrectDate(startDate, endDate)) {
@@ -54,8 +55,8 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
         String historyJsonAsString = objectMapper.writeValueAsString(historyOfWaterContainer);
         response.setContentType("application/json; charset=utf-8");
         PrintWriter pw = response.getWriter();
-        pw.println(historyJsonAsString);
 
+        pw.println(historyJsonAsString);
     }
 
     private boolean isCorrectDate(String startDate, String endDate) {

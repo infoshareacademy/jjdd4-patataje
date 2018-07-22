@@ -29,6 +29,7 @@ public class FilterThroughGivenData extends HttpServlet {
     private FreeMarkerConfig freeMarkerConfig;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8");
         String state = req.getParameter("state");
         List<String> wt = filterFiles.showWaterContainersThroughProvince(state).stream()
                 .map(WaterContainer::getContainerName)
