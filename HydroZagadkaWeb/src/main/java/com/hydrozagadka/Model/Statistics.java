@@ -17,7 +17,6 @@ public class Statistics {
     @Column(name = "views")
     private Long views;
 
-
     public Statistics(){}
 
     public Statistics(Long views, WaterContainer waterContainer) {
@@ -47,5 +46,15 @@ public class Statistics {
 
     public void setWaterContainer(WaterContainer waterContainer) {
         this.waterContainer = waterContainer;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Statistics{");
+        sb.append("id=").append(id);
+        sb.append(", waterContainer=").append(waterContainer);
+        sb.append(", views=").append(views);
+        sb.append('}');
+        return sb.toString();
     }
 }

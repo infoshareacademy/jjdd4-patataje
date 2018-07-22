@@ -74,11 +74,12 @@ $(document).ready(function () {
             data.addColumn('string', 'Location');
             data.addRows([
                 ['rzeka '+rzeka, rzeka]
+
             ]);
 
             var options = {
                 mapType: 'styledMap',
-                zoomLevel: 12,
+                zoomLevel: 9,
                 showTooltip: true,
                 showInfoWindow: true,
                 useMapTypeControl: true,
@@ -156,7 +157,7 @@ $(document).ready(function () {
                             $('#curve_chart').fadeIn(2000);
 
                             var options = {
-                                title: 'Pjęęękny wykres:',
+                                title: 'Wykres zmian temperatury, przepływu oraz stanu wody dla wybranej stacji:',
                                 curveType: 'function',
                                 legend: {position: 'bottom'}
                             };
