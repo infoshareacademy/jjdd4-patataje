@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class CSVLoader {
-    private static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
+    private static final String DIRECT_PATH = "C:/Users/Paulucha/Desktop/programowanie/PROJECTS/HydroZagadka3/jjdd4-patataje/HydroZagadkaApp/data/";
 
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();

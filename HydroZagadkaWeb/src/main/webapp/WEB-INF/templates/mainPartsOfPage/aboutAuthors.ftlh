@@ -56,7 +56,7 @@
                 <h4>
                     <strong>Pałlina</strong>
                 </h4>
-                <p class="text-faded mb-0">"Lubię głaskać lamy"</p>
+                <p class="text-faded mb-0">"I don't know how to branch."</p>
             </div>
         </div>
     </div>
