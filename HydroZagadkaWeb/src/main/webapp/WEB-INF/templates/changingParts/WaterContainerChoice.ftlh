@@ -63,6 +63,7 @@
             <a class="btn btn-primary btn-xl js-scroll-trigger" id="movetocharts" href="#charts" style="display: none">Sprawdź</a>
             <button type="submit" class="btn btn-primary" onclick="getElementById('movetocharts').click()">Sprawdź</button>
         </div>
+
     </form>
 
 </div>

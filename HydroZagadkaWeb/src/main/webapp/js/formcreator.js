@@ -15,7 +15,7 @@ $(document).ready(function () {
                 success:function(response){
                     $('#watercontainer').find('option').remove();
                     $('#watercontainer').append('<option value="-1">[Wybierz]</option>');
-                    var options = JSON.parse(response);
+                    var options = response;
                     for (var i = 0; i < options.length; i++) {
                         $('#watercontainer').append('<option value='+options[i].name+'>'+options[i].name+'</option>');
                     }

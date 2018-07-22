@@ -37,6 +37,7 @@ public class WatercontainerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
+        response.setContentType("application/json; charset=utf-8");
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         String province = request.getParameter("name");
