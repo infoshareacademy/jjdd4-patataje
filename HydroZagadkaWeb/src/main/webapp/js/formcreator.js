@@ -16,6 +16,7 @@ $(document).ready(function () {
                     $('#watercontainer').find('option').remove();
                     $('#watercontainer').append('<option value="-1">[Wybierz]</option>');
                     var options = response;
+                    console.log(options);
                     for (var i = 0; i < options.length; i++) {
                         $('#watercontainer').append('<option value='+options[i].name+'>'+options[i].name+'</option>');
                     }
@@ -73,15 +74,6 @@ $(document).ready(function () {
             data.addColumn('string', 'Location');
             data.addRows([
                 ['rzeka '+rzeka, rzeka]
-                // ['rzeka Skotawa', 'Skotawa'],
-                // ['rzeka Łupawa', 'Łupawa'],
-                // ['rzeka Piaśnica Dolna', 'Piaśnica Dolna'],
-                // ['rzeka Bolszewka', 'Bolszewka'],
-                // ['rzeka Reda', 'Reda'],
-                // ['Martwa Wisła', 'Martwa Wisła'],
-                // ['rzeka Słupia', 'Słupia'],
-                // ['rzeka Motława', 'Motława'],
-                // ['rzeka Radunia', 'Radunia']
             ]);
 
             var options = {

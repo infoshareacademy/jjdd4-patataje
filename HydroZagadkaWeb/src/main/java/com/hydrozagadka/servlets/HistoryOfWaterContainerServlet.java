@@ -24,51 +24,55 @@ import java.util.List;
 public class HistoryOfWaterContainerServlet extends HttpServlet {
 
     private CSVLoader csvLoader = new CSVLoader();
-    private LocalDate startdate = LocalDate.of(1954,01,01);
+    private LocalDate startdate = LocalDate.of(1954, 01, 01);
     private LocalDate enddate = LocalDate.now();
-@Inject
-private HistoryDao historyDao;
-@Inject
-private StatisticsDao statisticsDao;
+    @Inject
+    private HistoryDao historyDao;
+    @Inject
+    private StatisticsDao statisticsDao;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("application/json; charset=utf-8");
     }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json");
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
-        if(isCorrectDate(startDate,endDate)){
-             startdate = LocalDate.parse(startDate);
-             enddate = LocalDate.parse(endDate);
-             if(!isStartDateErlier(startdate,enddate)){
-                 startdate = LocalDate.of(1954,01,01);
-                 enddate = LocalDate.now();
-             }
+        if (isCorrectDate(startDate, endDate)) {
+            startdate = LocalDate.parse(startDate);
+            enddate = LocalDate.parse(endDate);
+            if (!isStartDateErlier(startdate, enddate)) {
+                startdate = LocalDate.of(1954, 01, 01);
+                enddate = LocalDate.now();
+            }
         }
         Long idWaterContainer = Long.parseLong(request.getParameter("station"));
         statisticsDao.update(idWaterContainer);
-        List<ChartHistory> historyOfWaterContainer = historyDao.getHistoryByWaterContainer(idWaterContainer,startdate,enddate);
+
+        List<ChartHistory> historyOfWaterContainer = historyDao.getHistoryByWaterContainer(idWaterContainer, startdate, enddate);
         ObjectMapper objectMapper = new ObjectMapper();
         //   objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         String historyJsonAsString = objectMapper.writeValueAsString(historyOfWaterContainer);
+        response.setContentType("application/json; charset=utf-8");
         PrintWriter pw = response.getWriter();
-
         pw.println(historyJsonAsString);
+
     }
-    private boolean isCorrectDate(String startDate,String endDate){
-        if(startDate==null || startDate.isEmpty()) {
+
+    private boolean isCorrectDate(String startDate, String endDate) {
+        if (startDate == null || startDate.isEmpty()) {
             return false;
         }
-        if(endDate==null || endDate.isEmpty()) {
+        if (endDate == null || endDate.isEmpty()) {
             return false;
         }
         return true;
     }
 
-    private boolean isStartDateErlier(LocalDate startdate,LocalDate enddate){
-        if(startdate.isAfter(enddate)){
+    private boolean isStartDateErlier(LocalDate startdate, LocalDate enddate) {
+        if (startdate.isAfter(enddate)) {
             return false;
         }
         return true;
