@@ -50,35 +50,11 @@ public class LoadServlet extends HttpServlet {
         unzipDao.unzip(is, DIRECT_PATH);
         CSVLoader csvLoader = new CSVLoader();
         waterContainerMap = csvLoader.getAllContainers();
-        updateWaterContainer();
-        updateHistory();
-        response.sendRedirect("/welcome");
+        response.sendRedirect("/database");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
     }
 
-    private void updateWaterContainer() {
-        waterContainerMap.values().stream()
-                .forEach(waterContainer -> {
-                    if (waterContainerDao.findById(waterContainer.getId()) == null) {
-                        waterContainerDao.save(waterContainer);
-                        statisticsDao.save(new Statistics(0L, waterContainer));
-                    }
-                });
-    }
-
-    public void updateHistory() {
-        waterContainerMap.values().stream()
-                .forEach(waterContainer -> waterContainer.getHistory().stream()
-                        .forEach(history -> {
-                            Long wcId = history.getContainerId();
-                            if (historyDao.findByDate(history.getDate(), wcId).size() == 0) {
-                                WaterContainer wc = waterContainerDao.findById(wcId);
-                                history.setWaterContainers(wc);
-                                historyDao.save(history);
-                            }
-                        }));
-    }
 }

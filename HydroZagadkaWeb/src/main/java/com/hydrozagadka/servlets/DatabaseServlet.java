@@ -29,30 +29,31 @@ public class DatabaseServlet extends HttpServlet {
     private HistoryDao historyDao;
     @Inject
     private StatisticsDao statisticsDao;
+
     @Override
-    public void init() throws ServletException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CSVLoader csvLoader = new CSVLoader();
-        Map<Long,WaterContainer> waterContainerMap = csvLoader.getAllContainers();
+        Map<Long, WaterContainer> waterContainerMap = csvLoader.getAllContainers();
 
         waterContainerMap.values().stream()
                 .forEach(waterContainer -> {
-                    waterContainerDao.save(waterContainer);
-                    statisticsDao.save(new Statistics(0L,waterContainer));
+                    if (waterContainerDao.findById(waterContainer.getId()) == null) {
+                        waterContainerDao.save(waterContainer);
+                        statisticsDao.save(new Statistics(0L, waterContainer));
+                    }
                 });
 
         waterContainerMap.values().stream()
                 .forEach(waterContainer -> waterContainer.getHistory().stream()
                         .forEach(history -> {
                             Long wcId = history.getContainerId();
-                            WaterContainer wc = waterContainerDao.findById(wcId);
-                            history.setWaterContainers(wc);
-                            historyDao.save(history);
+                            if (historyDao.findByDate(history.getDate(), wcId).size() == 0) {
+                                WaterContainer wc = waterContainerDao.findById(wcId);
+                                history.setWaterContainers(wc);
+                                historyDao.save(history);
+                            }
                         }));
-
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("/welcome");
     }
 
 
