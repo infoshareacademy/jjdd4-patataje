@@ -40,6 +40,7 @@ public class StationServlet extends HttpServlet {
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         String province = request.getParameter("name");
         String watercontainer = request.getParameter("watercontainer");
+        response.setContentType("application/json; charset=utf-8");
         PrintWriter pr = response.getWriter();
         List<StationView> result = mapper.mapToStationView(waterContainerDao.getWaterContainerByProvinceAndwaterContainer(province,watercontainer));
         String a =objectMapper.writeValueAsString(result);

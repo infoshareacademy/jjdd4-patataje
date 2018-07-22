@@ -47,7 +47,7 @@ $(document).ready(function () {
                 cache:false,
                 success:function(response){
                     $('#station').find('option').remove();
-                    var options = JSON.parse(response);
+                    var options = response;
                     for (var i = 0; i < options.length; i++) {
                         $('#station').append('<option value='+options[i].id+'>'+options[i].name+'</option>');
                     }
