@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 
 @WebServlet("/filter")
 public class FilterThroughGivenData extends HttpServlet {
-    private static Logger logger = LoggerFactory.getLogger(FilterThroughGivenData.class);
     private CSVLoader csvLoader = new CSVLoader();
     private FilterFiles filterFiles = new FilterFiles(csvLoader);
     @Inject
