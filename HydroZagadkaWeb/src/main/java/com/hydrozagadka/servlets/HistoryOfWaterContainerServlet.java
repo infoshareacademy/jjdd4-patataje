@@ -43,10 +43,6 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
         if (isCorrectDate(startDate, endDate)) {
             this.startDate = LocalDate.parse(startDate);
             this.endDate = LocalDate.parse(endDate);
-            if (!isStartDateErlier(this.startDate, this.endDate)) {
-                this.startDate = LocalDate.of(1954, 01, 01);
-                this.endDate = LocalDate.now();
-            }
         }
         Long idWaterContainer = Long.parseLong(request.getParameter("station"));
         statisticsDao.update(idWaterContainer);
@@ -67,13 +63,6 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
             return false;
         }
         if (endDate == null || endDate.isEmpty()) {
-            return false;
-        }
-        return true;
-    }
-
-    private boolean isStartDateErlier(LocalDate startDate, LocalDate endDate) {
-        if (startDate.isAfter(endDate)) {
             return false;
         }
         return true;

@@ -133,7 +133,9 @@ $(document).ready(function () {
                     console.log(response)
                     if(response.length ==0){
                       $("#curve_chart").html("<h1>Nie znaleziono wyników</h1>").fadeIn(2000);
-                    }else {
+                      return;
+                    }
+                    else {
                         mapchange = true;
                         var history = response;
                         google.charts.load('current', {'packages': ['corechart']});
