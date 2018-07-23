@@ -57,6 +57,7 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
         PrintWriter pw = response.getWriter();
 
         pw.println(historyJsonAsString);
+
     }
 
     private boolean isCorrectDate(String startDate, String endDate) {

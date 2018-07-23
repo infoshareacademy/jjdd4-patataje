@@ -2,6 +2,7 @@ package com.hydrozagadka;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "HISTORIES")
@@ -103,5 +104,22 @@ public class History {
         sb.append(", waterContainers=").append(waterContainers);
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        History history = (History) o;
+        return Objects.equals(date, history.date) &&
+                Objects.equals(waterDeep, history.waterDeep) &&
+                Objects.equals(flow, history.flow) &&
+                Objects.equals(temperature, history.temperature);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(date, waterDeep, flow, temperature);
     }
 }

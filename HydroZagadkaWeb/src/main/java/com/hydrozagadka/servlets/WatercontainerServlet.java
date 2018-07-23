@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.hydrozagadka.mappers.WaterContainerAndStationMapper;
 import com.hydrozagadka.Model.WaterContainerView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.hydrozagadka.dao.WaterContainerDao;
 
 import javax.inject.Inject;
@@ -20,7 +22,7 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/watercontainer")
 public class WatercontainerServlet extends HttpServlet {
-
+    private static Logger logger = LoggerFactory.getLogger(LoadServlet.class);
     @Inject
     private WaterContainerAndStationMapper mapper;
     @Inject
@@ -33,6 +35,7 @@ public class WatercontainerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         ObjectMapper objectMapper = new ObjectMapper();
         response.setContentType("application/json; charset=utf-8");
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -41,6 +44,7 @@ public class WatercontainerServlet extends HttpServlet {
         PrintWriter pr = response.getWriter();
         String result = mapper.mapToWaterContainerView(waterContainerDao.getWaterContainerByProvince(province));
         pr.println(result);
+        logger.info("Water containers filtred throught provinces");
         pr.close();
     }
 }

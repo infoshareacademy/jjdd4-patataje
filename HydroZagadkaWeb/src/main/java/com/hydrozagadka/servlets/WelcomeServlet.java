@@ -3,6 +3,8 @@ package com.hydrozagadka.servlets;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -16,6 +18,7 @@ import java.util.Map;
 
 @WebServlet(urlPatterns = "/welcome")
 public class WelcomeServlet extends HttpServlet {
+    private static Logger logger = LoggerFactory.getLogger(WelcomeServlet.class);
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
 
@@ -31,7 +34,7 @@ public class WelcomeServlet extends HttpServlet {
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
-            e.printStackTrace();
+            logger.warn("Template dosen't exist");
         }
     }
 }
