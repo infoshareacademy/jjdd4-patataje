@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="debug">
     <Appenders>
-        <RollingFile name="fileLogger" fileName="/home/lucjanwroblewski/hydrozagadka/jjdd4-patataje/HydroZagadkaWeb/src/main/resources
-/app-info.log" filePattern="/home/lucjanwroblewski/hydrozagadka/jjdd4-patataje/HydroZagadkaWeb/src/main/resources
-/app-info-%d{yyyy-MM-dd}.log">
+        <RollingFile name="fileLogger" fileName="HydroZagadakaApp-info.log"
+                     filePattern="/HydroZagadakaApp-info-%d{yyyy-MM-dd}.log">
             <PatternLayout>
                 <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
             </PatternLayout>
