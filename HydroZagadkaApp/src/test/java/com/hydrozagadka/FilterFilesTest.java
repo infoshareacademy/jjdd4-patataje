@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 public class FilterFilesTest {
 
     private FilterFiles subject;
-    private Map<Integer, WaterContainer> testData;
+    private Map<Long, WaterContainer> testData;
 
     @Mock
     private CSVLoader csvLoaderMock;
@@ -32,8 +32,8 @@ public class FilterFilesTest {
         testHistoryList.add(new History(LocalDate.now(), 1d, 2d, 3d));
         testHistoryList.add(new History(LocalDate.now(), 10d, 2d, 3d));
         testData = new HashMap<>();
-        testData.put(0, new WaterContainer(0, "aaa", "aassdd", "pomorskie", testHistoryList));
-        testData.put(1, new WaterContainer(1, "aaa", "aassdd", "kujawsko-4pomorskie", testHistoryList));
+        testData.put(0L, new WaterContainer(0L, "aaa", "aassdd", "pomorskie", testHistoryList));
+        testData.put(1L, new WaterContainer(1L, "aaa", "aassdd", "kujawsko-4pomorskie", testHistoryList));
 
         when(csvLoaderMock.getAllContainers()).thenReturn(testData);
 
@@ -46,7 +46,7 @@ public class FilterFilesTest {
         History expectedHistory = new History(LocalDate.now(), 10d, 2d, 3d);
 
         // when
-        List<History> actual = subject.minAndMaxValueOfHistoryWaterDeeps(0);
+        List<History> actual = subject.minAndMaxValueOfHistoryWaterDeeps(0L);
 
         // then
         assertTrue(actual.size() == 2);

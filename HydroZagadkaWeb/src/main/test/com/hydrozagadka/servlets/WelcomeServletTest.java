@@ -10,14 +10,7 @@ public class WelcomeServletTest {
 
     @Test
     public void shouldInitSevlet() throws ServletException {
-        // given
-        WelcomeServlet subject = new WelcomeServlet();
 
-        // when
-        subject.init();
-
-        // then
-        assertNotNull(subject.getLoad());
     }
 
     @Test

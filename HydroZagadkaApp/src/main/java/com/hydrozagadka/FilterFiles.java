@@ -6,14 +6,14 @@ import java.util.stream.Collectors;
 
 public class FilterFiles {
 
-    private Map<Integer, WaterContainer> waterContainerMap;
+    private Map<Long, WaterContainer> waterContainerMap;
 
     public FilterFiles(CSVLoader loadFile) {
         this.waterContainerMap = loadFile.getAllContainers();
     }
 
 
-    public List<History> minAndMaxValueOfHistoryWaterDeeps(int id) {
+    public List<History> minAndMaxValueOfHistoryWaterDeeps(Long id) {
         List<History> result = new ArrayList<>();
         List<History> historyList = waterContainerMap.get(id).getHistory();
         historyList.stream()
@@ -45,7 +45,7 @@ public class FilterFiles {
                 .collect(Collectors.toList());
     }
 
-    public List<History> minAndMaxValueOfHistoryWaterDeeps(int id, LocalDate start, LocalDate end) {
+    public List<History> minAndMaxValueOfHistoryWaterDeeps(Long id, LocalDate start, LocalDate end) {
         List<History> listOfResultValues = new ArrayList<>();
         List<History> listOfWaterContainerHistory = waterContainerMap.get(id).getHistory();
 
@@ -66,7 +66,7 @@ public class FilterFiles {
         return listOfResultValues;
     }
 
-    public WaterContainer getWaterContainerByID(Integer id) {
+    public WaterContainer getWaterContainerByID(Long id) {
         return waterContainerMap.get(id);
     }
 }

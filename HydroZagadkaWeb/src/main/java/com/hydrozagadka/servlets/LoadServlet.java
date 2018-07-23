@@ -4,6 +4,8 @@ import com.hydrozagadka.Beans.UnzipDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.hydrozagadka.CSVLoader;
+import com.hydrozagadka.WaterContainer;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -18,6 +20,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
 import java.util.logging.LogManager;
+import java.util.Map;
 
 @WebServlet("/loadservlet")
 @MultipartConfig
@@ -26,10 +29,9 @@ public class LoadServlet extends HttpServlet {
 
     @Inject
     private UnzipDao unzipDao;
-    @Inject
-    FreeMarkerConfig freeMarkerConfig;
-    public static final String DIRECT_PATH = "/home/orzel/jjdd4-pat" +
-            "ataje/HydroZagadkaApp/data";
+
+    private Map<Long, WaterContainer> waterContainerMap;
+    public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file");
@@ -41,13 +43,16 @@ public class LoadServlet extends HttpServlet {
             logger.warn("No zip file found");
             return;
         }
-
         InputStream is = filePart.getInputStream();
         unzipDao.unzip(is, DIRECT_PATH);
         logger.info("Unzip File: {}");
+        CSVLoader csvLoader = new CSVLoader();
+        waterContainerMap = csvLoader.getAllContainers();
+        response.sendRedirect("/database");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
     }
+
 }

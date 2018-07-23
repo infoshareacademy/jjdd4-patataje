@@ -11,6 +11,7 @@ import com.hydrozagadka.Model.StationView;
 import com.hydrozagadka.Model.WaterContainerView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.hydrozagadka.dao.WaterContainerDao;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -26,21 +27,23 @@ import java.util.List;
 public class StationServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(LoadServlet.class);
     @Inject
-    WaterContainerAndStationMapper mapper;
-    CSVLoader csvLoader = new CSVLoader();
-    FilterFiles filterFiles = new FilterFiles(csvLoader);
+    private WaterContainerAndStationMapper mapper;
+    @Inject
+    private WaterContainerDao waterContainerDao;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         String province = request.getParameter("name");
-        String watercontainer = request.getParameter("watercontainer");
+        String waterContainer = request.getParameter("watercontainer");
         PrintWriter pr = response.getWriter();
-        List<StationView> result = mapper.mapToStationView(filterFiles.filterThroughContainer(watercontainer,province));
+        List<StationView> result = mapper.mapToStationView(waterContainerDao.getWaterContainerByProvinceAndwaterContainer(province,waterContainer));
         String a =objectMapper.writeValueAsString(result);
         pr.println(a);
         logger.info("Files filtred throught containers");

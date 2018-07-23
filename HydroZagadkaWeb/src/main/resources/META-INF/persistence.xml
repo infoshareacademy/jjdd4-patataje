@@ -7,6 +7,9 @@
     <persistence-unit name="demoPU" transaction-type="JTA">
         <jta-data-source>java:ds/hydroZagadka</jta-data-source>
 
+        <class>com.hydrozagadka.WaterContainer</class>
+        <class>com.hydrozagadka.History</class>
+
         <properties>
             <!-- Hibernate settings -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>

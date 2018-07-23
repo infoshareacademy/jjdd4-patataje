@@ -4,7 +4,7 @@
 
 <head>
 
-    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description"
           content="Project of Web Application which shows water levels for lakes and rivers in Poland.">
@@ -55,8 +55,12 @@
 <!-- Sprawdź zbiornik -->
 <#include "changingParts/checkContainer.ftlh">
 
+
+
 <!-- wyświetlanie danych - wykresy -->
+
 <#include "changingParts/charts.ftlh">
+
 
 <!-- wyświetlanie danych - mapa -->
 <#include "changingParts/maps.ftlh">
