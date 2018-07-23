@@ -21,7 +21,8 @@ $(document).ready(function () {
                         $('#watercontainer').append('<option value='+options[i].name+'>'+options[i].name+'</option>');
                     }
                    $('#watercontainerlist').fadeIn(1000);
-
+                    $('#station').find('option').remove();
+                    $('#station').append('<option value="-1">[Wybierz]</option>');
                 },
                 error:function(){
                     alert('error');
