@@ -18,8 +18,6 @@ public class CSVLoader {
     private static final String DIRECT_PATH = "/home/pawelorlikowski/jjdd4-patataje/HydroZagadkaApp/data";
     private static Logger logger = LoggerFactory.getLogger(CSVLoader.class);
 
-
-
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();
     private Map<Long, WaterContainer> allContainers = new HashMap<>();
@@ -34,7 +32,7 @@ public class CSVLoader {
 
     private List<String> getFilesList() {
         List<String> fileNames = new ArrayList<>();
-        try  {
+        try {
             DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(DIRECT_PATH));
             for (Path path : directoryStream) {
                 if (path.toString().contains("codz_")) {
@@ -71,10 +69,10 @@ public class CSVLoader {
                 flow = 0.0;
             }
             Double temperature = Double.parseDouble(a[8]);
-            if (temperature == 99.9){
-                temperature=0.0;
+            if (temperature == 99.9) {
+                temperature = 0.0;
             }
-                History history = new History(date, waterDeep, flow, temperature);
+            History history = new History(date, waterDeep, flow, temperature);
             history.setContainerId(wc.getId());
             return history;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
@@ -130,7 +128,7 @@ public class CSVLoader {
         allContainers.get(wc.getId()).getHistory().add(history);
     }
 
-  public Set<String> getProvince() {
+    public Set<String> getProvince() {
         return province;
     }
 }

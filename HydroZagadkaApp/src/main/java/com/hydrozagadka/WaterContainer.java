@@ -11,12 +11,16 @@ public class WaterContainer {
     @Id
     @Column(name = "id")
     private Long id;
+
     @Column(name = "container_name")
     private String containerName;
+
     @Column(name = "station_name")
     private String stationName;
+
     @Column(name = "province_name")
     private String province;
+
     @OneToMany(mappedBy = "waterContainers", fetch = FetchType.EAGER)
     private List<History> history;
 

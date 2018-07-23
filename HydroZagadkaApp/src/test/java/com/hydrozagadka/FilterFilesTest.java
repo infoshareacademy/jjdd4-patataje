@@ -25,7 +25,6 @@ public class FilterFilesTest {
     private CSVLoader csvLoaderMock;
 
 
-
     @Before
     public void setup() {
         List<History> testHistoryList = new ArrayList<>();
@@ -53,31 +52,5 @@ public class FilterFilesTest {
         assertTrue(actual.contains(expectedHistory));
     }
 
-    @Test
-    public void filterThroughContainer() {
-        // given
-        // when
-        // then
-    }
 
-    @Test
-    public void showWaterContainersThroughProvince() {
-        // given
-        // when
-        // then
-    }
-
-    @Test
-    public void minAndMaxValueOfHistoryWaterDeeps1() {
-        // given
-        // when
-        // then
-    }
-
-    @Test
-    public void getWaterContainerByID() {
-        // given
-        // when
-        // then
-    }
 }

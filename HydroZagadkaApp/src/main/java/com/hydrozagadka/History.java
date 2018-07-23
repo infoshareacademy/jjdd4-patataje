@@ -12,14 +12,19 @@ public class History {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "dates")
     private LocalDate date;
+
     @Column(name = "water_deeps")
     private Double waterDeep;
+
     @Column(name = "flows")
     private Double flow;
+
     @Column(name = "temperatures")
     private Double temperature;
+
     @ManyToOne
     @JoinColumn(name = "container_id")
     private WaterContainer waterContainers;

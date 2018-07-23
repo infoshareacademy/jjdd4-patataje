@@ -27,20 +27,13 @@ public class WaterContainerAndStationMapper {
         return t -> seen.add(keyExtractor.apply(t));
     }
 
+    public String mapToWaterContainerView(List<WaterContainer> wt) throws JsonProcessingException {
+        List<WaterContainerView> wtv = new ArrayList<>();
 
-
-
-
-
-
-
-    public String mapToWaterContainerView (List<WaterContainer> wt) throws JsonProcessingException {
-       List<WaterContainerView> wtv = new ArrayList<>();
-
-        for (WaterContainer w: wt) {
-            wtv.add(new WaterContainerView(w.getId(),w.getStationName()));
+        for (WaterContainer w : wt) {
+            wtv.add(new WaterContainerView(w.getId(), w.getStationName()));
         }
-        wtv= wtv.stream()
+        wtv = wtv.stream()
                 .filter(distinctByKey(WaterContainerView::getName))
                 .collect(Collectors.toList());
         return jsonParserBean.parseToJson(wtv);
@@ -48,10 +41,10 @@ public class WaterContainerAndStationMapper {
 
     public String mapToStationView(List<WaterContainer> wt) throws JsonProcessingException {
         List<StationView> stationViews = new ArrayList<>();
-        for (WaterContainer w: wt) {
-            stationViews.add(new StationView(w.getId(),w.getContainerName()));
+        for (WaterContainer w : wt) {
+            stationViews.add(new StationView(w.getId(), w.getContainerName()));
         }
-    return jsonParserBean.parseToJson(stationViews);
+        return jsonParserBean.parseToJson(stationViews);
     }
 
 }

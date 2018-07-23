@@ -34,7 +34,7 @@ public class Province {
         Properties prop = new Properties();
 
         try {
-            InputStream  input = new FileInputStream("data/config.properties");
+            InputStream input = new FileInputStream("data/config.properties");
             prop.load(input);
             doubleFormat = new DecimalFormat(prop.getProperty("doubleformat"));
             dateFormat = DateTimeFormatter.ofPattern(prop.getProperty("dateformat"));
@@ -380,11 +380,6 @@ public class Province {
         sHd.addRule();
         sHd.addRow("Wartość Minimalna", filterFiles.minAndMaxValueOfHistoryWaterDeeps(id).get(1).getDate() + " " + filterFiles.minAndMaxValueOfHistoryWaterDeeps(id).get(1).getWaterDeep());
         sHd.addRule();
-//        filterFiles.minAndMaxValueOfHistoryWaterDeeps(id)
-//                .forEach(history -> {
-//                    sHd.addRow(null, null, history.getDate(), history.getWaterDeep());
-//                    sHd.addRule();
-//                });
         System.out.println(sHd.render());
     }
 
@@ -423,7 +418,7 @@ public class Province {
     private static void legend() {
         AsciiTable leg = new AsciiTable();
         leg.addRule();
-            leg.addRow("LEGENDA").setTextAlignment(TextAlignment.CENTER);
+        leg.addRow("LEGENDA").setTextAlignment(TextAlignment.CENTER);
         leg.addRule();
         leg.addRow("Stan wody 9999 lub 0.0 oznacza brak danych w bazie.");
         leg.addRule();
