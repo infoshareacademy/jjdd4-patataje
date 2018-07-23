@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.hydrozagadka.mappers.WaterContainerAndStationMapper;
-import com.hydrozagadka.Model.WaterContainerView;
+import com.hydrozagadka.mappers.WaterContainerMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.hydrozagadka.dao.WaterContainerDao;
@@ -18,13 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 @WebServlet(urlPatterns = "/watercontainer")
 public class WatercontainerServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(LoadServlet.class);
     @Inject
-    private WaterContainerAndStationMapper mapper;
+    private WaterContainerMapper mapper;
     @Inject
     private WaterContainerDao waterContainerDao;
 
