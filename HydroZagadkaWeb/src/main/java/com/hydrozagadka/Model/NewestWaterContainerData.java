@@ -7,14 +7,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
-import javax.ejb.Stateless;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 
 public class NewestWaterContainerData {
     @JsonProperty("id_stacji")
-    private Integer id;
+    private Long id;
     @JsonProperty("stacja")
     private String stacja;
     private String rzeka;
@@ -49,11 +47,11 @@ public class NewestWaterContainerData {
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime zjawiskoZarastaniaDataPomiaru;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
