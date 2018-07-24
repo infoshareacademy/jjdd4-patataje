@@ -1,5 +1,7 @@
 package com.hydrozagadka.servlets;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hydrozagadka.Beans.ApiConnector;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -21,6 +23,8 @@ public class WelcomeServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(WelcomeServlet.class);
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
+    @Inject
+    private ApiConnector apiConnector;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
@@ -28,7 +32,7 @@ public class WelcomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
-
+        apiConnector.load();
         Map<String, Object> model = new HashMap<>();
 
         try {
