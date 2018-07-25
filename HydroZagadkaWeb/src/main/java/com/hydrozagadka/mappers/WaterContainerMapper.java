@@ -17,7 +17,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Stateless
-public class WaterContainerAndStationMapper {
+public class WaterContainerMapper {
 
     @Inject
     JsonParserBean jsonParserBean;
@@ -28,23 +28,16 @@ public class WaterContainerAndStationMapper {
     }
 
     public String mapToWaterContainerView(List<WaterContainer> wt) throws JsonProcessingException {
-        List<WaterContainerView> wtv = new ArrayList<>();
 
-        for (WaterContainer w : wt) {
-            wtv.add(new WaterContainerView(w.getId(), w.getStationName()));
-        }
-        wtv = wtv.stream()
-                .filter(distinctByKey(WaterContainerView::getName))
-                .collect(Collectors.toList());
-        return jsonParserBean.parseToJson(wtv);
+        return jsonParserBean.parseToJson(wt.stream().filter(distinctByKey(WaterContainer::getContainerName))
+                .map(w->new WaterContainerView(w.getId(), w.getStationName()))
+                .collect(Collectors.toList()));
     }
 
     public String mapToStationView(List<WaterContainer> wt) throws JsonProcessingException {
-        List<StationView> stationViews = new ArrayList<>();
-        for (WaterContainer w : wt) {
-            stationViews.add(new StationView(w.getId(), w.getContainerName()));
-        }
-        return jsonParserBean.parseToJson(stationViews);
+        return jsonParserBean.parseToJson(wt.stream()
+                .map(w-> new StationView(w.getId(), w.getContainerName()))
+                .collect(Collectors.toList()));
     }
 
 }

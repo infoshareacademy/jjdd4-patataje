@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class CSVLoader {
-    private static final String DIRECT_PATH = "/home/pawelorlikowski/jjdd4-patataje/HydroZagadkaApp/data";
+    private static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
     private static Logger logger = LoggerFactory.getLogger(CSVLoader.class);
 
     private BufferedReader br;
@@ -109,8 +109,11 @@ public class CSVLoader {
         loadedLine = loadedLine.replaceAll("\"", "");
         //split data
         splitedLine = loadedLine.split(",");
-        if (splitedLine.length < 10) throw new DataLengthException("Plik ma nieodpowiednią liczbę rekordów!");
-        logger.warn("Nieprawidłwa liczba rekordów");
+        if (splitedLine.length < 10) {
+            logger.warn("Nieprawidłwa liczba rekordów");
+            throw new DataLengthException("Plik ma nieodpowiednią liczbę rekordów!");
+        }
+
         return splitedLine;
 
     }
