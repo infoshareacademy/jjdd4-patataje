@@ -8,8 +8,7 @@ $(document).ready(function () {
             return;
         }
         $.ajax({
-                url:'watercontainer',
-                data:{name:$("#province").val()},
+                url:"/province/"+encodeURIComponent($("#province").val()),
                 type:'get',
                 cache:false,
                 success:function(response){

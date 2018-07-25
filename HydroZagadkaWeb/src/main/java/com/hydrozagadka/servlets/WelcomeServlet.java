@@ -16,10 +16,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.ApplicationPath;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 @WebServlet(urlPatterns = "/welcome")
 public class WelcomeServlet extends HttpServlet {
@@ -40,8 +42,8 @@ public class WelcomeServlet extends HttpServlet {
         List<NewestWaterContainerData> imgwData = apiConnector.load();
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
-        newestWaterContainerDataLoadBean.loadNewestWaterContainerToDatabase(imgwData);
-        newestHistoryDataLoadBean.loadNewestHistoryToDatabase(imgwData);
+    //    newestWaterContainerDataLoadBean.loadNewestWaterContainerToDatabase(imgwData);
+   //     newestHistoryDataLoadBean.loadNewestHistoryToDatabase(imgwData);
         Map<String, Object> model = new HashMap<>();
 
         try {

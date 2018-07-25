@@ -40,8 +40,8 @@ public class WatercontainerServlet extends HttpServlet {
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         String province = request.getParameter("name");
         PrintWriter pr = response.getWriter();
-        String result = mapper.mapToWaterContainerView(waterContainerDao.getWaterContainerByProvince(province));
-        pr.println(result);
+    //    String result = mapper.mapToWaterContainerView(waterContainerDao.getWaterContainerByProvince(province));
+    //    pr.println(result);
         logger.info("Water containers filtred throught provinces");
         pr.close();
     }

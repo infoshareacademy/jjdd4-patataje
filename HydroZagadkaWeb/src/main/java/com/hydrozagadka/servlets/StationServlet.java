@@ -39,9 +39,9 @@ public class StationServlet extends HttpServlet {
         String watercontainer = request.getParameter("watercontainer");
         response.setContentType("application/json; charset=utf-8");
         PrintWriter pr = response.getWriter();
-        String result = mapper.mapToStationView(waterContainerDao.getWaterContainerByProvinceAndwaterContainer(province,watercontainer));
+  //      String result = mapper.mapToStationView(waterContainerDao.getWaterContainerByProvinceAndwaterContainer(province,watercontainer));
         logger.info("Files filtred throught containers");
-        pr.println(result);
+    //    pr.println(result);
         pr.close();
     }
 }
