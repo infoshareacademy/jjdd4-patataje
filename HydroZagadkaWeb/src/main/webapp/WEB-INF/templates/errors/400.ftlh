@@ -27,32 +27,36 @@
 </head>
 
 <body id="page-top">
-<!-- Navigation -->
-
-<a class="menu-toggle rounded" href="#">
-    <i class="fa fa-bars"></i>
-</a>
 
 
 <!-- Header -->
 <section>
     <div class="container">
-        <div class="row ">
-            <div class="col-sm"><h3>
-                Coś poszło nie tak!
-            </h3>
-                <h4>
-                    <div class="icon-home"></div>
-                    <a href="/welcome">Wróć na stronę główną </a></h4>
-            </div>
-            <div> Jeśli uważasz, że błąd nie powinien mieć miejsca skontaktuj się z <a href="patataje@patataje.pl">
-                administrtorem.</a></div>
-            <div class="col-sm text-align: center;">
-                <img src="../../HydroZagadkaFront/img/ryba.png">
 
+        <div class="row align-items-center" style="margin-top: 40px">
+            <div class="col">
+                <h2>
+                    Coś poszło nie tak!</h2><br>
+                <br>
+
+                <h3>Error code: </h3><br><br>
+                <h5>Smutna ryba jest smutna.</h5>
+                <h5><a href="/welcome"><img src="fa fa-home" class="icon-home">
+                    Wróć na stronę główną </a></h5>
+                <br><br>
+                <hr>
+                Jeśli uważasz, że błąd nie powinien mieć miejsca <br> skontaktuj się z <a href="mailto:patataje@patataje.pl">
+                administratorem.</a>
             </div>
+            <div class="col">
+                <img src="../../HydroZagadkaFront/img/ryba.png">
+            </div>
+
         </div>
-        <div class="overlay"></div>
+    </div>
+
+
+    <div class="overlay"></div>
 </section>
 
 
