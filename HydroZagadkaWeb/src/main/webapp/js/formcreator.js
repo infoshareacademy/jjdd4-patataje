@@ -133,7 +133,9 @@ $(document).ready(function () {
                     console.log(response)
                     if(response.length ==0){
                       $("#curve_chart").html("<h1>Nie znaleziono wyników</h1>").fadeIn(2000);
-                    }else {
+                      return;
+                    }
+                    else {
                         mapchange = true;
                         var history = response;
                         google.charts.load('current', {'packages': ['corechart']});
@@ -146,7 +148,7 @@ $(document).ready(function () {
                             data.push(Header);
                             for (var i = 0; i < history.length; i++) {
                                 var temp = [];
-                                temp.push(i);
+                                temp.push(i+1);
                                 temp.push(history[i].flow);
                                 temp.push(history[i].temperature);
                                 temp.push(history[i].waterDeep);
@@ -159,7 +161,9 @@ $(document).ready(function () {
                             var options = {
                                 title: 'Wykres zmian temperatury, przepływu oraz stanu wody dla wybranej stacji:',
                                 curveType: 'function',
-                                legend: {position: 'bottom'}
+                                legend: {position: 'bottom'},
+                                hAxis: {
+                                    minValue:1}
                             };
                             var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
