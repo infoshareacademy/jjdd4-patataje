@@ -25,7 +25,7 @@ public class CreateFBConnection {
                     + "client_id="
                     + CreateFBConnection.APP_ID
                     + "&redirect_uri="
-                    + URLEncoder.encode((CreateFBConnection.REDIRECT_URL, "UTF-8") + "&scope=email";
+                    + URLEncoder.encode(CreateFBConnection.REDIRECT_URL, "UTF-8") + "&scope=email";
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
