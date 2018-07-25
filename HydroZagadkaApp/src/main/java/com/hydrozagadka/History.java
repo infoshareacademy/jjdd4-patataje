@@ -2,6 +2,7 @@ package com.hydrozagadka;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -24,6 +25,20 @@ public class History {
 
     @Column(name = "temperatures")
     private Double temperature;
+
+    @Column(name="stan_wody_data_pomiaru")
+    private LocalDateTime stanWodyDataPomiaru;
+
+    @Column(name = "temperatura_wody_data_pomiaru")
+    private LocalDateTime temperaturaWodyDataPomiaru;
+    @Column(name="zjawisko_lodowe")
+    private Integer zjawiskoLodowe;
+    @Column(name="zjawisko_lodowe_data_pomiaru")
+    private LocalDateTime zjawiskoLodoweDataPomiaru;
+    @Column(name="zjawisko_zarastania")
+    private Integer zjawiskoZarastania;
+    @Column(name="zjawisko_zarastania_data_pomiaru")
+    private LocalDateTime zjawiskoZarastaniaDataPomiaru;
 
     @ManyToOne
     @JoinColumn(name = "container_id")
@@ -126,5 +141,72 @@ public class History {
     public int hashCode() {
 
         return Objects.hash(date, waterDeep, flow, temperature);
+    }
+
+
+    public History(LocalDate date, Double waterDeep, Double flow, Double temperature, LocalDateTime stanWodyDataPomiaru, LocalDateTime temperaturaWodyDataPomiaru, Integer zjawiskoLodowe, LocalDateTime zjawiskoLodoweDataPomiaru, Integer zjawiskoZarastania, LocalDateTime zjawiskoZarastaniaDataPomiaru, WaterContainer waterContainers, Long containerId) {
+        this.date = date;
+        this.waterDeep = waterDeep;
+        this.flow = flow;
+        this.temperature = temperature;
+        this.stanWodyDataPomiaru = stanWodyDataPomiaru;
+        this.temperaturaWodyDataPomiaru = temperaturaWodyDataPomiaru;
+        this.zjawiskoLodowe = zjawiskoLodowe;
+        this.zjawiskoLodoweDataPomiaru = zjawiskoLodoweDataPomiaru;
+        this.zjawiskoZarastania = zjawiskoZarastania;
+        this.zjawiskoZarastaniaDataPomiaru = zjawiskoZarastaniaDataPomiaru;
+        this.waterContainers = waterContainers;
+        this.containerId = containerId;
+    }
+
+    public LocalDateTime getStanWodyDataPomiaru() {
+        return stanWodyDataPomiaru;
+    }
+
+    public void setStanWodyDataPomiaru(LocalDateTime stanWodyDataPomiaru) {
+        this.stanWodyDataPomiaru = stanWodyDataPomiaru;
+    }
+
+
+
+
+    public LocalDateTime getTemperaturaWodyDataPomiaru() {
+        return temperaturaWodyDataPomiaru;
+    }
+
+    public void setTemperaturaWodyDataPomiaru(LocalDateTime temperaturaWodyDataPomiaru) {
+        this.temperaturaWodyDataPomiaru = temperaturaWodyDataPomiaru;
+    }
+
+    public Integer getZjawiskoLodowe() {
+        return zjawiskoLodowe;
+    }
+
+    public void setZjawiskoLodowe(Integer zjawiskoLodowe) {
+        this.zjawiskoLodowe = zjawiskoLodowe;
+    }
+
+    public LocalDateTime getZjawiskoLodoweDataPomiaru() {
+        return zjawiskoLodoweDataPomiaru;
+    }
+
+    public void setZjawiskoLodoweDataPomiaru(LocalDateTime zjawiskoLodoweDataPomiaru) {
+        this.zjawiskoLodoweDataPomiaru = zjawiskoLodoweDataPomiaru;
+    }
+
+    public Integer getZjawiskoZarastania() {
+        return zjawiskoZarastania;
+    }
+
+    public void setZjawiskoZarastania(Integer zjawiskoZarastania) {
+        this.zjawiskoZarastania = zjawiskoZarastania;
+    }
+
+    public LocalDateTime getZjawiskoZarastaniaDataPomiaru() {
+        return zjawiskoZarastaniaDataPomiaru;
+    }
+
+    public void setZjawiskoZarastaniaDataPomiaru(LocalDateTime zjawiskoZarastaniaDataPomiaru) {
+        this.zjawiskoZarastaniaDataPomiaru = zjawiskoZarastaniaDataPomiaru;
     }
 }

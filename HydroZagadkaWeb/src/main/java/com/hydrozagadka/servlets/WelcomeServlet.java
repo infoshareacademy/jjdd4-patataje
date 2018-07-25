@@ -1,9 +1,9 @@
 package com.hydrozagadka.servlets;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hydrozagadka.Beans.ApiConnector;
+import com.hydrozagadka.Beans.NewestHistoryDataLoadBean;
+import com.hydrozagadka.Beans.NewestWaterContainerDataLoadBean;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
-import com.hydrozagadka.mappers.NewestWaterContainerDataMapper;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -26,9 +26,10 @@ public class WelcomeServlet extends HttpServlet {
     private FreeMarkerConfig freeMarkerConfig;
     @Inject
     private ApiConnector apiConnector;
-
     @Inject
-    NewestWaterContainerDataMapper newestWaterContainerDataMapper;
+    private NewestHistoryDataLoadBean newestHistoryDataLoadBean;
+    @Inject
+    NewestWaterContainerDataLoadBean newestWaterContainerDataLoadBean;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
@@ -36,8 +37,8 @@ public class WelcomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
-
-        newestWaterContainerDataMapper.mapToWaterContainerView(apiConnector.load());
+        newestWaterContainerDataLoadBean.loadNewestWaterContainerToDatabase(apiConnector.load());
+        newestHistoryDataLoadBean.loadNewestHistoryToDatabase(apiConnector.load());
         Map<String, Object> model = new HashMap<>();
 
         try {

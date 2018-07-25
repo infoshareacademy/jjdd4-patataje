@@ -1,4 +1,4 @@
-package com.hydrozagadka.mappers;
+package com.hydrozagadka.Beans;
 
 import com.hydrozagadka.Model.NewestWaterContainerData;
 import com.hydrozagadka.WaterContainer;
@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 @Stateless
-public class NewestWaterContainerDataMapper {
+public class NewestWaterContainerDataLoadBean {
 
     @Inject
     WaterContainerDao waterContainerDao;
 
-    public boolean mapToWaterContainerView(List<NewestWaterContainerData> apiData){
+    public boolean loadNewestWaterContainerToDatabase(List<NewestWaterContainerData> apiData){
 
 
         apiData = apiData.stream()
