@@ -4,7 +4,7 @@
 
 <head>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description"
           content="Project of Web Application which shows water levels for lakes and rivers in Poland.">
@@ -32,27 +32,27 @@
 <a class="menu-toggle rounded" href="#">
     <i class="fa fa-bars"></i>
 </a>
-<#include "../mainPartsOfPage/navBar.ftlh">
+
 
 <!-- Header -->
 <section>
     <div class="container">
-<div class="row text-center">
-        <h3 class="mb-5">
-            <em>Coś poszło nie tak!</em>
-        </h3>
-</div>
-        <div class="row text-center">
-            <img src="">
+        <div class="row ">
+            <div class="col-sm"><h3>
+                Coś poszło nie tak!
+            </h3>
+                <h4>
+                    <div class="icon-home"></div>
+                    <a href="/welcome">Wróć na stronę główną </a></h4>
+            </div>
+            <div> Jeśli uważasz, że błąd nie powinien mieć miejsca skontaktuj się z <a href="patataje@patataje.pl">
+                administrtorem.</a></div>
+            <div class="col-sm text-align: center;">
+                <img src="../../HydroZagadkaFront/img/ryba.png">
 
+            </div>
         </div>
-        <div class="row">
-            Jeśli błąd występuje przez dłuższy czas skontaktuj się z
-            <a href="patataje@patataje.pl">nami</a>
-
-        </div>
-    </div>
-    <div class="overlay"></div>
+        <div class="overlay"></div>
 </section>
 
 

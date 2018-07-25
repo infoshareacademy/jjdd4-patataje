@@ -64,7 +64,7 @@ $(document).ready(function () {
             'packages': ['map'],
             // Note: you will need to get a mapsApiKey for your project.
             // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-            'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+            'mapsApiKey': 'AIzaSyDQlTwqbQzIesvDheiMg2T6AzoWXA54Pa4'
         });
         google.charts.setOnLoadCallback(drawMap);
 
