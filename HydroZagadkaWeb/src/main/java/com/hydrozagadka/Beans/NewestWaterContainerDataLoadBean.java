@@ -15,21 +15,18 @@ public class NewestWaterContainerDataLoadBean {
     @Inject
     WaterContainerDao waterContainerDao;
 
-    public boolean loadNewestWaterContainerToDatabase(List<NewestWaterContainerData> apiData){
+    public void loadNewestWaterContainerToDatabase(List<NewestWaterContainerData> apiData){
 
 
-        apiData = apiData.stream()
-                .filter(s->s.getId()!=waterContainerDao.findById(s.getId()).getId()).collect(Collectors.toList());
-
-        if(apiData.size()!=0){
-            apiData.stream().map(s-> waterContainerDao
-                    .save(new WaterContainer(s.getId(),
-                            s.getRzeka(),
-                            s.getStacja(),
-                            s.getWojewodztwo(),
-                            new ArrayList<>())));
-            return true;
-        }
-        return false;
+      apiData.forEach(s-> {
+          if(waterContainerDao.findById(s.getId())==null){
+              waterContainerDao.save(new WaterContainer(
+                      s.getId(),
+                      s.getRzeka(),
+                      s.getStacja(),
+                      s.getWojewodztwo(),
+                      new ArrayList<>()));
+          }
+      });
     }
 }

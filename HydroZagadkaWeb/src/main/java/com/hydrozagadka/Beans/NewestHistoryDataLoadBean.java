@@ -25,8 +25,16 @@ public class NewestHistoryDataLoadBean {
 
     public boolean loadNewestHistoryToDatabase(List<NewestWaterContainerData> apiData) {
 
-        apiData.forEach(s -> historyDao.save(new History(
-                s.getStanWodyDataPomiaru().toLocalDate(),
+
+        apiData.forEach(s -> {
+            LocalDate checkdate;
+            if(s.getStanWodyDataPomiaru()==null){
+                checkdate = LocalDate.now();
+            }else{
+                checkdate = s.getStanWodyDataPomiaru().toLocalDate();
+            }
+            historyDao.save(new History(
+                checkdate,
                 s.getStanWody(),
                 0.0,
                 s.getTemperatura(),
@@ -37,7 +45,8 @@ public class NewestHistoryDataLoadBean {
                 s.getZjawiskoZarastania(),
                 s.getZjawiskoZarastaniaDataPomiaru(),
                 waterContainerDao.findById(s.getId()),
-                s.getId())));
+                s.getId()));
+        });
         return true;
-    }
+   }
 }

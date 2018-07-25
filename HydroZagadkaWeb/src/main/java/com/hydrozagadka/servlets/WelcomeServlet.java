@@ -3,6 +3,7 @@ package com.hydrozagadka.servlets;
 import com.hydrozagadka.Beans.ApiConnector;
 import com.hydrozagadka.Beans.NewestHistoryDataLoadBean;
 import com.hydrozagadka.Beans.NewestWaterContainerDataLoadBean;
+import com.hydrozagadka.Model.NewestWaterContainerData;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = "/welcome")
@@ -35,10 +37,11 @@ public class WelcomeServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<NewestWaterContainerData> imgwData = apiConnector.load();
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
-        newestWaterContainerDataLoadBean.loadNewestWaterContainerToDatabase(apiConnector.load());
-        newestHistoryDataLoadBean.loadNewestHistoryToDatabase(apiConnector.load());
+        newestWaterContainerDataLoadBean.loadNewestWaterContainerToDatabase(imgwData);
+        newestHistoryDataLoadBean.loadNewestHistoryToDatabase(imgwData);
         Map<String, Object> model = new HashMap<>();
 
         try {
