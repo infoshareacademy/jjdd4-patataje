@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hydrozagadka.Model.ChartHistory;
 import com.hydrozagadka.dao.HistoryDao;
 import com.hydrozagadka.dao.StatisticsDao;
+import com.hydrozagadka.mappers.HistoryMapper;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -28,7 +29,8 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
     private HistoryDao historyDao;
     @Inject
     private StatisticsDao statisticsDao;
-
+    @Inject
+    private HistoryMapper historyMapper;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json; charset=utf-8");
     }
@@ -41,15 +43,11 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
         if (isCorrectDate(startDate, endDate)) {
             this.startDate = LocalDate.parse(startDate);
             this.endDate = LocalDate.parse(endDate);
-            if (!isStartDateErlier(this.startDate, this.endDate)) {
-                this.startDate = LocalDate.of(1954, 01, 01);
-                this.endDate = LocalDate.now();
-            }
         }
         Long idWaterContainer = Long.parseLong(request.getParameter("station"));
         statisticsDao.update(idWaterContainer);
 
-        List<ChartHistory> historyOfWaterContainer = historyDao.getHistoryByWaterContainerWithDates(idWaterContainer, this.startDate, this.endDate);
+        List<ChartHistory> historyOfWaterContainer = historyMapper.mapToChartHistory(historyDao.getHistoryByWaterContainerWithDates(idWaterContainer, this.startDate, this.endDate));
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         String historyJsonAsString = objectMapper.writeValueAsString(historyOfWaterContainer);
@@ -65,13 +63,6 @@ public class HistoryOfWaterContainerServlet extends HttpServlet {
             return false;
         }
         if (endDate == null || endDate.isEmpty()) {
-            return false;
-        }
-        return true;
-    }
-
-    private boolean isStartDateErlier(LocalDate startDate, LocalDate endDate) {
-        if (startDate.isAfter(endDate)) {
             return false;
         }
         return true;
