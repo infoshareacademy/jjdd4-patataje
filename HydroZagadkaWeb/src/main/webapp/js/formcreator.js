@@ -119,7 +119,7 @@ $(document).ready(function () {
             var enddate = $('#enddate').val();
 
         $.ajax({
-                url:'/history?station=' + historyId,
+                url:'rest/id/'+historyId,
                 data:{
                   startDate:startdate,
                   endDate:enddate
