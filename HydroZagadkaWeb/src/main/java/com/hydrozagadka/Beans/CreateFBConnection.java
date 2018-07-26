@@ -14,7 +14,7 @@ import java.net.URLEncoder;
 public class CreateFBConnection {
     private static final String APP_ID = "293962678012596";
     private static final String APP_SECRET = "21ce141136146b16578d812900b4d656";
-    private static final String REDIRECT_URL = "http://localhost:8080/welcome";
+    private static final String REDIRECT_URL = "http://127.0.0.1:8080/welcome";
 
     private String token = "";
 
