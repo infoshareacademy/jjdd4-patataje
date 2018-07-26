@@ -39,10 +39,10 @@
                     Coś poszło nie tak!</h2><br>
                 <br>
 
-                <h3>Error code: </h3><br><br>
+                <h3>Kod błędu:  </h3><br><br>
                 <h5>Smutna ryba jest smutna.</h5>
-                <h5><a href="/welcome"><img src="fa fa-home" class="icon-home">
-                    Wróć na stronę główną </a></h5>
+                <h4><a href="/welcome"><i class="fa fa-home"></i>
+                    Wróć na stronę główną </a></h4>
                 <br><br>
                 <hr>
                 Jeśli uważasz, że błąd nie powinien mieć miejsca <br> skontaktuj się z <a href="mailto:patataje@patataje.pl">
