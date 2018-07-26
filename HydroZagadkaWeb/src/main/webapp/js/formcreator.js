@@ -9,7 +9,7 @@ $(document).ready(function () {
         }
         console.log("AJAX LUBUSKIE", $("#province").val());
         $.ajax({
-                url:"rest/province/"+$("#province").val(),
+                url:"rest/"+$("#province").val(),
                 type:'get',
                 cache:false,
                 success:function(response){
@@ -40,10 +40,7 @@ $(document).ready(function () {
         var rzeka=$("#watercontainer").val();
         $('.invalid-feedback').css("display","none");
         $.ajax({
-                url:'station',
-                data:{
-                    name:$("#province").val(),
-                    watercontainer:$("#watercontainer").val()},
+                url:'rest/'+$("#province").val()+"/"+$("#watercontainer").val(),
                 type:'get',
                 cache:false,
                 success:function(response){
