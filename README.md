@@ -26,4 +26,10 @@ For chosen station The App will show you:
 
 
 
+#### Team members:
+
+- :octopus: [Pawe³](https://github.com/orzeltcz)
+- :octopus: [Julek](https://github.com/jkloss)
+- :octopus: [Lucjan](https://github.com/LucjanWroblewski)
+- :octopus: [Paulina](https://github.com/Paulucha)
 
