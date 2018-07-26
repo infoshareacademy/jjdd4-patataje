@@ -41,6 +41,11 @@
             <version>8.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20180130</version>
+        </dependency>
         <!--Hibernate-->
         <dependency>
             <groupId>org.hibernate</groupId>
