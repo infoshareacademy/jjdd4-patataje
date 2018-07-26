@@ -42,8 +42,8 @@ public class WelcomeServlet extends HttpServlet {
         List<NewestWaterContainerData> imgwData = apiConnector.load();
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
-    //    newestWaterContainerDataLoadBean.loadNewestWaterContainerToDatabase(imgwData);
-   //     newestHistoryDataLoadBean.loadNewestHistoryToDatabase(imgwData);
+        newestWaterContainerDataLoadBean.loadNewestWaterContainerToDatabase(imgwData);
+        newestHistoryDataLoadBean.loadNewestHistoryToDatabase(imgwData);
         Map<String, Object> model = new HashMap<>();
 
         try {

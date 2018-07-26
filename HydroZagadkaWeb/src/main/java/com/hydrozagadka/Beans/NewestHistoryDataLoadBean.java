@@ -28,16 +28,22 @@ public class NewestHistoryDataLoadBean {
 
         apiData.forEach(s -> {
             LocalDate checkdate;
+            Double temperatura;
             if(s.getStanWodyDataPomiaru()==null){
                 checkdate = LocalDate.now();
             }else{
                 checkdate = s.getStanWodyDataPomiaru().toLocalDate();
             }
+            if(s.getTemperatura()==null){
+                temperatura = 0.0;
+            }else {
+                temperatura= s.getTemperatura();
+            }
             historyDao.save(new History(
                 checkdate,
                 s.getStanWody(),
                 0.0,
-                s.getTemperatura(),
+                temperatura,
                 s.getStanWodyDataPomiaru(),
                 s.getTemperaturaWodyDataPomiaru(),
                 s.getZjawiskoLodowe(),
