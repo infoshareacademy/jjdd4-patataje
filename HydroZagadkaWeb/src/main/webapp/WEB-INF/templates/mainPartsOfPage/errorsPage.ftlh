@@ -4,7 +4,7 @@
 
 <head>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description"
           content="Project of Web Application which shows water levels for lakes and rivers in Poland.">
@@ -27,29 +27,47 @@
 </head>
 
 <body id="page-top">
-<!-- Navigation -->
 
-<a class="menu-toggle rounded" href="#">
-    <i class="fa fa-bars"></i>
-</a>
-<#include "../mainPartsOfPage/navBar.ftlh">
 
 <!-- Header -->
-<header class="masthead d-flex">
-    <div class="container text-center my-auto">
+<section>
+    <div class="container">
 
-        <h3 class="mb-5">
-            <em>Coś poszło nie tak!</em>
-        </h3>
+        <div class="row align-items-center" style="margin-top: 40px">
+            <div class="col">
+                <h2>
+                    Coś poszło nie tak!</h2><br>
+                <br>
+                <h3><#if statusCode??>Kod błędu: <em> ${statusCode}</em></#if>
+                    <h6><#if requestUri??>
+                        przekierowano z: <em> ${requestUri}</em></#if><br>
+                       <#if throwable??> wyjątek: ${throwable??}</#if>
+                    </h6>
+                </h3>
+                <br><br>
+                <h5>Smutna ryba jest smutna.</h5>
+                <h4><a href="/welcome"><i class="fa fa-home"></i>
+                    Wróć na stronę główną </a></h4>
+                <br><br>
+                <hr>
+                Jeśli uważasz, że błąd nie powinien mieć miejsca <br> skontaktuj się z <a
+                    href="mailto:patataje@patataje.pl"> administratorem.</a>
+            </div>
+            <div class="col">
+                <img src="../../HydroZagadkaFront/img/ryba.png">
+            </div>
 
+        </div>
     </div>
+
+
     <div class="overlay"></div>
-</header>
+</section>
 
 
 <!-- Footer -->
 
-<#include "../mainPartsOfPage/footer.ftlh">
+<#include "footer.ftlh">
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
