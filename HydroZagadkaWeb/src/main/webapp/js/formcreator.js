@@ -7,8 +7,9 @@ $(document).ready(function () {
         if($("#province").val()==-1){
             return;
         }
+        console.log("AJAX LUBUSKIE", $("#province").val());
         $.ajax({
-                url:"/province/"+encodeURIComponent($("#province").val()),
+                url:"rest/province/"+$("#province").val(),
                 type:'get',
                 cache:false,
                 success:function(response){
