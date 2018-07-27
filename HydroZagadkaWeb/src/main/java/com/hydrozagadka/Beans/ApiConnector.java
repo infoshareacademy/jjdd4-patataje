@@ -19,7 +19,13 @@ public class ApiConnector {
 
     public List<NewestWaterContainerData> load(){
         WebTarget webTarget = client.target("https://danepubliczne.imgw.pl/api/data/hydro/");
+
         Response response = webTarget.request().accept(MediaType.APPLICATION_JSON).get();
+
+
+        if (response.getStatus() != 200) {
+            throw new RuntimeException("Nie możemy pobrać danych");
+        }
         return response.readEntity(new GenericType<List<NewestWaterContainerData>>() {});
     }
 }

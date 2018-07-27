@@ -28,22 +28,15 @@ public class WelcomeServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(WelcomeServlet.class);
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
-    @Inject
-    private ApiConnector apiConnector;
-    @Inject
-    private NewestHistoryDataLoadBean newestHistoryDataLoadBean;
-    @Inject
-    NewestWaterContainerDataLoadBean newestWaterContainerDataLoadBean;
+
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<NewestWaterContainerData> imgwData = apiConnector.load();
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
-    //    newestWaterContainerDataLoadBean.loadNewestWaterContainerToDatabase(imgwData);
-   //     newestHistoryDataLoadBean.loadNewestHistoryToDatabase(imgwData);
         Map<String, Object> model = new HashMap<>();
 
         try {

@@ -29,14 +29,15 @@ public class WaterContainerMapper {
 
     public List<WaterContainerView> mapToWaterContainerView(List<WaterContainer> wt) throws JsonProcessingException {
 
-        return wt.stream().filter(distinctByKey(WaterContainer::getContainerName))
+        return wt.stream()
+                .filter(distinctByKey(WaterContainer::getStationName))
                 .map(w->new WaterContainerView(w.getId(), w.getStationName()))
                 .collect(Collectors.toList());
     }
 
-    public List<StationView> mapToStationView(List<WaterContainer> wt) throws JsonProcessingException {
+    public List<WaterContainerView> mapToStationView(List<WaterContainer> wt) throws JsonProcessingException {
         return wt.stream()
-                .map(w-> new StationView(w.getId(), w.getContainerName()))
+                .map(w-> new WaterContainerView(w.getId(), w.getContainerName()))
                 .collect(Collectors.toList());
     }
 
