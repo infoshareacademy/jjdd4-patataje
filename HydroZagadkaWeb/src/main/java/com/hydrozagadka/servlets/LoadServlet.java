@@ -47,19 +47,6 @@ public class LoadServlet extends HttpServlet {
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         if (!fileName.contains(".zip")) {
             logger.warn("No zip file found");
-
-//            przekazać tu atrybut o błędzie
-            response.setContentType("text/html;charset=UTF-8");
-            Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
-            Map<String, Object> model = new HashMap<>();
-            model.put("noZip", "Nie wysłałeś pliku .zip");
-
-            response.sendRedirect("/welcome#upload");
-            try {
-                template.process(model, response.getWriter());
-            } catch (TemplateException e) {
-                logger.warn("Template doesn't exist");
-            }
             return;
         }
         InputStream is = filePart.getInputStream();
