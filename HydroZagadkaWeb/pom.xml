@@ -8,7 +8,9 @@
     <artifactId>HydroZagadkaWeb</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-
+<build>
+    <finalName>HydroZagadka</finalName>
+</build>
     <parent>
         <groupId>patataje</groupId>
         <artifactId>HydroZagadka</artifactId>

@@ -1,0 +1,23 @@
+version: "2"
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass123
+      - MYSQL_DATABASE=hydroZagadka
+      - MYSQL_USER=hydroZagadka
+      - MYSQL_PASSWORD=hydroZagadka123
+    ports:
+      - 4212:3306
+  app:
+    build:
+      context: ./HydroZagadkaWeb
+    ports:
+      - 4210:8080
+      - 4211:9990
+    depends_on:
+      - db
+    links:
+      - db
+    dns: 8.8.8.8
+
