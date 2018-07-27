@@ -23,7 +23,6 @@ public class ErrorServlet extends HttpServlet {
     private FreeMarkerConfig freeMarkerConfig;
 
 
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
@@ -52,7 +51,7 @@ public class ErrorServlet extends HttpServlet {
         model.put("statusCode", statusCode);
         model.put("servletName", servletName);
         model.put("throwable", throwable);
-        model.put("requestUri",requestUri);
+        model.put("requestUri", requestUri);
 
 
         try {

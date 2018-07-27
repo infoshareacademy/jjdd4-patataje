@@ -42,7 +42,7 @@
                     <h6><#if requestUri??>
                         przekierowano z: <em> ${requestUri}</em></#if><br>
                        <#if throwable??> wyjątek: ${throwable}</#if>
-                                           </h6>
+                    </h6>
                 </h3>
                 <br><br>
                 <h5>Smutna ryba jest smutna.</h5>
