@@ -41,7 +41,7 @@
                 <h3><#if statusCode??>Kod błędu: <em> ${statusCode}</em></#if>
                     <h6><#if requestUri??>
                         przekierowano z: <em> ${requestUri}</em></#if><br>
-                       <#if throwable??> wyjątek: ${throwable??}</#if>
+                       <#if throwable??> wyjątek: ${throwable}</#if>
                     </h6>
                 </h3>
                 <br><br>

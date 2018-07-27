@@ -37,9 +37,12 @@ public class LoadServlet extends HttpServlet {
         PrintWriter pr = response.getWriter();
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         if (!fileName.contains(".zip")) {
+            logger.warn("No zip file found");
+
+//            przekazać tu atrybut o błędzie
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pr.close();
-            logger.warn("No zip file found");
+
             return;
         }
         InputStream is = filePart.getInputStream();

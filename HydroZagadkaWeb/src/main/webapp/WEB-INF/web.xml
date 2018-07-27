@@ -7,52 +7,17 @@
     <data-source>
         <name>java:ds/hydroZagadka</name>
         <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
-        <url>jdbc:mysql://127.0.0.1:3307/hydroZagadka?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw;
+        <url>jdbc:mysql://127.0.0.1:6603/hydroZagadka?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw;
         </url>
         <user>root</user>
         <password>pass123</password>
     </data-source>
-    <!--<welcome-file-list>-->
-        <!--<welcome-file>/welcome</welcome-file>-->
-    <!--</welcome-file-list>-->
+    <welcome-file-list>
+        <welcome-file>/welcome</welcome-file>
+    </welcome-file-list>
 
-
     <error-page>
-        <error-code>400</error-code>
         <location>/error</location>
     </error-page>
-    <error-page>
-        <!-- Missing login -->
-        <error-code>401</error-code>
-        <location>/error</location>
-    </error-page>
-    <error-page>
-        <!-- Forbidden directory listing -->
-        <error-code>403</error-code>
-        <location>/error</location>
-    </error-page>
-    <error-page>
-        <!-- Missing resource -->
-        <error-code>404</error-code>
-        <location>/error</location>
-    </error-page>
-    <error-page>
-        <!-- Uncaught exception -->
-        <error-code>500</error-code>
-        <location>/error</location>
-    </error-page>
-    <error-page>
-        <!-- Unsupported servlet method -->
-        <error-code>503</error-code>
-        <location>/error</location>
-    </error-page>
-    <!--<error-page>-->
-        <!--<exception-type>java.lang.Exception</exception-type>-->
-        <!--<location>/errorpages/exception.html</location>-->
-    <!--</error-page>-->
-    <!-- All errors -->
-    <!--<error-page>-->
-        <!--<location>/error</location>-->
-    <!--</error-page>-->
 
 </web-app>
