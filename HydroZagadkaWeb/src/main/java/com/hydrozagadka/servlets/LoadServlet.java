@@ -1,12 +1,16 @@
 package com.hydrozagadka.servlets;
 
 import com.hydrozagadka.Beans.UnzipDao;
+import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.WaterContainer;
 
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.logging.LogManager;
 import java.util.Map;
 
@@ -29,7 +34,11 @@ public class LoadServlet extends HttpServlet {
     @Inject
     private UnzipDao unzipDao;
 
+    @Inject
+    private FreeMarkerConfig freeMarkerConfig;
+
     private Map<Long, WaterContainer> waterContainerMap;
+
     public static final String DIRECT_PATH = "../../../../../HydroZagadkaApp/data";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,9 +49,17 @@ public class LoadServlet extends HttpServlet {
             logger.warn("No zip file found");
 
 //            przekazać tu atrybut o błędzie
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            pr.close();
+            response.setContentType("text/html;charset=UTF-8");
+            Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
+            Map<String, Object> model = new HashMap<>();
+            model.put("noZip", "Nie wysłałeś pliku .zip");
 
+            response.sendRedirect("/welcome#upload");
+            try {
+                template.process(model, response.getWriter());
+            } catch (TemplateException e) {
+                logger.warn("Template doesn't exist");
+            }
             return;
         }
         InputStream is = filePart.getInputStream();
