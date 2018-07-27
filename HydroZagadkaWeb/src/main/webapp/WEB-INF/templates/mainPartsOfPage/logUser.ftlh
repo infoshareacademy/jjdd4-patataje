@@ -1,10 +1,13 @@
-
 <section class="masthead d-flex" id="log" style="background-image: url('../../HydroZagadkaFront/img/bg-masthead.jpg')">
     <div class="container text-center my-auto">
-        <h1 class="mb-1">Logowanie wkrótce</h1>
-        <h3 class="mb-5">
-            <em>musisz jeszcze poczekać</em>
-        </h3>
-    </div>
+        <h3>Zaloguj się do aplikacji:</h3>
+        <div class="fb-login-button"
+             data-width="10000"
+             data-max-rows="1"
+             data-size="large"
+             data-button-type="login_with"
+             data-show-faces="false"
+             data-auto-logout-link="false"
+             data-use-continue-as="true"></div>
     <div class="overlay"></div>
 </section>
