@@ -30,8 +30,9 @@ public class WaterContainerDao {
     }
 
     public List<WaterContainer> getWaterContainerByProvinceAndwaterContainer(String province,String waterContainerName){
-        Query q = entityManager.createQuery("select wt from WaterContainer wt where wt.stationName like :watercname");
+        Query q = entityManager.createQuery("select wt from WaterContainer wt where wt.containerName like :watercname and wt.province like :province");
         q.setParameter("watercname","%"+waterContainerName+"%");
+        q.setParameter("province",province);
         return q.getResultList();
     }
 

@@ -109,8 +109,11 @@ public class CSVLoader {
         loadedLine = loadedLine.replaceAll("\"", "");
         //split data
         splitedLine = loadedLine.split(",");
-        if (splitedLine.length < 10) throw new DataLengthException("Plik ma nieodpowiednią liczbę rekordów!");
-        logger.warn("Nieprawidłwa liczba rekordów");
+        if (splitedLine.length < 10) {
+            logger.warn("Nieprawidłwa liczba rekordów");
+            throw new DataLengthException("Plik ma nieodpowiednią liczbę rekordów!");
+        }
+
         return splitedLine;
 
     }

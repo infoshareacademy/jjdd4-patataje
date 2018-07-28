@@ -38,7 +38,6 @@ public class LoadServlet extends HttpServlet {
     private FreeMarkerConfig freeMarkerConfig;
 
     private Map<Long, WaterContainer> waterContainerMap;
-
     public static final String DIRECT_PATH = "../../../../../HydroZagadkaApp/data";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,6 +46,10 @@ public class LoadServlet extends HttpServlet {
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         if (!fileName.contains(".zip")) {
             logger.warn("No zip file found");
+
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            pr.close();
+
             return;
         }
         InputStream is = filePart.getInputStream();
