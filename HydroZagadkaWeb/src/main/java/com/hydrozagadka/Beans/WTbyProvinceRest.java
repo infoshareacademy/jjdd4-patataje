@@ -7,6 +7,7 @@ import com.hydrozagadka.Model.WaterContainerView;
 import com.hydrozagadka.User;
 import com.hydrozagadka.WaterContainer;
 import com.hydrozagadka.dao.HistoryDao;
+import com.hydrozagadka.dao.StatisticsDao;
 import com.hydrozagadka.dao.UserDao;
 import com.hydrozagadka.dao.WaterContainerDao;
 import com.hydrozagadka.mappers.HistoryMapper;
@@ -42,6 +43,9 @@ public class WTbyProvinceRest {
     @Inject
     UserDao userDao;
 
+    @Inject
+    StatisticsDao statisticsDao;
+
     private Logger logger = LoggerFactory.getLogger(WTbyProvinceRest.class);
 
     @GET
@@ -71,13 +75,14 @@ public class WTbyProvinceRest {
     public Response getwaterContainerHistory(@PathParam("id") Long id, @QueryParam("startDate") String startdate, @QueryParam("endDate") String enddate, @QueryParam("check") boolean check) throws JsonProcessingException {
         LocalDate startDate = LocalDate.of(1954, 01, 01);
         LocalDate endDate = LocalDate.now();
+        addStat(id);
         if (isCorrectDate(startdate, enddate)) {
             startDate = LocalDate.parse(startdate);
             endDate = LocalDate.parse(enddate);
             logger.info("Dat nie podano");
         }
         if (check) {
-            addFavourite(id, 2L);
+            addFavourite(id, 1L);
         }
         List<History> histories = historyDao.getHistoryByWaterContainerWithDates(id, startDate, endDate);
         List<ChartHistory> chartHistories = historyMapper.mapToChartHistory(histories);
@@ -94,6 +99,10 @@ public class WTbyProvinceRest {
             return false;
         }
         return true;
+    }
+
+    private void addStat(Long idWC){
+        statisticsDao.update(idWC);
     }
 
     private void addFavourite(Long idWC, Long userId) {
