@@ -1,6 +1,10 @@
 package com.hydrozagadka.servlets;
 
+import com.hydrozagadka.Beans.ApiConnector;
+import com.hydrozagadka.Beans.NewestHistoryDataLoadBean;
+import com.hydrozagadka.Beans.NewestWaterContainerDataLoadBean;
 import com.hydrozagadka.CSVLoader;
+import com.hydrozagadka.Model.NewestWaterContainerData;
 import com.hydrozagadka.Model.Statistics;
 import com.hydrozagadka.WaterContainer;
 import com.hydrozagadka.dao.HistoryDao;
@@ -14,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = "/database")
@@ -25,6 +30,14 @@ public class DatabaseServlet extends HttpServlet {
     private HistoryDao historyDao;
     @Inject
     private StatisticsDao statisticsDao;
+
+    @Inject
+    private NewestHistoryDataLoadBean newestHistoryDataLoadBean;
+    @Inject
+    private NewestWaterContainerDataLoadBean newestWaterContainerDataLoadBean;
+
+    @Inject
+    private ApiConnector apiConnector;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -49,6 +62,9 @@ public class DatabaseServlet extends HttpServlet {
                                 historyDao.save(history);
                             }
                         }));
+        List<NewestWaterContainerData> imgwData = apiConnector.load();
+        newestWaterContainerDataLoadBean.loadNewestWaterContainerToDatabase(imgwData);
+        newestHistoryDataLoadBean.loadNewestHistoryToDatabase(imgwData);
         resp.sendRedirect("/welcome");
     }
 }

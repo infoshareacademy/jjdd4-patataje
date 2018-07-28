@@ -34,17 +34,12 @@ public class HistoryDao {
         return q.getResultList();
     }
 
-    public List<ChartHistory> getHistoryByWaterContainerWithDates(Long id, LocalDate startDate, LocalDate endDate) {
+    public List<History> getHistoryByWaterContainerWithDates(Long id, LocalDate startDate, LocalDate endDate) {
         Query q = entityManager.createQuery(
                 "SELECT h FROM History h WHERE h.waterContainers.id = :id AND h.date BETWEEN :startDate AND :endDate");
         q.setParameter("id", id);
         q.setParameter("startDate",startDate);
         q.setParameter("endDate",endDate);
-        return ((List<History>) q.getResultList()).stream()
-                .map(history -> new ChartHistory(
-                        history.getWaterDeep(),
-                        history.getFlow(),
-                        history.getTemperature()))
-                .collect(toList());
+        return q.getResultList();
     }
 }

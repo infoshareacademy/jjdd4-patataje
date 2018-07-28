@@ -30,16 +30,18 @@ public class LoadServlet extends HttpServlet {
     private UnzipDao unzipDao;
 
     private Map<Long, WaterContainer> waterContainerMap;
-    public static final String DIRECT_PATH = "/home/pawelorlikowski/jjdd4-patataje/HydroZagadkaApp/data";
+    public static final String DIRECT_PATH = "../../../../../HydroZagadkaApp/data";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file");
         PrintWriter pr = response.getWriter();
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         if (!fileName.contains(".zip")) {
+            logger.warn("No zip file found");
+
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pr.close();
-            logger.warn("No zip file found");
+
             return;
         }
         InputStream is = filePart.getInputStream();
