@@ -7,7 +7,6 @@ $(document).ready(function () {
         if($("#province").val()==-1){
             return;
         }
-        console.log("AJAX LUBUSKIE", $("#province").val());
         $.ajax({
                 url:"rest/"+$("#province").val(),
                 type:'get',
@@ -118,12 +117,16 @@ $(document).ready(function () {
         var historyId = $('#station').val();
             var startdate = $('#startdate').val();
             var enddate = $('#enddate').val();
-
+            var check = false;
+            if($('#favorite').is(":checked")){
+                check = true;
+            }
         $.ajax({
                 url:'rest/id/'+historyId,
                 data:{
                   startDate:startdate,
-                  endDate:enddate
+                  endDate:enddate,
+                    check: check
                 },
                 crossDomain: true,
                 type:'get',

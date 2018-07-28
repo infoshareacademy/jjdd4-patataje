@@ -1,8 +1,7 @@
 package com.hydrozagadka.dao;
 
 
-import com.hydrozagadka.Model.User;
-import com.hydrozagadka.WaterContainer;
+import com.hydrozagadka.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

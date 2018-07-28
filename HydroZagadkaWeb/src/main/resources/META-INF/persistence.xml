@@ -9,6 +9,7 @@
 
         <class>com.hydrozagadka.WaterContainer</class>
         <class>com.hydrozagadka.History</class>
+        <class>com.hydrozagadka.User</class>
 
         <properties>
             <!-- Hibernate settings -->

@@ -1,10 +1,12 @@
-package com.hydrozagadka.Model;
+package com.hydrozagadka;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
-@Table(name="USERS")
+@Table(name = "USERS")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,23 +14,30 @@ public class User {
     @Column(name = "Email")
     @NotNull
     private String email;
-    @Column(name="Token")
+    @Column(name = "Token")
     @NotNull
     private String token;
-    @Column(name="Adminaaa")
+    @Column(name = "Adminaaa")
     @NotNull
     private boolean adminaaa;
-    @Column(name="Stats")
+    @Column(name = "Stats")
     private Integer stats;
+    @ManyToMany
+    @JoinTable(
+            name = "USER_WATERCONTAINER",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "container_id", referencedColumnName = "id"))
+            List<WaterContainer> waterContainerId;
 
     public User() {
     }
 
-    public User(String email, String token, boolean adminaaa, Integer stats) {
+    public User(@NotNull String email, @NotNull String token, @NotNull boolean adminaaa, Integer stats, List<WaterContainer> waterContainerId) {
         this.email = email;
         this.token = token;
         this.adminaaa = adminaaa;
         this.stats = stats;
+        this.waterContainerId = waterContainerId;
     }
 
     public String getToken() {
@@ -70,5 +79,11 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+    public List<WaterContainer> getWaterContainerId() {
+        return waterContainerId;
+    }
 
+    public void setWaterContainerId(List<WaterContainer> waterContainerId) {
+        this.waterContainerId = waterContainerId;
+    }
 }
