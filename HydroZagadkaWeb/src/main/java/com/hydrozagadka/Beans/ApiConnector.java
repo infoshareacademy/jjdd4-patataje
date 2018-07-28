@@ -1,7 +1,9 @@
 package com.hydrozagadka.Beans;
 
 import com.hydrozagadka.Model.NewestWaterContainerData;
-import com.hydrozagadka.WaterContainer;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.client.Client;
@@ -14,18 +16,21 @@ import java.util.List;
 
 @Stateless
 public class ApiConnector {
-    Client client = ClientBuilder.newClient();
-
+    private Client client = ClientBuilder.newClient();
+    private Logger logger = LoggerFactory.getLogger(ApiConnector.class);
 
     public List<NewestWaterContainerData> load(){
         WebTarget webTarget = client.target("https://danepubliczne.imgw.pl/api/data/hydro/");
-
+        logger.info("pobieranie danych z https://danepubliczne.imgw.pl/api/data/hydro/");
         Response response = webTarget.request().accept(MediaType.APPLICATION_JSON).get();
 
 
         if (response.getStatus() != 200) {
             throw new RuntimeException("Nie możemy pobrać danych");
         }
-        return response.readEntity(new GenericType<List<NewestWaterContainerData>>() {});
+        List<NewestWaterContainerData> result = response.readEntity(new GenericType<List<NewestWaterContainerData>>() {});
+        logger.info("status połącznia : "+response.getStatus());
+        logger.info("Pobrano łącznie "+result.size()+" rekordów");
+        return result;
     }
 }

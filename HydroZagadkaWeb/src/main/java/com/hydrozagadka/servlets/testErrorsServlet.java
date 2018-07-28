@@ -24,7 +24,7 @@ public class testErrorsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        throw new RuntimeException("ojojojojojoj");
+        throw new RuntimeException("testowy błąd");
 
     }
 }

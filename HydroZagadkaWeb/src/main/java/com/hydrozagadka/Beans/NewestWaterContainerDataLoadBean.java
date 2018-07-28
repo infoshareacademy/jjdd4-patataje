@@ -22,9 +22,9 @@ public class NewestWaterContainerDataLoadBean {
           if(waterContainerDao.findById(s.getId())==null){
               waterContainerDao.save(new WaterContainer(
                       s.getId(),
-                      s.getRzeka(),
-                      s.getStacja(),
-                      s.getWojewodztwo(),
+                      s.getContainer(),
+                      s.getStation(),
+                      s.getProvince(),
                       new ArrayList<>()));
           }
       });

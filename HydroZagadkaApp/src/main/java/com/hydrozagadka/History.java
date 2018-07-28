@@ -26,19 +26,19 @@ public class History {
     @Column(name = "temperatures")
     private Double temperature;
 
-    @Column(name="stan_wody_data_pomiaru")
-    private LocalDateTime stanWodyDataPomiaru;
+    @Column(name="level_of_water_date")
+    private LocalDateTime levelOfWaterDate;
 
-    @Column(name = "temperatura_wody_data_pomiaru")
-    private LocalDateTime temperaturaWodyDataPomiaru;
-    @Column(name="zjawisko_lodowe")
-    private Integer zjawiskoLodowe;
-    @Column(name="zjawisko_lodowe_data_pomiaru")
-    private LocalDateTime zjawiskoLodoweDataPomiaru;
-    @Column(name="zjawisko_zarastania")
-    private Integer zjawiskoZarastania;
-    @Column(name="zjawisko_zarastania_data_pomiaru")
-    private LocalDateTime zjawiskoZarastaniaDataPomiaru;
+    @Column(name = "temperature_date")
+    private LocalDateTime temperatureDate;
+    @Column(name="ice_phenomenon")
+    private Integer icePhenomenon;
+    @Column(name="ice_phenomenon_date")
+    private LocalDateTime icePhenomenonDate;
+    @Column(name="overgrowth_phenomenon")
+    private Integer overgrowthPhenomenon;
+    @Column(name="overgrowth_phenomenon_date")
+    private LocalDateTime overgrowthPhenomenonDate;
 
     @ManyToOne
     @JoinColumn(name = "container_id")
@@ -144,69 +144,66 @@ public class History {
     }
 
 
-    public History(LocalDate date, Double waterDeep, Double flow, Double temperature, LocalDateTime stanWodyDataPomiaru, LocalDateTime temperaturaWodyDataPomiaru, Integer zjawiskoLodowe, LocalDateTime zjawiskoLodoweDataPomiaru, Integer zjawiskoZarastania, LocalDateTime zjawiskoZarastaniaDataPomiaru, WaterContainer waterContainers, Long containerId) {
+    public History(LocalDate date, Double waterDeep, Double flow, Double temperature, LocalDateTime levelOfWaterDate, LocalDateTime temperatureDate, Integer icePhenomenon, LocalDateTime icePhenomenonDate, Integer overgrowthPhenomenon, LocalDateTime overgrowthPhenomenonDate, WaterContainer waterContainers, Long containerId) {
         this.date = date;
         this.waterDeep = waterDeep;
         this.flow = flow;
         this.temperature = temperature;
-        this.stanWodyDataPomiaru = stanWodyDataPomiaru;
-        this.temperaturaWodyDataPomiaru = temperaturaWodyDataPomiaru;
-        this.zjawiskoLodowe = zjawiskoLodowe;
-        this.zjawiskoLodoweDataPomiaru = zjawiskoLodoweDataPomiaru;
-        this.zjawiskoZarastania = zjawiskoZarastania;
-        this.zjawiskoZarastaniaDataPomiaru = zjawiskoZarastaniaDataPomiaru;
+        this.levelOfWaterDate = levelOfWaterDate;
+        this.temperatureDate = temperatureDate;
+        this.icePhenomenon = icePhenomenon;
+        this.icePhenomenonDate = icePhenomenonDate;
+        this.overgrowthPhenomenon = overgrowthPhenomenon;
+        this.overgrowthPhenomenonDate = overgrowthPhenomenonDate;
         this.waterContainers = waterContainers;
         this.containerId = containerId;
     }
 
-    public LocalDateTime getStanWodyDataPomiaru() {
-        return stanWodyDataPomiaru;
+    public LocalDateTime getLevelOfWaterDate() {
+        return levelOfWaterDate;
     }
 
-    public void setStanWodyDataPomiaru(LocalDateTime stanWodyDataPomiaru) {
-        this.stanWodyDataPomiaru = stanWodyDataPomiaru;
+    public void setLevelOfWaterDate(LocalDateTime levelOfWaterDate) {
+        this.levelOfWaterDate = levelOfWaterDate;
     }
 
-
-
-
-    public LocalDateTime getTemperaturaWodyDataPomiaru() {
-        return temperaturaWodyDataPomiaru;
+    public LocalDateTime getTemperatureDate() {
+        return temperatureDate;
     }
 
-    public void setTemperaturaWodyDataPomiaru(LocalDateTime temperaturaWodyDataPomiaru) {
-        this.temperaturaWodyDataPomiaru = temperaturaWodyDataPomiaru;
+    public void setTemperatureDate(LocalDateTime temperatureDate) {
+        this.temperatureDate = temperatureDate;
     }
 
-    public Integer getZjawiskoLodowe() {
-        return zjawiskoLodowe;
+    public Integer getIcePhenomenon() {
+        return icePhenomenon;
     }
 
-    public void setZjawiskoLodowe(Integer zjawiskoLodowe) {
-        this.zjawiskoLodowe = zjawiskoLodowe;
+    public void setIcePhenomenon(Integer icePhenomenon) {
+        this.icePhenomenon = icePhenomenon;
     }
 
-    public LocalDateTime getZjawiskoLodoweDataPomiaru() {
-        return zjawiskoLodoweDataPomiaru;
+    public LocalDateTime getIcePhenomenonDate() {
+        return icePhenomenonDate;
     }
 
-    public void setZjawiskoLodoweDataPomiaru(LocalDateTime zjawiskoLodoweDataPomiaru) {
-        this.zjawiskoLodoweDataPomiaru = zjawiskoLodoweDataPomiaru;
+    public void setIcePhenomenonDate(LocalDateTime icePhenomenonDate) {
+        this.icePhenomenonDate = icePhenomenonDate;
     }
 
-    public Integer getZjawiskoZarastania() {
-        return zjawiskoZarastania;
+    public Integer getOvergrowthPhenomenon() {
+        return overgrowthPhenomenon;
     }
 
-    public void setZjawiskoZarastania(Integer zjawiskoZarastania) {
-        this.zjawiskoZarastania = zjawiskoZarastania;
+    public void setOvergrowthPhenomenon(Integer overgrowthPhenomenon) {
+        this.overgrowthPhenomenon = overgrowthPhenomenon;
     }
 
-    public LocalDateTime getZjawiskoZarastaniaDataPomiaru() {
-        return zjawiskoZarastaniaDataPomiaru;
+    public LocalDateTime getOvergrowthPhenomenonDate() {
+        return overgrowthPhenomenonDate;
     }
 
-    public void setZjawiskoZarastaniaDataPomiaru(LocalDateTime zjawiskoZarastaniaDataPomiaru) {
-        this.zjawiskoZarastaniaDataPomiaru = zjawiskoZarastaniaDataPomiaru;
+    public void setOvergrowthPhenomenonDate(LocalDateTime overgrowthPhenomenonDate) {
+        this.overgrowthPhenomenonDate = overgrowthPhenomenonDate;
     }
 }
