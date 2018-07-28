@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="USERS")
-public class Users {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,10 +21,10 @@ public class Users {
     @Column(name="Stats")
     private Integer stats;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(String email, String token, boolean adminaaa, Integer stats) {
+    public User(String email, String token, boolean adminaaa, Integer stats) {
         this.email = email;
         this.token = token;
         this.adminaaa = adminaaa;
