@@ -4,7 +4,7 @@
 
 <head>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description"
           content="Project of Web Application which shows water levels for lakes and rivers in Poland.">
@@ -24,19 +24,26 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
     <link href="../../HydroZagadkaFront/css/stylish-portfolio.min.css" rel="stylesheet">
-    <#-- File Style Scripts-->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<#-- File Style Scripts-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+            integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+            integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+            crossorigin="anonymous"></script>
 
 </head>
 
 <body id="page-top">
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
+<script>(function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
+    js = d.createElement(s);
+    js.id = id;
     js.src = 'https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v3.0&appId=293962678012596&autoLogAppEvents=1';
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
@@ -55,26 +62,22 @@
         <h3 class="mb-5">
             <em>Aplikacja sprawdzająca stan wód w Polsce</em>
         </h3>
-        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#upload">Wyślij dane!</a>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#log">Zaloguj się!</a>
         <a class="btn btn-primary btn-xl js-scroll-trigger" href="#check">Sprawdź zbiornik!</a>
         <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">O aplikacji!</a>
     </div>
     <div class="overlay"></div>
 </header>
 
-
-<!-- upload plików -->
-<#include "changingParts/uploadFiles.ftlh">
+<!-- o aplikacji -->
+<#include "mainPartsOfPage/aboutApp.ftlh">
 
 <!-- Sprawdź zbiornik -->
 <#include "changingParts/checkContainer.ftlh">
 
-
-
 <!-- wyświetlanie danych - wykresy -->
 
 <#include "changingParts/charts.ftlh">
-
 
 <!-- wyświetlanie danych - mapa -->
 <#include "changingParts/maps.ftlh">
@@ -83,8 +86,8 @@
 
 <#include "mainPartsOfPage/logUser.ftlh">
 
-<!-- o aplikacji -->
-<#include "mainPartsOfPage/aboutApp.ftlh">
+<!-- upload plików -->
+<#include "changingParts/uploadFiles.ftlh">
 
 <!-- Kontakt -->
 <#include "mainPartsOfPage/aboutAuthors.ftlh">
@@ -108,31 +111,32 @@
 <!-- Custom scripts for this template -->
 <script src="../../HydroZagadkaFront/js/stylish-portfolio.min.js"></script>
 <script src="../../js/formcreator.js"></script>
-<script type="text/javascript" src="../../HydroZagadkaFront/bootstrap-filestyle-2.1.0/src/bootstrap-filestyle.min.js"> </script>
+<script type="text/javascript"
+        src="../../HydroZagadkaFront/bootstrap-filestyle-2.1.0/src/bootstrap-filestyle.min.js"></script>
 <script type="text/javascript">
     $('#input01').filestyle()
     $('#input001').filestyle({
-        'placeholder' : 'Placeholder test'
+        'placeholder': 'Placeholder test'
     });
     $('#input02').filestyle({
-        text : 'My filestyle',
+        text: 'My filestyle',
         dragdrop: false
     });
 
     $('#input03').filestyle({
         badge: true,
-        input : false,
-        btnClass : 'btn-primary',
-        htmlIcon : '<span class="oi oi-folder"></span> '
+        input: false,
+        btnClass: 'btn-primary',
+        htmlIcon: '<span class="oi oi-folder"></span> '
     });
 
     $('#input04').filestyle({
-        htmlIcon : '<span class="oi oi-folder"></span> ',
+        htmlIcon: '<span class="oi oi-folder"></span> ',
         text: ''
     });
 
     $('#input05').filestyle({
-        btnClass : 'btn-outline-primary'
+        btnClass: 'btn-outline-primary'
     });
 
     $('#input06').filestyle({
@@ -143,20 +147,20 @@
     });
 
     $('#input08').filestyle({
-        text : ' File',
-        btnClass : 'btn-success'
+        text: ' File',
+        btnClass: 'btn-success'
     });
 
-    $('#clear').click(function() {
+    $('#clear').click(function () {
         $('#input08').filestyle('clear');
     });
 
     $('#input09').filestyle({
-        text : 'File',
-        btnClass : 'btn-primary'
+        text: 'File',
+        btnClass: 'btn-primary'
     });
 
-    $('#toggleInput').click(function() {
+    $('#toggleInput').click(function () {
         var fs = $('#input09');
         if (fs.filestyle('input'))
             fs.filestyle('input', false);
@@ -165,27 +169,27 @@
     });
 
     $('#input11').filestyle({
-        text : 'Multiple',
-        btnClass : 'btn-danger'
+        text: 'Multiple',
+        btnClass: 'btn-danger'
     });
 
     $('#input13').filestyle({
-        disabled : true
+        disabled: true
     });
 
     $('#input14').filestyle({
-        buttonBefore : true
+        buttonBefore: true
     });
     $('#input15').filestyle({
-        size : 'lg'
+        size: 'lg'
     });
     $('#input16').filestyle({
-        size : 'sm'
+        size: 'sm'
     });
 
     // nultiple initialize
     $('.test').filestyle({
-        btnClass : 'btn-primary'
+        btnClass: 'btn-primary'
     });
 
     $('#countRed').on('click', function () {

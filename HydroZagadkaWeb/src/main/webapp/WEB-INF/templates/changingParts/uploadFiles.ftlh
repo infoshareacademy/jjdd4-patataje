@@ -2,14 +2,17 @@
     <div class="container text-center my-auto">
         <div class="row">
             <div class="col-lg-10 mx-auto" id="uploadfile">
-                <h2> Aby zobaczyć wykresy wyślij plik zip:</h2>
+                <h2> Prześlij plik zip ze swoimi danymi:</h2>
                 <br>
                 <form class="formclass" method="post" id="loadfile" action="/loadservlet" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-sm"></div>
                         <div class="col-6">
                             <div class="form-group">
-                                <input type="file" name="file"  class="filestyle"  data-text="Wybierz plik" accept=".zip"
+                                <input type="file" name="file"
+                                       class="filestyle"
+                                       data-text="Wybierz plik"
+                                       accept=".zip"
                                        required oninvalid="this.setCustomValidity(' Nie wybrałeś pliku .zip')"
                                        oninput="setCustomValidity('')">
                             </div>
@@ -20,7 +23,6 @@
                     <div>
                         <input type="submit" class="btn btn-primary"></div>
                 </form>
-
             </div>
         </div>
     </div>
