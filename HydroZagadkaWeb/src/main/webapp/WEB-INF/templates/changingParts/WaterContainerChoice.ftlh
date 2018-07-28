@@ -47,6 +47,10 @@
                 <input type="checkbox" class="form-check-input" id="checkdate">
                 <label class="form-check-label" for="checkdate">Sprawdź dla wybranego przedziału dat</label>
             </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="favorite">
+                <label class="form-check-label" for="favorite">Dodaj zbiornik do ulubionych</label>
+            </div>
             <div id="dates" style="display: none">
                 <input type="date" id="startdate">
                 <input type="date" id="enddate">

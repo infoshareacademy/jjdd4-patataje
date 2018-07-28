@@ -38,7 +38,7 @@ public class LoadServlet extends HttpServlet {
     private FreeMarkerConfig freeMarkerConfig;
 
     private Map<Long, WaterContainer> waterContainerMap;
-    public static final String DIRECT_PATH = "../../../../../HydroZagadkaApp/data";
+    public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file");
