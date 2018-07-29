@@ -1,7 +1,9 @@
 package com.hydrozagadka.dao;
 
 import com.hydrozagadka.History;
+import com.hydrozagadka.Model.Statistics;
 import com.hydrozagadka.User;
+import com.hydrozagadka.WaterContainer;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -21,8 +23,8 @@ public class AdminStatsDao {
         return q.getResultList();
     }
 
-    public List<StatisticsDao> getStatistics (){
-        Query q = entityManager.createQuery("Select Statistics.waterContainer, Statistics.views from  Statistics where views>0");
+    public List<Statistics> getStatistics (){
+        Query q = entityManager.createQuery("Select Statistics.waterContainer from  Statistics where views>0");
         return q.getResultList();
     }
 }

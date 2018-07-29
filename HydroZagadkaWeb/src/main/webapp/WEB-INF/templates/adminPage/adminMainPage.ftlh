@@ -36,18 +36,86 @@
 <#include "navBarAdmin.ftlh">
 
 <!-- Header -->
-<section style="background-image: url('../../../HydroZagadkaFront/img/bg-masthead22.jpg')">
-    <div class="container">
-       <div >
-           <h1 class="mb-1">Witaj na panelu administratora</h1>
-<br>
-           <h3>Tutaj możesz zarządzać stroną HydroZagadka. <br>
-           Powodzenia!</h3>
-       </div>
+<#--<section style="background-image: url('../../../HydroZagadkaFront/img/bg-masthead22.jpg')">-->
+    <#--<div class="container">-->
+       <#--<div >-->
+           <#--<h1 class="mb-1">Witaj na panelu administratora</h1>-->
+<#--<br>-->
+           <#--<h3>Tutaj możesz zarządzać stroną HydroZagadka. <br>-->
+           <#--Powodzenia!</h3>-->
+       <#--</div>-->
 
+    <#--</div>-->
+    <#--<div class="overlay"></div>-->
+<#--</section>-->
+
+
+
+<section class="content-section" id="portfolio">
+    <div class="container">
+        <div class="content-section-heading text-center">
+            <h3 class="text-secondary mb-0">Adminie</h3>
+            <h2 class="mb-5">co chcesz dziś zrobić?</h2>
+        </div>
+
+
+        <div class="row no-gutters">
+            <div class="col"></div>
+            <div class="col-4">
+                <a class="portfolio-item" href="#stats">
+              <span class="caption">
+                <span class="caption-content">
+                  <h2>Statystyki</h2>
+                  <p class="mb-0">Sprawdź wyświetlenia zbiorników!</p>
+                </span>
+              </span>
+                    <img class="img-fluid" src="../../../HydroZagadkaFront/img/portfolio-7.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-4">
+                <a class="portfolio-item" href="#users">
+              <span class="caption">
+                <span class="caption-content">
+                  <h2>Lista użytkowników</h2>
+                  <p class="mb-0">Zobacz pełną listę użytkowników!</p>
+                </span>
+              </span>
+                    <img class="img-fluid" src="../../../HydroZagadkaFront/img/portfolio-2.jpg" alt="">
+                </a>
+            </div>
+            <div class="col"></div>
+        </div>
+
+        <div class="row no-gutters">
+            <div class="col"></div>
+            <div class="col-4">
+                <a class="portfolio-item" href="#logs">
+              <span class="caption">
+                <span class="caption-content">
+                  <h2>Raporty</h2>
+                  <p class="mb-0">Wyświetl logi!</p>
+                </span>
+              </span>
+                    <img class="img-fluid" src="../../../HydroZagadkaFront/img/portfolio-3.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-4">
+                <a class="portfolio-item" href="#">
+              <span class="caption">
+                <span class="caption-content">
+                  <h2>Konfiguruj</h2>
+                  <p class="mb-0">Konguruj.</p>
+                </span>
+              </span>
+                    <img class="img-fluid" src="../../../HydroZagadkaFront/img/portfolio-4.jpg" alt="">
+                </a>
+            </div>
+            <div class="col"></div>
+        </div>
+        </div>
     </div>
-    <div class="overlay"></div>
 </section>
+
 
 
 <!-- Footer -->

@@ -19,23 +19,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(urlPatterns = "/userList")
-public class UserListServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/IsAdmin")
+public class IsAdminServlet extends HttpServlet {
 
     private static Logger logger = LoggerFactory.getLogger(com.hydrozagadka.servlets.WelcomeServlet.class);
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
-    @Inject
-    private AdminStatsDao adminStatsDao;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
-        List<User> usersList = adminStatsDao.getAllUsersList();
-        Template template = freeMarkerConfig.getTemplate("adminPage/users.ftlh", getServletContext());
+           Template template = freeMarkerConfig.getTemplate("adminPage/isAdmin.ftlh", getServletContext());
 
         Map<String, Object> model = new HashMap<>();
-        model.put("Uzytkownik", usersList);
+
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
@@ -43,5 +40,6 @@ public class UserListServlet extends HttpServlet {
         }
     }
 }
+
 
 
