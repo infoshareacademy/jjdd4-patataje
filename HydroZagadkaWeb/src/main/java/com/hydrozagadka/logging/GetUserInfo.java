@@ -44,7 +44,7 @@ public class GetUserInfo implements Runnable {
         service.signRequest(token, oReq);
         Response oResp = oReq.send();
         JsonReader reader = Json.createReader(new ByteArrayInputStream(oResp.getBody().getBytes()));
-        JsonObject profile = reader.readObject()
+        JsonObject profile = reader.readObject();
         session.setAttribute("name", profile.getString("name"));
         session.setAttribute("email", profile.getString("email"));
         asyncContext.complete();
