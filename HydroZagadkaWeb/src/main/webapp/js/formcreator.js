@@ -2,28 +2,28 @@ $(document).ready(function () {
     $('#province').select2();
     $('#watercontainer').select2();
     $('#station').select2();
-    var mapchange=false;
+    var mapchange = false;
     $("#province").change(function () {
-        if($("#province").val()==-1){
+        if ($("#province").val() == -1) {
             return;
         }
         $.ajax({
-                url:"rest/"+$("#province").val(),
-                type:'get',
-                cache:false,
-                success:function(response){
+                url: "rest/" + $("#province").val(),
+                type: 'get',
+                cache: false,
+                success: function (response) {
                     $('#watercontainer').find('option').remove();
                     $('#watercontainer').append('<option value="-1">[Wybierz]</option>');
                     var options = response;
                     console.log(options);
                     for (var i = 0; i < options.length; i++) {
-                        $('#watercontainer').append('<option value='+options[i].name+'>'+options[i].name+'</option>');
+                        $('#watercontainer').append('<option value=' + options[i].name + '>' + options[i].name + '</option>');
                     }
-                   $('#watercontainerlist').fadeIn(1000);
+                    $('#watercontainerlist').fadeIn(1000);
                     $('#station').find('option').remove();
                     $('#station').append('<option value="-1">[Wybierz]</option>');
                 },
-                error:function(){
+                error: function () {
                     alert('error');
                 }
             }
@@ -31,27 +31,28 @@ $(document).ready(function () {
     });
 
 
-
     $("#watercontainer").change(function () {
-        if($("#province").val()==-1 || $("#watercontainer").val()==-1){
+        if ($("#province").val() == -1 || $("#watercontainer").val() == -1) {
             return;
         }
-        var rzeka=$("#watercontainer").val();
-        $('.invalid-feedback').css("display","none");
+        var rzeka = $("#watercontainer").val()
+        var province = $("#province").val()
+        var stacja =  $("#station").val();
+        $('.invalid-feedback').css("display", "none");
         $.ajax({
-                url:'rest/'+$("#province").val()+"/"+$("#watercontainer").val(),
-                type:'get',
-                cache:false,
-                success:function(response){
+                url: 'rest/' + $("#province").val() + "/" + $("#watercontainer").val(),
+                type: 'get',
+                cache: false,
+                success: function (response) {
                     $('#station').find('option').remove();
                     var options = response;
                     for (var i = 0; i < options.length; i++) {
-                        $('#station').append('<option value='+options[i].id+'>'+options[i].name+'</option>');
+                        $('#station').append('<option value=' + options[i].id + '>' + options[i].name + '</option>');
                     }
                     $('#stationlist').fadeIn(1000);
 
                 },
-                error:function(){
+                error: function () {
                     alert('error');
                 }
             }
@@ -59,8 +60,6 @@ $(document).ready(function () {
 
         google.charts.load('current', {
             'packages': ['map'],
-            // Note: you will need to get a mapsApiKey for your project.
-            // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
             'mapsApiKey': 'AIzaSyDQlTwqbQzIesvDheiMg2T6AzoWXA54Pa4'
         });
         google.charts.setOnLoadCallback(drawMap);
@@ -70,7 +69,7 @@ $(document).ready(function () {
             data.addColumn('string', 'Address');
             data.addColumn('string', 'Location');
             data.addRows([
-                ['rzeka '+rzeka, rzeka]
+                [province + ' rzeka ' + rzeka, province + " " + rzeka + " " ]
 
             ]);
 
@@ -115,26 +114,26 @@ $(document).ready(function () {
 
     $('.history-form').on('submit', function () {
         var historyId = $('#station').val();
-            var startdate = $('#startdate').val();
-            var enddate = $('#enddate').val();
-            var check = false;
-            if($('#favorite').is(":checked")){
-                check = true;
-            }
+        var startdate = $('#startdate').val();
+        var enddate = $('#enddate').val();
+        var check = false;
+        if ($('#favorite').is(":checked")) {
+            check = true;
+        }
         $.ajax({
-                url:'rest/id/'+historyId,
-                data:{
-                  startDate:startdate,
-                  endDate:enddate,
+                url: 'rest/id/' + historyId,
+                data: {
+                    startDate: startdate,
+                    endDate: enddate,
                     check: check
                 },
                 crossDomain: true,
-                type:'get',
-                success:function(response){
+                type: 'get',
+                success: function (response) {
                     console.log(response)
-                    if(response.length ==0){
-                      $("#curve_chart").html("<h1>Nie znaleziono wyników</h1>").fadeIn(2000);
-                      return;
+                    if (response.length == 0) {
+                        $("#curve_chart").html("<h1>Nie znaleziono wyników</h1>").fadeIn(2000);
+                        return;
                     }
                     else {
                         mapchange = true;
@@ -149,7 +148,7 @@ $(document).ready(function () {
                             data.push(Header);
                             for (var i = 0; i < history.length; i++) {
                                 var temp = [];
-                                temp.push(i+1);
+                                temp.push(i + 1);
                                 temp.push(history[i].flow);
                                 temp.push(history[i].temperature);
                                 temp.push(history[i].waterDeep);
@@ -164,15 +163,16 @@ $(document).ready(function () {
                                 curveType: 'function',
                                 legend: {position: 'bottom'},
                                 hAxis: {
-                                    minValue:1}
+                                    minValue: 1
+                                }
                             };
                             var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
                             chart.draw(chartdata, options);
                         }
                     }
-                    },
-                error:function(err){
+                },
+                error: function (err) {
                     alert('error');
                 }
             }
@@ -181,7 +181,7 @@ $(document).ready(function () {
     });
 
 
-    $('#checkdate').click(function() {
+    $('#checkdate').click(function () {
         $("#dates").toggle(this.checked);
     });
 });
