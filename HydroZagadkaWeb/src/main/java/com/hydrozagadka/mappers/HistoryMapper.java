@@ -24,7 +24,7 @@ public class HistoryMapper {
                         history.getWaterDeep(),
                         history.getFlow(),
                         history.getTemperature(),
-                        history.getDate().getDayOfMonth()))
+                        history.getDate()))
                 .collect(toList());
     }
 }

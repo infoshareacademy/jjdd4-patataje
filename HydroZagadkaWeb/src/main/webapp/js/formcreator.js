@@ -139,37 +139,39 @@ $(document).ready(function () {
                     else {
                         mapchange = true;
                         var history = response;
-                        google.charts.load('current', {'packages': ['corechart']});
+
+                        google.charts.load('current', {'packages':['line', 'corechart']});
                         google.charts.setOnLoadCallback(drawChart);
-
                         function drawChart() {
-
-                            var data = [];
-                            var Header = ['Dzień', 'Przepływ [m/s]', 'Temperatura [ C]', 'Poziom wody [cm]'];
-                            data.push(Header);
+                            var chartDiv = document.getElementById('curve_chart');
+                           var data = new google.visualization.DataTable();
+                            data.addColumn('date', 'Data');
+                            data.addColumn('number', "Przepływ [m/s]");
+                            data.addColumn('number', "Temperatura [ C]");
+                            data.addColumn('number', "Poziom wody [cm]");
                             for (var i = 0; i < history.length; i++) {
                                 var temp = [];
-                                temp.push(i+1);
+                                temp.push(new Date(history[i].date.year, history[i].date.monthValue-1,history[i].date.dayOfMonth));
                                 temp.push(history[i].flow);
                                 temp.push(history[i].temperature);
                                 temp.push(history[i].waterDeep);
-                                data.push(temp);
+                                data.addRow(temp);
                             }
-                            var chartdata = new google.visualization.arrayToDataTable(data);
 
-                            $('#curve_chart').fadeIn(2000);
+                            var materialOptions = {
+                                chart: {
+                                    title: 'Wyniki dla wybranego zbiornika wodnego'
+                                },
+                                width: 900,
+                                height: 600,
 
-                            var options = {
-                                title: 'Wykres zmian temperatury, przepływu oraz stanu wody dla wybranej stacji:',
-                                curveType: 'function',
-                                legend: {position: 'bottom'},
-                                hAxis: {
-                                    minValue:1}
                             };
-                            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
-                            chart.draw(chartdata, options);
+                                var materialChart = new google.charts.Line(chartDiv);
+                                materialChart.draw(data, materialOptions);
+
                         }
+
                     }
                     },
                 error:function(err){
