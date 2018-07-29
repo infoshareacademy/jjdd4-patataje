@@ -2,9 +2,9 @@ package com.hydrozagadka.Beans;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hydrozagadka.History;
-import com.hydrozagadka.Model.ChartHistory;
-import com.hydrozagadka.Model.StationView;
-import com.hydrozagadka.Model.WaterContainerView;
+import com.hydrozagadka.DTO.ChartHistory;
+import com.hydrozagadka.DTO.StationView;
+import com.hydrozagadka.DTO.WaterContainerView;
 import com.hydrozagadka.User;
 import com.hydrozagadka.WaterContainer;
 import com.hydrozagadka.dao.HistoryDao;
@@ -22,7 +22,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Path("/")

@@ -1,15 +1,11 @@
 package com.hydrozagadka.mappers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.hydrozagadka.Model.StationView;
-import com.hydrozagadka.Model.WaterContainerView;
+import com.hydrozagadka.DTO.StationView;
+import com.hydrozagadka.DTO.WaterContainerView;
 import com.hydrozagadka.WaterContainer;
 
 import javax.ejb.Stateless;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -30,13 +26,13 @@ public class WaterContainerMapper {
     public List<WaterContainerView> mapToWaterContainerView(List<WaterContainer> wt) throws JsonProcessingException {
 
         return wt.stream()
-                .filter(distinctByKey(WaterContainer::getContainerName))
                 .map(w->new WaterContainerView(w.getId(), w.getContainerName()))
                 .collect(Collectors.toList());
     }
 
     public List<StationView> mapToStationView(List<WaterContainer> wt) throws JsonProcessingException {
         return wt.stream()
+                .filter(distinctByKey(WaterContainer::getStationName))
                 .map(w-> new StationView(w.getId(), w.getStationName()))
                 .collect(Collectors.toList());
     }

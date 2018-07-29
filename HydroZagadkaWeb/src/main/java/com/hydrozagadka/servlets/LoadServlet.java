@@ -1,12 +1,16 @@
 package com.hydrozagadka.servlets;
 
 import com.hydrozagadka.Beans.UnzipDao;
+import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.WaterContainer;
 
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.logging.LogManager;
 import java.util.Map;
 
@@ -28,6 +33,9 @@ public class LoadServlet extends HttpServlet {
 
     @Inject
     private UnzipDao unzipDao;
+
+    @Inject
+    private FreeMarkerConfig freeMarkerConfig;
 
     private Map<Long, WaterContainer> waterContainerMap;
     public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";

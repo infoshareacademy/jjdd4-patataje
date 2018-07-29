@@ -27,6 +27,11 @@
                     <strong>Pafeł</strong>
                 </h4>
                 <p class="text-faded mb-0">"Wyślij mi pom'a"</p>
+                <a href="https://www.linkedin.com/in/pawe%C5%82-orlikowski/" style="color:honeydew "> <i class="icon-social-linkedin"></i> linkedInn</a>
+                <br>
+                <a href="https://github.com/orzeltcz" style="color:honeydew "> <i class="icon-social-github"></i> GitHub</a>
+
+
             </div>
             <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
             <span class="service-icon rounded-circle mx-auto mb-3">
@@ -38,6 +43,11 @@
                     <strong>Jóleg</strong>
                 </h4>
                 <p class="text-faded mb-0">"Na żydowski sposób!"</p>
+                <a href="https://www.linkedin.com/in/juliuszklos/" style="color:honeydew "> <i class="icon-social-linkedin"></i> linkedInn</a>
+                <br>
+                <a href="https://github.com/jkloss" style="color:honeydew "> <i class="icon-social-github"></i> GitHub</a>
+
+
             </div>
             <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
             <span class="service-icon rounded-circle mx-auto mb-3">
@@ -46,7 +56,11 @@
                 <h4>
                     <strong>Lócjan</strong>
                 </h4>
-                <p class="text-faded mb-0">"Zrobię to po Lucku"
+                <p class="text-faded mb-0">"Zrobię to po Lucku"</p>
+                <a href="https://www.linkedin.com/in/LucjanWroblewski/" style="color:honeydew "> <i class="icon-social-linkedin"></i> linkedInn</a>
+                <br>
+                <a href="https://github.com/LucjanWroblewski" style="color:honeydew "> <i class="icon-social-github"></i> GitHub</a>
+
 
             </div>
             <div class="col-lg-3 col-md-6">
@@ -57,6 +71,12 @@
                     <strong>Pałlina</strong>
                 </h4>
                 <p class="text-faded mb-0">"I don't know how to branch."</p>
+
+
+                <a href="https://www.linkedin.com/in/paulinaprzekop/" style="color:honeydew "> <i class="icon-social-linkedin"></i> linkedInn</a>
+                <br>
+                <a href="https://github.com/Paulucha" style="color:honeydew "> <i class="icon-social-github"></i> GitHub</a>
+
             </div>
         </div>
     </div>

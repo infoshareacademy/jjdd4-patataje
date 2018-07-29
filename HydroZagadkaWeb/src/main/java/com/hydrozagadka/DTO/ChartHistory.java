@@ -1,4 +1,4 @@
-package com.hydrozagadka.Model;
+package com.hydrozagadka.DTO;
 
 import java.time.LocalDate;
 
