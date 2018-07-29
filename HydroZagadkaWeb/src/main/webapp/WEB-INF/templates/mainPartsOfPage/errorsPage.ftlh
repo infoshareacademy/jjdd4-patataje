@@ -28,7 +28,6 @@
 
 <body id="page-top">
 
-
 <!-- Header -->
 <section>
     <div class="container">
@@ -63,7 +62,6 @@
 
     <div class="overlay"></div>
 </section>
-
 
 <!-- Footer -->
 

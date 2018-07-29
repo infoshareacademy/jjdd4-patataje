@@ -13,6 +13,9 @@
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="#stats">Statystyki</a>
         </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="#users">Lista użytkowników</a>
+        </li>
 
     </ul>
 </nav>

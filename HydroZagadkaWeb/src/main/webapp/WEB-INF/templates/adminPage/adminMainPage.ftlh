@@ -32,26 +32,22 @@
 <a class="menu-toggle rounded" href="#">
     <i class="fa fa-bars"></i>
 </a>
+
 <#include "navBarAdmin.ftlh">
 
 <!-- Header -->
 <section style="background-image: url('../../../HydroZagadkaFront/img/bg-masthead22.jpg')">
     <div class="container">
-       <div class="row">
+       <div >
            <h1 class="mb-1">Witaj na panelu administratora</h1>
 <br>
            <h3>Tutaj możesz zarządzać stroną HydroZagadka. <br>
            Powodzenia!</h3>
        </div>
-        <div class="row">
 
-
-
-        </div>
     </div>
     <div class="overlay"></div>
 </section>
-
 
 
 <!-- Footer -->

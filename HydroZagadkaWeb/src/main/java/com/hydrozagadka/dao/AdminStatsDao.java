@@ -16,7 +16,7 @@ public class AdminStatsDao {
     private EntityManager entityManager;
 
     public List<User> getAllUsersList(){
-        Query q = entityManager.createQuery("select User.email from User u");
+        Query q = entityManager.createQuery("select u from User u");
 
         return q.getResultList();
     }
