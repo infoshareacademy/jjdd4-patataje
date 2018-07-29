@@ -3,6 +3,7 @@ package com.hydrozagadka.Beans;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hydrozagadka.History;
 import com.hydrozagadka.Model.ChartHistory;
+import com.hydrozagadka.Model.StationView;
 import com.hydrozagadka.Model.WaterContainerView;
 import com.hydrozagadka.User;
 import com.hydrozagadka.WaterContainer;
@@ -53,7 +54,7 @@ public class WTbyProvinceRest {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getWTbyProvinces(@PathParam("province") String province) throws JsonProcessingException {
         List<WaterContainer> waterContainerList = waterContainerDao.getWaterContainerByProvince(province);
-        List<WaterContainerView> waterContainerViews = waterContainerMapper.mapToWaterContainerView(waterContainerList);
+        List<StationView> waterContainerViews = waterContainerMapper.mapToStationView(waterContainerList);
         logger.info("/rest/province filtrowanie danych po województwach zwrócono " + waterContainerViews.size() + " rekordów");
         return Response.ok(waterContainerViews).build();
     }
@@ -63,7 +64,7 @@ public class WTbyProvinceRest {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getWTbyProvinces(@PathParam("province") String province, @PathParam("container") String container) throws JsonProcessingException {
         List<WaterContainer> waterContainers = waterContainerDao.getWaterContainerByProvinceAndwaterContainer(province, container);
-        List<WaterContainerView> waterContainerViews = waterContainerMapper.mapToStationView(waterContainers);
+        List<WaterContainerView> waterContainerViews = waterContainerMapper.mapToWaterContainerView(waterContainers);
         logger.info("/rest/province/container filtrowanie danych po województwie i zbiorniku zwrócono " + waterContainerViews.size() + " rekordów");
         return Response.ok(waterContainerViews).build();
     }

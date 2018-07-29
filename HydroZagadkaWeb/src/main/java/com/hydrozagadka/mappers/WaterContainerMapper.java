@@ -35,9 +35,9 @@ public class WaterContainerMapper {
                 .collect(Collectors.toList());
     }
 
-    public List<WaterContainerView> mapToStationView(List<WaterContainer> wt) throws JsonProcessingException {
+    public List<StationView> mapToStationView(List<WaterContainer> wt) throws JsonProcessingException {
         return wt.stream()
-                .map(w-> new WaterContainerView(w.getId(), w.getStationName()))
+                .map(w-> new StationView(w.getId(), w.getStationName()))
                 .collect(Collectors.toList());
     }
 
