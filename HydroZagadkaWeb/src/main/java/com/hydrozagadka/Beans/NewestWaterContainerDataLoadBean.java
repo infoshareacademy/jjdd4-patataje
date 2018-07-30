@@ -21,8 +21,6 @@ public class NewestWaterContainerDataLoadBean {
     StatisticsDao statisticsDao;
 
     public void loadNewestWaterContainerToDatabase(List<NewestWaterContainerData> apiData){
-
-
       apiData.forEach(s-> {
           if(waterContainerDao.findById(s.getId())==null){
               WaterContainer wt = new WaterContainer(
