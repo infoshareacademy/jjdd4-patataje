@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class CSVLoader {
-    private static final String DIRECT_PATH = System.getProperty("java.io.tmpdir");
+    private static final String DIRECT_PATH = System.getProperty("jboss.server.home.dir");
     private static Logger logger = LoggerFactory.getLogger(CSVLoader.class);
 
     private BufferedReader br;

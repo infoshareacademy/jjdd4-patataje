@@ -39,7 +39,7 @@ public class LoadServlet extends HttpServlet {
 
     private Map<Long, WaterContainer> waterContainerMap;
 
-    public static final String DIRECT_PATH = System.getProperty("java.io.tmpdir");
+    public static final String DIRECT_PATH = System.getProperty("jboss.server.home.dir");
 
 
 
