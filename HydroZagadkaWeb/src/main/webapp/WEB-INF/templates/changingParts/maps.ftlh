@@ -4,7 +4,6 @@
             <div class="col-lg-10 mx-auto" id="mapa" style="display:none;">
                 <h5> Okolica wybranego zbiornika zaznaczona na mapie:</h5>
 
-                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                 <div id="map_div" style="height: 500px; width: 900px"></div>
             </div>
         </div>

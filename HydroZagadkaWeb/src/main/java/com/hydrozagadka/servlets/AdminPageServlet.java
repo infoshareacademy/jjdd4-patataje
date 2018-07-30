@@ -3,6 +3,8 @@ package com.hydrozagadka.servlets;
 import com.hydrozagadka.Model.Statistics;
 import com.hydrozagadka.User;
 import com.hydrozagadka.dao.AdminStatsDao;
+import com.hydrozagadka.DTO.ProvinceStatisticView;
+import com.hydrozagadka.dao.AdminStatsDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -29,17 +31,20 @@ public class AdminPageServlet extends HttpServlet {
     private FreeMarkerConfig freeMarkerConfig;
     @Inject
     private AdminStatsDao adminStatsDao;
+
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("adminPage/adminMainPage.ftlh", getServletContext());
 
         List<User> usersList = adminStatsDao.getAllUsersList();
-        List<Statistics> WCList = adminStatsDao.getStatistics();
+//        List<Statistics> WCList = adminStatsDao.getStatistics();
+        List<ProvinceStatisticView> provinceStatisticViews = adminStatsDao.getStatsByProvince();
         Map<String, Object> model = new HashMap<>();
         model.put("Uzytkownik", usersList);
-        model.put("WCList", WCList);
-
+//        model.put("WCList", WCList);
+        model.put("provincestats",provinceStatisticViews);
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {

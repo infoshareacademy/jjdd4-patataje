@@ -1,5 +1,7 @@
 package com.hydrozagadka.servlets;
 
+import com.hydrozagadka.Beans.DatabaseLoadBean;
+import com.hydrozagadka.Beans.LoadZipToDatabaseBean;
 import com.hydrozagadka.Beans.UnzipDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import freemarker.template.Template;
@@ -37,8 +39,11 @@ public class LoadServlet extends HttpServlet {
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
 
-    private Map<Long, WaterContainer> waterContainerMap;
-    public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
+    @Inject
+    private LoadZipToDatabaseBean loadZipToDatabaseBean;
+    @Inject
+    DatabaseLoadBean databaseLoadBean;
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file");
@@ -53,11 +58,11 @@ public class LoadServlet extends HttpServlet {
             return;
         }
         InputStream is = filePart.getInputStream();
-        unzipDao.unzip(is, DIRECT_PATH);
-        logger.info("Unzip File: {}");
-        CSVLoader csvLoader = new CSVLoader();
-        waterContainerMap = csvLoader.getAllContainers();
-        response.sendRedirect("/database");
+        loadZipToDatabaseBean.unzipFile(is);
+        databaseLoadBean.loadWaterContainer();
+        databaseLoadBean.loadHistory();
+        databaseLoadBean.loadDataFromApi();
+        response.sendRedirect("/welcome");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

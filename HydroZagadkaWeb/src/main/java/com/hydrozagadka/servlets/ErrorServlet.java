@@ -18,7 +18,7 @@ import java.util.Map;
 
 @WebServlet(urlPatterns = "/error")
 public class ErrorServlet extends HttpServlet {
-    private static Logger logger = LoggerFactory.getLogger(com.hydrozagadka.servlets.WelcomeServlet.class);
+    private static Logger logger = LoggerFactory.getLogger(com.hydrozagadka.servlets.ErrorServlet.class);
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
 
@@ -43,11 +43,11 @@ public class ErrorServlet extends HttpServlet {
             requestUri = "Nieznany";
         }
 
-        logger.warn("Error occured, from servlet: " + servletName + ", see details: " + " error code: " + statusCode + " ,throwable: " + throwable);
+
 
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("mainPartsOfPage/errorsPage.ftlh", getServletContext());
-
+        logger.warn("Error occured, from servlet: " + servletName + ", see details: " + " error code: " + statusCode + " ,throwable: " + throwable);
 
         Map<String, Object> model = new HashMap<>();
         model.put("statusCode", statusCode);

@@ -1,29 +1,37 @@
+google.charts.load('current', {
+    'packages': ['map','line', 'corechart'],
+    // Note: you will need to get a mapsApiKey for your project.
+    // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+    'mapsApiKey': 'AIzaSyDQlTwqbQzIesvDheiMg2T6AzoWXA54Pa4',
+    'language': 'pl'
+});
+
 $(document).ready(function () {
     $('#province').select2();
     $('#watercontainer').select2();
     $('#station').select2();
-    var mapchange = false;
+    var mapchange=false;
     $("#province").change(function () {
-        if ($("#province").val() == -1) {
+        if($("#province").val()==-1){
             return;
         }
         $.ajax({
-                url: "rest/" + $("#province").val(),
-                type: 'get',
-                cache: false,
-                success: function (response) {
+                url:"rest/"+$("#province").val(),
+                type:'get',
+                cache:false,
+                success:function(response){
                     $('#watercontainer').find('option').remove();
                     $('#watercontainer').append('<option value="-1">[Wybierz]</option>');
                     var options = response;
                     console.log(options);
                     for (var i = 0; i < options.length; i++) {
-                        $('#watercontainer').append('<option value=' + options[i].name + '>' + options[i].name + '</option>');
+                        $('#watercontainer').append('<option value='+options[i].name+'>'+options[i].name+'</option>');
                     }
-                    $('#watercontainerlist').fadeIn(1000);
+                   $('#watercontainerlist').fadeIn(1000);
                     $('#station').find('option').remove();
                     $('#station').append('<option value="-1">[Wybierz]</option>');
                 },
-                error: function () {
+                error:function(){
                     alert('error');
                 }
             }
@@ -31,148 +39,152 @@ $(document).ready(function () {
     });
 
 
+
     $("#watercontainer").change(function () {
-        if ($("#province").val() == -1 || $("#watercontainer").val() == -1) {
+        if($("#province").val()==-1 || $("#watercontainer").val()==-1){
             return;
         }
-        var rzeka = $("#watercontainer").val()
-        var province = $("#province").val()
-        var stacja =  $("#station").val();
-        $('.invalid-feedback').css("display", "none");
+
+
+        $('.invalid-feedback').css("display","none");
         $.ajax({
-                url: 'rest/' + $("#province").val() + "/" + $("#watercontainer").val(),
-                type: 'get',
-                cache: false,
-                success: function (response) {
+                url:'rest/'+$("#province").val()+"/"+$("#watercontainer").val(),
+                type:'get',
+                cache:false,
+                success:function(response){
                     $('#station').find('option').remove();
                     var options = response;
                     for (var i = 0; i < options.length; i++) {
-                        $('#station').append('<option value=' + options[i].id + '>' + options[i].name + '</option>');
+                        $('#station').append('<option value='+options[i].id+'>'+options[i].name+'</option>');
                     }
                     $('#stationlist').fadeIn(1000);
 
                 },
-                error: function () {
+                error:function(){
                     alert('error');
                 }
             }
         );
 
-        google.charts.load('current', {
-            'packages': ['map'],
-            'mapsApiKey': 'AIzaSyDQlTwqbQzIesvDheiMg2T6AzoWXA54Pa4'
-        });
-        google.charts.setOnLoadCallback(drawMap);
 
-        function drawMap() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Address');
-            data.addColumn('string', 'Location');
-            data.addRows([
-                [province + ' rzeka ' + rzeka, province + " " + rzeka + " " ]
-
-            ]);
-
-            var options = {
-                mapType: 'styledMap',
-                zoomLevel: 9,
-                showTooltip: true,
-                showInfoWindow: true,
-                useMapTypeControl: true,
-                maps: {
-                    // Your custom mapTypeId holding custom map styles.
-                    styledMap: {
-                        name: 'Styled Map', // This name will be displayed in the map type control.
-                        styles: [
-                            {
-                                featureType: 'poi.attraction',
-                                stylers: [{color: '#fce8b2'}]
-                            },
-                            {
-                                featureType: 'road.highway',
-                                stylers: [{hue: '#0277bd'}, {saturation: -50}]
-                            },
-                            {
-                                featureType: 'road.highway',
-                                elementType: 'labels.icon',
-                                stylers: [{hue: '#000'}, {saturation: 100}, {lightness: 50}]
-                            },
-                            {
-                                featureType: 'landscape',
-                                stylers: [{hue: '#259b24'}, {saturation: 10}, {lightness: -22}]
-                            }
-                        ]
-                    }
-                }
-            };
-
-            var map = new google.visualization.Map(document.getElementById('map_div'));
-            map.draw(data, options);
-            $('#mapa').fadeIn(2000);
-        }
     })
+
+
 
     $('.history-form').on('submit', function () {
         var historyId = $('#station').val();
-        var startdate = $('#startdate').val();
-        var enddate = $('#enddate').val();
-        var check = false;
-        if ($('#favorite').is(":checked")) {
-            check = true;
-        }
+            var startdate = $('#startdate').val();
+            var enddate = $('#enddate').val();
+            var check = false;
+            if($('#favorite').is(":checked")){
+                check = true;
+            }
         $.ajax({
-                url: 'rest/id/' + historyId,
-                data: {
-                    startDate: startdate,
-                    endDate: enddate,
+                url:'rest/id/'+historyId,
+                data:{
+                  startDate:startdate,
+                  endDate:enddate,
                     check: check
                 },
                 crossDomain: true,
-                type: 'get',
-                success: function (response) {
+                type:'get',
+                success:function(response){
                     console.log(response)
-                    if (response.length == 0) {
-                        $("#curve_chart").html("<h1>Nie znaleziono wyników</h1>").fadeIn(2000);
-                        return;
+                    if(response.length === 0){
+                      $("#curve_chart").html("<h1>Nie znaleziono wyników</h1>").fadeIn(2000);
+                      return;
                     }
                     else {
                         mapchange = true;
                         var history = response;
-                        google.charts.load('current', {'packages': ['corechart']});
-                        google.charts.setOnLoadCallback(drawChart);
 
+
+                        drawChart()
+
+                        var rzeka=$("#watercontainer").val();
+                        var selectedOptionText = $('#station option:selected').text()
+
+                        drawMap(selectedOptionText)
+
+                        function drawMap(name) {
+                            var data = new google.visualization.DataTable();
+                            data.addColumn('string', 'Address');
+                            data.addColumn('string', 'Location');
+                            data.addRows([
+                                ['rzeka '+ rzeka + ' ' + name, rzeka + ' ' + name]
+
+                            ]);
+
+                            var options = {
+                                mapType: 'styledMap',
+                                zoomLevel: 9,
+                                showTooltip: true,
+                                showInfoWindow: true,
+                                useMapTypeControl: true,
+                                maps: {
+                                    // Your custom mapTypeId holding custom map styles.
+                                    styledMap: {
+                                        name: 'Styled Map', // This name will be displayed in the map type control.
+                                        styles: [
+                                            {
+                                                featureType: 'poi.attraction',
+                                                stylers: [{color: '#fce8b2'}]
+                                            },
+                                            {
+                                                featureType: 'road.highway',
+                                                stylers: [{hue: '#0277bd'}, {saturation: -50}]
+                                            },
+                                            {
+                                                featureType: 'road.highway',
+                                                elementType: 'labels.icon',
+                                                stylers: [{hue: '#000'}, {saturation: 100}, {lightness: 50}]
+                                            },
+                                            {
+                                                featureType: 'landscape',
+                                                stylers: [{hue: '#259b24'}, {saturation: 10}, {lightness: -22}]
+                                            }
+                                        ]
+                                    }
+                                }
+                            };
+
+                            var map = new google.visualization.Map(document.getElementById('map_div'));
+                            map.draw(data, options);
+                            $('#mapa').fadeIn(2000);
+                        }
                         function drawChart() {
-
-                            var data = [];
-                            var Header = ['Dzień', 'Przepływ [m/s]', 'Temperatura [ C]', 'Poziom wody [cm]'];
-                            data.push(Header);
+                            var chartDiv = document.getElementById('curve_chart');
+                           var data = new google.visualization.DataTable();
+                            data.addColumn('date', 'Data');
+                            data.addColumn('number', "Przepływ [m/s]");
+                            data.addColumn('number', "Temperatura [ C]");
+                            data.addColumn('number', "Poziom wody [cm]");
                             for (var i = 0; i < history.length; i++) {
                                 var temp = [];
-                                temp.push(i + 1);
+                                temp.push(new Date(history[i].date.year, history[i].date.monthValue-1,history[i].date.dayOfMonth));
                                 temp.push(history[i].flow);
                                 temp.push(history[i].temperature);
                                 temp.push(history[i].waterDeep);
-                                data.push(temp);
+                                data.addRow(temp);
                             }
-                            var chartdata = new google.visualization.arrayToDataTable(data);
 
-                            $('#curve_chart').fadeIn(2000);
+                            var materialOptions = {
+                                chart: {
+                                    title: 'Wyniki dla wybranego zbiornika wodnego'
+                                },
+                                width: 900,
+                                height: 600,
 
-                            var options = {
-                                title: 'Wykres zmian temperatury, przepływu oraz stanu wody dla wybranej stacji:',
-                                curveType: 'function',
-                                legend: {position: 'bottom'},
-                                hAxis: {
-                                    minValue: 1
-                                }
                             };
-                            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
-                            chart.draw(chartdata, options);
+                                var materialChart = new google.charts.Line(chartDiv);
+                                materialChart.draw(data, materialOptions);
+
                         }
+
                     }
-                },
-                error: function (err) {
+                    },
+                error:function(err){
                     alert('error');
                 }
             }
@@ -181,7 +193,7 @@ $(document).ready(function () {
     });
 
 
-    $('#checkdate').click(function () {
+    $('#checkdate').click(function() {
         $("#dates").toggle(this.checked);
     });
 });

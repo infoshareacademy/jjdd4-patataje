@@ -1,12 +1,11 @@
 package com.hydrozagadka.mappers;
 
 import com.hydrozagadka.History;
-import com.hydrozagadka.Model.ChartHistory;
+import com.hydrozagadka.DTO.ChartHistory;
 import com.hydrozagadka.dao.HistoryDao;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.time.LocalDate;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -24,7 +23,7 @@ public class HistoryMapper {
                         history.getWaterDeep(),
                         history.getFlow(),
                         history.getTemperature(),
-                        history.getDate().getDayOfMonth()))
+                        history.getDate()))
                 .collect(toList());
     }
 }

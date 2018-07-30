@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="pl-PL">
 
 <head>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description"
           content="Project of Web Application which shows water levels for lakes and rivers in Poland.">
@@ -17,7 +16,8 @@
     <link href="../../../HydroZagadkaFront/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../../../HydroZagadkaFront/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../../../HydroZagadkaFront/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
           rel="stylesheet" type="text/css">
     <link href="../../../HydroZagadkaFront/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
@@ -36,29 +36,12 @@
 <#include "navBarAdmin.ftlh">
 
 <!-- Header -->
-<#--<section style="background-image: url('../../../HydroZagadkaFront/img/bg-masthead22.jpg')">-->
-    <#--<div class="container">-->
-       <#--<div >-->
-           <#--<h1 class="mb-1">Witaj na panelu administratora</h1>-->
-<#--<br>-->
-           <#--<h3>Tutaj możesz zarządzać stroną HydroZagadka. <br>-->
-           <#--Powodzenia!</h3>-->
-       <#--</div>-->
-
-    <#--</div>-->
-    <#--<div class="overlay"></div>-->
-<#--</section>-->
-
-
-
-<section class="content-section" id="portfolio">
+<section style="background-image: url('../../../HydroZagadkaFront/img/bg-masthead22.jpg')">
     <div class="container">
         <div class="content-section-heading text-center">
             <h3 class="text-secondary mb-0">Adminie</h3>
             <h2 class="mb-5">co chcesz dziś zrobić?</h2>
         </div>
-
-
         <div class="row no-gutters">
             <div class="col"></div>
             <div class="col-4">
@@ -112,7 +95,6 @@
             </div>
             <div class="col"></div>
         </div>
-        </div>
     </div>
 </section>
 
@@ -122,7 +104,9 @@
 <#include "../adminPage/users.ftlh">
 </section>
 <!-- Ilosc klikniec na wojewodztwa -->
-
+<section href="#prov">
+    <#include "../adminPage/listOfProvincesWithVIews.ftlh">
+</section>
 <!-- Najczesciej wybierane zbiorniki -->
 <#include "../adminPage/mostViewedStations.ftlh">
 <!-- Footer -->

@@ -38,13 +38,13 @@ public class StatisticsForContainersServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         Template template = freeMarkerConfig.getTemplate("adminPage/mostViewedStations.ftlh", getServletContext());
-        List<Statistics> WCList = adminStatsDao.getStatistics();
-        Map<String, Object> model = new HashMap<>();
-        model.put("WCList", WCList);
-        try {
-            template.process(model, response.getWriter());
-        } catch (TemplateException e) {
-            logger.warn("Template doesn't exist");
-        }
+//        List<Statistics> WCList = adminStatsDao.getStatistics();
+//        Map<String, Object> model = new HashMap<>();
+//        model.put("WCList", WCList);
+//        try {
+//            template.process(model, response.getWriter());
+//        } catch (TemplateException e) {
+//            logger.warn("Template doesn't exist");
+//        }
     }
 }
