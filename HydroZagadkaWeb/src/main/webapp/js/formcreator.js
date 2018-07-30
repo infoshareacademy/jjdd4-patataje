@@ -1,3 +1,11 @@
+google.charts.load('current', {
+    'packages': ['map','line', 'corechart'],
+    // Note: you will need to get a mapsApiKey for your project.
+    // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+    'mapsApiKey': 'AIzaSyDQlTwqbQzIesvDheiMg2T6AzoWXA54Pa4',
+    'language': 'pl'
+});
+
 $(document).ready(function () {
     $('#province').select2();
     $('#watercontainer').select2();
@@ -37,6 +45,7 @@ $(document).ready(function () {
             return;
         }
         var rzeka=$("#watercontainer").val();
+
         $('.invalid-feedback').css("display","none");
         $.ajax({
                 url:'rest/'+$("#province").val()+"/"+$("#watercontainer").val(),
@@ -57,13 +66,7 @@ $(document).ready(function () {
             }
         );
 
-        google.charts.load('current', {
-            'packages': ['map'],
-            // Note: you will need to get a mapsApiKey for your project.
-            // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-            'mapsApiKey': 'AIzaSyDQlTwqbQzIesvDheiMg2T6AzoWXA54Pa4'
-        });
-        google.charts.setOnLoadCallback(drawMap);
+        drawMap()
 
         function drawMap() {
             var data = new google.visualization.DataTable();
@@ -113,6 +116,8 @@ $(document).ready(function () {
         }
     })
 
+
+
     $('.history-form').on('submit', function () {
         var historyId = $('#station').val();
             var startdate = $('#startdate').val();
@@ -132,7 +137,7 @@ $(document).ready(function () {
                 type:'get',
                 success:function(response){
                     console.log(response)
-                    if(response.length ==0){
+                    if(response.length === 0){
                       $("#curve_chart").html("<h1>Nie znaleziono wyników</h1>").fadeIn(2000);
                       return;
                     }
@@ -140,8 +145,8 @@ $(document).ready(function () {
                         mapchange = true;
                         var history = response;
 
-                        google.charts.load('current', {'packages':['line', 'corechart']});
-                        google.charts.setOnLoadCallback(drawChart);
+
+                        drawChart()
                         function drawChart() {
                             var chartDiv = document.getElementById('curve_chart');
                            var data = new google.visualization.DataTable();
