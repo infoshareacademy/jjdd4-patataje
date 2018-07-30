@@ -12,8 +12,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 @RequestScoped
-public class UnzipBean implements UnzipDao {
-    private static Logger logger = LoggerFactory.getLogger(UnzipBean.class);
+public class UnzipDaoBean implements UnzipDao {
+    private static Logger logger = LoggerFactory.getLogger(UnzipDaoBean.class);
     @Override
     public void unzip(InputStream fis, String destinationDirPath) {
         File dir = new File(destinationDirPath);

@@ -4,7 +4,7 @@ public class StationView {
     private int id;
     private String name;
 
-    public StationView(int id, String name) {
+    public StationView(Long id, String name) {
         this.id = id;
         this.name = name;
     }
