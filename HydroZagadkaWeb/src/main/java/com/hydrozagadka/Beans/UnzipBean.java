@@ -1,5 +1,8 @@
 package com.hydrozagadka.Beans;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.enterprise.context.RequestScoped;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -10,7 +13,7 @@ import java.util.zip.ZipInputStream;
 
 @RequestScoped
 public class UnzipBean implements UnzipDao {
-
+    private static Logger logger = LoggerFactory.getLogger(UnzipBean.class);
     @Override
     public void unzip(InputStream fis, String destinationDirPath) {
         File dir = new File(destinationDirPath);
@@ -34,6 +37,7 @@ public class UnzipBean implements UnzipDao {
             fis.close();
         } catch (IOException e) {
             e.printStackTrace();
+            logger.warn("File not found,can't unzip file");
         }
 
     }

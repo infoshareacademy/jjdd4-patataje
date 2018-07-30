@@ -1,6 +1,8 @@
 package com.hydrozagadka;
 
 import com.hydrozagadka.exceptions.DataLengthException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,11 +15,12 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class CSVLoader {
-    private static final String DIRECT_PATH = "D:/Develop/Hydrozagadka/jjdd4-patataje/HydroZagadkaApp/data";
+    private static final String DIRECT_PATH = "/home/juliuszklos/Development/HydroZagadka/jjdd4-patataje/HydroZagadkaApp/data";
 
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();
     private Map<Long, WaterContainer> allContainers = new HashMap<>();
+    private static Logger logger = LoggerFactory.getLogger(CSVLoader.class);
 
     public Map<Long, WaterContainer> getAllContainers() {
         return allContainers;
@@ -38,6 +41,7 @@ public class CSVLoader {
             }
         } catch (IOException ex) {
             System.out.println("Nie znaleziono folderu!");
+            logger.warn("Nie znaleziono folderu");
         }
         return fileNames;
     }
@@ -65,15 +69,16 @@ public class CSVLoader {
                 flow = 0.0;
             }
             Double temperature = Double.parseDouble(a[8]);
-            if (temperature == 99.9){
-                temperature=0.0;
+            if (temperature == 99.9) {
+                temperature = 0.0;
             }
-                History history = new History(date, waterDeep, flow, temperature);
+            History history = new History(date, waterDeep, flow, temperature);
             history.setContainerId(wc.getId());
             return history;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             System.out.println("Błąd podczas konwertowania rekordu na liczbę!");
             System.exit(0);
+            logger.warn("Błąd konwertowania rekordu na liczbę");
         }
         return null;
     }
@@ -94,6 +99,7 @@ public class CSVLoader {
             }
         } catch (IOException e) {
             System.out.println("Nie znaleziono pliku!");
+            logger.warn("Nie znaleziono pliku");
         }
         return allContainers;
     }
@@ -103,7 +109,11 @@ public class CSVLoader {
         loadedLine = loadedLine.replaceAll("\"", "");
         //split data
         splitedLine = loadedLine.split(",");
-        if (splitedLine.length < 10) throw new DataLengthException("Plik ma nieodpowiednią liczbę rekordów!");
+        if (splitedLine.length < 10) {
+            logger.warn("Nieprawidłwa liczba rekordów");
+            throw new DataLengthException("Plik ma nieodpowiednią liczbę rekordów!");
+        }
+
         return splitedLine;
     }
 

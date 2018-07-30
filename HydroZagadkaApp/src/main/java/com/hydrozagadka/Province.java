@@ -4,6 +4,9 @@ package com.hydrozagadka;
 import com.hydrozagadka.exceptions.IdLengthException;
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +21,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Province {
+    private static Logger logger = LoggerFactory.getLogger(Province.class);
     private static List<String> province;
     private static CSVLoader csvLoader = new CSVLoader();
     private static FilterFiles filterFiles = new FilterFiles(csvLoader);
@@ -30,7 +34,7 @@ public class Province {
         Properties prop = new Properties();
 
         try {
-            InputStream  input = new FileInputStream("data/config.properties");
+            InputStream input = new FileInputStream("data/config.properties");
             prop.load(input);
             doubleFormat = new DecimalFormat(prop.getProperty("doubleformat"));
             dateFormat = DateTimeFormatter.ofPattern(prop.getProperty("dateformat"));
@@ -38,6 +42,7 @@ public class Province {
             input.close();
         } catch (IOException ex) {
             System.out.println("Błąd przy wczytywaniu pliku konfiguracyjnego");
+            logger.warn("Nieprawidłowy plik konfiguracyjny");
         }
 
     }
@@ -47,6 +52,7 @@ public class Province {
         System.out.println("Aplikacja została zamknięta.");
         byeScreen();
         System.exit(0);
+        logger.info("Aplikacja została zamknięta");
     }
 
     private static void createMenu() {
@@ -88,7 +94,9 @@ public class Province {
             createMenu();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Blad podczas wczytywania danych program zostanie zamkniety");
+            logger.error("Aplikacja została zamknięta");
             closeApp();
+
         }
     }
 
@@ -121,6 +129,7 @@ public class Province {
                 default: {
                     System.out.println("Wybrałeś złą odpowiedź, spróbuj jeszcze raz.");
                     selectionMenu(province);
+                    logger.warn("Nieprawidłowe dane");
                 }
             }
 
@@ -177,11 +186,13 @@ public class Province {
             System.out.println("Wprowadziłeś złą wartość");
             System.out.println("Nacisnij enter aby kontynuowac");
             scanner.nextLine();
+
             getIDMenu(province);
         } catch (IdLengthException e) {
             System.out.println("Podałeś nieprawidłowe ID");
             System.out.println("Nacisnij enter aby kontynuowac");
             scanner.nextLine();
+            logger.warn("Nieprawidłowe dane");
             getIDMenu(province);
         }
     }
@@ -217,6 +228,7 @@ public class Province {
         } catch (ArithmeticException e) {
             System.out.println("Nie znaleziono zbiornika");
             chooseContainerWithName(province);
+            logger.warn("Nieprawidłowe dane");
         }
     }
 
@@ -265,6 +277,7 @@ public class Province {
             default:
                 System.out.println("Wybrałeś zły znak. Spróbuj jeszcze raz.");
                 showNewestData(id);
+                logger.warn("Nieprawidłowe dane");
         }
     }
 
@@ -356,6 +369,7 @@ public class Province {
         } else {
             System.out.println("Wybrałeś zły znak. Spróbuj jeszcze raz.");
             minMaxSelectMenu(id);
+            logger.warn("Nieprawidłowe dane");
         }
     }
 
@@ -366,11 +380,6 @@ public class Province {
         sHd.addRule();
         sHd.addRow("Wartość Minimalna", filterFiles.minAndMaxValueOfHistoryWaterDeeps(id).get(1).getDate() + " " + filterFiles.minAndMaxValueOfHistoryWaterDeeps(id).get(1).getWaterDeep());
         sHd.addRule();
-//        filterFiles.minAndMaxValueOfHistoryWaterDeeps(id)
-//                .forEach(history -> {
-//                    sHd.addRow(null, null, history.getDate(), history.getWaterDeep());
-//                    sHd.addRule();
-//                });
         System.out.println(sHd.render());
     }
 
@@ -390,6 +399,7 @@ public class Province {
             System.out.println("Podałeś nieprawidłową datę ");
             System.out.println("Nacisnij enter aby kontynuowac");
             scanner.nextLine();
+            logger.warn("Nieprawidłowe dane");
             minMaxSelectMenu(id);
         }
 
@@ -408,7 +418,7 @@ public class Province {
     private static void legend() {
         AsciiTable leg = new AsciiTable();
         leg.addRule();
-            leg.addRow("LEGENDA").setTextAlignment(TextAlignment.CENTER);
+        leg.addRow("LEGENDA").setTextAlignment(TextAlignment.CENTER);
         leg.addRule();
         leg.addRow("Stan wody 9999 lub 0.0 oznacza brak danych w bazie.");
         leg.addRule();
@@ -434,9 +444,11 @@ public class Province {
                 "           ',))))))))\\/)))))' \\{         ⓒJPPL\n" +
                 "             '*O))))))))O*'\n");
         System.out.println("");
+        logger.info("Aplikacja została uruchomiona");
     }
 
     private static void byeScreen() {
+        logger.info("Aplikacja została zamknięta");
         System.out.println("\n" +
                 "                 ,__\n" +
                 "                   |  `'.\n" +

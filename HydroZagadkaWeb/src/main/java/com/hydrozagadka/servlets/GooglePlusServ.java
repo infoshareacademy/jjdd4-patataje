@@ -25,7 +25,7 @@ public class GooglePlusServ extends HttpServlet {
         OAuthService service = builder.provider(Google2Api.class)
                 .apiKey(clientId)
                 .apiSecret(clientSecret)
-                .callback("http://localhost:8080/welcome")
+                .callback("http://localhost:8080")
                 .scope("openid profile email" + "https://www.googleapis.com/auth/plus.login " +
                 "https://www.googleapis.com/auth/plus.me")
                 .build();
