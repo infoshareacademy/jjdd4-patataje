@@ -1,7 +1,7 @@
 <div class="container text-center my-auto">
 <div class="row">
     <div class="col-sm"></div>
-<div class="col-9">
+<div class="col-6">
     <br><br>
     <h3>Wyświetlenia województw:</h3>
 <div class="table-responsive-md">

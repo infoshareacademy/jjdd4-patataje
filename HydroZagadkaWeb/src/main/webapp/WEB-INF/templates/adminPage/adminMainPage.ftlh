@@ -36,9 +36,11 @@
 <#include "navBarAdmin.ftlh">
 
 <!-- Header -->
-<section style="background-image: url('../../../HydroZagadkaFront/img/bg-masthead22.jpg')">
+<section >
     <div class="container">
+        <div class="row"> <div class="col"><br></div></div>
         <div class="content-section-heading text-center">
+
             <h3 class="text-secondary mb-0">Adminie</h3>
             <h2 class="mb-5">co chcesz dziś zrobić?</h2>
         </div>
@@ -103,15 +105,21 @@
 <section id="users" href="#users">
 <#include "../adminPage/users.ftlh">
 </section>
+
 <!-- Ilosc klikniec na wojewodztwa -->
-<section href="#prov">
+<section id="stats" href="#stats">
     <#include "../adminPage/listOfProvincesWithVIews.ftlh">
 </section>
-<!-- Najczesciej wybierane zbiorniki -->
-<#include "../adminPage/mostViewedStations.ftlh">
-<!-- Footer -->
-<#include "../mainPartsOfPage/footer.ftlh">
 
+<!-- Najczesciej wybierane zbiorniki -->
+<section id="stations" href="#stations">
+<#include "../adminPage/mostViewedStations.ftlh">
+</section>
+
+<!-- Footer -->
+<DIV>
+<#include "../mainPartsOfPage/footer.ftlh">
+</DIV>
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
     <i class="fa fa-angle-up"></i>
