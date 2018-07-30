@@ -1,8 +1,5 @@
 package com.hydrozagadka.servlets;
 
-import com.hydrozagadka.Beans.ProvinceBean;
-import com.hydrozagadka.CSVLoader;
-import com.hydrozagadka.FilterFiles;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -19,26 +16,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/welcome")
+@WebServlet(urlPatterns = "/welcome")
 public class WelcomeServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(WelcomeServlet.class);
     @Inject
-    FreeMarkerConfig freeMarkerConfig;
-
-    @Inject
-    ProvinceBean provinceBean;
-
-    private CSVLoader load;
-    private FilterFiles ff;
-
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        load = new CSVLoader();
-        logger.info("Load CSVFile");
-        ff = new FilterFiles(load);
-    }
-
+    private FreeMarkerConfig freeMarkerConfig;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
@@ -54,9 +36,5 @@ public class WelcomeServlet extends HttpServlet {
         } catch (TemplateException e) {
             logger.warn("Template dosen't exist");
         }
-    }
-
-    public CSVLoader getLoad() {
-        return load;
     }
 }

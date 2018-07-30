@@ -1,19 +1,20 @@
 package com.hydrozagadka.Model;
 
 public class WaterContainerView {
-    private Integer id;
+
+    private Long id;
     private String name;
 
-    public WaterContainerView(Integer id, String name) {
+    public WaterContainerView(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

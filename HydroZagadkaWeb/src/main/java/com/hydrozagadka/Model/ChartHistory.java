@@ -28,10 +28,11 @@ public class ChartHistory {
 
     @Override
     public String toString() {
-        return "ChartHistory{" +
-                "waterDeep=" + waterDeep +
-                ", flow=" + flow +
-                ", temperature=" + temperature +
-                '}';
+        final StringBuffer sb = new StringBuffer("ChartHistory{");
+        sb.append("waterDeep=").append(waterDeep);
+        sb.append(", flow=").append(flow);
+        sb.append(", temperature=").append(temperature);
+        sb.append('}');
+        return sb.toString();
     }
 }
