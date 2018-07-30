@@ -8,8 +8,7 @@ $(document).ready(function () {
             return;
         }
         $.ajax({
-                url:'watercontainer',
-                data:{name:$("#province").val()},
+                url:"rest/"+$("#province").val(),
                 type:'get',
                 cache:false,
                 success:function(response){
@@ -21,7 +20,8 @@ $(document).ready(function () {
                         $('#watercontainer').append('<option value='+options[i].name+'>'+options[i].name+'</option>');
                     }
                    $('#watercontainerlist').fadeIn(1000);
-
+                    $('#station').find('option').remove();
+                    $('#station').append('<option value="-1">[Wybierz]</option>');
                 },
                 error:function(){
                     alert('error');
@@ -39,10 +39,7 @@ $(document).ready(function () {
         var rzeka=$("#watercontainer").val();
         $('.invalid-feedback').css("display","none");
         $.ajax({
-                url:'station',
-                data:{
-                    name:$("#province").val(),
-                    watercontainer:$("#watercontainer").val()},
+                url:'rest/'+$("#province").val()+"/"+$("#watercontainer").val(),
                 type:'get',
                 cache:false,
                 success:function(response){
@@ -64,7 +61,7 @@ $(document).ready(function () {
             'packages': ['map'],
             // Note: you will need to get a mapsApiKey for your project.
             // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-            'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+            'mapsApiKey': 'AIzaSyDQlTwqbQzIesvDheiMg2T6AzoWXA54Pa4'
         });
         google.charts.setOnLoadCallback(drawMap);
 
@@ -120,12 +117,16 @@ $(document).ready(function () {
         var historyId = $('#station').val();
             var startdate = $('#startdate').val();
             var enddate = $('#enddate').val();
-
+            var check = false;
+            if($('#favorite').is(":checked")){
+                check = true;
+            }
         $.ajax({
-                url:'/history?station=' + historyId,
+                url:'rest/id/'+historyId,
                 data:{
                   startDate:startdate,
-                  endDate:enddate
+                  endDate:enddate,
+                    check: check
                 },
                 crossDomain: true,
                 type:'get',
@@ -133,38 +134,44 @@ $(document).ready(function () {
                     console.log(response)
                     if(response.length ==0){
                       $("#curve_chart").html("<h1>Nie znaleziono wyników</h1>").fadeIn(2000);
-                    }else {
+                      return;
+                    }
+                    else {
                         mapchange = true;
                         var history = response;
-                        google.charts.load('current', {'packages': ['corechart']});
+
+                        google.charts.load('current', {'packages':['line', 'corechart']});
                         google.charts.setOnLoadCallback(drawChart);
-
                         function drawChart() {
-
-                            var data = [];
-                            var Header = ['Dzień', 'Przepływ [m/s]', 'Temperatura [ C]', 'Poziom wody [cm]'];
-                            data.push(Header);
+                            var chartDiv = document.getElementById('curve_chart');
+                           var data = new google.visualization.DataTable();
+                            data.addColumn('date', 'Data');
+                            data.addColumn('number', "Przepływ [m/s]");
+                            data.addColumn('number', "Temperatura [ C]");
+                            data.addColumn('number', "Poziom wody [cm]");
                             for (var i = 0; i < history.length; i++) {
                                 var temp = [];
-                                temp.push(i);
+                                temp.push(new Date(history[i].date.year, history[i].date.monthValue-1,history[i].date.dayOfMonth));
                                 temp.push(history[i].flow);
                                 temp.push(history[i].temperature);
                                 temp.push(history[i].waterDeep);
-                                data.push(temp);
+                                data.addRow(temp);
                             }
-                            var chartdata = new google.visualization.arrayToDataTable(data);
 
-                            $('#curve_chart').fadeIn(2000);
+                            var materialOptions = {
+                                chart: {
+                                    title: 'Wyniki dla wybranego zbiornika wodnego'
+                                },
+                                width: 900,
+                                height: 600,
 
-                            var options = {
-                                title: 'Wykres zmian temperatury, przepływu oraz stanu wody dla wybranej stacji:',
-                                curveType: 'function',
-                                legend: {position: 'bottom'}
                             };
-                            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
-                            chart.draw(chartdata, options);
+                                var materialChart = new google.charts.Line(chartDiv);
+                                materialChart.draw(data, materialOptions);
+
                         }
+
                     }
                     },
                 error:function(err){

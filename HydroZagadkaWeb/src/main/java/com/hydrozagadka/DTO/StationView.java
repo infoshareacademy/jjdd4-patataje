@@ -1,4 +1,4 @@
-package com.hydrozagadka.Model;
+package com.hydrozagadka.DTO;
 
 public class StationView {
     private int id;

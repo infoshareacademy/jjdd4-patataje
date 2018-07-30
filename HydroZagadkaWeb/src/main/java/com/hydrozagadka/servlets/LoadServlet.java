@@ -1,12 +1,16 @@
 package com.hydrozagadka.servlets;
 
 import com.hydrozagadka.Beans.UnzipDao;
+import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.WaterContainer;
 
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.logging.LogManager;
 import java.util.Map;
 
@@ -29,17 +34,22 @@ public class LoadServlet extends HttpServlet {
     @Inject
     private UnzipDao unzipDao;
 
+    @Inject
+    private FreeMarkerConfig freeMarkerConfig;
+
     private Map<Long, WaterContainer> waterContainerMap;
-    public static final String DIRECT_PATH = "/home/pawelorlikowski/jjdd4-patataje/HydroZagadkaApp/data";
+    public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file");
         PrintWriter pr = response.getWriter();
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         if (!fileName.contains(".zip")) {
+            logger.warn("No zip file found");
+
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pr.close();
-            logger.warn("No zip file found");
+
             return;
         }
         InputStream is = filePart.getInputStream();
