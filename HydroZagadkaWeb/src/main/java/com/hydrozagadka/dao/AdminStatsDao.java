@@ -24,7 +24,7 @@ public class AdminStatsDao {
     }
 
     public List<Statistics> getStatistics (){
-        Query q = entityManager.createQuery("Select Statistics.waterContainer from  Statistics where views>0");
+        Query q = entityManager.createQuery("SELECT WATER_CONTAINERS.station_name, STATISTICS.views FROM WATER_CONTAINERS JOIN STATISTICS ON WATER_CONTAINERS.id=STATISTICS.container_id WHERE views>0");
         return q.getResultList();
     }
 }

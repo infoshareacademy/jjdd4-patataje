@@ -96,7 +96,7 @@
                   <p class="mb-0">Wyświetl logi!</p>
                 </span>
               </span>
-                    <img class="img-fluid" src="../../../HydroZagadkaFront/img/portfolio-3.jpg" alt="">
+                    <img class="img-fluid" src="../../../HydroZagadkaFront/img/portfolio-6.jpg" alt="">
                 </a>
             </div>
             <div class="col-4">

@@ -9,6 +9,7 @@
     <meta name="description"
           content="Project of Web Application which shows water levels for lakes and rivers in Poland.">
     <meta name="author" content="JPPL">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
 
     <title>HydroZagadka</title>
     <link rel="icon" href="../../HydroZagadkaFront/img/Drop.png">
