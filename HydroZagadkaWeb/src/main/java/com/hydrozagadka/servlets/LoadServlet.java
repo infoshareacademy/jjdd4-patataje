@@ -34,9 +34,6 @@ public class LoadServlet extends HttpServlet {
 
 
     @Inject
-    private UnzipDao unzipDao;
-
-    @Inject
     private FreeMarkerConfig freeMarkerConfig;
 
     @Inject

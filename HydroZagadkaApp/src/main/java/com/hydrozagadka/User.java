@@ -11,17 +11,23 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "Email")
+    @Column(name = "email")
     @NotNull
     private String email;
-    @Column(name = "Token")
-    @NotNull
-    private String token;
-    @Column(name = "Adminaaa")
+    @Column(name = "adminaaa")
     @NotNull
     private boolean adminaaa;
-    @Column(name = "Stats")
+    @NotNull
+    @Column
+    private String token;
+    @Column(name = "stats")
     private Integer stats;
+    @Column(name="name")
+    private String name;
+    @Column(name="pic_path")
+    private String urlPicPath;
+    @Column(name="locale")
+    private String locale;
     @ManyToMany
     @JoinTable(
             name = "USER_WATERCONTAINER",
@@ -32,12 +38,35 @@ public class User {
     public User() {
     }
 
-    public User(@NotNull String email, @NotNull String token, @NotNull boolean adminaaa, Integer stats, List<WaterContainer> waterContainerId) {
-        this.email = email;
+    public User(@NotNull String token, @NotNull String name ,@NotNull String email, @NotNull boolean adminaaa, Integer stats, List<WaterContainer> waterContainerId,String urlPicPath, String locale) {
         this.token = token;
+        this.name = name;
+        this.email = email;
         this.adminaaa = adminaaa;
         this.stats = stats;
         this.waterContainerId = waterContainerId;
+        this.urlPicPath = urlPicPath;
+        this.locale = locale;
+    }
+
+    public String getUrlPicPath() {
+        return urlPicPath;
+    }
+
+    public void setUrlPicPath(String urlPicPath) {
+        this.urlPicPath = urlPicPath;
+    }
+
+    public String getLocale() {
+        return locale;
+    }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
+
+    public boolean isAdminaaa() {
+        return adminaaa;
     }
 
     public String getToken() {
@@ -46,10 +75,6 @@ public class User {
 
     public void setToken(String token) {
         this.token = token;
-    }
-
-    public boolean isAdminaaa() {
-        return adminaaa;
     }
 
     public void setAdminaaa(boolean adminaaa) {
@@ -74,6 +99,14 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setEmail(String email) {

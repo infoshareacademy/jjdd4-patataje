@@ -5,7 +5,9 @@ import com.hydrozagadka.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
@@ -13,8 +15,16 @@ public class UserDao {
     @PersistenceContext
     EntityManager entityManager;
 
-    public User findById(Long id){
-       return entityManager.find(User.class,id);
+    public User findById(String id){
+        Query q = entityManager.createQuery("select u from User u where u.token = :token");
+        q.setParameter("token",id);
+        User user = null;
+        try {
+            user = (User) q.getSingleResult();
+            return user;
+        }catch (NoResultException e){
+            return user;
+        }
     }
 
     public void save(User user){

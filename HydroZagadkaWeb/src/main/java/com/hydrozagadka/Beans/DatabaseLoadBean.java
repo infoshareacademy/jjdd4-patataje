@@ -69,9 +69,5 @@ public class DatabaseLoadBean {
         List<NewestWaterContainerData> imgwData = apiConnector.load();
         newestWaterContainerDataLoadBean.loadNewestWaterContainerToDatabase(imgwData);
         newestHistoryDataLoadBean.loadNewestHistoryToDatabase(imgwData);
-        userDao.save(new
-                User("orliktcz@gmail.com", "asdasascr54t4grghfdaq3", false, 0, new ArrayList<>()));
-        userDao.save(new
-                User("Admin@wp.pl", "fdfdsfdf", true, 0, new ArrayList<>()));
     }
 }

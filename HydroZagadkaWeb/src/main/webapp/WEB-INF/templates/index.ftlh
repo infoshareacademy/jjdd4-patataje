@@ -16,6 +16,8 @@
     <!-- Bootstrap Core CSS -->
     <link href="../../HydroZagadkaFront/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+
+    <meta name="google-signin-client_id" content="838946843173-a1982aq9rsq35t2hlanpjbn74ok93es0.apps.googleusercontent.com">
     <!-- Custom Fonts -->
     <link href="../../HydroZagadkaFront/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
@@ -34,6 +36,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
             integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
             crossorigin="anonymous"></script>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 </head>
 
