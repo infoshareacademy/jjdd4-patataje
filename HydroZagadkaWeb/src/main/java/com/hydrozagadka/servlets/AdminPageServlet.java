@@ -1,5 +1,7 @@
 package com.hydrozagadka.servlets;
 
+import com.hydrozagadka.User;
+import com.hydrozagadka.dao.AdminStatsDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -23,13 +26,18 @@ public class AdminPageServlet extends HttpServlet {
 
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
-
+    @Inject
+    private AdminStatsDao adminStatsDao;
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("adminPage/adminMainPage.ftlh", getServletContext());
 
+        List<User> usersList = adminStatsDao.getAllUsersList();
         Map<String, Object> model = new HashMap<>();
+        model.put("Uzytkownik", usersList);
+
+
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {

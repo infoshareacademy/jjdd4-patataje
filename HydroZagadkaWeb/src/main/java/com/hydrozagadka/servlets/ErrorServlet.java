@@ -30,10 +30,14 @@ public class ErrorServlet extends HttpServlet {
 
         Throwable throwable = (Throwable) request
                 .getAttribute("javax.servlet.error.exception");
+
+
         Integer statusCode = (Integer) request
                 .getAttribute("javax.servlet.error.status_code");
+
         String servletName = (String) request
                 .getAttribute("javax.servlet.error.servlet_name");
+
         if (servletName == null) {
             servletName = "Nieznany";
         }
@@ -42,6 +46,8 @@ public class ErrorServlet extends HttpServlet {
         if (requestUri == null) {
             requestUri = "Nieznany";
         }
+
+        logger.warn("Error occured, from servlet: " + servletName + ", see details: " + " error code: " + statusCode + " ,throwable: " + throwable);
 
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("mainPartsOfPage/errorsPage.ftlh", getServletContext());

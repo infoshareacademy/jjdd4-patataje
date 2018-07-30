@@ -117,7 +117,10 @@
 </section>
 
 
-
+<!-- Lista uzytkownikow -->
+<section id="users" href="#users">
+<#include "../adminPage/users.ftlh">
+</section>
 <!-- Footer -->
 
 <#include "../mainPartsOfPage/footer.ftlh">
