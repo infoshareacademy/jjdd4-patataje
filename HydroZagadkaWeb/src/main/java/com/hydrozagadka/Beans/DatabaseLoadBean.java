@@ -19,7 +19,6 @@ import java.util.Map;
 @Stateless
 public class DatabaseLoadBean {
 
-
     @Inject
     private WaterContainerDao waterContainerDao;
     @Inject
@@ -66,7 +65,6 @@ public class DatabaseLoadBean {
     }
 
     public void loadDataFromApi() {
-
 
         List<NewestWaterContainerData> imgwData = apiConnector.load();
         newestWaterContainerDataLoadBean.loadNewestWaterContainerToDatabase(imgwData);

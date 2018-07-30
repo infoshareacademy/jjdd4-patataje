@@ -1,5 +1,6 @@
 package com.hydrozagadka.servlets;
 
+import com.hydrozagadka.Beans.DatabaseLoadBean;
 import com.hydrozagadka.Beans.LoadZipToDatabaseBean;
 import com.hydrozagadka.Beans.UnzipDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
@@ -40,7 +41,8 @@ public class LoadServlet extends HttpServlet {
 
     @Inject
     private LoadZipToDatabaseBean loadZipToDatabaseBean;
-
+    @Inject
+    DatabaseLoadBean databaseLoadBean;
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,7 +56,10 @@ public class LoadServlet extends HttpServlet {
         }
         InputStream is = filePart.getInputStream();
         loadZipToDatabaseBean.unzipFile(is);
-        response.sendRedirect("/database");
+        databaseLoadBean.loadWaterContainer();
+        databaseLoadBean.loadHistory();
+        databaseLoadBean.loadDataFromApi();
+        response.sendRedirect("/welcome");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

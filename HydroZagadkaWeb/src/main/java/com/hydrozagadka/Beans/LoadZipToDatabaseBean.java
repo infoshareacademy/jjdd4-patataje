@@ -7,10 +7,12 @@ import com.hydrozagadka.servlets.LoadServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.InputStream;
 import java.util.Map;
 
+@Stateless
 public class LoadZipToDatabaseBean {
 
     private static Logger logger = LoggerFactory.getLogger(LoadServlet.class);
