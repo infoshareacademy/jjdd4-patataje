@@ -30,14 +30,10 @@ public class ErrorServlet extends HttpServlet {
 
         Throwable throwable = (Throwable) request
                 .getAttribute("javax.servlet.error.exception");
-
-
         Integer statusCode = (Integer) request
                 .getAttribute("javax.servlet.error.status_code");
-
         String servletName = (String) request
                 .getAttribute("javax.servlet.error.servlet_name");
-
         if (servletName == null) {
             servletName = "Nieznany";
         }
@@ -63,7 +59,7 @@ public class ErrorServlet extends HttpServlet {
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
-            logger.warn("Template doesn't exist");
+            logger.warn("Template doesn't exist",e);
         }
 
 

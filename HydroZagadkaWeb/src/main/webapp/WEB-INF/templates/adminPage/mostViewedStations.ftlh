@@ -2,7 +2,7 @@
 <section id="users">
     <div class="container text-center my-auto">
         <br><br>
-        <h3>Statystyki zbiorników:</h3>
+        <h3>Najczęściej wybierane zbioniki:</h3>
     <table class="table">
         <thead>
         <tr>

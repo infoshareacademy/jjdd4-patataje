@@ -36,9 +36,9 @@ public class StatisticsForContainersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
-        List<Statistics> WCList = adminStatsDao.getStatistics();
-        Template template = freeMarkerConfig.getTemplate("adminPage/statistics.ftlh", getServletContext());
 
+        Template template = freeMarkerConfig.getTemplate("adminPage/mostViewedStations.ftlh", getServletContext());
+        List<Statistics> WCList = adminStatsDao.getStatistics();
         Map<String, Object> model = new HashMap<>();
         model.put("WCList", WCList);
         try {

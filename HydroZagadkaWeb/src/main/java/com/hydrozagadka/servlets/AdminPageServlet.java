@@ -1,5 +1,6 @@
 package com.hydrozagadka.servlets;
 
+import com.hydrozagadka.Model.Statistics;
 import com.hydrozagadka.User;
 import com.hydrozagadka.dao.AdminStatsDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
@@ -34,14 +35,15 @@ public class AdminPageServlet extends HttpServlet {
         Template template = freeMarkerConfig.getTemplate("adminPage/adminMainPage.ftlh", getServletContext());
 
         List<User> usersList = adminStatsDao.getAllUsersList();
+        List<Statistics> WCList = adminStatsDao.getStatistics();
         Map<String, Object> model = new HashMap<>();
         model.put("Uzytkownik", usersList);
-
+        model.put("WCList", WCList);
 
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
-            logger.warn("Template doesn't exist");
+            logger.warn("Template doesn't exist", e);
         }
     }
 }
