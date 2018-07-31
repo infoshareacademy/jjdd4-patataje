@@ -27,24 +27,18 @@ import java.util.List;
 @Path("/")
 public class WTbyProvinceRest {
 
-
     @Inject
-    WaterContainerDao waterContainerDao;
-
+    private WaterContainerDao waterContainerDao;
     @Inject
-    WaterContainerMapper waterContainerMapper;
-
+    private WaterContainerMapper waterContainerMapper;
     @Inject
-    HistoryDao historyDao;
-
+    private HistoryDao historyDao;
     @Inject
-    HistoryMapper historyMapper;
-
+    private HistoryMapper historyMapper;
     @Inject
-    UserDao userDao;
-
+    private UserDao userDao;
     @Inject
-    StatisticsDao statisticsDao;
+    private StatisticsDao statisticsDao;
 
     private Logger logger = LoggerFactory.getLogger(WTbyProvinceRest.class);
 
@@ -82,7 +76,7 @@ public class WTbyProvinceRest {
             logger.info("Dat nie podano");
         }
         if (check) {
-            addFavourite(id, 1L);
+            addFavourite(id, "1L");
         }
         List<History> histories = historyDao.getHistoryByWaterContainerWithDates(id, startDate, endDate);
         List<ChartHistory> chartHistories = historyMapper.mapToChartHistory(histories);
@@ -105,10 +99,9 @@ public class WTbyProvinceRest {
         statisticsDao.update(idWC);
     }
 
-    private void addFavourite(Long idWC, Long userId) {
+    private void addFavourite(Long idWC, String userId) {
         User user = userDao.findById(userId);
         user.getWaterContainerId().add(waterContainerDao.findById(idWC));
         userDao.update(user);
     }
-
 }

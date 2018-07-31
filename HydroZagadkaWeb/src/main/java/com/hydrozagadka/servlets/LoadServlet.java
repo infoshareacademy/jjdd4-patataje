@@ -42,7 +42,7 @@ public class LoadServlet extends HttpServlet {
     @Inject
     private LoadZipToDatabaseBean loadZipToDatabaseBean;
     @Inject
-    DatabaseLoadBean databaseLoadBean;
+    private DatabaseLoadBean databaseLoadBean;
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -58,7 +58,7 @@ public class LoadServlet extends HttpServlet {
         loadZipToDatabaseBean.unzipFile(is);
         databaseLoadBean.loadWaterContainer();
         databaseLoadBean.loadHistory();
-        databaseLoadBean.loadDataFromApi();
+     //   databaseLoadBean.loadDataFromApi();
         response.sendRedirect("/welcome");
     }
 
