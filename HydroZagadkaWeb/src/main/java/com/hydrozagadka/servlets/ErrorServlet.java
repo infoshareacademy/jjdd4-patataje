@@ -43,8 +43,6 @@ public class ErrorServlet extends HttpServlet {
             requestUri = "Nieznany";
         }
 
-
-
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("mainPartsOfPage/errorsPage.ftlh", getServletContext());
         logger.warn("Error occured, from servlet: " + servletName + ", see details: " + " error code: " + statusCode + " ,throwable: " + throwable);
@@ -59,7 +57,7 @@ public class ErrorServlet extends HttpServlet {
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
-            logger.warn("Template doesn't exist",e);
+            logger.warn("Template doesn't exist", e);
         }
 
 
