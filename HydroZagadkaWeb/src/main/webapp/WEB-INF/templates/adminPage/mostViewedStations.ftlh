@@ -1,7 +1,7 @@
 <div class="container text-center my-auto">
 <div class="row">
     <div class="col-sm"></div>
-<div class="col-9">
+<div class="col-7">
     <br><br>
     <h3>Najczęściej wyświetlane stacje pomiarowe:</h3>
 <div class="table-responsive-md">
@@ -16,11 +16,11 @@
 <tbody>
 <tr>
 <#list WCList>
-    <#items as waterContainer>
-                <th scope="row">${(waterContainer?index)+1}</th>
+    <#items as containerName>
+                <th scope="row">${(containerName?index)+1}</th>
 
-                <td>${waterContainer.containerName} </td>
-                <td>${statistics.views}</td>
+                <td>${containerName.stationName} </td>
+                <td>${containerName.views}</td>
                     </tr>
     </#items>
 </tbody>

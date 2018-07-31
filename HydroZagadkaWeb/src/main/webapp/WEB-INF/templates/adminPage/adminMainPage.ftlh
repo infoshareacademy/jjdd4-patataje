@@ -1,4 +1,4 @@
-<#ftl encoding='UTF-8'>
+
 <!DOCTYPE html>
 <html lang="pl-PL">
 
@@ -58,7 +58,9 @@
         <div class="row no-gutters">
             <div class="col"></div>
             <div class="col-4">
-                <a class="portfolio-item" href="#stats">
+                <a class="portfolio-item"
+                   <#--data-toggle="collapse" data-target="#stats" -->
+                   href="#stats">
               <span class="caption">
                 <span class="caption-content">
                   <h2>Statystyki</h2>
@@ -116,17 +118,17 @@
 <#include "../changingParts/uploadFiles.ftlh">
 </section>
 <!-- Lista uzytkownikow -->
-<section id="users">
+<section class="content-section" id="users">
 <#include "../adminPage/users.ftlh">
 </section>
 
 <!-- Ilosc klikniec na wojewodztwa -->
-<section id="stats">
+<section class="content-section" id="stats">
     <#include "../adminPage/listOfProvincesWithVIews.ftlh">
 </section>
 
 <!-- Najczesciej wybierane zbiorniki -->
-<section id="stations" href="#stations">
+<section class="content-section" id="stations" href="#stations">
 <#include "../adminPage/mostViewedStations.ftlh">
 </section>
 

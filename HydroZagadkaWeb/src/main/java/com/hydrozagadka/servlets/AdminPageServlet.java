@@ -1,5 +1,6 @@
 package com.hydrozagadka.servlets;
 
+import com.hydrozagadka.DTO.StatisticWithWaterStationView;
 import com.hydrozagadka.DTO.WaterContainerView;
 import com.hydrozagadka.Model.Statistics;
 import com.hydrozagadka.User;
@@ -40,7 +41,9 @@ public class AdminPageServlet extends HttpServlet {
         Template template = freeMarkerConfig.getTemplate("adminPage/adminMainPage.ftlh", getServletContext());
 
         List<User> usersList = adminStatsDao.getAllUsersList();
-        List<Statistics> WCList = adminStatsDao.getStatistics();
+
+        List<StatisticWithWaterStationView> WCList = adminStatsDao.getStatistics();
+
         List<ProvinceStatisticView> provinceStatisticViews = adminStatsDao.getStatsByProvince();
         Map<String, Object> model = new HashMap<>();
         model.put("Uzytkownik", usersList);
