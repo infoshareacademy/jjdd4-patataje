@@ -1,5 +1,7 @@
 package com.hydrozagadka.servlets;
 
+import com.hydrozagadka.Beans.DatabaseLoadBean;
+import com.hydrozagadka.Beans.LoadZipToDatabaseBean;
 import com.hydrozagadka.Beans.UnzipDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import freemarker.template.Template;
@@ -18,11 +20,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
+import java.io.*;
+import java.net.URI;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.logging.LogManager;
 import java.util.Map;
 
@@ -37,27 +39,27 @@ public class LoadServlet extends HttpServlet {
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
 
-    private Map<Long, WaterContainer> waterContainerMap;
-    public static final String DIRECT_PATH = "/home/orzel/jjdd4-patataje/HydroZagadkaApp/data";
+    @Inject
+    private LoadZipToDatabaseBean loadZipToDatabaseBean;
+    @Inject
+    DatabaseLoadBean databaseLoadBean;
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file");
         PrintWriter pr = response.getWriter();
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         if (!fileName.contains(".zip")) {
-            logger.warn("No zip file found");
-
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pr.close();
-
             return;
         }
         InputStream is = filePart.getInputStream();
-        unzipDao.unzip(is, DIRECT_PATH);
-        logger.info("Unzip File: {}");
-        CSVLoader csvLoader = new CSVLoader();
-        waterContainerMap = csvLoader.getAllContainers();
-        response.sendRedirect("/database");
+        loadZipToDatabaseBean.unzipFile(is);
+        databaseLoadBean.loadWaterContainer();
+        databaseLoadBean.loadHistory();
+        databaseLoadBean.loadDataFromApi();
+        response.sendRedirect("/welcome");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -18,7 +18,7 @@ import java.util.Map;
 
 @WebServlet(urlPatterns = "/error")
 public class ErrorServlet extends HttpServlet {
-    private static Logger logger = LoggerFactory.getLogger(com.hydrozagadka.servlets.WelcomeServlet.class);
+    private static Logger logger = LoggerFactory.getLogger(com.hydrozagadka.servlets.ErrorServlet.class);
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
 
@@ -57,7 +57,7 @@ public class ErrorServlet extends HttpServlet {
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
-            logger.warn("Template doesn't exist",e);
+            logger.warn("Template doesn't exist", e);
         }
 
 

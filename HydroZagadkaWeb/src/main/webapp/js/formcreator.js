@@ -1,3 +1,11 @@
+google.charts.load('current', {
+    'packages': ['map','line', 'corechart'],
+    // Note: you will need to get a mapsApiKey for your project.
+    // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+    'mapsApiKey': 'AIzaSyDQlTwqbQzIesvDheiMg2T6AzoWXA54Pa4',
+    'language': 'pl'
+});
+
 $(document).ready(function () {
     $('#province').select2();
     $('#watercontainer').select2();
@@ -36,7 +44,8 @@ $(document).ready(function () {
         if($("#province").val()==-1 || $("#watercontainer").val()==-1){
             return;
         }
-        var rzeka=$("#watercontainer").val();
+
+
         $('.invalid-feedback').css("display","none");
         $.ajax({
                 url:'rest/'+$("#province").val()+"/"+$("#watercontainer").val(),
@@ -57,61 +66,10 @@ $(document).ready(function () {
             }
         );
 
-        google.charts.load('current', {
-            'packages': ['map'],
-            // Note: you will need to get a mapsApiKey for your project.
-            // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-            'mapsApiKey': 'AIzaSyDQlTwqbQzIesvDheiMg2T6AzoWXA54Pa4'
-        });
-        google.charts.setOnLoadCallback(drawMap);
 
-        function drawMap() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Address');
-            data.addColumn('string', 'Location');
-            data.addRows([
-                ['rzeka '+rzeka, rzeka]
-
-            ]);
-
-            var options = {
-                mapType: 'styledMap',
-                zoomLevel: 9,
-                showTooltip: true,
-                showInfoWindow: true,
-                useMapTypeControl: true,
-                maps: {
-                    // Your custom mapTypeId holding custom map styles.
-                    styledMap: {
-                        name: 'Styled Map', // This name will be displayed in the map type control.
-                        styles: [
-                            {
-                                featureType: 'poi.attraction',
-                                stylers: [{color: '#fce8b2'}]
-                            },
-                            {
-                                featureType: 'road.highway',
-                                stylers: [{hue: '#0277bd'}, {saturation: -50}]
-                            },
-                            {
-                                featureType: 'road.highway',
-                                elementType: 'labels.icon',
-                                stylers: [{hue: '#000'}, {saturation: 100}, {lightness: 50}]
-                            },
-                            {
-                                featureType: 'landscape',
-                                stylers: [{hue: '#259b24'}, {saturation: 10}, {lightness: -22}]
-                            }
-                        ]
-                    }
-                }
-            };
-
-            var map = new google.visualization.Map(document.getElementById('map_div'));
-            map.draw(data, options);
-            $('#mapa').fadeIn(2000);
-        }
     })
+
+
 
     $('.history-form').on('submit', function () {
         var historyId = $('#station').val();
@@ -132,7 +90,7 @@ $(document).ready(function () {
                 type:'get',
                 success:function(response){
                     console.log(response)
-                    if(response.length ==0){
+                    if(response.length === 0){
                       $("#curve_chart").html("<h1>Nie znaleziono wyników</h1>").fadeIn(2000);
                       return;
                     }
@@ -140,8 +98,60 @@ $(document).ready(function () {
                         mapchange = true;
                         var history = response;
 
-                        google.charts.load('current', {'packages':['line', 'corechart']});
-                        google.charts.setOnLoadCallback(drawChart);
+
+                        drawChart()
+
+                        var rzeka=$("#watercontainer").val();
+                        var selectedOptionText = $('#station option:selected').text()
+
+                        drawMap(selectedOptionText)
+
+                        function drawMap(name) {
+                            var data = new google.visualization.DataTable();
+                            data.addColumn('string', 'Address');
+                            data.addColumn('string', 'Location');
+                            data.addRows([
+                                ['rzeka '+ rzeka + ' ' + name, rzeka + ' ' + name]
+
+                            ]);
+
+                            var options = {
+                                mapType: 'styledMap',
+                                zoomLevel: 9,
+                                showTooltip: true,
+                                showInfoWindow: true,
+                                useMapTypeControl: true,
+                                maps: {
+                                    // Your custom mapTypeId holding custom map styles.
+                                    styledMap: {
+                                        name: 'Styled Map', // This name will be displayed in the map type control.
+                                        styles: [
+                                            {
+                                                featureType: 'poi.attraction',
+                                                stylers: [{color: '#fce8b2'}]
+                                            },
+                                            {
+                                                featureType: 'road.highway',
+                                                stylers: [{hue: '#0277bd'}, {saturation: -50}]
+                                            },
+                                            {
+                                                featureType: 'road.highway',
+                                                elementType: 'labels.icon',
+                                                stylers: [{hue: '#000'}, {saturation: 100}, {lightness: 50}]
+                                            },
+                                            {
+                                                featureType: 'landscape',
+                                                stylers: [{hue: '#259b24'}, {saturation: 10}, {lightness: -22}]
+                                            }
+                                        ]
+                                    }
+                                }
+                            };
+
+                            var map = new google.visualization.Map(document.getElementById('map_div'));
+                            map.draw(data, options);
+                            $('#mapa').fadeIn(2000);
+                        }
                         function drawChart() {
                             var chartDiv = document.getElementById('curve_chart');
                            var data = new google.visualization.DataTable();
