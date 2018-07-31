@@ -84,9 +84,9 @@
 <#include "changingParts/maps.ftlh">
 
 <!-- Logowanie -->
-<#if isLoggedIn=="none">
+
 <#include "mainPartsOfPage/logUser.ftlh">
-</#if>
+
 <!-- upload plików -->
 <#include "changingParts/uploadFiles.ftlh">
 

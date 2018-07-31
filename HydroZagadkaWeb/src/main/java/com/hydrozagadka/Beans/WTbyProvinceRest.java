@@ -13,12 +13,16 @@ import com.hydrozagadka.dao.UserDao;
 import com.hydrozagadka.dao.WaterContainerDao;
 import com.hydrozagadka.mappers.HistoryMapper;
 import com.hydrozagadka.mappers.WaterContainerMapper;
+import org.apache.http.HttpRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.time.LocalDate;
@@ -27,24 +31,18 @@ import java.util.List;
 @Path("/")
 public class WTbyProvinceRest {
 
-
     @Inject
-    WaterContainerDao waterContainerDao;
-
+    private WaterContainerDao waterContainerDao;
     @Inject
-    WaterContainerMapper waterContainerMapper;
-
+    private WaterContainerMapper waterContainerMapper;
     @Inject
-    HistoryDao historyDao;
-
+    private HistoryDao historyDao;
     @Inject
-    HistoryMapper historyMapper;
-
+    private HistoryMapper historyMapper;
     @Inject
-    UserDao userDao;
-
+    private UserDao userDao;
     @Inject
-    StatisticsDao statisticsDao;
+    private StatisticsDao statisticsDao;
 
     private Logger logger = LoggerFactory.getLogger(WTbyProvinceRest.class);
 
@@ -72,7 +70,11 @@ public class WTbyProvinceRest {
     @Path("/id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response getwaterContainerHistory(@PathParam("id") Long id, @QueryParam("startDate") String startdate, @QueryParam("endDate") String enddate, @QueryParam("check") boolean check) throws JsonProcessingException {
+    public Response getwaterContainerHistory(@PathParam("id") Long id,
+                                             @QueryParam("startDate") String startdate,
+                                             @QueryParam("endDate") String enddate,
+                                             @QueryParam("check") boolean check,
+                                             @Context HttpServletRequest request) throws JsonProcessingException {
         LocalDate startDate = LocalDate.of(1954, 01, 01);
         LocalDate endDate = LocalDate.now();
         addStat(id);
@@ -82,7 +84,9 @@ public class WTbyProvinceRest {
             logger.info("Dat nie podano");
         }
         if (check) {
-            addFavourite(id, 1L);
+            HttpSession httpSession =request.getSession();
+            String token = (String) httpSession.getAttribute("token");
+            addFavourite(id, token);
         }
         List<History> histories = historyDao.getHistoryByWaterContainerWithDates(id, startDate, endDate);
         List<ChartHistory> chartHistories = historyMapper.mapToChartHistory(histories);
@@ -105,10 +109,9 @@ public class WTbyProvinceRest {
         statisticsDao.update(idWC);
     }
 
-    private void addFavourite(Long idWC, Long userId) {
+    private void addFavourite(Long idWC, String userId) {
         User user = userDao.findById(userId);
         user.getWaterContainerId().add(waterContainerDao.findById(idWC));
         userDao.update(user);
     }
-
 }

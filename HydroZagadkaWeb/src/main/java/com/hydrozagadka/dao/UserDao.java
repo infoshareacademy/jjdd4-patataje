@@ -5,16 +5,27 @@ import com.hydrozagadka.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import java.util.List;
-
+import javax.persistence.Query;
 @Stateless
 public class UserDao {
-    @PersistenceContext
-    EntityManager entityManager;
 
-    public User findById(Long id){
-       return entityManager.find(User.class,id);
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public User findById(String id){
+        Query q = entityManager.createQuery("select u from User u where u.token = :token");
+        q.setParameter("token", id);
+        User user = null;
+        try {
+            user = (User) q.getSingleResult();
+            user.setStats(user.getStats()+1);
+            entityManager.merge(user);
+            return user;
+        }catch (NoResultException e){
+            return user;
+        }
     }
 
     public void save(User user){
