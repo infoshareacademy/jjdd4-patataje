@@ -102,6 +102,9 @@
     <i class="fa fa-angle-up"></i>
 </a>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
 <!-- Bootstrap core JavaScript -->
 <script src="../../HydroZagadkaFront/vendor/jquery/jquery.min.js"></script>
 <script src="../../HydroZagadkaFront/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

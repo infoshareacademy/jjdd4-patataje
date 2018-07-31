@@ -1,7 +1,6 @@
 package com.hydrozagadka.dao;
 
 import com.hydrozagadka.History;
-import com.hydrozagadka.Model.ChartHistory;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -9,8 +8,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.time.LocalDate;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 @Stateless
 public class HistoryDao {

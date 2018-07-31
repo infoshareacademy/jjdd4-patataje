@@ -16,11 +16,12 @@ import java.util.*;
 
 public class CSVLoader {
     private static final String DIRECT_PATH = "/home/juliuszklos/Development/HydroZagadka/jjdd4-patataje/HydroZagadkaApp/data";
+    private static final String DIRECT_PATH_TO_PROPERTY = System.getProperty("java.io.tmpdir");
+    private static Logger logger = LoggerFactory.getLogger(CSVLoader.class);
 
     private BufferedReader br;
     private Set<String> province = new LinkedHashSet<>();
     private Map<Long, WaterContainer> allContainers = new HashMap<>();
-    private static Logger logger = LoggerFactory.getLogger(CSVLoader.class);
 
     public Map<Long, WaterContainer> getAllContainers() {
         return allContainers;
@@ -32,7 +33,7 @@ public class CSVLoader {
 
     private List<String> getFilesList() {
         List<String> fileNames = new ArrayList<>();
-        try  {
+        try {
             DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(DIRECT_PATH));
             for (Path path : directoryStream) {
                 if (path.toString().contains("codz_")) {
@@ -115,6 +116,7 @@ public class CSVLoader {
         }
 
         return splitedLine;
+
     }
 
     private void checkingExistingContainers(WaterContainer wc, History history) {
@@ -130,7 +132,7 @@ public class CSVLoader {
         allContainers.get(wc.getId()).getHistory().add(history);
     }
 
-  public Set<String> getProvince() {
+    public Set<String> getProvince() {
         return province;
     }
 }
