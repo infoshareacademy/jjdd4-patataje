@@ -20,18 +20,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
+import java.io.*;
+import java.net.URI;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.logging.LogManager;
 import java.util.Map;
 
 @WebServlet("/loadservlet")
 @MultipartConfig
 public class LoadServlet extends HttpServlet {
-
+    private static Logger logger = LoggerFactory.getLogger(LoadServlet.class);
 
     @Inject
     private UnzipDao unzipDao;
