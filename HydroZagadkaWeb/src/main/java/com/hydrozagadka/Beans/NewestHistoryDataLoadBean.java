@@ -32,14 +32,14 @@ public class NewestHistoryDataLoadBean {
         LocalDate checkdate;
         Double temperature;
         if (s.getWaterLevelDate() == null) {
-            logger.warn("Brak danych o dacie pomiaru ustawiona na dzisiaj");
+            logger.warn("Brak danych o dacie pomiaru. Data ustawiona na dzisiaj");
             checkdate = LocalDate.now();
         } else {
             checkdate = s.getWaterLevelDate().toLocalDate();
         }
         if (s.getWaterTemperature() == null) {
             temperature = 0.0;
-            logger.warn("Brak danych o temperaturze ustawiona na 0");
+            logger.warn("Brak danych o temperaturze. Temperatura ustawiona na 0");
         } else {
             temperature = s.getWaterTemperature();
         }

@@ -54,7 +54,7 @@ public class WTbyProvinceRest {
     public Response getWTbyProvinces(@PathParam("province") String province) throws JsonProcessingException {
         List<WaterContainer> waterContainerList = waterContainerDao.getWaterContainerByProvince(province);
         List<StationView> waterContainerViews = waterContainerMapper.mapToStationView(waterContainerList);
-        logger.info("/rest/province filtrowanie danych po województwach zwrócono " + waterContainerViews.size() + " rekordów");
+        logger.info("/rest/province Filtrowanie danych po województwach, zwrócono " + waterContainerViews.size() + " rekordów");
         return Response.ok(waterContainerViews).build();
     }
 
@@ -64,7 +64,7 @@ public class WTbyProvinceRest {
     public Response getWTbyProvinces(@PathParam("province") String province, @PathParam("container") String container) throws JsonProcessingException {
         List<WaterContainer> waterContainers = waterContainerDao.getWaterContainerByProvinceAndwaterContainer(province, container);
         List<WaterContainerView> waterContainerViews = waterContainerMapper.mapToWaterContainerView(waterContainers);
-        logger.info("/rest/province/container filtrowanie danych po województwie i zbiorniku zwrócono " + waterContainerViews.size() + " rekordów");
+        logger.info("/rest/province/container Filtrowanie danych po województwie i zbiorniku, zwrócono " + waterContainerViews.size() + " rekordów");
         return Response.ok(waterContainerViews).build();
     }
 
@@ -79,14 +79,14 @@ public class WTbyProvinceRest {
         if (isCorrectDate(startdate, enddate)) {
             startDate = LocalDate.parse(startdate);
             endDate = LocalDate.parse(enddate);
-            logger.info("Dat nie podano");
+            logger.info("Nie podano dat");
         }
         if (check) {
             addFavourite(id, 1L);
         }
         List<History> histories = historyDao.getHistoryByWaterContainerWithDates(id, startDate, endDate);
         List<ChartHistory> chartHistories = historyMapper.mapToChartHistory(histories);
-        logger.info("/id/id zwrócenie historii danej stacji zwrócono " + chartHistories.size() + " rekordów");
+        logger.info("/id/id Zwrócenie historii danej stacji, zwrócono " + chartHistories.size() + " rekordów");
         return Response.ok(chartHistories).build();
     }
 

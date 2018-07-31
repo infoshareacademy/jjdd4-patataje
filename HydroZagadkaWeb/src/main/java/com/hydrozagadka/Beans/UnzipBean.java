@@ -37,7 +37,7 @@ public class UnzipBean implements UnzipDao {
             fis.close();
         } catch (IOException e) {
             e.printStackTrace();
-            logger.warn("File not found,can't unzip file");
+            logger.warn("Pliku nie znaleziono", e);
         }
 
     }

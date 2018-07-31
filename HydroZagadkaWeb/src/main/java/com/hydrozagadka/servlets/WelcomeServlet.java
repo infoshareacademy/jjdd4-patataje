@@ -38,7 +38,7 @@ public class WelcomeServlet extends HttpServlet {
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
-            logger.warn("Template dosen't exist");
+            logger.warn("Szablon nie istnieje", e);
         }
     }
 }

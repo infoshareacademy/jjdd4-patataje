@@ -28,7 +28,7 @@ public class LoadZipToDatabaseBean {
 
     public void unzipFile(InputStream is){
         unzipDao.unzip(is, DIRECT_PATH);
-        logger.info("Unzip File: {}");
+        logger.info("Rozpakowywanie pliku: {}");
         CSVLoader csvLoader = new CSVLoader();
         waterContainerMap = csvLoader.getAllContainers();
     }
