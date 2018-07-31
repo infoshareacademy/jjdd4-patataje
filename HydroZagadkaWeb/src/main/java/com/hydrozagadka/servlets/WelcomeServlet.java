@@ -29,22 +29,22 @@ public class WelcomeServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Template template;
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         Boolean isAuth = (Boolean) session.getAttribute("isLoggedIn");
         Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
 
-        if (isAuth) {
-            
+        if (isAuth && !isAdmin) {
+            template = freeMarkerConfig.getTemplate("userPage.ftlh", getServletContext());
+        } else if (isAuth && isAdmin) {
+            template = freeMarkerConfig.getTemplate("adminPage.ftlh", getServletContext());
+        } else {
+            template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
         }
 
-        if (isAdmin) {
-
-        }
-
-        Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
         Map<String, Object> model = new HashMap<>();
-
+        
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
