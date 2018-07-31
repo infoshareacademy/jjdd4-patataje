@@ -2,6 +2,7 @@ package com.hydrozagadka;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -24,6 +25,20 @@ public class History {
 
     @Column(name = "temperatures")
     private Double temperature;
+
+    @Column(name="level_of_water_date")
+    private LocalDateTime levelOfWaterDate;
+
+    @Column(name = "temperature_date")
+    private LocalDateTime temperatureDate;
+    @Column(name="ice_phenomenon")
+    private Integer icePhenomenon;
+    @Column(name="ice_phenomenon_date")
+    private LocalDateTime icePhenomenonDate;
+    @Column(name="overgrowth_phenomenon")
+    private Integer overgrowthPhenomenon;
+    @Column(name="overgrowth_phenomenon_date")
+    private LocalDateTime overgrowthPhenomenonDate;
 
     @ManyToOne
     @JoinColumn(name = "container_id")
@@ -126,5 +141,69 @@ public class History {
     public int hashCode() {
 
         return Objects.hash(date, waterDeep, flow, temperature);
+    }
+
+
+    public History(LocalDate date, Double waterDeep, Double flow, Double temperature, LocalDateTime levelOfWaterDate, LocalDateTime temperatureDate, Integer icePhenomenon, LocalDateTime icePhenomenonDate, Integer overgrowthPhenomenon, LocalDateTime overgrowthPhenomenonDate, WaterContainer waterContainers, Long containerId) {
+        this.date = date;
+        this.waterDeep = waterDeep;
+        this.flow = flow;
+        this.temperature = temperature;
+        this.levelOfWaterDate = levelOfWaterDate;
+        this.temperatureDate = temperatureDate;
+        this.icePhenomenon = icePhenomenon;
+        this.icePhenomenonDate = icePhenomenonDate;
+        this.overgrowthPhenomenon = overgrowthPhenomenon;
+        this.overgrowthPhenomenonDate = overgrowthPhenomenonDate;
+        this.waterContainers = waterContainers;
+        this.containerId = containerId;
+    }
+
+    public LocalDateTime getLevelOfWaterDate() {
+        return levelOfWaterDate;
+    }
+
+    public void setLevelOfWaterDate(LocalDateTime levelOfWaterDate) {
+        this.levelOfWaterDate = levelOfWaterDate;
+    }
+
+    public LocalDateTime getTemperatureDate() {
+        return temperatureDate;
+    }
+
+    public void setTemperatureDate(LocalDateTime temperatureDate) {
+        this.temperatureDate = temperatureDate;
+    }
+
+    public Integer getIcePhenomenon() {
+        return icePhenomenon;
+    }
+
+    public void setIcePhenomenon(Integer icePhenomenon) {
+        this.icePhenomenon = icePhenomenon;
+    }
+
+    public LocalDateTime getIcePhenomenonDate() {
+        return icePhenomenonDate;
+    }
+
+    public void setIcePhenomenonDate(LocalDateTime icePhenomenonDate) {
+        this.icePhenomenonDate = icePhenomenonDate;
+    }
+
+    public Integer getOvergrowthPhenomenon() {
+        return overgrowthPhenomenon;
+    }
+
+    public void setOvergrowthPhenomenon(Integer overgrowthPhenomenon) {
+        this.overgrowthPhenomenon = overgrowthPhenomenon;
+    }
+
+    public LocalDateTime getOvergrowthPhenomenonDate() {
+        return overgrowthPhenomenonDate;
+    }
+
+    public void setOvergrowthPhenomenonDate(LocalDateTime overgrowthPhenomenonDate) {
+        this.overgrowthPhenomenonDate = overgrowthPhenomenonDate;
     }
 }

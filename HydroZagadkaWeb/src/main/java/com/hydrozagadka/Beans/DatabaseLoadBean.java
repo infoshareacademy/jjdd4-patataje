@@ -1,23 +1,23 @@
-package com.hydrozagadka.servlets;
+package com.hydrozagadka.Beans;
 
 import com.hydrozagadka.CSVLoader;
+import com.hydrozagadka.Model.NewestWaterContainerData;
 import com.hydrozagadka.Model.Statistics;
+import com.hydrozagadka.User;
 import com.hydrozagadka.WaterContainer;
 import com.hydrozagadka.dao.HistoryDao;
 import com.hydrozagadka.dao.StatisticsDao;
+import com.hydrozagadka.dao.UserDao;
 import com.hydrozagadka.dao.WaterContainerDao;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-@WebServlet(urlPatterns = "/database")
-public class DatabaseServlet extends HttpServlet {
+@Stateless
+public class DatabaseLoadBean {
 
     @Inject
     private WaterContainerDao waterContainerDao;
@@ -26,11 +26,22 @@ public class DatabaseServlet extends HttpServlet {
     @Inject
     private StatisticsDao statisticsDao;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CSVLoader csvLoader = new CSVLoader();
-        Map<Long, WaterContainer> waterContainerMap = csvLoader.getAllContainers();
+    @Inject
+    private NewestHistoryDataLoadBean newestHistoryDataLoadBean;
+    @Inject
+    private NewestWaterContainerDataLoadBean newestWaterContainerDataLoadBean;
 
+    @Inject
+    private ApiConnector apiConnector;
+
+    @Inject
+    private UserDao userDao;
+
+    CSVLoader csvLoader = new CSVLoader();
+    Map<Long, WaterContainer> waterContainerMap = csvLoader.getAllContainers();
+
+
+    public void loadWaterContainer() {
         waterContainerMap.values().stream()
                 .forEach(waterContainer -> {
                     if (waterContainerDao.findById(waterContainer.getId()) == null) {
@@ -38,7 +49,9 @@ public class DatabaseServlet extends HttpServlet {
                         statisticsDao.save(new Statistics(0L, waterContainer));
                     }
                 });
+    }
 
+    public void loadHistory() {
         waterContainerMap.values().stream()
                 .forEach(waterContainer -> waterContainer.getHistory().stream()
                         .forEach(history -> {
@@ -49,6 +62,16 @@ public class DatabaseServlet extends HttpServlet {
                                 historyDao.save(history);
                             }
                         }));
-        resp.sendRedirect("/welcome");
+    }
+
+    public void loadDataFromApi() {
+
+        List<NewestWaterContainerData> imgwData = apiConnector.load();
+        newestWaterContainerDataLoadBean.loadNewestWaterContainerToDatabase(imgwData);
+        newestHistoryDataLoadBean.loadNewestHistoryToDatabase(imgwData);
+        userDao.save(new
+                User("orliktcz@gmail.com", "asdasascr54t4grghfdaq3", false, 0, new ArrayList<>()));
+        userDao.save(new
+                User("Admin@wp.pl", "fdfdsfdf", true, 0, new ArrayList<>()));
     }
 }

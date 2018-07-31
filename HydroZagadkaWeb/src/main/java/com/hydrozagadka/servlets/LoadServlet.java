@@ -1,5 +1,7 @@
 package com.hydrozagadka.servlets;
 
+import com.hydrozagadka.Beans.DatabaseLoadBean;
+import com.hydrozagadka.Beans.LoadZipToDatabaseBean;
 import com.hydrozagadka.Beans.UnzipDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import freemarker.template.Template;
@@ -37,10 +39,10 @@ public class LoadServlet extends HttpServlet {
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
 
-    private Map<Long, WaterContainer> waterContainerMap;
-
-    public static final String DIRECT_PATH = System.getProperty("java.io.tmpdir");
-
+    @Inject
+    private LoadZipToDatabaseBean loadZipToDatabaseBean;
+    @Inject
+    DatabaseLoadBean databaseLoadBean;
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,15 +50,16 @@ public class LoadServlet extends HttpServlet {
         PrintWriter pr = response.getWriter();
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         if (!fileName.contains(".zip")) {
-            logger.warn("No zip file found");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            pr.close();
             return;
         }
         InputStream is = filePart.getInputStream();
-        unzipDao.unzip(is, DIRECT_PATH);
-        logger.info("Unzip File: {}");
-        CSVLoader csvLoader = new CSVLoader();
-        waterContainerMap = csvLoader.getAllContainers();
-        response.sendRedirect("/database");
+        loadZipToDatabaseBean.unzipFile(is);
+        databaseLoadBean.loadWaterContainer();
+        databaseLoadBean.loadHistory();
+        databaseLoadBean.loadDataFromApi();
+        response.sendRedirect("/welcome");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

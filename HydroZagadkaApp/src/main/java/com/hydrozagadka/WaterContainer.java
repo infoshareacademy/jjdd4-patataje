@@ -24,6 +24,9 @@ public class WaterContainer {
     @OneToMany(mappedBy = "waterContainers", fetch = FetchType.EAGER)
     private List<History> history;
 
+    @ManyToMany(mappedBy = "waterContainerId")
+    List<User> users;
+
     public WaterContainer() {
     }
 
@@ -71,9 +74,18 @@ public class WaterContainer {
         return history;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
     public void setHistory(List<History> history) {
         this.history = history;
     }
+
 
     @Override
     public String toString() {

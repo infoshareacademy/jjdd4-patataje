@@ -28,7 +28,6 @@
 
 <body id="page-top">
 
-
 <!-- Header -->
 <section>
     <div class="container">
@@ -41,7 +40,7 @@
                 <h3><#if statusCode??>Kod błędu: <em> ${statusCode}</em></#if>
                     <h6><#if requestUri??>
                         przekierowano z: <em> ${requestUri}</em></#if><br>
-                       <#if throwable??> wyjątek: ${throwable}</#if>
+                       <#if throwable??> szczegóły: ${throwable}</#if>
                     </h6>
                 </h3>
                 <br><br>
@@ -63,7 +62,6 @@
 
     <div class="overlay"></div>
 </section>
-
 
 <!-- Footer -->
 
