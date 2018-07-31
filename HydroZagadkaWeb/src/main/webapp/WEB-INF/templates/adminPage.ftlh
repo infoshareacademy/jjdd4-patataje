@@ -1,4 +1,4 @@
-<#ftl encoding='UTF-8'>
+
 <!DOCTYPE html>
 <html lang="pl-PL">
 
@@ -27,62 +27,32 @@
 </head>
 
 <body id="page-top">
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = 'https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v3.0&appId=293962678012596&autoLogAppEvents=1';
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
 <!-- Navigation -->
 
 <a class="menu-toggle rounded" href="#">
     <i class="fa fa-bars"></i>
 </a>
-<#include "mainPartsOfPage/navBar.ftlh">
+<#include "mainPartsOfPage/navBarAdmin.ftlh">
 
 <!-- Header -->
-<header class="masthead d-flex">
-    <div class="container text-center my-auto">
-        <h1 class="mb-1">HydroZagadka</h1>
-        <h3 class="mb-5">
-            <em>Aplikacja sprawdzająca stan wód w Polsce</em>
-        </h3>
-        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#upload">Wyślij dane!</a>
-        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#check">Sprawdź zbiornik!</a>
-        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">O aplikacji!</a>
+<section style="background-image: url('../../HydroZagadkaFront/img/bg-masthead22.jpg')">
+    <div class="container">
+       <div class="row">
+           <h1 class="mb-1">Witaj na panelu administratora</h1>
+<br>
+           <h3>Tutaj możesz zarządzać stroną HydroZagadka. <br>
+           Powodzenia!</h3>
+       </div>
+        <div class="row">
+
+
+
+        </div>
     </div>
     <div class="overlay"></div>
-</header>
+</section>
 
 
-<!-- upload plików -->
-<#include "changingParts/uploadFiles.ftlh">
-
-<!-- Sprawdź zbiornik -->
-<#include "changingParts/checkContainer.ftlh">
-
-
-
-<!-- wyświetlanie danych - wykresy -->
-
-<#include "changingParts/charts.ftlh">
-
-
-<!-- wyświetlanie danych - mapa -->
-<#include "changingParts/maps.ftlh">
-
-<!-- Logowanie -->
-
-<#include "mainPartsOfPage/logUser.ftlh">
-
-<!-- o aplikacji -->
-<#include "mainPartsOfPage/aboutApp.ftlh">
-
-<!-- Kontakt -->
-<#include "mainPartsOfPage/aboutAuthors.ftlh">
 
 <!-- Footer -->
 
