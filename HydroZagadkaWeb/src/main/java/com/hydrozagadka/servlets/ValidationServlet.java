@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
-@WebServlet(urlPatterns = "validation")
+@WebServlet(urlPatterns = "/validation")
 public class ValidationServlet extends HttpServlet {
 
     @Inject

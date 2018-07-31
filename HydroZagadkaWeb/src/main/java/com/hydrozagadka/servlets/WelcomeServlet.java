@@ -32,9 +32,14 @@ public class WelcomeServlet extends HttpServlet {
         Template template;
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        Boolean isAuth = (Boolean) session.getAttribute("isLoggedIn");
+        if (session.getAttribute("isLoggedIn") == null) {
+            session.setAttribute("isLoggedIn", false);
+        }
+        if (session.getAttribute("isAdmin") == null) {
+            session.setAttribute("isAdmin", false);
+        }
         Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
-
+        Boolean isAuth = (Boolean) session.getAttribute("isLoggedIn");
         if (isAuth && !isAdmin) {
             template = freeMarkerConfig.getTemplate("userPage.ftlh", getServletContext());
         } else if (isAuth && isAdmin) {

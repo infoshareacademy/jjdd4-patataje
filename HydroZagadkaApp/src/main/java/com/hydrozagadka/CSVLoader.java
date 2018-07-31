@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class CSVLoader {
-    private static final String DIRECT_PATH = "/home/juliuszklos/Development/HydroZagadka/jjdd4-patataje/HydroZagadkaApp/data";
+    private static final String DIRECT_PATH = "D:/Develop/Hydrozagadka/jjdd4-patataje/HydroZagadkaApp/data";
     private static final String DIRECT_PATH_TO_PROPERTY = System.getProperty("java.io.tmpdir");
     private static Logger logger = LoggerFactory.getLogger(CSVLoader.class);
 
