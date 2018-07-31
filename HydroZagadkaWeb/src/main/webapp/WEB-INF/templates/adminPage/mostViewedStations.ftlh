@@ -1,9 +1,9 @@
 <div class="container text-center my-auto">
-<div class="row">
-    <div class="col-sm"></div>
-<div class="col-7">
+<#--<div class="row">-->
+    <#--<div class="col-sm"></div>-->
+<#--<div class="col-7">-->
     <br><br>
-    <h3>Najczęściej wyświetlane stacje pomiarowe:</h3>
+    <h4>stacje pomiarowe:</h4>
 <div class="table-responsive-md">
 <table class="table table-sm table-hover">
     <thead>
@@ -26,10 +26,10 @@
 </tbody>
             </table>
             </div>
-            </div>
-                <div class="col-sm">
+            <#--</div>-->
+                <#--<div class="col-sm">-->
 
-                </div>
+                <#--</div>-->
             </div>
 </#list>
     <div class="overlay"></div>

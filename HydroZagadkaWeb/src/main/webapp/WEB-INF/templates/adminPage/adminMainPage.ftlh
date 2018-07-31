@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pl-PL">
 
@@ -47,35 +46,36 @@
 <#include "navBarAdmin.ftlh">
 
 <!-- Header -->
-<section >
+<section>
     <div class="container">
-        <div class="row"> <div class="col"><br></div></div>
+        <div class="row">
+            <div class="col"><br></div>
+        </div>
         <div class="content-section-heading text-center">
 
             <h3 class="text-secondary mb-0">Adminie</h3>
-            <h2 class="mb-5">co chcesz dziś zrobić?</h2>
+            <h2 class="mb-5">Co chcesz dziś zrobić?</h2>
         </div>
         <div class="row no-gutters">
             <div class="col"></div>
             <div class="col-4">
-                <a class="portfolio-item"
-                   <#--data-toggle="collapse" data-target="#stats" -->
-                   href="#stats">
+                <a class="portfolio-item "  href="#upload">
               <span class="caption">
                 <span class="caption-content">
-                  <h2>Statystyki</h2>
-                  <p class="mb-0">Sprawdź wyświetlenia zbiorników!</p>
+                  <h2>Uaktualnij dane</h2>
+                  <p class="mb-0">Załaduj plik .zip z danymi zbiorników.</p>
                 </span>
               </span>
                     <img class="img-fluid" src="../../../HydroZagadkaFront/img/portfolio-7.jpg" alt="">
                 </a>
             </div>
+
             <div class="col-4">
                 <a class="portfolio-item" href="#users">
               <span class="caption">
                 <span class="caption-content">
                   <h2>Lista użytkowników</h2>
-                  <p class="mb-0">Zobacz pełną listę użytkowników!</p>
+                  <p class="mb-0">Zobacz listę użytkowników aplikacji.</p>
                 </span>
               </span>
                     <img class="img-fluid" src="../../../HydroZagadkaFront/img/portfolio-2.jpg" alt="">
@@ -87,11 +87,11 @@
         <div class="row no-gutters">
             <div class="col"></div>
             <div class="col-4">
-                <a class="portfolio-item" href="#logs">
+                <a class="portfolio-item" href="#stats">
               <span class="caption">
                 <span class="caption-content">
-                  <h2>Raporty</h2>
-                  <p class="mb-0">Wyświetl logi!</p>
+                  <h2>Statystyki wyświetleń</h2>
+                  <p class="mb-0">Sprawdź wyświetlenia stacji i województw.</p>
                 </span>
               </span>
                     <img class="img-fluid" src="../../../HydroZagadkaFront/img/portfolio-6.jpg" alt="">
@@ -101,16 +101,19 @@
                 <a class="portfolio-item" href="#upload">
               <span class="caption">
                 <span class="caption-content">
-                  <h2>Uaktualnij dane</h2>
-                  <p class="mb-0">Wgraj pliki.</p>
+                  <h2>Loggery</h2>
+                  <p class="mb-0">Zobacz logi<br>
+                      aplikacji.</p>
                 </span>
               </span>
-                    <img class="img-fluid" src="../../../HydroZagadkaFront/img/portfolio-4.jpg" alt="">
+                    <img class="img-fluid" src="../../../HydroZagadkaFront/img/portfolio-4.jpg"
+                         alt="Zczytaj logi aplikacji.">
                 </a>
             </div>
             <div class="col"></div>
         </div>
     </div>
+    <br>
 </section>
 
 <!-- upload plików -->
@@ -118,18 +121,23 @@
 <#include "../changingParts/uploadFiles.ftlh">
 </section>
 <!-- Lista uzytkownikow -->
-<section class="content-section" id="users">
+<section class="content-section container text-center my-auto" id="users">
 <#include "../adminPage/users.ftlh">
 </section>
 
-<!-- Ilosc klikniec na wojewodztwa -->
-<section class="content-section" id="stats">
-    <#include "../adminPage/listOfProvincesWithVIews.ftlh">
-</section>
-
-<!-- Najczesciej wybierane zbiorniki -->
-<section class="content-section" id="stations" href="#stations">
-<#include "../adminPage/mostViewedStations.ftlh">
+<!-- Ilosc klikniec na wojewodztwa/stacje -->
+<section class="content-section bg-light container text-center my-auto" id="stats">
+    <h3>Najczęściej wyświetlane</h3>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-4">
+        <#include "../adminPage/listOfProvincesWithVIews.ftlh">
+        </div>
+        <div class="col-4">
+        <#include "../adminPage/mostViewedStations.ftlh">
+        </div>
+        <div class="col"></div>
+    </div>
 </section>
 
 <!-- Footer -->

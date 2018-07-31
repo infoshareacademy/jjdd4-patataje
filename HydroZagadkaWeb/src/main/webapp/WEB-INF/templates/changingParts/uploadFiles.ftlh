@@ -2,7 +2,7 @@
     <div class="container text-center my-auto">
         <div class="row">
             <div class="col-lg-10 mx-auto" id="uploadfile">
-                <h2> Prześlij plik zip ze swoimi danymi:</h2>
+                <h2> Prześlij plik zip z danymi:</h2>
                 <br>
                 <form class="formclass" method="post" id="loadfile" action="/loadservlet" enctype="multipart/form-data">
                     <div class="row">

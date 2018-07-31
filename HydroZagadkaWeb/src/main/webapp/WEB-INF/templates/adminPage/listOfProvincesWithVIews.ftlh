@@ -1,11 +1,11 @@
 
 
 <div class="container text-center my-auto">
-<div class="row">
-    <div class="col-sm"></div>
-<div class="col-6">
+<#--<div class="row">-->
+    <#--<div class="col-sm"></div>-->
+<#--<div class="col-6">-->
     <br><br>
-    <h3>Wyświetlenia województw:</h3>
+    <h4>województwa:</h4>
 <div class="table-responsive-md">
 <table class="table table-sm table-hover">
     <thead>
@@ -27,10 +27,10 @@
 </tbody>
             </table>
             </div>
-            </div>
-                <div class="col-sm">
+            <#--</div>-->
+            <#--?    <div class="col-sm">-->
 
-                </div>
+                <#--</div>-->
             </div>
 </#list>
     <div class="overlay"></div>
