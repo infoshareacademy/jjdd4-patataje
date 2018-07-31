@@ -87,8 +87,7 @@
 
 <#include "mainPartsOfPage/logUser.ftlh">
 
-<!-- upload plików -->
-<#include "changingParts/uploadFiles.ftlh">
+
 
 <!-- Kontakt -->
 <#include "mainPartsOfPage/aboutAuthors.ftlh">
