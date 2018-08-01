@@ -15,7 +15,7 @@ public class User {
     private String email;
     @Column(name = "adminaaa")
     @NotNull
-    private boolean adminaaa;
+    private Integer adminaaa;
     @NotNull
     @Column
     private String token;
@@ -37,7 +37,7 @@ public class User {
     public User() {
     }
 
-    public User(@NotNull String token, @NotNull String name ,@NotNull String email, @NotNull boolean adminaaa, Integer stats, List<WaterContainer> waterContainerId,String urlPicPath, String locale) {
+    public User(@NotNull String token, @NotNull String name ,@NotNull String email, @NotNull Integer adminaaa, Integer stats, List<WaterContainer> waterContainerId,String urlPicPath, String locale) {
         this.token = token;
         this.name = name;
         this.email = email;
@@ -64,7 +64,7 @@ public class User {
         this.locale = locale;
     }
 
-    public boolean isAdminaaa() {
+    public Integer getAdminaaa() {
         return adminaaa;
     }
 
@@ -76,7 +76,7 @@ public class User {
         this.token = token;
     }
 
-    public void setAdminaaa(boolean adminaaa) {
+    public void setAdminaaa(Integer adminaaa) {
         this.adminaaa = adminaaa;
     }
 

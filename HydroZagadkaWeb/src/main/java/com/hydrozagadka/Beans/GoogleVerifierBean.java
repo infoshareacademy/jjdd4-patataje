@@ -26,7 +26,7 @@ public class GoogleVerifierBean {
     @Inject
     private UserDao userDao;
     private static final JacksonFactory jacksonFactory = new JacksonFactory();
-    private static final String CLIENT_ID = "838946843173-a1982aq9rsq35t2hlanpjbn74ok93es0.apps.googleusercontent.com";
+    private static final String CLIENT_ID = "838946843173-fn7d8je5vm8kisb459ud5tc584p0c8th.apps.googleusercontent.com";
     private static final String salt = "wyu845wyovvvvvvvvuwt5ht78uyh358gf7y3qg78vyqer87gfyqe8r7gh834uigh*(&^&*^*(&^(^(";
 @Transactional
     public User verify(String idTokenString) throws GeneralSecurityException, IOException {
@@ -51,7 +51,7 @@ public class GoogleVerifierBean {
             if (user != null) {
                 return user;
             } else if (emailVerified) {
-                User u = new User(encodedUserId, name, email, false, 0, new ArrayList<>(), pictureUrl, locale);
+                User u = new User(encodedUserId, name, email, 0, 0, new ArrayList<>(), pictureUrl, locale);
                 userDao.save(u);
                 return u;
             }
