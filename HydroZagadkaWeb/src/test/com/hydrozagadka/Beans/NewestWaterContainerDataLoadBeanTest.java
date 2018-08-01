@@ -12,6 +12,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import javax.validation.constraints.NotNull;
+import java.util.Collection;
 import java.util.Collections;
 
 import static org.junit.Assert.*;
@@ -46,5 +48,32 @@ public class NewestWaterContainerDataLoadBeanTest {
         // then
         Mockito.verify(waterContainerDao).save(expectedWaterContainer);
         Mockito.verify(statisticsDao).save(new Statistics(0L, expectedWaterContainer));
+    }
+    @Test
+    public void loadNewestWaterContainerToDatabaseNotNull() {
+        //given
+        NewestWaterContainerData givenContainer = new NewestWaterContainerData();
+        givenContainer.setId(2L);
+        givenContainer.setContainer("Container");
+        givenContainer.setStation("Station");
+        givenContainer.setProvince("Province");
+
+        Mockito.when(waterContainerDao.findById(2L)).thenReturn(new WaterContainer());
+
+        //when
+        testObj.loadNewestWaterContainerToDatabase(Collections.singletonList(givenContainer));
+
+        //then
+        Mockito.verify(statisticsDao, Mockito.never()).save(Mockito.any());
+        Mockito.verify(waterContainerDao, Mockito.never()).save(Mockito.any());
+
+
+
+
+
+
+
+
+
     }
 }
