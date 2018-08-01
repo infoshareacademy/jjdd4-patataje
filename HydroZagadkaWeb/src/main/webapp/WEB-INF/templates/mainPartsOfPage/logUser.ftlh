@@ -10,7 +10,9 @@
             <div class="col">
                 <div class="g-signin2" data-onsuccess="onSignIn"></div>
             </div>
-            <div class="col"></div>
+            <div class="col">
+                <a href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/logout">wyloguj</a>
+            </div>
         </div>
     </div>
 

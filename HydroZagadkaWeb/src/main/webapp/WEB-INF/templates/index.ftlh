@@ -36,6 +36,7 @@
             integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
             crossorigin="anonymous"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+
 </head>
 
 <body id="page-top">
