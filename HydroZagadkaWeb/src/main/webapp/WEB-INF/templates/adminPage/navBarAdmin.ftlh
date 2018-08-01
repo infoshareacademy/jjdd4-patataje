@@ -5,16 +5,16 @@
             <a class="js-scroll-trigger" href="#page-top">Góra</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="#raport">Raporty</a>
+            <a class="js-scroll-trigger" href="#upload">Wczytaj plik</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="#conf">Konfiguacje</a>
-        </li>
-        <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="#stats">Statystyki</a>
+            <a class="js-scroll-trigger" href="#stats">Statystyki wyświetleń</a>
         </li>
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="#users">Lista użytkowników</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="#logs">Logi</a>
         </li>
 
     </ul>

@@ -52,6 +52,7 @@ public class LoadServlet extends HttpServlet {
         if (!fileName.contains(".zip")) {
             logger.warn("No zip file found");
 
+
  throw new FileNotFoundException("zły format pliku");
 
 

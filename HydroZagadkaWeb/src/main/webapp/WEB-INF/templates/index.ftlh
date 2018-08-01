@@ -87,8 +87,6 @@
 
 <#include "mainPartsOfPage/logUser.ftlh">
 
-
-
 <!-- Kontakt -->
 <#include "mainPartsOfPage/aboutAuthors.ftlh">
 
