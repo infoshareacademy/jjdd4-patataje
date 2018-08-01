@@ -44,9 +44,6 @@ public class LoadServlet extends HttpServlet {
     @Inject
     DatabaseLoadBean databaseLoadBean;
 
-    public static final String DIRECT_PATH = System.getProperty("java.io.tmpdir");
-
-
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file");
