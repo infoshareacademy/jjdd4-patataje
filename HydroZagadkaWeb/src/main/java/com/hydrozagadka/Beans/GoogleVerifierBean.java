@@ -51,7 +51,7 @@ public class GoogleVerifierBean {
             if (user != null) {
                 return user;
             } else if (emailVerified) {
-                User u = new User(encodedUserId, name, email, 1, 0, new ArrayList<>(), pictureUrl, locale);
+                User u = new User(encodedUserId, name, email, true, 0, new ArrayList<>(), pictureUrl, locale);
                 userDao.save(u);
                 return u;
             }

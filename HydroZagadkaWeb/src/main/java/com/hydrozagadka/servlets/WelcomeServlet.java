@@ -40,9 +40,9 @@ public class WelcomeServlet extends HttpServlet {
             session.setAttribute("isAdmin", false);
         }
         Boolean isAuth = (Boolean) session.getAttribute("isLoggedIn");
-        Integer isAdmin = (Integer) session.getAttribute("isAdmin");
+        Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
         if (isAuth) {
-            if (isAdmin==1) {
+            if (isAdmin) {
                 model.put("isLoggedIn", "admin");
             } else {
                 model.put("isLoggedIn", "user");
