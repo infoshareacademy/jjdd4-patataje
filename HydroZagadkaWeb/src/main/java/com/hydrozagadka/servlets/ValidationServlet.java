@@ -26,7 +26,7 @@ public class ValidationServlet extends HttpServlet {
             User user = googleVerifierBean.verify(req.getParameter("idtoken"));
             HttpSession session = req.getSession();
             session.setAttribute("isLoggedIn", true);
-            session.setAttribute("isAdmin", user.isAdminaaa());
+            session.setAttribute("isAdmin", user.getAdminaaa());
             session.setAttribute("token",user.getToken());
         } catch (GeneralSecurityException e) {
             e.printStackTrace();

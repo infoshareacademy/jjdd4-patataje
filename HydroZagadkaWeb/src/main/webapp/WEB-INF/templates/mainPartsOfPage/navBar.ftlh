@@ -4,11 +4,11 @@
         <li class="sidebar-brand">
             <a class="js-scroll-trigger" href="#page-top">Góra</a>
         </li>
-        <#--<#if isLoggedIn = admin>-->
+        <#if isLoggedIn = "admin">
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="/admin">Panel admina</a>
         </li>
-        <#--</#if>-->
+        </#if>
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="#about">O Aplikacji</a>
         </li>
