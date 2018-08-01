@@ -32,24 +32,27 @@ public class WelcomeServlet extends HttpServlet {
         Template template;
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
+        Map<String, Object> model = new HashMap<>();
         if (session.getAttribute("isLoggedIn") == null) {
             session.setAttribute("isLoggedIn", false);
         }
         if (session.getAttribute("isAdmin") == null) {
             session.setAttribute("isAdmin", false);
         }
-        Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
         Boolean isAuth = (Boolean) session.getAttribute("isLoggedIn");
-        if (isAuth && !isAdmin) {
-            template = freeMarkerConfig.getTemplate("userPage.ftlh", getServletContext());
-        } else if (isAuth && isAdmin) {
-            template = freeMarkerConfig.getTemplate("adminPage.ftlh", getServletContext());
+        Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+        if (isAuth) {
+            if (isAdmin) {
+                model.put("isLoggedIn", "admin");
+            } else {
+                model.put("isLoggedIn", "user");
+            }
         } else {
-            template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
+            model.put("isLoggedIn", "none");
         }
 
-        Map<String, Object> model = new HashMap<>();
-        
+        template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
+
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {

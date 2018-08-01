@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 @Stateless
 public class UserDao {
 
@@ -21,6 +20,8 @@ public class UserDao {
         User user = null;
         try {
             user = (User) q.getSingleResult();
+            user.setStats(user.getStats()+1);
+            entityManager.merge(user);
             return user;
         }catch (NoResultException e){
             return user;

@@ -28,8 +28,7 @@ public class GoogleVerifierBean {
     private static final JacksonFactory jacksonFactory = new JacksonFactory();
     private static final String CLIENT_ID = "838946843173-a1982aq9rsq35t2hlanpjbn74ok93es0.apps.googleusercontent.com";
     private static final String salt = "wyu845wyovvvvvvvvuwt5ht78uyh358gf7y3qg78vyqer87gfyqe8r7gh834uigh*(&^&*^*(&^(^(";
-
-    @Transactional
+@Transactional
     public User verify(String idTokenString) throws GeneralSecurityException, IOException {
 
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), jacksonFactory)

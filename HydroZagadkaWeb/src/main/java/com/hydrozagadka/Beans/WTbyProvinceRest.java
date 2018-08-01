@@ -13,12 +13,16 @@ import com.hydrozagadka.dao.UserDao;
 import com.hydrozagadka.dao.WaterContainerDao;
 import com.hydrozagadka.mappers.HistoryMapper;
 import com.hydrozagadka.mappers.WaterContainerMapper;
+import org.apache.http.HttpRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.time.LocalDate;
@@ -66,7 +70,11 @@ public class WTbyProvinceRest {
     @Path("/id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response getwaterContainerHistory(@PathParam("id") Long id, @QueryParam("startDate") String startdate, @QueryParam("endDate") String enddate, @QueryParam("check") boolean check) throws JsonProcessingException {
+    public Response getwaterContainerHistory(@PathParam("id") Long id,
+                                             @QueryParam("startDate") String startdate,
+                                             @QueryParam("endDate") String enddate,
+                                             @QueryParam("check") boolean check,
+                                             @Context HttpServletRequest request) throws JsonProcessingException {
         LocalDate startDate = LocalDate.of(1954, 01, 01);
         LocalDate endDate = LocalDate.now();
         addStat(id);
@@ -76,7 +84,9 @@ public class WTbyProvinceRest {
             logger.info("Dat nie podano");
         }
         if (check) {
-            addFavourite(id, "1L");
+            HttpSession httpSession =request.getSession();
+            String token = (String) httpSession.getAttribute("token");
+            addFavourite(id, token);
         }
         List<History> histories = historyDao.getHistoryByWaterContainerWithDates(id, startDate, endDate);
         List<ChartHistory> chartHistories = historyMapper.mapToChartHistory(histories);
@@ -86,13 +96,7 @@ public class WTbyProvinceRest {
 
 
     private boolean isCorrectDate(String startDate, String endDate) {
-        if (startDate == null || startDate.isEmpty()) {
-            return false;
-        }
-        if (endDate == null || endDate.isEmpty()) {
-            return false;
-        }
-        return true;
+        return startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty();
     }
 
     private void addStat(Long idWC){

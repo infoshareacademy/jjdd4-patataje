@@ -19,6 +19,7 @@ public class ValidationServlet extends HttpServlet {
     @Inject
     private GoogleVerifierBean googleVerifierBean;
 
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
@@ -26,6 +27,7 @@ public class ValidationServlet extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("isLoggedIn", true);
             session.setAttribute("isAdmin", user.isAdminaaa());
+            session.setAttribute("token",user.getToken());
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
         }

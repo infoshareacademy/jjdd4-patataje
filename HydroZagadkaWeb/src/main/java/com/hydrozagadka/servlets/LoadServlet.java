@@ -58,7 +58,7 @@ public class LoadServlet extends HttpServlet {
         loadZipToDatabaseBean.unzipFile(is);
         databaseLoadBean.loadWaterContainer();
         databaseLoadBean.loadHistory();
-     //   databaseLoadBean.loadDataFromApi();
+        databaseLoadBean.loadDataFromApi();
         response.sendRedirect("/welcome");
     }
 
