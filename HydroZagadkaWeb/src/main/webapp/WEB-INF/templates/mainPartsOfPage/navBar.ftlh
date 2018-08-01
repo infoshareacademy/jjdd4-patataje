@@ -4,9 +4,11 @@
         <li class="sidebar-brand">
             <a class="js-scroll-trigger" href="#page-top">Góra</a>
         </li>
+        <#--<#if isLoggedIn = admin>-->
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="/admin">Panel admina</a>
         </li>
+        <#--</#if>-->
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="#about">O Aplikacji</a>
         </li>
@@ -21,6 +23,15 @@
         </li>
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="#contact">O Autorach</a>
+        </li>
+        <li class="sidebar-nav-item">
+        <#if isLoggedIn == "none">
+           <div><#include "logInUser.ftlh"></div>
+        <#elseif isLoggedIn == "user" >
+        </#if>
+        </li>
+        <li>
+            <div><#include "logOutUser.ftlh"></div>
         </li>
     </ul>
 </nav>
