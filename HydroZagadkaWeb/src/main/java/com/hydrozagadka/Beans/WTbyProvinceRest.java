@@ -13,7 +13,6 @@ import com.hydrozagadka.dao.UserDao;
 import com.hydrozagadka.dao.WaterContainerDao;
 import com.hydrozagadka.mappers.HistoryMapper;
 import com.hydrozagadka.mappers.WaterContainerMapper;
-import org.apache.http.HttpRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
