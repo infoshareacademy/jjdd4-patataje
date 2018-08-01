@@ -55,10 +55,9 @@ public class LoadServlet extends HttpServlet {
         if (!fileName.contains(".zip")) {
             logger.warn("No zip file found");
 
-//            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            pr.close();
+ throw new FileNotFoundException("zły format pliku");
 
-            return;
+
         }
         InputStream is = filePart.getInputStream();
         loadZipToDatabaseBean.unzipFile(is);
