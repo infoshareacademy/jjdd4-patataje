@@ -98,10 +98,7 @@ public class WTbyProvinceRest {
         if (startDate == null || startDate.isEmpty()) {
             return false;
         }
-        if (endDate == null || endDate.isEmpty()) {
-            return false;
-        }
-        return true;
+        return endDate != null && !endDate.isEmpty();
     }
 
     private void addStat(Long idWC){
