@@ -38,7 +38,6 @@
                     Coś poszło nie tak!</h2><br>
                 <br>
                 <h3><#if statusCode??>Kod błędu: <em> ${statusCode}</em></#if>
-
                 </h3>
                 <br><br>
                 <h5>Smutna ryba jest smutna.</h5>

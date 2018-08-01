@@ -9,7 +9,7 @@
           content="Project of Web Application which shows water levels for lakes and rivers in Poland.">
     <meta name="author" content="JPPL">
 
-    <title>HydroZagadka</title>
+    <title>HydroZagadka Panel Admina</title>
     <link rel="icon" href="../../../HydroZagadkaFront/img/Drop.png">
 
     <!-- Bootstrap Core CSS -->
@@ -59,7 +59,7 @@
         <div class="row no-gutters">
             <div class="col"></div>
             <div class="col-4">
-                <a class="portfolio-item "  href="#upload">
+                <a class="portfolio-item " href="#upload">
               <span class="caption">
                 <span class="caption-content">
                   <h2>Uaktualnij dane</h2>
@@ -120,6 +120,7 @@
 <section class="content-section bg-light" id="upload">
 <#include "../changingParts/uploadFiles.ftlh">
 </section>
+
 <!-- Lista uzytkownikow -->
 <section class="content-section container text-center my-auto" id="users">
 <#include "../adminPage/users.ftlh">

@@ -1,7 +1,4 @@
 <div class="container text-center my-auto">
-<#--<div class="row">-->
-    <#--<div class="col-sm"></div>-->
-<#--<div class="col-7">-->
     <br><br>
     <h4>stacje pomiarowe:</h4>
 <div class="table-responsive-md">
@@ -15,21 +12,17 @@
     </thead>
 <tbody>
 <tr>
-<#list WCList>
-    <#items as containerName>
+<#if WCList??>
+    <#list WCList>
+        <#items as containerName>
                 <th scope="row">${(containerName?index)+1}</th>
-
                 <td>${containerName.stationName} </td>
                 <td>${containerName.views}</td>
                     </tr>
-    </#items>
+        </#items>
 </tbody>
             </table>
             </div>
-            <#--</div>-->
-                <#--<div class="col-sm">-->
-
-                <#--</div>-->
-            </div>
-</#list>
+              </div>
+    </#list></#if>
     <div class="overlay"></div>

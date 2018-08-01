@@ -16,6 +16,7 @@
     </thead>
 <tbody>
 <tr>
+    <#if Uzytkownik??>
             <#list Uzytkownik>
                 <#items as  user>
                 <th scope="row">${(user?index)+1}</th>
@@ -33,5 +34,5 @@
 
                 </div>
             </div>
-            </#list>
+            </#list></#if>
     <div class="overlay"></div>
