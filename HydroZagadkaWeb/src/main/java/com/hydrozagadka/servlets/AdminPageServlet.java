@@ -40,13 +40,11 @@ public class AdminPageServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("adminPage/adminMainPage.ftlh", getServletContext());
 
-        List<User> usersList = adminStatsDao.getAllUsersList();
 
         List<StatisticWithWaterStationView> WCList = adminStatsDao.getStatistics();
 
         List<ProvinceStatisticView> provinceStatisticViews = adminStatsDao.getStatsByProvince();
         Map<String, Object> model = new HashMap<>();
-        model.put("Uzytkownik", usersList);
         model.put("WCList", WCList);
         model.put("provincestats",provinceStatisticViews);
         try {

@@ -22,28 +22,28 @@ public class NewestWaterContainerData {
     @JsonProperty("stan_wody")
     private Double waterLevel;
     @JsonProperty("stan_wody_data_pomiaru")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss",locale = "pl_PL")
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime waterLevelDate;
     @JsonProperty("temperatura_wody")
     private Double waterTemperature;
     @JsonProperty("temperatura_wody_data_pomiaru")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss",locale = "pl_PL")
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime waterTemperatureDate;
     @JsonProperty("zjawisko_lodowe")
     private Integer icePhenomenon;
     @JsonProperty("zjawisko_lodowe_data_pomiaru")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss",locale = "pl_PL")
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime icePhenomenonDate;
     @JsonProperty("zjawisko_zarastania")
     private Integer overgrowthPhenomenon;
     @JsonProperty("zjawisko_zarastania_data_pomiaru")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss",locale = "pl_PL")
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime overgrowthPhenomenonDate;
