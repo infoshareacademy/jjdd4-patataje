@@ -12,13 +12,7 @@
             <a class="js-scroll-trigger" href="#about">O Aplikacji</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="#check">Znajdź zbiornik</a>
-        </li>
-        <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="#upload">Prześlij swoje dane</a>
-        </li>
-        <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="#contact">O Autorach</a>
+            <a class="js-scroll-trigger" href="#check">Sprawdź zbiornik</a>
         </li>
         <li class="sidebar-nav-item">
         <#if isLoggedIn == "none">

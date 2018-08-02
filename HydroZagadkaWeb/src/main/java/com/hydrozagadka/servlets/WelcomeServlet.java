@@ -22,10 +22,12 @@ import java.util.Map;
 
 @WebServlet(urlPatterns = "/welcome")
 public class WelcomeServlet extends HttpServlet {
-
     private static Logger logger = LoggerFactory.getLogger(WelcomeServlet.class);
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,7 +61,7 @@ public class WelcomeServlet extends HttpServlet {
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
-            logger.warn("Template dosen't exist");
+            logger.warn("Template dosen't exist", e);
         }
     }
 }
