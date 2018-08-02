@@ -80,6 +80,7 @@ public class User {
         this.token = token;
     }
 
+
     public Integer getStats() {
         return stats;
     }

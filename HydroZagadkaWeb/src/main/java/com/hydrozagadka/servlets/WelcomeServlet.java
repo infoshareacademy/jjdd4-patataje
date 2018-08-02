@@ -40,7 +40,6 @@ public class WelcomeServlet extends HttpServlet {
         if (session.getAttribute("isAdmin") == null) {
             session.setAttribute("isAdmin", false);
         }
-
         Boolean isAuth = (Boolean) session.getAttribute("isLoggedIn");
         Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
         if (isAuth) {
@@ -55,6 +54,8 @@ public class WelcomeServlet extends HttpServlet {
         logger.info("isLoggedIn " + model.get("isLoggedIn"));
         template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
 
+
+        
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
