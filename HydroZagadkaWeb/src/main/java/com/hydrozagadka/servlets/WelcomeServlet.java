@@ -52,7 +52,7 @@ public class WelcomeServlet extends HttpServlet {
         } else {
             model.put("isLoggedIn", "none");
         }
-
+        logger.info("isLoggedIn " + model.get("isLoggedIn"));
         template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
 
         try {

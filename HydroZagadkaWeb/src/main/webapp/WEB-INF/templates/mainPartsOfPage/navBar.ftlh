@@ -23,7 +23,6 @@
         <li class="sidebar-nav-item">
         <#if isLoggedIn == "none">
             <div><#include "logInUser.ftlh"></div>
-        <#elseif isLoggedIn == "user" >
         </#if>
         </li>
         <li>

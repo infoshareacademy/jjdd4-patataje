@@ -38,7 +38,7 @@ public class ValidationServlet extends HttpServlet {
                 session.setAttribute("isAdmin",true);
             }
 
-            resp.sendRedirect("/welcome");
+            req.getRequestDispatcher("/welcome").forward(req, resp);
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
         }
