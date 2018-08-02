@@ -1,6 +1,5 @@
 package com.hydrozagadka.servlets;
 
-import com.hydrozagadka.Model.Statistics;
 import com.hydrozagadka.User;
 import com.hydrozagadka.dao.AdminStatsDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
@@ -10,8 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,17 +23,10 @@ import java.util.Map;
 public class UserListServlet extends HttpServlet {
 
     private static Logger logger = LoggerFactory.getLogger(com.hydrozagadka.servlets.WelcomeServlet.class);
-    @PersistenceContext
-    EntityManager entityManager;
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
     @Inject
-    private Statistics statistics;
-    @Inject
     private AdminStatsDao adminStatsDao;
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

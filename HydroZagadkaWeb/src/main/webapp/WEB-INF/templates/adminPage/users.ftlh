@@ -36,9 +36,13 @@
 
 <section id="users">
     <div class="container text-center my-auto">
+    <div class="row">
+        <div class="col-sm"></div>
+    <div class="col-9">
         <br><br>
         <h3>Lista użytkowników:</h3>
-    <table class="table">
+    <div class="table-responsive-md">
+    <table class="table table-sm table-hover">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -54,12 +58,18 @@
                 <th scope="row">${(user?index)+1}</th>
                 <td>${user.email} </td>
                 <td>${user.token}</td>
-               <td><#if user.adminaaa == true> TAK
+                    <td><#if user.adminaaa == true> <strong>TAK</strong>
                <#else>NIE
                </#if></td></tr>
                 </#items>
 </tbody>
-</table>
+            </table>
+            </div>
+            </div>
+                <div class="col-sm">
+
+                </div>
+            </div>
             </#list>
         <div class="overlay"></div>
 </section>
