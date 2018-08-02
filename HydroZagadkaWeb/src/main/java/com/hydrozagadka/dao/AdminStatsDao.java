@@ -2,17 +2,12 @@ package com.hydrozagadka.dao;
 
 import com.hydrozagadka.DTO.ProvinceStatisticView;
 import com.hydrozagadka.DTO.StatisticWithWaterStationView;
-import com.hydrozagadka.History;
-import com.hydrozagadka.Model.Statistics;
-import com.hydrozagadka.User;
-import com.hydrozagadka.WaterContainer;
+import com.hydrozagadka.DTO.UserDetails;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,13 +16,13 @@ public class AdminStatsDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<User> getAllUsersList(){
+    public List<UserDetails> getAllUsersList(){
         Query q = entityManager.createQuery("select u.email, u.adminaaa, u.name from User u");
         List<Object[]> result = q.getResultList();
-        List<User> user = result.stream()
-                .map(o-> new User((String) o[0],(boolean) o[1], (String) o[2]))
+        List<UserDetails> userDetails = result.stream()
+                .map(o-> new UserDetails((String) o[0],(boolean) o[1], (String) o[2]))
                 .collect(Collectors.toList());
-        return user;
+        return userDetails;
     }
 
     public List<StatisticWithWaterStationView> getStatistics (){
