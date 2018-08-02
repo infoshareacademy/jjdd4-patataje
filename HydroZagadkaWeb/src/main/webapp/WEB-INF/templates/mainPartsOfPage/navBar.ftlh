@@ -1,6 +1,6 @@
 <nav id="sidebar-wrapper">
     <#if nameSurname??>
-    <div id="nameSurname"></div>
+    <div id="nameSurname">${nameSurname}</div>
     </#if>
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
