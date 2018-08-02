@@ -31,6 +31,7 @@ public class ValidationServlet extends HttpServlet {
             session.setAttribute("isLoggedIn", true);
             session.setAttribute("isAdmin", user.isAdminaaa());
             session.setAttribute("token",user.getToken());
+            session.setAttribute("nameSurname",user.getName());
 
             Boolean isAuth = (Boolean) session.getAttribute("isLoggedIn");
             Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
