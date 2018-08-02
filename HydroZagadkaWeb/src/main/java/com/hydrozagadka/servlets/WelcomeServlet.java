@@ -33,12 +33,14 @@ public class WelcomeServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         Map<String, Object> model = new HashMap<>();
+
         if (session.getAttribute("isLoggedIn") == null) {
             session.setAttribute("isLoggedIn", false);
         }
         if (session.getAttribute("isAdmin") == null) {
             session.setAttribute("isAdmin", false);
         }
+
         Boolean isAuth = (Boolean) session.getAttribute("isLoggedIn");
         Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
         if (isAuth) {
