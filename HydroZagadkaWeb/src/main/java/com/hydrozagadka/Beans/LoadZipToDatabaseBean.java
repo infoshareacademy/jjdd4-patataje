@@ -17,7 +17,7 @@ public class LoadZipToDatabaseBean {
 
     private static Logger logger = LoggerFactory.getLogger(LoadServlet.class);
 
-    private static final String DIRECT_PATH = "~/patataje-upload";
+    private static final String DIRECT_PATH = "/opt/jboss/patataje-upload";
     @Inject
     private UnzipDao unzipDao;
 
