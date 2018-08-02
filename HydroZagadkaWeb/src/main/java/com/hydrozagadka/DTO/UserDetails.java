@@ -34,4 +34,13 @@ public class UserDetails {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "UserDetails{" +
+                "email='" + email + '\'' +
+                ", adminaaa=" + adminaaa +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
