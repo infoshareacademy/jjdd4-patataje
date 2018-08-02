@@ -35,7 +35,6 @@ public class AdminStatsDao {
                 .collect(Collectors.toList());
         return statisticWithWaterStationViews;
     }
-//"SELECT WATER_CONTAINERS.station_name, STATISTICS.views FROM WATER_CONTAINERS JOIN STATISTICS ON WATER_CONTAINERS.id=STATISTICS.container_id WHERE views>0"
 
     public List<ProvinceStatisticView> getStatsByProvince() {
         Query q = entityManager.createQuery("select w.province,SUM(s.views) as views  from Statistics s JOIN s.waterContainer w where w.id=s.waterContainer.id and s.views>0 group by w.province order by views desc");

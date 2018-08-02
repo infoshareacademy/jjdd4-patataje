@@ -9,7 +9,7 @@
     <meta name="description"
           content="Project of Web Application which shows water levels for lakes and rivers in Poland.">
     <meta name="author" content="JPPL">
-    <meta name="google-signin-client_id" content="838946843173-fn7d8je5vm8kisb459ud5tc584p0c8th.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="838946843173-a1982aq9rsq35t2hlanpjbn74ok93es0.apps.googleusercontent.com">
 
     <title>HydroZagadka</title>
     <link rel="icon" href="../../HydroZagadkaFront/img/Drop.png">
@@ -63,14 +63,12 @@
         <h3 class="mb-5">
             <em>Aplikacja sprawdzająca stan wód w Polsce</em>
         </h3>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#log">Zaloguj się!</a>
         <a class="btn btn-primary btn-xl js-scroll-trigger" href="#check">Sprawdź zbiornik!</a>
         <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">O aplikacji!</a>
     </div>
     <div class="overlay"></div>
 </header>
-
-<#-- dane Zalogowanego uzytkownika-->
-<#--<#include "changingParts/userDetailsAndFavs.ftlh">-->
 
 <!-- o aplikacji -->
 <#include "mainPartsOfPage/aboutApp.ftlh">
@@ -85,17 +83,23 @@
 <!-- wyświetlanie danych - mapa -->
 <#include "changingParts/maps.ftlh">
 
+<!-- upload plików -->
+<#include "changingParts/uploadFiles.ftlh">
+
 <!-- Kontakt -->
 <#include "mainPartsOfPage/aboutAuthors.ftlh">
 
 <!-- Footer -->
+
 <#include "mainPartsOfPage/footer.ftlh">
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
     <i class="fa fa-angle-up"></i>
 </a>
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 
 <!-- Bootstrap core JavaScript -->
 <script src="../../HydroZagadkaFront/vendor/jquery/jquery.min.js"></script>

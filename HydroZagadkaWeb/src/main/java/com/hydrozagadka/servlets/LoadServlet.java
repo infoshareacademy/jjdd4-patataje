@@ -34,6 +34,12 @@ public class LoadServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(LoadServlet.class);
 
     @Inject
+    private UnzipDao unzipDao;
+
+    @Inject
+    private FreeMarkerConfig freeMarkerConfig;
+
+    @Inject
     private LoadZipToDatabaseBean loadZipToDatabaseBean;
     @Inject
     private DatabaseLoadBean databaseLoadBean;
