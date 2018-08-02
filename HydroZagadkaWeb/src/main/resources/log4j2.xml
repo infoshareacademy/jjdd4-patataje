@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="debug">
+
+        <Properties>
+            <Property name="basePath">/home/paulinaprzekop</Property>
+        </Properties>
+
     <Appenders>
-        <RollingFile name="fileLogger" fileName="HydroZagadakaApp-info.log"
-                     filePattern="/HydroZagadakaApp-info-%d{yyyy-MM-dd}.log">
+        <RollingFile name="fileLogger"
+                     fileName="${basePath}/HydroZagadakaApp-info.log"
+                     immediateFlush="true"
+                     filePattern="${basePath}/HydroZagadakaApp-info-%d{yyyy-MM-dd}.log">
             <PatternLayout>
                 <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
             </PatternLayout>
@@ -19,8 +26,13 @@
         <Logger name="com.hydrozagadka" level="debug" additivity="true">
             <appender-ref ref="fileLogger" level="debug"/>
         </Logger>
-        <Root level="debug" additivity="false">
-            <appender-ref ref="console"/>
-        </Root>
+
+
+            <Root level="debug" additivity="false">
+                <AppenderRef ref="Console" level="error" />
+                <AppenderRef ref="RollingFile" level="info" />
+            </Root>
+
+
     </Loggers>
 </Configuration>
