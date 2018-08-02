@@ -15,7 +15,6 @@
     <welcome-file-list>
         <welcome-file>/welcome</welcome-file>
     </welcome-file-list>
-
     <error-page>
         <location>/error</location>
     </error-page>

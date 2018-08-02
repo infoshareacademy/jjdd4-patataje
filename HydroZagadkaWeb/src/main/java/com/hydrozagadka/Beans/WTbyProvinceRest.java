@@ -95,10 +95,7 @@ public class WTbyProvinceRest {
 
 
     private boolean isCorrectDate(String startDate, String endDate) {
-        if (startDate == null || startDate.isEmpty()) {
-            return false;
-        }
-        return endDate != null && !endDate.isEmpty();
+        return startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty();
     }
 
     private void addStat(Long idWC){
