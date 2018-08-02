@@ -38,10 +38,6 @@
                     Coś poszło nie tak!</h2><br>
                 <br>
                 <h3><#if statusCode??>Kod błędu: <em> ${statusCode}</em></#if>
-                    <h6><#if requestUri??>
-                        przekierowano z: <em> ${requestUri}</em></#if><br>
-                       <#if throwable??> szczegóły: ${throwable}</#if>
-                    </h6>
                 </h3>
                 <br><br>
                 <h5>Smutna ryba jest smutna.</h5>

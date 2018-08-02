@@ -24,9 +24,15 @@ public class ErrorServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       processError(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processError(request, response);
+
+    }
+
+    protected void processError (HttpServletRequest request, HttpServletResponse response ) throws IOException {
 
         Throwable throwable = (Throwable) request
                 .getAttribute("javax.servlet.error.exception");
@@ -45,7 +51,7 @@ public class ErrorServlet extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("mainPartsOfPage/errorsPage.ftlh", getServletContext());
-
+        logger.warn("Error occured, from servlet: " + servletName + ", see details: " + " error code: " + statusCode + " ,throwable: " + throwable);
 
         Map<String, Object> model = new HashMap<>();
         model.put("statusCode", statusCode);
@@ -59,8 +65,6 @@ public class ErrorServlet extends HttpServlet {
         } catch (TemplateException e) {
             logger.warn("Template doesn't exist", e);
         }
-
-
     }
 
 

@@ -63,12 +63,14 @@
         <h3 class="mb-5">
             <em>Aplikacja sprawdzająca stan wód w Polsce</em>
         </h3>
-        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#log">Zaloguj się!</a>
         <a class="btn btn-primary btn-xl js-scroll-trigger" href="#check">Sprawdź zbiornik!</a>
         <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">O aplikacji!</a>
     </div>
     <div class="overlay"></div>
 </header>
+
+<#-- dane Zalogowanego uzytkownika-->
+<#--<#include "changingParts/userDetailsAndFavs.ftlh">-->
 
 <!-- o aplikacji -->
 <#include "mainPartsOfPage/aboutApp.ftlh">
@@ -83,27 +85,17 @@
 <!-- wyświetlanie danych - mapa -->
 <#include "changingParts/maps.ftlh">
 
-<!-- Logowanie -->
-<#if isLoggedIn=="none">
-<#include "mainPartsOfPage/logUser.ftlh">
-</#if>
-<!-- upload plików -->
-<#include "changingParts/uploadFiles.ftlh">
-
 <!-- Kontakt -->
 <#include "mainPartsOfPage/aboutAuthors.ftlh">
 
 <!-- Footer -->
-
 <#include "mainPartsOfPage/footer.ftlh">
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
     <i class="fa fa-angle-up"></i>
 </a>
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
 
 <!-- Bootstrap core JavaScript -->
 <script src="../../HydroZagadkaFront/vendor/jquery/jquery.min.js"></script>

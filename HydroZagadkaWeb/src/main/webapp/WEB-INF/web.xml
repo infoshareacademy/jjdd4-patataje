@@ -7,7 +7,8 @@
     <data-source>
         <name>java:ds/hydroZagadka</name>
         <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
-        <url>jdbc:mysql://db:3306/hydroZagadka?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>
+        <url>jdbc:mysql://db:3306/hydroZagadka?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw;
+        </url>
         <user>hydroZagadka</user>
         <password>hydroZagadka123</password>
     </data-source>
