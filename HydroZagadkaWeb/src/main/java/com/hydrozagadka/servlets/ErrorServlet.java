@@ -52,7 +52,7 @@ public class ErrorServlet extends HttpServlet {
         model.put("servletName", servletName);
         model.put("throwable", throwable);
         model.put("requestUri", requestUri);
-
+        model.put("message",throwable.getMessage());
 
         try {
             template.process(model, response.getWriter());
