@@ -25,8 +25,6 @@ public class WelcomeServlet extends HttpServlet {
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
 
-
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
@@ -34,7 +32,7 @@ public class WelcomeServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
         Map<String, Object> model = new HashMap<>();
-        //probny użytkownik
+
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {

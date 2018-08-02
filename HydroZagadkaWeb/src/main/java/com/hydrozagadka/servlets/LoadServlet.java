@@ -34,16 +34,9 @@ public class LoadServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(LoadServlet.class);
 
     @Inject
-    private UnzipDao unzipDao;
-
-    @Inject
-    private FreeMarkerConfig freeMarkerConfig;
-
-    @Inject
     private LoadZipToDatabaseBean loadZipToDatabaseBean;
     @Inject
-    DatabaseLoadBean databaseLoadBean;
-
+    private DatabaseLoadBean databaseLoadBean;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file");
@@ -52,9 +45,7 @@ public class LoadServlet extends HttpServlet {
         if (!fileName.contains(".zip")) {
             logger.warn("No zip file found");
 
-
- throw new FileNotFoundException("zły format pliku");
-
+            throw new FileNotFoundException("zły format pliku");
 
         }
         InputStream is = filePart.getInputStream();
