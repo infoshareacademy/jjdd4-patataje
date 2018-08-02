@@ -25,24 +25,19 @@ public class DatabaseLoadBean {
     private HistoryDao historyDao;
     @Inject
     private StatisticsDao statisticsDao;
-
     @Inject
     private NewestHistoryDataLoadBean newestHistoryDataLoadBean;
     @Inject
     private NewestWaterContainerDataLoadBean newestWaterContainerDataLoadBean;
-
     @Inject
     private ApiConnector apiConnector;
 
-    @Inject
-    private UserDao userDao;
-
-    CSVLoader csvLoader = new CSVLoader();
-    Map<Long, WaterContainer> waterContainerMap = csvLoader.getAllContainers();
+    private CSVLoader csvLoader = new CSVLoader();
+    private Map<Long, WaterContainer> waterContainerMap = csvLoader.getAllContainers();
 
 
     public void loadWaterContainer() {
-        waterContainerMap.values().stream()
+        waterContainerMap.values()
                 .forEach(waterContainer -> {
                     if (waterContainerDao.findById(waterContainer.getId()) == null) {
                         waterContainerDao.save(waterContainer);
@@ -52,8 +47,8 @@ public class DatabaseLoadBean {
     }
 
     public void loadHistory() {
-        waterContainerMap.values().stream()
-                .forEach(waterContainer -> waterContainer.getHistory().stream()
+        waterContainerMap.values()
+                .forEach(waterContainer -> waterContainer.getHistory()
                         .forEach(history -> {
                             Long wcId = history.getContainerId();
                             if (historyDao.findByDate(history.getDate(), wcId).size() == 0) {

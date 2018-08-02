@@ -39,7 +39,7 @@ public class GoogleVerifierBean {
             IdToken.Payload payload = idToken.getPayload();
             String userId = payload.getSubject();
             String email = ((GoogleIdToken.Payload) payload).getEmail();
-            boolean emailVerified = Boolean.valueOf(((GoogleIdToken.Payload) payload).getEmailVerified());
+            boolean emailVerified = ((GoogleIdToken.Payload) payload).getEmailVerified();
             String name = (String) payload.get("name");
             String pictureUrl = (String) payload.get("picture");
             String locale = (String) payload.get("locale");
@@ -51,7 +51,7 @@ public class GoogleVerifierBean {
             if (user != null) {
                 return user;
             } else if (emailVerified) {
-                User u = new User(encodedUserId, name, email, 0, 0, new ArrayList<>(), pictureUrl, locale);
+                User u = new User(encodedUserId, name, email, false, 0, new ArrayList<>(), pictureUrl, locale);
                 userDao.save(u);
                 return u;
             }
