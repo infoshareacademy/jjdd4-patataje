@@ -15,6 +15,9 @@ public class LogOutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.setAttribute("isLoggedIn", false);
+        session.setAttribute("isAdmin", false);
+        session.setAttribute("token","");
+        session.setAttribute("nameSurname","");
         resp.sendRedirect("/welcome");
     }
 

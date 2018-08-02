@@ -48,6 +48,7 @@ public class WelcomeServlet extends HttpServlet {
             } else {
                 model.put("isLoggedIn", "user");
             }
+            model.put("nameSurname",session.getAttribute("nameSurname"));
         } else {
             model.put("isLoggedIn", "none");
         }
