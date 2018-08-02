@@ -42,6 +42,7 @@ public class DatabaseLoadBean {
 
 
     public void loadWaterContainer() {
+        Map<Long, WaterContainer> waterContainerMap = csvLoader.getAllContainers();
         waterContainerMap.values().stream()
                 .forEach(waterContainer -> {
                     if (waterContainerDao.findById(waterContainer.getId()) == null) {
