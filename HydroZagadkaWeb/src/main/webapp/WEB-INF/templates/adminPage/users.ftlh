@@ -12,7 +12,7 @@
     <tr>
         <th scope="col">#</th>
         <th scope="col">email</th>
-        <th scope="col">token</th>
+        <th scope="col">imię</th>
         <th scope="col">uprawnienia admina</th>
     </tr>
     </thead>
@@ -23,7 +23,7 @@
         <#items as  user>
                 <th scope="row">${(user?index)+1}</th>
                 <td>${user.email} </td>
-                <td>${user.token}</td>
+                <td>${user.name}</td>
                     <td><#if user.adminaaa == true> <strong>TAK</strong>
                     <#else>NIE
                     </#if></td></tr>

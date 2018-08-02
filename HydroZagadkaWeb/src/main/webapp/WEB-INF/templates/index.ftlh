@@ -69,8 +69,10 @@
     <div class="overlay"></div>
 </header>
 
-<#-- dane Zalogowanego uzytkownika-->
-<#--<#include "changingParts/userDetailsAndFavs.ftlh">-->
+<#--zalogowany user - info-->
+<#if isLoggedIn=="user" || isLoggedIn=="admin">
+    <#include "changingParts/userDetailsAndFavs.ftlh">
+</#if>
 
 <!-- o aplikacji -->
 <#include "mainPartsOfPage/aboutApp.ftlh">

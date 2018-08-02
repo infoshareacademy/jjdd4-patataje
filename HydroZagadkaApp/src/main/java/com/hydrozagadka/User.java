@@ -37,7 +37,13 @@ public class User {
     public User() {
     }
 
-    public User(@NotNull String token, @NotNull String name ,@NotNull String email, @NotNull Boolean adminaaa, Integer stats, List<WaterContainer> waterContainerId,String urlPicPath, String locale) {
+    public User(@NotNull String email, @NotNull Boolean adminaaa, String name) {
+        this.email = email;
+        this.adminaaa = adminaaa;
+        this.name = name;
+    }
+
+    public User(@NotNull String token, @NotNull String name , @NotNull String email, @NotNull Boolean adminaaa, Integer stats, List<WaterContainer> waterContainerId, String urlPicPath, String locale) {
         this.token = token;
         this.name = name;
         this.email = email;

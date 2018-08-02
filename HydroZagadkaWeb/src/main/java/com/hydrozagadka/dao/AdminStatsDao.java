@@ -22,9 +22,12 @@ public class AdminStatsDao {
     private EntityManager entityManager;
 
     public List<User> getAllUsersList(){
-        Query q = entityManager.createQuery("select u from User u");
-
-        return q.getResultList();
+        Query q = entityManager.createQuery("select u.email, u.adminaaa, u.name from User u");
+        List<Object[]> result = q.getResultList();
+        List<User> user = result.stream()
+                .map(o-> new User((String) o[0],(boolean) o[1], (String) o[2]))
+                .collect(Collectors.toList());
+        return user;
     }
 
     public List<StatisticWithWaterStationView> getStatistics (){
