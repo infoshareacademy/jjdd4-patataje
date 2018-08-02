@@ -123,18 +123,22 @@
 
 <!-- Lista uzytkownikow -->
 <section class="content-section container text-center my-auto" id="users">
+    <h3>Lista użytkowników:</h3>
 <#include "../adminPage/users.ftlh">
 </section>
 
 <!-- Ilosc klikniec na wojewodztwa/stacje -->
 <section class="content-section bg-light container text-center my-auto" id="stats">
     <h3>Najczęściej wyświetlane</h3>
+    <br>
     <div class="row">
         <div class="col"></div>
         <div class="col-4">
+    <h4 >województwa:</h4>
         <#include "../adminPage/listOfProvincesWithVIews.ftlh">
         </div>
         <div class="col-4">
+            <h4 >stacje pomiarowe:</h4>
         <#include "../adminPage/mostViewedStations.ftlh">
         </div>
         <div class="col"></div>

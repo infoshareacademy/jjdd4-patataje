@@ -1,7 +1,7 @@
+<#if (province.views)??>
 <div class="container text-center my-auto">
     <br><br>
-    <h4>województwa:</h4>
-<div class="table-responsive-md">
+    <div class="table-responsive-md">
 <table class="table table-sm table-hover">
     <thead>
     <tr>
@@ -12,7 +12,6 @@
     </thead>
 <tbody>
 <tr>
-<#if provincestats??>
     <#list provincestats>
         <#items as province>
                 <th scope="row">${(province?index)+1}</th>
@@ -24,5 +23,6 @@
             </table>
             </div>
                        </div>
-    </#list></#if>
+    </#list><#else>
+<p class="alert-warning">Brak wyświetleń województw.</p></#if>
     <div class="overlay"></div>

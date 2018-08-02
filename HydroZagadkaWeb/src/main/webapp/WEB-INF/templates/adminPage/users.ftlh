@@ -1,9 +1,11 @@
+<#if user??>
 <div class="container text-center my-auto">
 <div class="row">
     <div class="col-sm"></div>
 <div class="col-9">
     <br><br>
-    <h3>Lista użytkowników:</h3>
+
+
 <div class="table-responsive-md">
 <table class="table table-sm table-hover">
     <thead>
@@ -16,16 +18,16 @@
     </thead>
 <tbody>
 <tr>
-    <#if Uzytkownik??>
-            <#list Uzytkownik>
-                <#items as  user>
+
+    <#list Uzytkownik>
+        <#items as  user>
                 <th scope="row">${(user?index)+1}</th>
                 <td>${user.email} </td>
                 <td>${user.token}</td>
                     <td><#if user.adminaaa == true> <strong>TAK</strong>
                     <#else>NIE
                     </#if></td></tr>
-                </#items>
+        </#items>
 </tbody>
             </table>
             </div>
@@ -33,6 +35,8 @@
                 <div class="col-sm">
 
                 </div>
-            </div>
-            </#list></#if>
+            </div></div>
+    </#list><#else>
+<p class="alert-warning">Brak użytkowników w bazie.</p>
+</#if>
     <div class="overlay"></div>

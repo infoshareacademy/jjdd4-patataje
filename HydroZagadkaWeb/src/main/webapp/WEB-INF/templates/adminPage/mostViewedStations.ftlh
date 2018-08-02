@@ -1,6 +1,6 @@
+<#if (containerName.views)??>
 <div class="container text-center my-auto">
     <br><br>
-    <h4>stacje pomiarowe:</h4>
 <div class="table-responsive-md">
 <table class="table table-sm table-hover">
     <thead>
@@ -12,7 +12,6 @@
     </thead>
 <tbody>
 <tr>
-<#if WCList??>
     <#list WCList>
         <#items as containerName>
                 <th scope="row">${(containerName?index)+1}</th>
@@ -24,5 +23,6 @@
             </table>
             </div>
               </div>
-    </#list></#if>
+    </#list><#else>
+<p class="alert-warning">Brak wyświetleń zbiorników.</p></#if>
     <div class="overlay"></div>
