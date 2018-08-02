@@ -17,7 +17,7 @@ public class LoadZipToDatabaseBean {
 
     private static Logger logger = LoggerFactory.getLogger(LoadServlet.class);
 
-    private static final String DIRECT_PATH = "/home/pawelorlikowski/jjdd4-patataje/HydroZagadkaApp/data";
+    private static final String DIRECT_PATH = "/home/patataje-upload";
     @Inject
     private UnzipDao unzipDao;
 
