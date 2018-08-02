@@ -44,13 +44,11 @@ public class AdminStatsDao {
         return provinceStatisticViews;
     }
 
-//    public List<UserFavsView> getUserFavsContainers(){
-//        Query q = entityManager.createQuery();
-//        List<Object[]> objects = q.getResultList();
-//        List<UserFavsView> userFavsViews = objects.stream()
-//                .map(o -> new UserFavsView((String) o[0], )
-//                .collect(Collectors.toList());
-//        return provinceStatisticViews;
-//    }
+    public List<UserFavsView> getUserFavsContainers(){
+        Query q = entityManager.createQuery("SELECT w.container FROM waterContainerId w");
+        List<UserFavsView> userFavsView = q.getResultList();
+
+        return userFavsView;
+    }
 
 }

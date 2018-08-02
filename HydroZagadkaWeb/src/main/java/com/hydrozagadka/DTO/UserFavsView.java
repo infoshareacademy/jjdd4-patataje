@@ -3,6 +3,7 @@ package com.hydrozagadka.DTO;
 public class UserFavsView {
     private String favContainer;
 
+
     public UserFavsView(String favContainer) {
         this.favContainer = favContainer;
     }
