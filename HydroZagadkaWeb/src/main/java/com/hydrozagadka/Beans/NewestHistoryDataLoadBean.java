@@ -16,10 +16,10 @@ import java.util.List;
 public class NewestHistoryDataLoadBean {
 
     @Inject
-    HistoryDao historyDao;
+    private HistoryDao historyDao;
 
     @Inject
-    WaterContainerDao waterContainerDao;
+    private WaterContainerDao waterContainerDao;
 
 
     private Logger logger = LoggerFactory.getLogger(NewestHistoryDataLoadBean.class);
@@ -28,7 +28,7 @@ public class NewestHistoryDataLoadBean {
         apiData.forEach(s -> createHistoryData(s));
     }
 
-    private void createHistoryData(NewestWaterContainerData s){
+    private void createHistoryData(NewestWaterContainerData s) {
         LocalDate checkdate;
         Double temperature;
         if (s.getWaterLevelDate() == null) {
