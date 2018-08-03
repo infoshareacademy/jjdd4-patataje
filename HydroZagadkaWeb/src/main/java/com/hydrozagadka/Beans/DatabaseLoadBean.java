@@ -33,7 +33,7 @@ public class DatabaseLoadBean {
     private ApiConnector apiConnector;
 
     private CSVLoader csvLoader = new CSVLoader();
-    private Map<Long, WaterContainer> waterContainerMap = csvLoader.getAllContainers();
+    private Map<Long, WaterContainer> waterContainerMap = csvLoader.loadCSV();
 
 
     public void loadWaterContainer() {
