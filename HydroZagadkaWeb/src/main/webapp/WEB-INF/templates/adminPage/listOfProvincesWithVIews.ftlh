@@ -1,15 +1,16 @@
-<#if provincestats??>
+
 <div class="container text-center my-auto">
-    <br><br>
+    <br>
     <div class="table-responsive-md">
 <table class="table table-sm table-hover">
     <thead>
     <tr>
         <th scope="col">#</th>
-        <th scope="col">Województwo</th>
-        <th scope="col">liczba wyświetleń</th>
+        <th scope="col">województwo</th>
+        <th scope="col">wyświetlenia</th>
     </tr>
     </thead>
+<#if provincestats?has_content>
 <tbody>
 <tr>
     <#list provincestats>
@@ -22,10 +23,11 @@
 </tbody>
 
     </#list>
-</table>
-            </div>
-                       </div>
 <#else>
-<p class="alert-warning">Brak wyświetleń województw.</p>
+<p class="alert-warning">Brak wyświetleń województw w bazie.</p>
 </#if>
+</table>
+    </div>
+</div>
+
     <div class="overlay"></div>

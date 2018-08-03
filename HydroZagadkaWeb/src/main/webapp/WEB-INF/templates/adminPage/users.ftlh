@@ -1,4 +1,4 @@
-<#if Uzytkownik??>
+
 <div class="container text-center my-auto">
 <div class="row">
     <div class="col-sm"></div>
@@ -16,9 +16,10 @@
         <th scope="col">uprawnienia admina</th>
     </tr>
     </thead>
-<tbody>
-<tr>
 
+    <#if Uzytkownik?has_content>
+    <tbody>
+<tr>
     <#list Uzytkownik>
         <#items as  user>
                 <th scope="row">${(user?index)+1}</th>
@@ -31,6 +32,9 @@
 </tbody>
 
     </#list>
+    <#else>
+<p class="alert-warning">Brak użytkowników w bazie.</p>
+    </#if>
 </table>
             </div>
             </div>
@@ -38,7 +42,5 @@
 
                 </div>
             </div></div>
-<#else>
-<p class="alert-warning">Brak użytkowników w bazie.</p>
-</#if>
+
     <div class="overlay"></div>
