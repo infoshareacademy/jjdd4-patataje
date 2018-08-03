@@ -49,12 +49,4 @@ public class DatabaseLoadBeanTest {
         Mockito.verify(waterContainerDao).save(waterContainer);
         Mockito.verify(statisticsDao).save(new Statistics(0L, waterContainer));
     }
-
-    @Test
-    public void loadHistory() {
-    }
-
-    @Test
-    public void loadDataFromApi() {
-    }
 }
