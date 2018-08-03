@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,10 +32,34 @@ public class WelcomeServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Template template;
         response.setContentType("text/html;charset=UTF-8");
-        Template template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
+        HttpSession session = request.getSession();
         Map<String, Object> model = new HashMap<>();
-        //probny użytkownik
+
+        if (session.getAttribute("isLoggedIn") == null) {
+            session.setAttribute("isLoggedIn", false);
+        }
+        if (session.getAttribute("isAdmin") == null) {
+            session.setAttribute("isAdmin", false);
+        }
+        Boolean isAuth = (Boolean) session.getAttribute("isLoggedIn");
+        Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+        if (isAuth) {
+            if (isAdmin) {
+                model.put("isLoggedIn", "admin");
+            } else {
+                model.put("isLoggedIn", "user");
+            }
+            model.put("nameSurname",session.getAttribute("nameSurname"));
+        } else {
+            model.put("isLoggedIn", "none");
+        }
+        logger.info("isLoggedIn " + model.get("isLoggedIn"));
+        template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
+
+
+
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {

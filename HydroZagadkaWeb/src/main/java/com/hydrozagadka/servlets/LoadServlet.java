@@ -42,17 +42,17 @@ public class LoadServlet extends HttpServlet {
     @Inject
     private LoadZipToDatabaseBean loadZipToDatabaseBean;
     @Inject
-    DatabaseLoadBean databaseLoadBean;
-
+    private DatabaseLoadBean databaseLoadBean;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file");
         PrintWriter pr = response.getWriter();
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         if (!fileName.contains(".zip")) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            pr.close();
-            return;
+            logger.warn("No zip file found");
+
+            throw new FileNotFoundException("zły format pliku");
+
         }
         InputStream is = filePart.getInputStream();
         loadZipToDatabaseBean.unzipFile(is);
