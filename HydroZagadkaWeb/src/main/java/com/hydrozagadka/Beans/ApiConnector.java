@@ -28,10 +28,10 @@ public class ApiConnector {
         if (response.getStatus() != 200) {
             throw new RuntimeException("Nie możemy pobrać danych");
         }
-        throw new IllegalArgumentException(response.readEntity(String.class));
-//        List<NewestWaterContainerData> result = response.readEntity(new GenericType<List<NewestWaterContainerData>>() {});
-//        logger.info("status połącznia : "+response.getStatus());
-//        logger.info("Pobrano łącznie "+result.size()+" rekordów");
-//        return result;
+     //   throw new IllegalArgumentException(response.readEntity(String.class));
+        List<NewestWaterContainerData> result = response.readEntity(new GenericType<List<NewestWaterContainerData>>() {});
+        logger.info("status połącznia : "+response.getStatus());
+        logger.info("Pobrano łącznie "+result.size()+" rekordów");
+        return result;
     }
 }
