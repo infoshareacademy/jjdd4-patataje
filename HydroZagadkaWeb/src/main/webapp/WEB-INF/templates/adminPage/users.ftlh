@@ -1,4 +1,4 @@
-<#--<#if user??>-->
+<#if Uzytkownik??>
 <div class="container text-center my-auto">
 <div class="row">
     <div class="col-sm"></div>
@@ -29,15 +29,16 @@
                     </#if></td></tr>
         </#items>
 </tbody>
-            </table>
+
+    </#list>
+</table>
             </div>
             </div>
                 <div class="col-sm">
 
                 </div>
             </div></div>
-    </#list>
-<#--<#else>-->
+<#else>
 <p class="alert-warning">Brak użytkowników w bazie.</p>
-<#--</#if>-->
+</#if>
     <div class="overlay"></div>
