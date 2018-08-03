@@ -1,6 +1,7 @@
 package com.hydrozagadka.servlets;
 
 import com.hydrozagadka.User;
+import com.hydrozagadka.WaterContainer;
 import com.hydrozagadka.dao.UserDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import freemarker.template.Template;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -25,6 +27,8 @@ public class WelcomeServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(WelcomeServlet.class);
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
+    @Inject
+    private UserDao userDao;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
@@ -35,6 +39,12 @@ public class WelcomeServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         Map<String, Object> model = new HashMap<>();
+
+//        if (session.getAttribute("ID") != null) {
+            User user = userDao.findById("1");
+            List<WaterContainer> waterContainers = user.getWaterContainerId();
+            logger.info(waterContainers.toString());
+//        }
 
         if (session.getAttribute("isLoggedIn") == null) {
             session.setAttribute("isLoggedIn", false);

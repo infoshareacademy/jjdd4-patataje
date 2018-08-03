@@ -4,11 +4,13 @@ public class UserDetails {
     private String email;
     private boolean adminaaa;
     private String name;
+    private Integer stats;
 
-    public UserDetails(String email, boolean adminaaa, String name) {
+    public UserDetails(String email, boolean adminaaa, String name, Integer stats) {
         this.email = email;
         this.adminaaa = adminaaa;
         this.name = name;
+        this.stats = stats;
     }
 
     public String getEmail() {
@@ -35,12 +37,22 @@ public class UserDetails {
         this.name = name;
     }
 
+    public Integer getStats() {
+        return stats;
+    }
+
+    public void setStats(Integer stats) {
+        this.stats = stats;
+    }
+
     @Override
     public String toString() {
-        return "UserDetails{" +
-                "email='" + email + '\'' +
-                ", adminaaa=" + adminaaa +
-                ", name='" + name + '\'' +
-                '}';
+        final StringBuffer sb = new StringBuffer("UserDetails{");
+        sb.append("email='").append(email).append('\'');
+        sb.append(", adminaaa=").append(adminaaa);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", stats=").append(stats);
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -4,6 +4,7 @@ import com.hydrozagadka.DTO.ProvinceStatisticView;
 import com.hydrozagadka.DTO.StatisticWithWaterStationView;
 import com.hydrozagadka.DTO.UserDetails;
 import com.hydrozagadka.DTO.UserFavsView;
+import com.hydrozagadka.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,20 +18,20 @@ public class AdminStatsDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<UserDetails> getAllUsersList(){
-        Query q = entityManager.createQuery("select u.email, u.adminaaa, u.name from User u");
+    public List<UserDetails> getAllUsersList() {
+        Query q = entityManager.createQuery("select u.email, u.adminaaa, u.name, u.stats from User u");
         List<Object[]> result = q.getResultList();
         List<UserDetails> userDetails = result.stream()
-                .map(o-> new UserDetails((String) o[0],(boolean) o[1], (String) o[2]))
+                .map(o -> new UserDetails((String) o[0], (boolean) o[1], (String) o[2], (Integer) o[3]))
                 .collect(Collectors.toList());
         return userDetails;
     }
 
-    public List<StatisticWithWaterStationView> getStatistics (){
+    public List<StatisticWithWaterStationView> getStatistics() {
         Query q = entityManager.createQuery("SELECT w.containerName, s.views FROM  Statistics s JOIN s.waterContainer w where w.id=s.waterContainer.id order by s.views desc").setMaxResults(10);
         List<Object[]> result = q.getResultList();
         List<StatisticWithWaterStationView> statisticWithWaterStationViews = result.stream()
-                .map(o-> new StatisticWithWaterStationView((String) o[0],(Long) o[1]))
+                .map(o -> new StatisticWithWaterStationView((String) o[0], (Long) o[1]))
                 .collect(Collectors.toList());
         return statisticWithWaterStationViews;
     }
@@ -38,17 +39,22 @@ public class AdminStatsDao {
     public List<ProvinceStatisticView> getStatsByProvince() {
         Query q = entityManager.createQuery("select w.province,SUM(s.views) as views  from Statistics s JOIN s.waterContainer w where w.id=s.waterContainer.id and s.views>0 group by w.province order by views desc");
         List<Object[]> objects = q.getResultList();
-       List<ProvinceStatisticView> provinceStatisticViews = objects.stream()
-               .map(o -> new ProvinceStatisticView((String) o[0], (Long) o[1]))
-               .collect(Collectors.toList());
+        List<ProvinceStatisticView> provinceStatisticViews = objects.stream()
+                .map(o -> new ProvinceStatisticView((String) o[0], (Long) o[1]))
+                .collect(Collectors.toList());
         return provinceStatisticViews;
     }
 
-    public List<UserFavsView> getUserFavsContainers(){
-        Query q = entityManager.createQuery("SELECT w.container FROM waterContainerId w");
-        List<UserFavsView> userFavsView = q.getResultList();
+//    public List<UserFavsView> getUserFavsContainers(){
+//
+//        List<UserFavsView> userFavsView =
 
-        return userFavsView;
+//        Query q = entityManager.createQuery("select u.waterContainerId from User u left join WaterContainer uw on uw.users = u.waterContainerId left join WaterContainer wc on wc.id = uw.container_id  where u.id=1");
+//        List<Object[]> favs = q.getResultList();
+//        List<UserFavsView> userFavsView = favs.stream()
+
+//        return userFavsView;
     }
 
-}
+//}
+//}

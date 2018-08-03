@@ -31,33 +31,33 @@ public class GoogleVerifierBean {
 @Transactional
     public User verify(String idTokenString) throws GeneralSecurityException, IOException {
 
-        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), jacksonFactory)
-                .setAudience(Collections.singletonList(CLIENT_ID))
-                .build();
-        GoogleIdToken idToken = verifier.verify(idTokenString);
-        if (idToken != null) {
-            IdToken.Payload payload = idToken.getPayload();
-            String userId = payload.getSubject();
-            String email = ((GoogleIdToken.Payload) payload).getEmail();
-            boolean emailVerified = ((GoogleIdToken.Payload) payload).getEmailVerified();
-            String name = (String) payload.get("name");
-            String pictureUrl = (String) payload.get("picture");
-            String locale = (String) payload.get("locale");
-            String userIdSalt = salt + userId + email;
-            String encodedUserId = Hashing.sha256()
-                    .hashString(userIdSalt, StandardCharsets.UTF_8)
-                    .toString();
-            User user = userDao.findById(encodedUserId);
-            if (user != null) {
-                return user;
-            } else if (emailVerified) {
-                User u = new User(encodedUserId, name, email, false, 0, new ArrayList<>(), pictureUrl, locale);
+//        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), jacksonFactory)
+//                .setAudience(Collections.singletonList(CLIENT_ID))
+//                .build();
+//        GoogleIdToken idToken = verifier.verify(idTokenString);
+//        if (idToken != null) {
+//            IdToken.Payload payload = idToken.getPayload();
+//            String userId = payload.getSubject();
+//            String email = ((GoogleIdToken.Payload) payload).getEmail();
+//            boolean emailVerified = ((GoogleIdToken.Payload) payload).getEmailVerified();
+//            String name = (String) payload.get("name");
+//            String pictureUrl = (String) payload.get("picture");
+//            String locale = (String) payload.get("locale");
+//            String userIdSalt = salt + userId + email;
+//            String encodedUserId = Hashing.sha256()
+//                    .hashString(userIdSalt, StandardCharsets.UTF_8)
+//                    .toString();
+//            User user = userDao.findById(encodedUserId);
+//            if (user != null) {
+//                return user;
+//            } else if (emailVerified) {
+                User u = new User("jhfkjk", "test", "test@example.com", false, 0, new ArrayList<>(), "", "");
                 userDao.save(u);
                 return u;
             }
-        } else {
-            throw new IllegalArgumentException("Id użytkownika nieprawidłowe");
-        }
-        return null;
-    }
+//        } else {
+//            throw new IllegalArgumentException("Id użytkownika nieprawidłowe");
+//        }
+//        return null;
+//    }
 }

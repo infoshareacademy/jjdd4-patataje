@@ -15,8 +15,8 @@ public class UserDao {
     private EntityManager entityManager;
 
     public User findById(String id){
-        Query q = entityManager.createQuery("select u from User u where u.token = :token");
-        q.setParameter("token", id);
+        Query q = entityManager.createQuery("select u from User u where u.id = :token");
+        q.setParameter("token", Long.valueOf(id));
         User user = null;
         try {
             user = (User) q.getSingleResult();

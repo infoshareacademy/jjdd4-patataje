@@ -2,7 +2,7 @@
 <Configuration status="debug">
 
         <Properties>
-            <Property name="basePath">/home/paulinaprzekop</Property>
+            <Property name="basePath">~/patataje-logs</Property>
         </Properties>
 
     <Appenders>

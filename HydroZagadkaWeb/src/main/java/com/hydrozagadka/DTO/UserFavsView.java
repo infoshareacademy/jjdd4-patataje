@@ -1,25 +1,28 @@
 package com.hydrozagadka.DTO;
 
+import java.util.List;
+
 public class UserFavsView {
-    private String favContainer;
+    private List<String> favContainers;
 
 
-    public UserFavsView(String favContainer) {
-        this.favContainer = favContainer;
+    public UserFavsView(List<String> favContainers) {
+        this.favContainers = favContainers;
     }
 
-    public String getFavContainer() {
-        return favContainer;
+    public List<String> getfavContainers() {
+        return favContainers;
     }
 
-    public void setFavContainer(String favContainer) {
-        this.favContainer = favContainer;
+    public void setfavContainers(List<String> favContainers) {
+        this.favContainers = favContainers;
     }
 
     @Override
     public String toString() {
-        return "UserFavsView{" +
-                "favContainer='" + favContainer + '\'' +
-                '}';
+        final StringBuffer sb = new StringBuffer("UserFavsView{");
+        sb.append("favContainers=").append(favContainers);
+        sb.append('}');
+        return sb.toString();
     }
 }
