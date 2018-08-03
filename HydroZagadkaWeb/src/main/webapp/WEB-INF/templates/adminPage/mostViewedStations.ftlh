@@ -1,4 +1,4 @@
-<#if (containerName.views)??>
+<#if WCList??>
 <div class="container text-center my-auto">
     <br><br>
 <div class="table-responsive-md">
@@ -20,9 +20,11 @@
                     </tr>
         </#items>
 </tbody>
-            </table>
+
+    </#list>
+</table>
             </div>
               </div>
-    </#list><#else>
+<#else>
 <p class="alert-warning">Brak wyświetleń zbiorników.</p></#if>
     <div class="overlay"></div>

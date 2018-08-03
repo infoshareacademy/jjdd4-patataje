@@ -1,12 +1,9 @@
 package com.hydrozagadka.servlets;
 
+import com.hydrozagadka.DTO.ProvinceStatisticView;
 import com.hydrozagadka.DTO.StatisticWithWaterStationView;
 import com.hydrozagadka.DTO.UserDetails;
-import com.hydrozagadka.DTO.WaterContainerView;
-import com.hydrozagadka.Model.Statistics;
-import com.hydrozagadka.User;
-import com.hydrozagadka.dao.AdminStatsDao;
-import com.hydrozagadka.DTO.ProvinceStatisticView;
+import com.hydrozagadka.DTO.UserFavsView;
 import com.hydrozagadka.dao.AdminStatsDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import freemarker.template.Template;
@@ -34,7 +31,8 @@ public class AdminPageServlet extends HttpServlet {
     private FreeMarkerConfig freeMarkerConfig;
     @Inject
     private AdminStatsDao adminStatsDao;
-
+//    @Inject
+//    private UserFavsView userFavsView;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -44,12 +42,14 @@ public class AdminPageServlet extends HttpServlet {
         List<UserDetails> usersList = adminStatsDao.getAllUsersList();
 
         List<StatisticWithWaterStationView> WCList = adminStatsDao.getStatistics();
+//        List<UserFavsView> userFavsView = adminStatsDao.getUserFavsContainers();
 
         List<ProvinceStatisticView> provinceStatisticViews = adminStatsDao.getStatsByProvince();
         Map<String, Object> model = new HashMap<>();
         model.put("Uzytkownik", usersList);
         model.put("WCList", WCList);
-        model.put("provincestats",provinceStatisticViews);
+        model.put("provincestats", provinceStatisticViews);
+//        model.put("usersFavs", userFavsView);
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {

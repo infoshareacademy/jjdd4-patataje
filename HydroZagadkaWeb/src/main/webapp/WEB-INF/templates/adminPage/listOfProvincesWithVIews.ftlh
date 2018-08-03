@@ -1,4 +1,4 @@
-<#if (province.views)??>
+<#if provincestats??>
 <div class="container text-center my-auto">
     <br><br>
     <div class="table-responsive-md">
@@ -20,9 +20,12 @@
                     </tr>
         </#items>
 </tbody>
-            </table>
+
+    </#list>
+</table>
             </div>
                        </div>
-    </#list><#else>
-<p class="alert-warning">Brak wyświetleń województw.</p></#if>
+<#else>
+<p class="alert-warning">Brak wyświetleń województw.</p>
+</#if>
     <div class="overlay"></div>
