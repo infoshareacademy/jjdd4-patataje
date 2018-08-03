@@ -1,15 +1,16 @@
-<#if WCList??>
+
 <div class="container text-center my-auto">
-    <br><br>
+    <br>
 <div class="table-responsive-md">
 <table class="table table-sm table-hover">
     <thead>
     <tr>
         <th scope="col">#</th>
-        <th scope="col">Nazwa stacji</th>
-        <th scope="col">Liczba wyświetleń</th>
+        <th scope="col">nazwa stacji</th>
+        <th scope="col">wyświetlenia</th>
     </tr>
     </thead>
+    <#if WCList?has_content>
 <tbody>
 <tr>
     <#list WCList>
@@ -22,9 +23,10 @@
 </tbody>
 
     </#list>
+    <#else>
+<p class="alert-warning">Brak wyświetleń stacji w bazie.</p>
+    </#if>
 </table>
-            </div>
-              </div>
-<#else>
-<p class="alert-warning">Brak wyświetleń zbiorników.</p></#if>
+</div>
+</div>
     <div class="overlay"></div>
