@@ -1,7 +1,7 @@
 version: "2"
 services:
   db:
-    image: mysql:latest
+    image: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=pass123
       - MYSQL_DATABASE=hydroZagadka
@@ -9,6 +9,7 @@ services:
       - MYSQL_PASSWORD=hydroZagadka123
     ports:
       - 4212:3306
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --init-connect='SET NAMES UTF8;' --innodb-flush-log-at-trx-commit=0
   app:
     build:
       context: ./HydroZagadkaWeb
