@@ -52,6 +52,6 @@ public class AdminStatsDao {
 //        List<UserFavsView> userFavsView = favs.stream().map(o -> new UserFavsView((List<WaterContainer>) o[0])).collect(Collectors.toList());
 //
 //        return userFavsView;
-//    }}
+//    }
 
 }

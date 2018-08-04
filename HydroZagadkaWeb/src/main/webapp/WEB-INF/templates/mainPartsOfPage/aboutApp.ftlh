@@ -12,9 +12,8 @@
                     wodnym.<br>
                     Po wybraniu konkretnej stacji pomiarowej oraz okresu czasu wyświetlony zostaje wykres z danymi i
                     mapka przedstawiająca okolicę stacji pomiarowej.<br>
-                    Aplikacja daje użytkownikowi możliwość wysłania swoich danych.<br>
-                    Po zalogowaniu użytkownik dostaje funkcję zapisania swoich ulubionych zbiorników oraz wyróżnienia
-                    ich podczas wyszukiwania.
+
+                    Po zalogowaniu użytkownik dostaje funkcję zapisania swoich ulubionych zbiorników.
                     <br>
                 </h5>
                 <h6> Projekt aplikacji został zrealizowany podczas <a href="https://infoshareacademy.com/"> kursu

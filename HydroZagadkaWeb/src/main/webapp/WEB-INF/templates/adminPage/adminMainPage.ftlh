@@ -63,7 +63,7 @@
               <span class="caption">
                 <span class="caption-content">
                   <h2>Uaktualnij dane</h2>
-                  <p class="mb-0">Załaduj plik .zip z danymi zbiorników.</p>
+                  <p class="mb-0">Odśwież dane z IMGW .</p>
                 </span>
               </span>
                     <img class="img-fluid" src="../../../HydroZagadkaFront/img/portfolio-7.jpg" alt="">
@@ -98,7 +98,7 @@
                 </a>
             </div>
             <div class="col-4">
-                <a class="portfolio-item" href="#upload">
+                <a class="portfolio-item" href="#logs">
               <span class="caption">
                 <span class="caption-content">
                   <h2>Loggery</h2>
@@ -145,6 +145,9 @@
         <div class="col"></div>
     </div>
 </section>
+
+<#--pobierz logi-->
+<#include "../adminPage/downloadsLogs.ftlh">
 
 <!-- Footer -->
 <DIV>
