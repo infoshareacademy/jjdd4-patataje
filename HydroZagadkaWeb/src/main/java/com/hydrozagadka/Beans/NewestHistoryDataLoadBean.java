@@ -29,14 +29,8 @@ public class NewestHistoryDataLoadBean {
     }
 
     private void createHistoryData(NewestWaterContainerData s){
-        LocalDate checkdate;
         Double temperature;
-        if (s.getWaterLevelDate() == null) {
-            logger.warn("Brak danych o dacie pomiaru ustawiona na dzisiaj");
-            checkdate = LocalDate.now();
-        } else {
-            checkdate = s.getWaterLevelDate().toLocalDate();
-        }
+
         if (s.getWaterTemperature() == null) {
             temperature = 0.0;
             logger.warn("Brak danych o temperaturze ustawiona na 0");
@@ -44,12 +38,12 @@ public class NewestHistoryDataLoadBean {
             temperature = s.getWaterTemperature();
         }
         historyDao.save(new History(
-                checkdate,
+                s.getWaterLevelDate(),
                 s.getWaterLevel(),
                 0.0,
                 temperature,
-                s.getWaterLevelDate(),
                 s.getWaterTemperatureDate(),
+                s.getIcePhenomenonDate(),
                 s.getIcePhenomenon(),
                 s.getIcePhenomenonDate(),
                 s.getOvergrowthPhenomenon(),

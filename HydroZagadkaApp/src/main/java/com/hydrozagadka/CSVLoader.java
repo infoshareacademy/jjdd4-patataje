@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class CSVLoader {
-    private static final String DIRECT_PATH = "~/patataje-upload";
+    private static final String DIRECT_PATH = "/opt/jboss/patataje-upload";
     private static final String DIRECT_PATH_TO_PROPERTY = System.getProperty("java.io.tmpdir");
     private static Logger logger = LoggerFactory.getLogger(CSVLoader.class);
 
@@ -28,7 +28,6 @@ public class CSVLoader {
     }
 
     public CSVLoader() {
-        loadCSV();
     }
 
     private List<String> getFilesList() {
@@ -84,7 +83,7 @@ public class CSVLoader {
         return null;
     }
 
-    private Map<Long, WaterContainer> loadCSV() {
+    public Map<Long, WaterContainer> loadCSV() {
         String loadedLine;
         String[] splitedLine;
         try {

@@ -39,6 +39,9 @@
                 <br>
                 <h3><#if statusCode??>Kod błędu: <em> ${statusCode}</em></#if>
                 </h3>
+                <#if message??>
+                <div>${message}</div>
+                </#if>
                 <br><br>
                 <h5>Smutna ryba jest smutna.</h5>
                 <h4><a href="/welcome"><i class="fa fa-home"></i>

@@ -119,6 +119,7 @@
 <!-- upload plików -->
 <section class="content-section bg-light" id="upload">
 <#include "../changingParts/uploadFiles.ftlh">
+
 </section>
 
 <!-- Lista uzytkownikow -->
