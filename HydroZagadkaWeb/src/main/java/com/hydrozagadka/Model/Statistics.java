@@ -11,11 +11,9 @@ public class Statistics {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @OneToOne
     @JoinColumn(name = "container_id", unique = true)
     private WaterContainer waterContainer;
-
     @Column(name = "views")
     private Long views;
 

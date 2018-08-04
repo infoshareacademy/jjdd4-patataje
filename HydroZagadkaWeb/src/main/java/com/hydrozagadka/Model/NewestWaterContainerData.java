@@ -1,11 +1,6 @@
 package com.hydrozagadka.Model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,35 +24,25 @@ public class NewestWaterContainerData {
     @JsonProperty("stan_wody")
     private Double waterLevel;
     @JsonProperty("stan_wody_data_pomiaru")
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss",locale = "pl_PL")
-//    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-//    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private String waterLevelDate;
     @JsonProperty("temperatura_wody")
     private Double waterTemperature;
     @JsonProperty("temperatura_wody_data_pomiaru")
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss",locale = "pl_PL")
-//    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-//    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    private String  waterTemperatureDate;
+    private String waterTemperatureDate;
     @JsonProperty("zjawisko_lodowe")
     private Integer icePhenomenon;
     @JsonProperty("zjawisko_lodowe_data_pomiaru")
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss",locale = "pl_PL")
-//    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-//    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    private String  icePhenomenonDate;
+    private String icePhenomenonDate;
     @JsonProperty("zjawisko_zarastania")
     private Integer overgrowthPhenomenon;
     @JsonProperty("zjawisko_zarastania_data_pomiaru")
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss",locale = "pl_PL")
-//    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-//    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    private String  overgrowthPhenomenonDate;
 
-    public NewestWaterContainerData() { }
+    private String overgrowthPhenomenonDate;
 
-    public NewestWaterContainerData(Long id, String station, String container, String province, Double waterLevel, String  waterLevelDate, Double waterTemperature, String  waterTemperatureDate, Integer icePhenomenon, String  icePhenomenonDate, Integer overgrowthPhenomenon, String  overgrowthPhenomenonDate) {
+    public NewestWaterContainerData() {
+    }
+
+    public NewestWaterContainerData(Long id, String station, String container, String province, Double waterLevel, String waterLevelDate, Double waterTemperature, String waterTemperatureDate, Integer icePhenomenon, String icePhenomenonDate, Integer overgrowthPhenomenon, String overgrowthPhenomenonDate) {
         this.id = id;
         this.station = station;
         this.container = container;
@@ -118,7 +103,7 @@ public class NewestWaterContainerData {
                 .orElse(LocalDateTime.now()).toLocalDate();
     }
 
-    public void setWaterLevelDate(String  waterLevelDate) {
+    public void setWaterLevelDate(String waterLevelDate) {
         this.waterLevelDate = waterLevelDate;
     }
 
@@ -136,7 +121,7 @@ public class NewestWaterContainerData {
                 .orElse(LocalDateTime.now());
     }
 
-    public void setWaterTemperatureDate(String  waterTemperatureDate) {
+    public void setWaterTemperatureDate(String waterTemperatureDate) {
         this.waterTemperatureDate = waterTemperatureDate;
     }
 
@@ -154,7 +139,7 @@ public class NewestWaterContainerData {
                 .orElse(LocalDateTime.now());
     }
 
-    public void setIcePhenomenonDate(String  icePhenomenonDate) {
+    public void setIcePhenomenonDate(String icePhenomenonDate) {
         this.icePhenomenonDate = icePhenomenonDate;
     }
 
@@ -172,7 +157,7 @@ public class NewestWaterContainerData {
                 .orElse(LocalDateTime.now());
     }
 
-    public void setOvergrowthPhenomenonDate(String  overgrowthPhenomenonDate) {
+    public void setOvergrowthPhenomenonDate(String overgrowthPhenomenonDate) {
         this.overgrowthPhenomenonDate = overgrowthPhenomenonDate;
     }
 }

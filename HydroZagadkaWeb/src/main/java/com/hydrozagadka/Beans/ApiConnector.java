@@ -19,19 +19,18 @@ public class ApiConnector {
     private Client client = ClientBuilder.newClient();
     private Logger logger = LoggerFactory.getLogger(ApiConnector.class);
 
-    public List<NewestWaterContainerData> load(){
+    public List<NewestWaterContainerData> load() {
         WebTarget webTarget = client.target("https://danepubliczne.imgw.pl/api/data/hydro/");
         logger.info("pobieranie danych z https://danepubliczne.imgw.pl/api/data/hydro/");
         Response response = webTarget.request().accept(MediaType.APPLICATION_JSON).get();
-
-
         if (response.getStatus() != 200) {
             throw new RuntimeException("Nie możemy pobrać danych");
         }
-     //   throw new IllegalArgumentException(response.readEntity(String.class));
-        List<NewestWaterContainerData> result = response.readEntity(new GenericType<List<NewestWaterContainerData>>() {});
-        logger.info("status połącznia : "+response.getStatus());
-        logger.info("Pobrano łącznie "+result.size()+" rekordów");
+
+        List<NewestWaterContainerData> result = response.readEntity(new GenericType<List<NewestWaterContainerData>>() {
+        });
+        logger.info("status połącznia : " + response.getStatus());
+        logger.info("Pobrano łącznie " + result.size() + " rekordów");
         return result;
     }
 }

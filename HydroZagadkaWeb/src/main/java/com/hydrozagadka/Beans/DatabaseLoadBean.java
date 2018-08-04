@@ -30,11 +30,8 @@ public class DatabaseLoadBean {
     private NewestWaterContainerDataLoadBean newestWaterContainerDataLoadBean;
     @Inject
     private ApiConnector apiConnector;
-
     private Map<Long, WaterContainer> waterContainerMap;
-
     private CSVLoader csvLoader = new CSVLoader();
-
 
     public void loadWaterContainer() throws IOException {
         waterContainerMap = csvLoader.loadCSV();
@@ -63,7 +60,6 @@ public class DatabaseLoadBean {
     }
 
     public void loadDataFromApi() {
-
         List<NewestWaterContainerData> imgwData = apiConnector.load();
         newestWaterContainerDataLoadBean.loadNewestWaterContainerToDatabase(imgwData);
         newestHistoryDataLoadBean.loadNewestHistoryToDatabase(imgwData);

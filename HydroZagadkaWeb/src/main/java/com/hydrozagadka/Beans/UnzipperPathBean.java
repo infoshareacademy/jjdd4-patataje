@@ -18,7 +18,7 @@ public class UnzipperPathBean {
     private UnzipDao unzipDao;
 
 
-    public void unzipFile(InputStream is){
+    public void unzipFile(InputStream is) {
         unzipDao.unzip(is, DIRECT_PATH);
         logger.info("Unzip File: {}");
 

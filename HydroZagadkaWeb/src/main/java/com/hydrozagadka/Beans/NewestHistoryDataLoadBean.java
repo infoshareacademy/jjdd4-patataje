@@ -17,10 +17,8 @@ public class NewestHistoryDataLoadBean {
 
     @Inject
     HistoryDao historyDao;
-
     @Inject
     WaterContainerDao waterContainerDao;
-
 
     private Logger logger = LoggerFactory.getLogger(NewestHistoryDataLoadBean.class);
 
@@ -28,7 +26,7 @@ public class NewestHistoryDataLoadBean {
         apiData.forEach(s -> createHistoryData(s));
     }
 
-    private void createHistoryData(NewestWaterContainerData s){
+    private void createHistoryData(NewestWaterContainerData s) {
         Double temperature;
 
         if (s.getWaterTemperature() == null) {

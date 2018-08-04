@@ -17,20 +17,20 @@ public class AdminStatsDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<UserDetails> getAllUsersList(){
+    public List<UserDetails> getAllUsersList() {
         Query q = entityManager.createQuery("select u.email, u.adminaaa, u.name from User u");
         List<Object[]> result = q.getResultList();
         List<UserDetails> userDetails = result.stream()
-                .map(o-> new UserDetails((String) o[0],(boolean) o[1], (String) o[2]))
+                .map(o -> new UserDetails((String) o[0], (boolean) o[1], (String) o[2]))
                 .collect(Collectors.toList());
         return userDetails;
     }
 
-    public List<StatisticWithWaterStationView> getStatistics (){
+    public List<StatisticWithWaterStationView> getStatistics() {
         Query q = entityManager.createQuery("SELECT w.containerName, s.views FROM  Statistics s JOIN s.waterContainer w where w.id=s.waterContainer.id order by s.views desc").setMaxResults(10);
         List<Object[]> result = q.getResultList();
         List<StatisticWithWaterStationView> statisticWithWaterStationViews = result.stream()
-                .map(o-> new StatisticWithWaterStationView((String) o[0],(Long) o[1]))
+                .map(o -> new StatisticWithWaterStationView((String) o[0], (Long) o[1]))
                 .collect(Collectors.toList());
         return statisticWithWaterStationViews;
     }
@@ -38,13 +38,13 @@ public class AdminStatsDao {
     public List<ProvinceStatisticView> getStatsByProvince() {
         Query q = entityManager.createQuery("select w.province,SUM(s.views) as views  from Statistics s JOIN s.waterContainer w where w.id=s.waterContainer.id and s.views>0 group by w.province order by views desc");
         List<Object[]> objects = q.getResultList();
-       List<ProvinceStatisticView> provinceStatisticViews = objects.stream()
-               .map(o -> new ProvinceStatisticView((String) o[0], (Long) o[1]))
-               .collect(Collectors.toList());
+        List<ProvinceStatisticView> provinceStatisticViews = objects.stream()
+                .map(o -> new ProvinceStatisticView((String) o[0], (Long) o[1]))
+                .collect(Collectors.toList());
         return provinceStatisticViews;
     }
 
-    public List<UserFavsView> getUserFavsContainers(){
+    public List<UserFavsView> getUserFavsContainers() {
         Query q = entityManager.createQuery("SELECT w.container FROM waterContainerId w");
         List<UserFavsView> userFavsView = q.getResultList();
 

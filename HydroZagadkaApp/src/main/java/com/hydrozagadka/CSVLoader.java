@@ -4,7 +4,10 @@ import com.hydrozagadka.exceptions.DataLengthException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,7 +17,6 @@ import java.util.*;
 
 public class CSVLoader {
     private static final String DIRECT_PATH = "/opt/jboss/patataje-upload";
-    private static final String DIRECT_PATH_TO_PROPERTY = System.getProperty("java.io.tmpdir");
     private static Logger logger = LoggerFactory.getLogger(CSVLoader.class);
 
     private BufferedReader br;

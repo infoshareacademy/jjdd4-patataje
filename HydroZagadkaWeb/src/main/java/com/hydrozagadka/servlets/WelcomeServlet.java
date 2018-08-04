@@ -50,15 +50,12 @@ public class WelcomeServlet extends HttpServlet {
             } else {
                 model.put("isLoggedIn", "user");
             }
-            model.put("nameSurname",session.getAttribute("nameSurname"));
+            model.put("nameSurname", session.getAttribute("nameSurname"));
         } else {
             model.put("isLoggedIn", "none");
         }
         logger.info("isLoggedIn " + model.get("isLoggedIn"));
         template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
-
-
-        
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
