@@ -10,18 +10,18 @@
             <option value="lubuskie">lubuskie</option>
             <option value="lubelskie">lubelskie</option>
             <option value="podkarpackie">podkarpackie</option>
-            <option value="warmińsko-mazurskie">warmińsko-mazurskie</option>
+            <option value="warminsko-mazurskie">warmińsko-mazurskie</option>
             <option value="zachodniopomorskie">zachodniopomorskie</option>
             <option value="podlaskie">podlaskie</option>
             <option value="opolskie">opolskie</option>
-            <option value="śląskie">śląskie</option>
+            <option value="slaskie">śląskie</option>
             <option value="mazowieckie">mazowieckie</option>
             <option value="podlaskie">podlaskie</option>
-            <option value="dolnośląskie">dolnośląskie</option>
+            <option value="dolnoslaskie">dolnośląskie</option>
             <option value="wielkopolskie">wielkopolskie</option>
-            <option value="świętokrzyskie">świętokrzyskie</option>
-            <option value="małopolskie">małopolskie</option>
-            <option value="łódzkie">łódzkie</option>
+            <option value="swietokrzyskie">świętokrzyskie</option>
+            <option value="malopolskie">małopolskie</option>
+            <option value="lodzkie">łódzkie</option>
         </select>
 
 
