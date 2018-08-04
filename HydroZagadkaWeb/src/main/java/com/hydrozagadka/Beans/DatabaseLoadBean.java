@@ -3,16 +3,15 @@ package com.hydrozagadka.Beans;
 import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.Model.NewestWaterContainerData;
 import com.hydrozagadka.Model.Statistics;
-import com.hydrozagadka.User;
 import com.hydrozagadka.WaterContainer;
 import com.hydrozagadka.dao.HistoryDao;
 import com.hydrozagadka.dao.StatisticsDao;
-import com.hydrozagadka.dao.UserDao;
 import com.hydrozagadka.dao.WaterContainerDao;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -32,11 +31,13 @@ public class DatabaseLoadBean {
     @Inject
     private ApiConnector apiConnector;
 
+    private Map<Long, WaterContainer> waterContainerMap;
+
     private CSVLoader csvLoader = new CSVLoader();
-    private Map<Long, WaterContainer> waterContainerMap = csvLoader.getAllContainers();
 
 
     public void loadWaterContainer() {
+        waterContainerMap = csvLoader.loadCSV();
         waterContainerMap.values()
                 .forEach(waterContainer -> {
                     if (waterContainerDao.findById(waterContainer.getId()) == null) {
@@ -46,7 +47,8 @@ public class DatabaseLoadBean {
                 });
     }
 
-    public void loadHistory() {
+    public void loadHistory() throws IOException {
+        waterContainerMap = csvLoader.loadCSV();
         waterContainerMap.values()
                 .forEach(waterContainer -> waterContainer.getHistory()
                         .forEach(history -> {
@@ -57,6 +59,7 @@ public class DatabaseLoadBean {
                                 historyDao.save(history);
                             }
                         }));
+        org.apache.commons.io.FileUtils.cleanDirectory(new File("/opt/jboss/patataje-upload"));
     }
 
     public void loadDataFromApi() {

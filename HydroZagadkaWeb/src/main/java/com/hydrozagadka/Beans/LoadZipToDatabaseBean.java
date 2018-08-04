@@ -1,8 +1,5 @@
 package com.hydrozagadka.Beans;
 
-import com.hydrozagadka.CSVLoader;
-import com.hydrozagadka.WaterContainer;
-import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import com.hydrozagadka.servlets.LoadServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.InputStream;
-import java.util.Map;
 
 @Stateless
 public class LoadZipToDatabaseBean {
@@ -21,15 +17,13 @@ public class LoadZipToDatabaseBean {
     @Inject
     private UnzipDao unzipDao;
 
-    @Inject
-    private FreeMarkerConfig freeMarkerConfig;
-
-    private Map<Long, WaterContainer> waterContainerMap;
 
     public void unzipFile(InputStream is){
         unzipDao.unzip(is, DIRECT_PATH);
+        JJD4PAT-10-TestyJednostkowe
         logger.info("Rozpakowywanie pliku: {}");
         CSVLoader csvLoader = new CSVLoader();
         waterContainerMap = csvLoader.getAllContainers();
+
     }
 }

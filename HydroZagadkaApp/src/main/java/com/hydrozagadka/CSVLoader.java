@@ -28,7 +28,6 @@ public class CSVLoader {
     }
 
     public CSVLoader() {
-        loadCSV();
     }
 
     private List<String> getFilesList() {
@@ -84,7 +83,7 @@ public class CSVLoader {
         return null;
     }
 
-    private Map<Long, WaterContainer> loadCSV() {
+    public Map<Long, WaterContainer> loadCSV() {
         String loadedLine;
         String[] splitedLine;
         try {

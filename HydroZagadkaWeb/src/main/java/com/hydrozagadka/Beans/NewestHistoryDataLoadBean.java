@@ -28,6 +28,7 @@ public class NewestHistoryDataLoadBean {
         apiData.forEach(s -> createHistoryData(s));
     }
 
+  JJD4PAT-10-TestyJednostkowe
     private void createHistoryData(NewestWaterContainerData s) {
         LocalDate checkdate;
         Double temperature;
@@ -37,6 +38,11 @@ public class NewestHistoryDataLoadBean {
         } else {
             checkdate = s.getWaterLevelDate().toLocalDate();
         }
+
+    private void createHistoryData(NewestWaterContainerData s){
+        Double temperature;
+
+  develop
         if (s.getWaterTemperature() == null) {
             temperature = 0.0;
             logger.warn("Brak danych o temperaturze. Temperatura ustawiona na 0");
@@ -44,12 +50,12 @@ public class NewestHistoryDataLoadBean {
             temperature = s.getWaterTemperature();
         }
         historyDao.save(new History(
-                checkdate,
+                s.getWaterLevelDate(),
                 s.getWaterLevel(),
                 0.0,
                 temperature,
-                s.getWaterLevelDate(),
                 s.getWaterTemperatureDate(),
+                s.getIcePhenomenonDate(),
                 s.getIcePhenomenon(),
                 s.getIcePhenomenonDate(),
                 s.getOvergrowthPhenomenon(),
