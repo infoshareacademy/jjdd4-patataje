@@ -40,12 +40,6 @@ public class WelcomeServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Map<String, Object> model = new HashMap<>();
 
-//        if (session.getAttribute("ID") != null) {
-            User user = userDao.findById("1");
-            List<WaterContainer> waterContainers = user.getWaterContainerId();
-            logger.info(waterContainers.toString());
-//        }
-
         if (session.getAttribute("isLoggedIn") == null) {
             session.setAttribute("isLoggedIn", false);
         }
@@ -68,7 +62,7 @@ public class WelcomeServlet extends HttpServlet {
         template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
 
 
-        
+
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {

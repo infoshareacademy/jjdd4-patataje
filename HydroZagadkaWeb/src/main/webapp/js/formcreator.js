@@ -2,7 +2,7 @@ google.charts.load('current', {
     'packages': ['map','line', 'corechart'],
     // Note: you will need to get a mapsApiKey for your project.
     // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-    'mapsApiKey': 'AIzaSyDQlTwqbQzIesvDheiMg2T6AzoWXA54Pa4',
+    'mapsApiKey': 'AIzaSyD6yWku9TtoRFpZuRe-MHbjj5dh1oFnNh4',
     'language': 'pl'
 });
 
