@@ -23,6 +23,7 @@
                     <div>
                         <input type="submit" class="btn btn-primary"></div>
                 </form>
+                <p style="margin-top: 20px;"> <a class="btn btn-primary btn-xl js-scroll-trigger" href="/loadimgw">Dodaj dane z IMGW</a></p>
             </div>
         </div>
     </div>

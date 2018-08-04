@@ -13,6 +13,9 @@
         <user>hydroZagadka</user>
         <password>hydroZagadka123</password>
     </data-source>
+    <session-config>
+        <session-timeout>10</session-timeout>
+    </session-config>
     <welcome-file-list>
         <welcome-file>/welcome</welcome-file>
     </welcome-file-list>

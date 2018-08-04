@@ -64,7 +64,6 @@
                 <span class="caption-content">
                   <h2>Uaktualnij dane</h2>
                   <p class="mb-0">Załaduj plik .zip z danymi zbiorników.</p>
-                    <p> <a class="btn btn-primary btn-xl js-scroll-trigger" href="/loadimgw">Dodaj dane z IMGW</a></p>
                 </span>
               </span>
                     <img class="img-fluid" src="../../../HydroZagadkaFront/img/portfolio-7.jpg" alt="">
@@ -120,6 +119,7 @@
 <!-- upload plików -->
 <section class="content-section bg-light" id="upload">
 <#include "../changingParts/uploadFiles.ftlh">
+
 </section>
 
 <!-- Lista uzytkownikow -->
