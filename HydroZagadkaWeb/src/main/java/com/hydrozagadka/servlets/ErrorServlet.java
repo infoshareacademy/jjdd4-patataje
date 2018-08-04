@@ -63,7 +63,7 @@ public class ErrorServlet extends HttpServlet {
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
-            logger.warn("Template doesn't exist", e);
+            logger.warn("Szablon nie istnieje", e);
         }
     }
 

@@ -26,9 +26,10 @@ public class WelcomeServlet extends HttpServlet {
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
 
+
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
-
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Template template;
@@ -58,11 +59,11 @@ public class WelcomeServlet extends HttpServlet {
         template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
 
 
-        
+
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
-            logger.warn("Template dosen't exist", e);
+            logger.warn("Szablon nie istnieje", e);
         }
     }
 }

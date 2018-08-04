@@ -30,10 +30,10 @@ public class AdminPageServlet extends HttpServlet {
 
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
+
     @Inject
     private AdminStatsDao adminStatsDao;
-//    @Inject
-//    private UserFavsView userFavsView;
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       HttpSession session = request.getSession();
@@ -46,18 +46,18 @@ public class AdminPageServlet extends HttpServlet {
         List<UserDetails> usersList = adminStatsDao.getAllUsersList();
 
         List<StatisticWithWaterStationView> WCList = adminStatsDao.getStatistics();
-//        List<UserFavsView> userFavsView = adminStatsDao.getUserFavsContainers();
+
 
         List<ProvinceStatisticView> provinceStatisticViews = adminStatsDao.getStatsByProvince();
         Map<String, Object> model = new HashMap<>();
         model.put("Uzytkownik", usersList);
         model.put("WCList", WCList);
         model.put("provincestats", provinceStatisticViews);
-//        model.put("usersFavs", userFavsView);
+
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
-            logger.warn("Template doesn't exist", e);
+            logger.warn("Szablon nie istnieje", e);
         }
     }
 }

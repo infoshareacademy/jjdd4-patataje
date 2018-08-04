@@ -2,6 +2,7 @@ package com.hydrozagadka;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 
 @Entity
@@ -86,6 +87,22 @@ public class WaterContainer {
         this.history = history;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WaterContainer that = (WaterContainer) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(containerName, that.containerName) &&
+                Objects.equals(stationName, that.stationName) &&
+                Objects.equals(province, that.province);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, containerName, stationName, province);
+    }
 
     @Override
     public String toString() {
