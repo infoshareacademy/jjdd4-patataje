@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import java.io.InputStream;
 
 @Stateless
-public class LoadZipToDatabaseBean {
+public class UnzipperPathBean {
 
     private static Logger logger = LoggerFactory.getLogger(LoadServlet.class);
 

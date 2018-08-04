@@ -36,7 +36,7 @@ public class DatabaseLoadBean {
     private CSVLoader csvLoader = new CSVLoader();
 
 
-    public void loadWaterContainer() {
+    public void loadWaterContainer() throws IOException {
         waterContainerMap = csvLoader.loadCSV();
         waterContainerMap.values()
                 .forEach(waterContainer -> {
@@ -45,11 +45,11 @@ public class DatabaseLoadBean {
                         statisticsDao.save(new Statistics(0L, waterContainer));
                     }
                 });
+        loadHistory(waterContainerMap);
     }
 
-    public void loadHistory() throws IOException {
-        waterContainerMap = csvLoader.loadCSV();
-        waterContainerMap.values()
+    public void loadHistory(Map<Long, WaterContainer> data) throws IOException {
+        data.values()
                 .forEach(waterContainer -> waterContainer.getHistory()
                         .forEach(history -> {
                             Long wcId = history.getContainerId();
