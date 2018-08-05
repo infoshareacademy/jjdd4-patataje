@@ -26,7 +26,7 @@ public class GoogleVerifierBean {
     @Inject
     private UserDao userDao;
     private static final JacksonFactory jacksonFactory = new JacksonFactory();
-    private static final String CLIENT_ID = "838946843173-fn7d8je5vm8kisb459ud5tc584p0c8th.apps.googleusercontent.com";
+    private static final String CLIENT_ID = "838946843173-jhuf7gp3sd1et99aiptfavaqh045r4dc.apps.googleusercontent.com";
     private static final String salt = "wyu845wyovvvvvvvvuwt5ht78uyh358gf7y3qg78vyqer87gfyqe8r7gh834uigh*(&^&*^*(&^(^(";
 
     @Transactional
