@@ -3,6 +3,8 @@
         <div class="row">
             <div class="col-lg-10 mx-auto" id="userInfo">
                 <h3> Witaj <h3 class="text-secondary mb-0">  ${nameSurname}</h3></h3>
+            </div>
+                <div class="row">
                 <div class="col-sm"></div>
               <#if favs??>
                   <h4>Twoje ulubione zbiorniki to:</h4>

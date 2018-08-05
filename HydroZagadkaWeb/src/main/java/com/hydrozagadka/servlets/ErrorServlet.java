@@ -48,7 +48,7 @@ public class ErrorServlet extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("mainPartsOfPage/errorsPage.ftlh", getServletContext());
-        logger.warn("Error occured, from servlet: " + servletName + ", see details: " + " error code: " + statusCode + " ,throwable: " + throwable);
+        logger.warn("Błąd z servletu " + servletName + ". Kod błędu: "+ statusCode + ". Wyjątek: " + throwable);
         Map<String, Object> model = new HashMap<>();
         model.put("statusCode", statusCode);
         model.put("servletName", servletName);
