@@ -1,4 +1,4 @@
-<nav id="sidebar-wrapper">
+
       <ul class="sidebar-nav">
         <li class="sidebar-brand">
             <a class="js-scroll-trigger" href="#page-top">Góra</a>
@@ -27,4 +27,4 @@
             </#if>
         </li>
     </ul>
-</nav>
+

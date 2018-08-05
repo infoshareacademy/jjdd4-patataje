@@ -94,7 +94,7 @@ public class Province {
             createMenu();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Blad podczas wczytywania danych program zostanie zamkniety");
-            logger.error("Aplikacja została zamknięta");
+            logger.error("Aplikacja została zamknięta",e );
             closeApp();
 
         }

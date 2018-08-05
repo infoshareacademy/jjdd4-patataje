@@ -17,7 +17,6 @@ public class HistoryMapper {
     private HistoryDao historyDao;
 
     public List<ChartHistory> mapToChartHistory(List<History> listOfHistoryToMap) {
-
         return listOfHistoryToMap.stream()
                 .map(history -> new ChartHistory(
                         history.getWaterDeep(),

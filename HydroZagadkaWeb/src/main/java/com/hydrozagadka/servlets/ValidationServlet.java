@@ -31,15 +31,13 @@ public class ValidationServlet extends HttpServlet {
             session.setAttribute("ID", user.getId());
             session.setAttribute("isLoggedIn", true);
             session.setAttribute("isAdmin", user.isAdminaaa());
-            session.setAttribute("token",user.getToken());
-            session.setAttribute("nameSurname",user.getName());
-
+            session.setAttribute("token", user.getToken());
+            session.setAttribute("nameSurname", user.getName());
             Boolean isAuth = (Boolean) session.getAttribute("isLoggedIn");
             Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
             if (isAuth && isAdmin) {
-                session.setAttribute("isAdmin",true);
+                session.setAttribute("isAdmin", true);
             }
-
             req.getRequestDispatcher("/welcome").forward(req, resp);
         } catch (GeneralSecurityException e) {
             e.printStackTrace();

@@ -1,7 +1,6 @@
 package com.hydrozagadka.servlets;
 
 import com.hydrozagadka.User;
-import com.hydrozagadka.WaterContainer;
 import com.hydrozagadka.dao.UserDao;
 import com.hydrozagadka.freeMarkerConfig.FreeMarkerConfig;
 import freemarker.template.Template;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -27,8 +25,6 @@ public class WelcomeServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(WelcomeServlet.class);
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
-    @Inject
-    private UserDao userDao;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
@@ -54,19 +50,16 @@ public class WelcomeServlet extends HttpServlet {
             } else {
                 model.put("isLoggedIn", "user");
             }
-            model.put("nameSurname",session.getAttribute("nameSurname"));
+            model.put("nameSurname", session.getAttribute("nameSurname"));
         } else {
             model.put("isLoggedIn", "none");
         }
         logger.info("isLoggedIn " + model.get("isLoggedIn"));
         template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
-
-
-
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
-            logger.warn("Template dosen't exist", e);
+            logger.warn("Szablon nie istnieje", e);
         }
     }
 }

@@ -14,6 +14,7 @@ import java.util.zip.ZipInputStream;
 @RequestScoped
 public class UnzipBean implements UnzipDao {
     private static Logger logger = LoggerFactory.getLogger(UnzipBean.class);
+
     @Override
     public void unzip(InputStream fis, String destinationDirPath) {
         File dir = new File(destinationDirPath);
@@ -36,7 +37,8 @@ public class UnzipBean implements UnzipDao {
             }
             fis.close();
         } catch (IOException e) {
-            logger.warn("File not found,can't unzip file", e);
+            e.printStackTrace();
+            logger.warn("Pliku nie znaleziono", e);
         }
 
     }

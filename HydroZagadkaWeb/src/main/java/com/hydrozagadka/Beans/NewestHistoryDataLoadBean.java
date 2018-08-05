@@ -16,11 +16,9 @@ import java.util.List;
 public class NewestHistoryDataLoadBean {
 
     @Inject
-    HistoryDao historyDao;
-
+    private HistoryDao historyDao;
     @Inject
-    WaterContainerDao waterContainerDao;
-
+    private WaterContainerDao waterContainerDao;
 
     private Logger logger = LoggerFactory.getLogger(NewestHistoryDataLoadBean.class);
 
@@ -28,12 +26,12 @@ public class NewestHistoryDataLoadBean {
         apiData.forEach(s -> createHistoryData(s));
     }
 
-    private void createHistoryData(NewestWaterContainerData s){
+    private void createHistoryData(NewestWaterContainerData s) {
         Double temperature;
 
         if (s.getWaterTemperature() == null) {
             temperature = 0.0;
-            logger.warn("Brak danych o temperaturze ustawiona na 0");
+            logger.warn("Brak danych o temperaturze. Temperatura ustawiona na 0");
         } else {
             temperature = s.getWaterTemperature();
         }

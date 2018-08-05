@@ -4,17 +4,12 @@ import java.time.LocalDate;
 
 public class ChartHistory {
 
-
     private Double waterDeep;
-
     private Double flow;
-
     private Double temperature;
-
     private LocalDate date;
 
-
-    public ChartHistory(Double waterDeep, Double flow, Double temperature,LocalDate date) {
+    public ChartHistory(Double waterDeep, Double flow, Double temperature, LocalDate date) {
         this.waterDeep = waterDeep;
         this.flow = flow;
         this.temperature = temperature;
@@ -32,7 +27,6 @@ public class ChartHistory {
     public Double getTemperature() {
         return temperature;
     }
-
 
     public void setWaterDeep(Double waterDeep) {
         this.waterDeep = waterDeep;

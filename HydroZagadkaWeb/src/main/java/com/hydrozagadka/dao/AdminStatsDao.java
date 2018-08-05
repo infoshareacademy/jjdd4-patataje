@@ -3,6 +3,7 @@ package com.hydrozagadka.dao;
 import com.hydrozagadka.DTO.ProvinceStatisticView;
 import com.hydrozagadka.DTO.StatisticWithWaterStationView;
 import com.hydrozagadka.DTO.UserDetails;
+import com.hydrozagadka.DTO.UserFavsView;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

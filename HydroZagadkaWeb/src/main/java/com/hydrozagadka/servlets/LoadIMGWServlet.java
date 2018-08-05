@@ -14,6 +14,7 @@ import java.io.IOException;
 public class LoadIMGWServlet extends HttpServlet {
     @Inject
     private DatabaseLoadBean databaseLoadBean;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
