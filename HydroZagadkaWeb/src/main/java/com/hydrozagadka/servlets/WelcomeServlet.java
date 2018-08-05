@@ -32,6 +32,7 @@ public class WelcomeServlet extends HttpServlet {
     private FreeMarkerConfig freeMarkerConfig;
     @Inject
     UserDao userDao;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
@@ -58,7 +59,7 @@ public class WelcomeServlet extends HttpServlet {
             model.put("nameSurname", session.getAttribute("nameSurname"));
             Long id = (Long) session.getAttribute("ID");
             List<WaterContainer> favorites = userDao.getFavourites(id);
-            if(isFavorite(favorites)) {
+            if (isFavorite(favorites)) {
                 model.put("favs", favorites);
             }
         } else {
@@ -73,8 +74,8 @@ public class WelcomeServlet extends HttpServlet {
         }
     }
 
-    private boolean isFavorite(List<WaterContainer> favs){
-        if(favs.size()!=0){
+    private boolean isFavorite(List<WaterContainer> favs) {
+        if (favs.size() != 0) {
             return true;
         }
         return false;
