@@ -1,8 +1,5 @@
-<nav id="sidebar-wrapper">
-    <#if nameSurname??>
-    <div id="nameSurname">${nameSurname}</div>
-    </#if>
-    <ul class="sidebar-nav">
+
+      <ul class="sidebar-nav">
         <li class="sidebar-brand">
             <a class="js-scroll-trigger" href="#page-top">Góra</a>
         </li>
@@ -30,4 +27,4 @@
             </#if>
         </li>
     </ul>
-</nav>
+

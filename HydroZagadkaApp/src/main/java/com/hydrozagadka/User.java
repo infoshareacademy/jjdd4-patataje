@@ -30,8 +30,8 @@ public class User {
     @ManyToMany
     @JoinTable(
             name = "USER_WATERCONTAINER",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "container_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "container_id"))
     private List<WaterContainer> waterContainerId;
 
     public User() {

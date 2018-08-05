@@ -18,10 +18,10 @@ public class AdminStatsDao {
     private EntityManager entityManager;
 
     public List<UserDetails> getAllUsersList() {
-        Query q = entityManager.createQuery("select u.email, u.adminaaa, u.name from User u");
+        Query q = entityManager.createQuery("select u.email, u.adminaaa, u.name, u.stats from User u");
         List<Object[]> result = q.getResultList();
         List<UserDetails> userDetails = result.stream()
-                .map(o -> new UserDetails((String) o[0], (boolean) o[1], (String) o[2]))
+                .map(o -> new UserDetails((String) o[0], (boolean) o[1], (String) o[2], (Integer) o[3]))
                 .collect(Collectors.toList());
         return userDetails;
     }
@@ -44,11 +44,14 @@ public class AdminStatsDao {
         return provinceStatisticViews;
     }
 
-    public List<UserFavsView> getUserFavsContainers() {
-        Query q = entityManager.createQuery("SELECT w.container FROM waterContainerId w");
-        List<UserFavsView> userFavsView = q.getResultList();
-
-        return userFavsView;
-    }
+//    public List<UserFavsView> getUserFavsContainers(){
+//
+//        Query q = entityManager.createQuery("select u.waterContainerId from User u left join WaterContainer uw on uw.users = u.waterContainerId left join WaterContainer wc on wc.id = uw.container_id  where u.id=:id");
+//q.setParameter("id", Long.valueOf(id));
+//        List<Object[]> favs = q.getResultList();
+//        List<UserFavsView> userFavsView = favs.stream().map(o -> new UserFavsView((List<WaterContainer>) o[0])).collect(Collectors.toList());
+//
+//        return userFavsView;
+//    }
 
 }

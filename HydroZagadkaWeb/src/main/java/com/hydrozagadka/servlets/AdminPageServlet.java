@@ -33,21 +33,24 @@ public class AdminPageServlet extends HttpServlet {
     @Inject
     private AdminStatsDao adminStatsDao;
 
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       HttpSession session = request.getSession();
-//        if (session.getAttribute("isLoggedIn")!="admin"){
-//            response.sendRedirect("/welcome");
-//        }
+        if (session.getAttribute("isLoggedIn")!="admin"){
+            response.sendRedirect("/welcome");
+        }
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("adminPage/adminMainPage.ftlh", getServletContext());
         List<UserDetails> usersList = adminStatsDao.getAllUsersList();
         List<StatisticWithWaterStationView> WCList = adminStatsDao.getStatistics();
+
+//        List<UserFavsView> userFavsView = adminStatsDao.getUserFavsContainers();
+
         List<ProvinceStatisticView> provinceStatisticViews = adminStatsDao.getStatsByProvince();
         Map<String, Object> model = new HashMap<>();
         model.put("Uzytkownik", usersList);
         model.put("WCList", WCList);
         model.put("provincestats", provinceStatisticViews);
+//        model.put("usersFavs", userFavsView);
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
