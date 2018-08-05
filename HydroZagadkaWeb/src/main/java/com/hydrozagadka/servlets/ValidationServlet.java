@@ -38,7 +38,6 @@ public class ValidationServlet extends HttpServlet {
             if (isAuth && isAdmin) {
                 session.setAttribute("isAdmin", true);
             }
-            req.getRequestDispatcher("/welcome").forward(req, resp);
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
         }
