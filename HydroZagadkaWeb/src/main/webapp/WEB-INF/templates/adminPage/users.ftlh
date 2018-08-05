@@ -3,8 +3,6 @@
         <div class="col-sm"></div>
         <div class="col-9">
             <br><br>
-
-
             <div class="table-responsive-md">
                 <table class="table table-sm table-hover">
                     <thead>

@@ -1,15 +1,14 @@
 package com.hydrozagadka.dao;
 
-import com.hydrozagadka.DTO.*;
-import com.hydrozagadka.User;
-import com.hydrozagadka.WaterContainer;
+import com.hydrozagadka.DTO.ProvinceStatisticView;
+import com.hydrozagadka.DTO.StatisticWithWaterStationView;
+import com.hydrozagadka.DTO.UserDetails;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 @Stateless
@@ -46,8 +45,8 @@ public class AdminStatsDao {
 
 //    public List<UserFavsView> getUserFavsContainers(){
 //
-//        Query q = entityManager.createQuery("select u.waterContainerId from User u left join WaterContainer uw on uw.users = u.waterContainerId left join WaterContainer wc on wc.id = uw.container_id  where u.id=1");
-//
+//        Query q = entityManager.createQuery("select u.waterContainerId from User u left join WaterContainer uw on uw.users = u.waterContainerId left join WaterContainer wc on wc.id = uw.container_id  where u.id=:id");
+//q.setParameter("id", Long.valueOf(id));
 //        List<Object[]> favs = q.getResultList();
 //        List<UserFavsView> userFavsView = favs.stream().map(o -> new UserFavsView((List<WaterContainer>) o[0])).collect(Collectors.toList());
 //

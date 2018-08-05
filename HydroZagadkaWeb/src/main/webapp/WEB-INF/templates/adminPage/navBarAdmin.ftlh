@@ -7,7 +7,7 @@
             <a class="js-scroll-trigger" href="/welcome">Strona Główna</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="#upload">Wczytaj plik</a>
+            <a class="js-scroll-trigger" href="#upload">Wczytaj dane</a>
         </li>
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="#users">Lista użytkowników</a>

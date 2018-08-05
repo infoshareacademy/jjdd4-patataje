@@ -38,18 +38,14 @@
                     Coś poszło nie tak!</h2><br>
                 <br>
                 <h3><#if statusCode??>Kod błędu: <em> ${statusCode}</em></#if>
-                </h3>
-                <#if message??>
-                <div>${message}</div>
-                </#if>
-                <br><br>
+                </h3><br><br>
                 <h5>Smutna ryba jest smutna.</h5>
                 <h4><a href="/welcome"><i class="fa fa-home"></i>
                     Wróć na stronę główną </a></h4>
                 <br><br>
                 <hr>
                 Jeśli uważasz, że błąd nie powinien mieć miejsca <br> skontaktuj się z <a
-                    href="mailto:patataje@patataje.pl"> administratorem.</a>
+                    href="mailto:pauprzek@gmail.com"> administratorem.</a>
             </div>
             <div class="col">
                 <img src="../../HydroZagadkaFront/img/ryba.png">
@@ -57,8 +53,6 @@
 
         </div>
     </div>
-
-
     <div class="overlay"></div>
 </section>
 
