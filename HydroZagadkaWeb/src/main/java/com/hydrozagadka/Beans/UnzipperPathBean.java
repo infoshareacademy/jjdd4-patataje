@@ -1,5 +1,6 @@
 package com.hydrozagadka.Beans;
 
+import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.servlets.LoadServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ public class UnzipperPathBean {
 
     public void unzipFile(InputStream is) {
         unzipDao.unzip(is, DIRECT_PATH);
-        logger.info("Unzip File: {}");
+        logger.info("Rozpakowywanie pliku: {}");
 
     }
 }

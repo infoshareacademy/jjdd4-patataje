@@ -78,7 +78,7 @@ public class CSVLoader {
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             System.out.println("Błąd podczas konwertowania rekordu na liczbę!");
             System.exit(0);
-            logger.warn("Błąd konwertowania rekordu na liczbę");
+            logger.warn("Błąd konwertowania rekordu na liczbę", e);
         }
         return null;
     }
@@ -99,7 +99,7 @@ public class CSVLoader {
             }
         } catch (IOException e) {
             System.out.println("Nie znaleziono pliku!");
-            logger.warn("Nie znaleziono pliku");
+            logger.warn("Nie znaleziono pliku",e);
         }
         return allContainers;
     }
