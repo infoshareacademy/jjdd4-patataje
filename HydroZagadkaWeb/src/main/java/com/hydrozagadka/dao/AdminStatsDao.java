@@ -3,7 +3,6 @@ package com.hydrozagadka.dao;
 import com.hydrozagadka.DTO.ProvinceStatisticView;
 import com.hydrozagadka.DTO.StatisticWithWaterStationView;
 import com.hydrozagadka.DTO.UserDetails;
-import com.hydrozagadka.DTO.UserFavsView;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -43,15 +42,4 @@ public class AdminStatsDao {
                 .collect(Collectors.toList());
         return provinceStatisticViews;
     }
-
-//    public List<UserFavsView> getUserFavsContainers(){
-//
-//        Query q = entityManager.createQuery("select u.waterContainerId from User u left join WaterContainer uw on uw.users = u.waterContainerId left join WaterContainer wc on wc.id = uw.container_id  where u.id=:id");
-//q.setParameter("id", Long.valueOf(id));
-//        List<Object[]> favs = q.getResultList();
-//        List<UserFavsView> userFavsView = favs.stream().map(o -> new UserFavsView((List<WaterContainer>) o[0])).collect(Collectors.toList());
-//
-//        return userFavsView;
-//    }
-
 }
