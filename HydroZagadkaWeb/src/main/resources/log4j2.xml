@@ -2,7 +2,7 @@
 <Configuration status="debug">
 
         <Properties>
-            <Property name="basePath">"/opt/jboss/patataje-logs</Property>
+            <Property name="basePath">/opt/jboss/</Property>
         </Properties>
 
     <Appenders>

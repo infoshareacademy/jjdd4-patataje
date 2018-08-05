@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-10 mx-auto" id="uploadfile">
                 <h2> Pobierz plik z logami z aplikacji.</h2>
-                <a href="/opt/jboss/patataje-logs" download="HydroZagadakaApp-info.log" role="button" class="btn btn-warning">Pobierz</a>
+                <a href="/HydroZagadakaApp-info.log" role="button" class="btn btn-warning">Pobierz</a>
                 <br>
             </div>
         </div>
