@@ -5,7 +5,7 @@
         var id_token = googleUser.getAuthResponse().id_token
 
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://patataje.jjdd4.is-academy.pl/validation',true);
+        xhr.open('POST', 'http://localhost:4210/validation',true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
             console.log('Signed in as: ' + xhr.responseText);

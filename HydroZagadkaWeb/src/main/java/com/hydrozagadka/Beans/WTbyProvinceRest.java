@@ -103,7 +103,7 @@ public class WTbyProvinceRest {
     }
 
     private void addFavourite(Long idWC, String userId) {
-        User user = userDao.findById(userId);
+        User user = userDao.findByToken(userId);
         user.getWaterContainerId().add(waterContainerDao.findById(idWC));
         userDao.update(user);
     }

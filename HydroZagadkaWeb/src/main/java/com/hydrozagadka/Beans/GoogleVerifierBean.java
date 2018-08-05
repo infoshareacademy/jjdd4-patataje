@@ -47,7 +47,7 @@ public class GoogleVerifierBean {
             String encodedUserId = Hashing.sha256()
                     .hashString(userIdSalt, StandardCharsets.UTF_8)
                     .toString();
-            User user = userDao.findById(encodedUserId);
+            User user = userDao.findByToken(encodedUserId);
             if (user != null) {
                 return user;
             } else if (emailVerified) {
