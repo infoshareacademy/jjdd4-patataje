@@ -26,10 +26,9 @@ public class WelcomeServlet extends HttpServlet {
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
 
-
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Template template;
@@ -51,15 +50,12 @@ public class WelcomeServlet extends HttpServlet {
             } else {
                 model.put("isLoggedIn", "user");
             }
-            model.put("nameSurname",session.getAttribute("nameSurname"));
+            model.put("nameSurname", session.getAttribute("nameSurname"));
         } else {
             model.put("isLoggedIn", "none");
         }
         logger.info("isLoggedIn " + model.get("isLoggedIn"));
         template = freeMarkerConfig.getTemplate("index.ftlh", getServletContext());
-
-
-
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {

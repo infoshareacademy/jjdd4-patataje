@@ -24,10 +24,10 @@ public class HistoryDao {
         return entityManager.merge(history);
     }
 
-    public List<History> findByDate(LocalDate date, Long id){
+    public List<History> findByDate(LocalDate date, Long id) {
         Query q = entityManager.createQuery("select h from History h where date=:date and h.waterContainers.id=:id");
-        q.setParameter("date",date);
-        q.setParameter("id",id);
+        q.setParameter("date", date);
+        q.setParameter("id", id);
         return q.getResultList();
     }
 
@@ -35,8 +35,8 @@ public class HistoryDao {
         Query q = entityManager.createQuery(
                 "SELECT h FROM History h WHERE h.waterContainers.id = :id AND h.date BETWEEN :startDate AND :endDate");
         q.setParameter("id", id);
-        q.setParameter("startDate",startDate);
-        q.setParameter("endDate",endDate);
+        q.setParameter("startDate", startDate);
+        q.setParameter("endDate", endDate);
         return q.getResultList();
     }
 }

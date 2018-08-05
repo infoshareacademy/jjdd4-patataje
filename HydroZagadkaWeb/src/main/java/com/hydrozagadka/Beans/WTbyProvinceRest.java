@@ -83,7 +83,7 @@ public class WTbyProvinceRest {
             logger.info("Nie podano dat");
         }
         if (check) {
-            HttpSession httpSession =request.getSession();
+            HttpSession httpSession = request.getSession();
             String token = (String) httpSession.getAttribute("token");
             addFavourite(id, token);
         }
@@ -98,7 +98,7 @@ public class WTbyProvinceRest {
         return startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty();
     }
 
-    private void addStat(Long idWC){
+    private void addStat(Long idWC) {
         statisticsDao.update(idWC);
     }
 

@@ -30,7 +30,6 @@ public class AdminPageServlet extends HttpServlet {
 
     @Inject
     private FreeMarkerConfig freeMarkerConfig;
-
     @Inject
     private AdminStatsDao adminStatsDao;
 
@@ -42,18 +41,13 @@ public class AdminPageServlet extends HttpServlet {
 //        }
         response.setContentType("text/html;charset=UTF-8");
         Template template = freeMarkerConfig.getTemplate("adminPage/adminMainPage.ftlh", getServletContext());
-
         List<UserDetails> usersList = adminStatsDao.getAllUsersList();
-
         List<StatisticWithWaterStationView> WCList = adminStatsDao.getStatistics();
-
-
         List<ProvinceStatisticView> provinceStatisticViews = adminStatsDao.getStatsByProvince();
         Map<String, Object> model = new HashMap<>();
         model.put("Uzytkownik", usersList);
         model.put("WCList", WCList);
         model.put("provincestats", provinceStatisticViews);
-
         try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
