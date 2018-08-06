@@ -15,9 +15,6 @@
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="#stats">Statystyki wyświetleń</a>
         </li>
-        <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="#logs">Logi</a>
-        </li>
 
     </ul>
 </nav>

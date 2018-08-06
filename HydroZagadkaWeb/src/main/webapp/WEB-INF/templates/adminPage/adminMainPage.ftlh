@@ -97,19 +97,7 @@
                     <img class="img-fluid" src="../../../HydroZagadkaFront/img/portfolio-6.jpg" alt="">
                 </a>
             </div>
-            <div class="col-4">
-                <a class="portfolio-item" href="#logs">
-              <span class="caption">
-                <span class="caption-content">
-                  <h2>Loggery</h2>
-                  <p class="mb-0">Zobacz logi<br>
-                      aplikacji.</p>
-                </span>
-              </span>
-                    <img class="img-fluid" src="../../../HydroZagadkaFront/img/portfolio-4.jpg"
-                         alt="Zczytaj logi aplikacji.">
-                </a>
-            </div>
+
             <div class="col"></div>
         </div>
     </div>
@@ -146,8 +134,7 @@
     </div>
 </section>
 
-<#--pobierz logi-->
-<#include "../adminPage/downloadsLogs.ftlh">
+
 
 <!-- Footer -->
 <DIV>

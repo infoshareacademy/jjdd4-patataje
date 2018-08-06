@@ -53,9 +53,7 @@ public class ErrorServlet extends HttpServlet {
         model.put("statusCode", statusCode);
         model.put("servletName", servletName);
         model.put("throwable", throwable);
-        model.put("requestUri", requestUri);
-        model.put("message", throwable.getMessage());
-        try {
+               try {
             template.process(model, response.getWriter());
         } catch (TemplateException e) {
             logger.warn("Szablon nie istnieje", e);
