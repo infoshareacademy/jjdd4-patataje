@@ -9,7 +9,7 @@
     <meta name="description"
           content="Project of Web Application which shows water levels for lakes and rivers in Poland.">
     <meta name="author" content="JPPL">
-    <meta name="google-signin-client_id" content="838946843173-fn7d8je5vm8kisb459ud5tc584p0c8th.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="838946843173-jhuf7gp3sd1et99aiptfavaqh045r4dc.apps.googleusercontent.com">
 
     <title>HydroZagadka</title>
     <link rel="icon" href="../../HydroZagadkaFront/img/Drop.png">
@@ -36,25 +36,20 @@
             integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
             crossorigin="anonymous"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6yWku9TtoRFpZuRe-MHbjj5dh1oFnNh4&callback=initMap"
+            type="text/javascript"></script>
 </head>
 
 <body id="page-top">
-<div id="fb-root"></div>
-<script>(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = 'https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v3.0&appId=293962678012596&autoLogAppEvents=1';
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
 <!-- Navigation -->
 
 <a class="menu-toggle rounded" href="#">
-    <i class="fa fa-bars"></i>
-</a>
+    <i class="fa fa-bars"></i></a>
+<nav id="sidebar-wrapper">
 <#include "mainPartsOfPage/navBar.ftlh">
+</nav>
+
 
 <!-- Header -->
 <header class="masthead d-flex">
@@ -63,12 +58,16 @@
         <h3 class="mb-5">
             <em>Aplikacja sprawdzająca stan wód w Polsce</em>
         </h3>
-        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#log">Zaloguj się!</a>
         <a class="btn btn-primary btn-xl js-scroll-trigger" href="#check">Sprawdź zbiornik!</a>
         <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">O aplikacji!</a>
     </div>
     <div class="overlay"></div>
 </header>
+
+<#--zalogowany user - info-->
+<#if isLoggedIn=="user" || isLoggedIn=="admin">
+    <#include "changingParts/userDetailsAndFavs.ftlh">
+</#if>
 
 <!-- o aplikacji -->
 <#include "mainPartsOfPage/aboutApp.ftlh">
@@ -83,27 +82,17 @@
 <!-- wyświetlanie danych - mapa -->
 <#include "changingParts/maps.ftlh">
 
-<!-- Logowanie -->
-<#if isLoggedIn=="none">
-<#include "mainPartsOfPage/logUser.ftlh">
-</#if>
-<!-- upload plików -->
-<#include "changingParts/uploadFiles.ftlh">
-
 <!-- Kontakt -->
 <#include "mainPartsOfPage/aboutAuthors.ftlh">
 
 <!-- Footer -->
-
 <#include "mainPartsOfPage/footer.ftlh">
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
     <i class="fa fa-angle-up"></i>
 </a>
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
 
 <!-- Bootstrap core JavaScript -->
 <script src="../../HydroZagadkaFront/vendor/jquery/jquery.min.js"></script>

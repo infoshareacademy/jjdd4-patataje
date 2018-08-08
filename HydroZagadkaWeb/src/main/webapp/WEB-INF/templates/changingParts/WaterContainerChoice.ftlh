@@ -24,7 +24,6 @@
             <option value="łódzkie">łódzkie</option>
         </select>
 
-
         <div class="form-group" id="watercontainerlist">
             <br>
             <label for="watercontainer">Zbionik:</label><br>
@@ -62,7 +61,5 @@
             <button type="submit" class="btn btn-primary" onclick="getElementById('movetocharts').click()">Sprawdź
             </button>
         </div>
-
     </form>
-
 </div>

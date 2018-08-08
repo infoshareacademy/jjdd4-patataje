@@ -2,8 +2,8 @@ FROM jboss/wildfly
 
 ADD target/HydroZagadka.war /opt/jboss/wildfly/standalone/deployments/
 
-RUN mkdir -p home/patataje-upload
-RUN chmod 777 home/patataje-upload
+RUN mkdir -p /opt/jboss/patataje-upload
+RUN chmod 777 /opt/jboss/patataje-upload
 
 RUN /opt/jboss/wildfly/bin/add-user.sh admin admin --silent
 

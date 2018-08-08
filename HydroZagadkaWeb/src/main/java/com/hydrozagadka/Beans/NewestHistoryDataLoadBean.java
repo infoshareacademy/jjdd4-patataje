@@ -16,11 +16,9 @@ import java.util.List;
 public class NewestHistoryDataLoadBean {
 
     @Inject
-    HistoryDao historyDao;
-
+    private HistoryDao historyDao;
     @Inject
-    WaterContainerDao waterContainerDao;
-
+    private WaterContainerDao waterContainerDao;
 
     private Logger logger = LoggerFactory.getLogger(NewestHistoryDataLoadBean.class);
 
@@ -28,28 +26,22 @@ public class NewestHistoryDataLoadBean {
         apiData.forEach(s -> createHistoryData(s));
     }
 
-    private void createHistoryData(NewestWaterContainerData s){
-        LocalDate checkdate;
+    private void createHistoryData(NewestWaterContainerData s) {
         Double temperature;
-        if (s.getWaterLevelDate() == null) {
-            logger.warn("Brak danych o dacie pomiaru ustawiona na dzisiaj");
-            checkdate = LocalDate.now();
-        } else {
-            checkdate = s.getWaterLevelDate().toLocalDate();
-        }
+
         if (s.getWaterTemperature() == null) {
             temperature = 0.0;
-            logger.warn("Brak danych o temperaturze ustawiona na 0");
+            logger.warn("Brak danych o temperaturze. Temperatura ustawiona na 0");
         } else {
             temperature = s.getWaterTemperature();
         }
         historyDao.save(new History(
-                checkdate,
+                s.getWaterLevelDate(),
                 s.getWaterLevel(),
                 0.0,
                 temperature,
-                s.getWaterLevelDate(),
                 s.getWaterTemperatureDate(),
+                s.getIcePhenomenonDate(),
                 s.getIcePhenomenon(),
                 s.getIcePhenomenonDate(),
                 s.getOvergrowthPhenomenon(),

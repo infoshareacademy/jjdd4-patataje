@@ -3,6 +3,7 @@ package com.hydrozagadka.Model;
 import com.hydrozagadka.WaterContainer;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "STATISTICS")
@@ -12,10 +13,25 @@ public class Statistics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Statistics that = (Statistics) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(waterContainer, that.waterContainer) &&
+                Objects.equals(views, that.views);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, waterContainer, views);
+    }
+
     @OneToOne
     @JoinColumn(name = "container_id", unique = true)
     private WaterContainer waterContainer;
-
     @Column(name = "views")
     private Long views;
 

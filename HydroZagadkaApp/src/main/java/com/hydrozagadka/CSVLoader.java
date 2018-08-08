@@ -5,8 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,8 +16,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class CSVLoader {
-    private static final String DIRECT_PATH = "/home/patataje-upload";
-    private static final String DIRECT_PATH_TO_PROPERTY = System.getProperty("java.io.tmpdir");
+    private static final String DIRECT_PATH = "/opt/jboss/patataje-upload";
     private static Logger logger = LoggerFactory.getLogger(CSVLoader.class);
 
     private BufferedReader br;
@@ -28,7 +28,6 @@ public class CSVLoader {
     }
 
     public CSVLoader() {
-        loadCSV();
     }
 
     private List<String> getFilesList() {
@@ -55,7 +54,7 @@ public class CSVLoader {
         if (a.length == 11) {
             province = a[10];
         }
-        return new WaterContainer(id, containerName, stationName, province, new ArrayList<History>());
+        return new WaterContainer(id, containerName, stationName, province, new ArrayList<>());
     }
 
     private History createHistory(WaterContainer wc, String[] a) {
@@ -79,18 +78,18 @@ public class CSVLoader {
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             System.out.println("Błąd podczas konwertowania rekordu na liczbę!");
             System.exit(0);
-            logger.warn("Błąd konwertowania rekordu na liczbę");
+            logger.warn("Błąd konwertowania rekordu na liczbę", e);
         }
         return null;
     }
 
-    private Map<Long, WaterContainer> loadCSV() {
+    public Map<Long, WaterContainer> loadCSV() {
         String loadedLine;
         String[] splitedLine;
         try {
             List<String> files = getFilesList();
             for (String file : files) {
-                br = new BufferedReader(new FileReader(file));
+                br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
                 while ((loadedLine = br.readLine()) != null) {
                     splitedLine = splitString(loadedLine);
                     WaterContainer wc = createWaterContainer(splitedLine);
@@ -100,7 +99,7 @@ public class CSVLoader {
             }
         } catch (IOException e) {
             System.out.println("Nie znaleziono pliku!");
-            logger.warn("Nie znaleziono pliku");
+            logger.warn("Nie znaleziono pliku",e);
         }
         return allContainers;
     }

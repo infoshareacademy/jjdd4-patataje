@@ -26,11 +26,11 @@ public class GoogleVerifierBean {
     @Inject
     private UserDao userDao;
     private static final JacksonFactory jacksonFactory = new JacksonFactory();
-    private static final String CLIENT_ID = "838946843173-fn7d8je5vm8kisb459ud5tc584p0c8th.apps.googleusercontent.com";
+    private static final String CLIENT_ID = "838946843173-jhuf7gp3sd1et99aiptfavaqh045r4dc.apps.googleusercontent.com";
     private static final String salt = "wyu845wyovvvvvvvvuwt5ht78uyh358gf7y3qg78vyqer87gfyqe8r7gh834uigh*(&^&*^*(&^(^(";
-@Transactional
-    public User verify(String idTokenString) throws GeneralSecurityException, IOException {
 
+    @Transactional
+    public User verify(String idTokenString) throws GeneralSecurityException, IOException {
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), jacksonFactory)
                 .setAudience(Collections.singletonList(CLIENT_ID))
                 .build();
@@ -39,7 +39,7 @@ public class GoogleVerifierBean {
             IdToken.Payload payload = idToken.getPayload();
             String userId = payload.getSubject();
             String email = ((GoogleIdToken.Payload) payload).getEmail();
-            boolean emailVerified = Boolean.valueOf(((GoogleIdToken.Payload) payload).getEmailVerified());
+            boolean emailVerified = ((GoogleIdToken.Payload) payload).getEmailVerified();
             String name = (String) payload.get("name");
             String pictureUrl = (String) payload.get("picture");
             String locale = (String) payload.get("locale");
@@ -47,11 +47,11 @@ public class GoogleVerifierBean {
             String encodedUserId = Hashing.sha256()
                     .hashString(userIdSalt, StandardCharsets.UTF_8)
                     .toString();
-            User user = userDao.findById(encodedUserId);
+            User user = userDao.findByToken(encodedUserId);
             if (user != null) {
                 return user;
             } else if (emailVerified) {
-                User u = new User(encodedUserId, name, email, 0, 0, new ArrayList<>(), pictureUrl, locale);
+                User u = new User(encodedUserId, name, email, false, 0, new ArrayList<>(), pictureUrl, locale);
                 userDao.save(u);
                 return u;
             }

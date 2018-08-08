@@ -2,9 +2,9 @@
     <div class="container text-center my-auto">
         <div class="row">
             <div class="col-lg-10 mx-auto" id="uploadfile">
-                <h2> Prześlij plik zip ze swoimi danymi:</h2>
+                <h2> Prześlij plik zip z danymi:</h2>
                 <br>
-                <form class="formclass" method="post" id="loadfile" action="/loadservlet" enctype="multipart/form-data">
+                <form class="formclass" method="post" id="loadfile" action="/loadservlet" enctype="multipart/form-data" data-toggle="validator">
                     <div class="row">
                         <div class="col-sm"></div>
                         <div class="col-6">
@@ -13,7 +13,7 @@
                                        class="filestyle"
                                        data-text="Wybierz plik"
                                        accept=".zip"
-                                       required oninvalid="this.setCustomValidity(' Nie wybrałeś pliku .zip')"
+                                       required oninvalid="this.setCustomValidity('Nie wybrałeś pliku .zip')"
                                        oninput="setCustomValidity('')">
                             </div>
                         </div>
@@ -23,6 +23,7 @@
                     <div>
                         <input type="submit" class="btn btn-primary"></div>
                 </form>
+                <p style="margin-top: 20px;"> <a class="btn btn-primary btn-xl js-scroll-trigger" href="/loadimgw">Dodaj dane z IMGW</a></p>
             </div>
         </div>
     </div>

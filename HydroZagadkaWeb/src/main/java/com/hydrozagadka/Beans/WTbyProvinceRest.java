@@ -51,7 +51,7 @@ public class WTbyProvinceRest {
     public Response getWTbyProvinces(@PathParam("province") String province) throws JsonProcessingException {
         List<WaterContainer> waterContainerList = waterContainerDao.getWaterContainerByProvince(province);
         List<StationView> waterContainerViews = waterContainerMapper.mapToStationView(waterContainerList);
-        logger.info("/rest/province filtrowanie danych po województwach zwrócono " + waterContainerViews.size() + " rekordów");
+        logger.info("/rest/province Filtrowanie danych po województwach, zwrócono " + waterContainerViews.size() + " rekordów");
         return Response.ok(waterContainerViews).build();
     }
 
@@ -61,7 +61,7 @@ public class WTbyProvinceRest {
     public Response getWTbyProvinces(@PathParam("province") String province, @PathParam("container") String container) throws JsonProcessingException {
         List<WaterContainer> waterContainers = waterContainerDao.getWaterContainerByProvinceAndwaterContainer(province, container);
         List<WaterContainerView> waterContainerViews = waterContainerMapper.mapToWaterContainerView(waterContainers);
-        logger.info("/rest/province/container filtrowanie danych po województwie i zbiorniku zwrócono " + waterContainerViews.size() + " rekordów");
+        logger.info("/rest/province/container Filtrowanie danych po województwie i zbiorniku, zwrócono " + waterContainerViews.size() + " rekordów");
         return Response.ok(waterContainerViews).build();
     }
 
@@ -80,33 +80,30 @@ public class WTbyProvinceRest {
         if (isCorrectDate(startdate, enddate)) {
             startDate = LocalDate.parse(startdate);
             endDate = LocalDate.parse(enddate);
-            logger.info("Dat nie podano");
+            logger.info("Nie podano dat");
         }
         if (check) {
-            HttpSession httpSession =request.getSession();
+            HttpSession httpSession = request.getSession();
             String token = (String) httpSession.getAttribute("token");
             addFavourite(id, token);
         }
         List<History> histories = historyDao.getHistoryByWaterContainerWithDates(id, startDate, endDate);
         List<ChartHistory> chartHistories = historyMapper.mapToChartHistory(histories);
-        logger.info("/id/id zwrócenie historii danej stacji zwrócono " + chartHistories.size() + " rekordów");
+        logger.info("/id/id Zwrócenie historii danej stacji, zwrócono " + chartHistories.size() + " rekordów");
         return Response.ok(chartHistories).build();
     }
 
 
     private boolean isCorrectDate(String startDate, String endDate) {
-        if (startDate == null || startDate.isEmpty()) {
-            return false;
-        }
-        return endDate != null && !endDate.isEmpty();
+        return startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty();
     }
 
-    private void addStat(Long idWC){
+    private void addStat(Long idWC) {
         statisticsDao.update(idWC);
     }
 
     private void addFavourite(Long idWC, String userId) {
-        User user = userDao.findById(userId);
+        User user = userDao.findByToken(userId);
         user.getWaterContainerId().add(waterContainerDao.findById(idWC));
         userDao.update(user);
     }

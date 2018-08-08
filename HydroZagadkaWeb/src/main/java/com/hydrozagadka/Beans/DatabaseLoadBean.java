@@ -3,16 +3,15 @@ package com.hydrozagadka.Beans;
 import com.hydrozagadka.CSVLoader;
 import com.hydrozagadka.Model.NewestWaterContainerData;
 import com.hydrozagadka.Model.Statistics;
-import com.hydrozagadka.User;
 import com.hydrozagadka.WaterContainer;
 import com.hydrozagadka.dao.HistoryDao;
 import com.hydrozagadka.dao.StatisticsDao;
-import com.hydrozagadka.dao.UserDao;
 import com.hydrozagadka.dao.WaterContainerDao;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -25,35 +24,30 @@ public class DatabaseLoadBean {
     private HistoryDao historyDao;
     @Inject
     private StatisticsDao statisticsDao;
-
     @Inject
     private NewestHistoryDataLoadBean newestHistoryDataLoadBean;
     @Inject
     private NewestWaterContainerDataLoadBean newestWaterContainerDataLoadBean;
-
     @Inject
     private ApiConnector apiConnector;
+    private Map<Long, WaterContainer> waterContainerMap;
+    private CSVLoader csvLoader = new CSVLoader();
 
-    @Inject
-    private UserDao userDao;
-
-    CSVLoader csvLoader = new CSVLoader();
-    Map<Long, WaterContainer> waterContainerMap = csvLoader.getAllContainers();
-
-
-    public void loadWaterContainer() {
-        waterContainerMap.values().stream()
+    public void loadWaterContainer() throws IOException {
+        waterContainerMap = csvLoader.loadCSV();
+        waterContainerMap.values()
                 .forEach(waterContainer -> {
                     if (waterContainerDao.findById(waterContainer.getId()) == null) {
                         waterContainerDao.save(waterContainer);
                         statisticsDao.save(new Statistics(0L, waterContainer));
                     }
                 });
+        loadHistory(waterContainerMap);
     }
 
-    public void loadHistory() {
-        waterContainerMap.values().stream()
-                .forEach(waterContainer -> waterContainer.getHistory().stream()
+    public void loadHistory(Map<Long, WaterContainer> data) throws IOException {
+        data.values()
+                .forEach(waterContainer -> waterContainer.getHistory()
                         .forEach(history -> {
                             Long wcId = history.getContainerId();
                             if (historyDao.findByDate(history.getDate(), wcId).size() == 0) {
@@ -62,10 +56,10 @@ public class DatabaseLoadBean {
                                 historyDao.save(history);
                             }
                         }));
+        org.apache.commons.io.FileUtils.cleanDirectory(new File("/opt/jboss/patataje-upload"));
     }
 
     public void loadDataFromApi() {
-
         List<NewestWaterContainerData> imgwData = apiConnector.load();
         newestWaterContainerDataLoadBean.loadNewestWaterContainerToDatabase(imgwData);
         newestHistoryDataLoadBean.loadNewestHistoryToDatabase(imgwData);

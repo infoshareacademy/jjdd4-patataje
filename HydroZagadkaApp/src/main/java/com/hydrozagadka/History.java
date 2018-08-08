@@ -13,37 +13,29 @@ public class History {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
     @Column(name = "dates")
     private LocalDate date;
-
     @Column(name = "water_deeps")
     private Double waterDeep;
-
     @Column(name = "flows")
     private Double flow;
-
     @Column(name = "temperatures")
     private Double temperature;
-
-    @Column(name="level_of_water_date")
+    @Column(name = "level_of_water_date")
     private LocalDateTime levelOfWaterDate;
-
     @Column(name = "temperature_date")
     private LocalDateTime temperatureDate;
-    @Column(name="ice_phenomenon")
+    @Column(name = "ice_phenomenon")
     private Integer icePhenomenon;
-    @Column(name="ice_phenomenon_date")
+    @Column(name = "ice_phenomenon_date")
     private LocalDateTime icePhenomenonDate;
-    @Column(name="overgrowth_phenomenon")
+    @Column(name = "overgrowth_phenomenon")
     private Integer overgrowthPhenomenon;
-    @Column(name="overgrowth_phenomenon_date")
+    @Column(name = "overgrowth_phenomenon_date")
     private LocalDateTime overgrowthPhenomenonDate;
-
     @ManyToOne
     @JoinColumn(name = "container_id")
     private WaterContainer waterContainers;
-
     @Transient
     private Long containerId;
 
